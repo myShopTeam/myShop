@@ -1,0 +1,14 @@
+﻿\#*
+.*
+!.gitignore
+*.swp
+*~
+*.swo
+$.swn
+config/certi.php
+*.tags
+*.tags_sorted_by_file
+/#runtime
+/.idea
+/d
+robots.txt
