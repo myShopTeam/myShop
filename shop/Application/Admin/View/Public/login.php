@@ -56,8 +56,8 @@
 		<div class="submit2"></div>
 	</form>
 	<div class="bottom">
-		<h6>Copyright 2006-2015 Shopwwi Inc.</h6>
-		<h6>Powered by <?php echo $output['setting_config']['sw_version'];?></h6>
+		<h6>Copyright 2006-2015</h6>
+		<h6>Powered by lp</h6>
 	</div>
 </div>
 <script>
