@@ -1,238 +1,134 @@
-<?php if (!defined('SHUIPF_VERSION')) exit(); ?>
 <!doctype html>
 <html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="edge" />
-<meta charset="utf-8" />
-<title>系统后台 - {$Config.sitename} - by ShuipFCMS</title>
-<meta name="generator" content="ThinkPHP Shuipf" />
-<admintemplate file="Admin/Common/Js"/>
-<style type="text/css">
- html{font-size:62.5%;font-family:Tahoma}
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td,hr{margin:0;padding:0}
-body{line-height:1.333;font-size:12px;font-size:1.2rem}
-h1,h2,h3,h4,h5,h6{font-size:100%}
-input,textarea,select,button{font-size:12px;font-weight:normal}
-input[type="button"],input[type="submit"],select,button{cursor:pointer}
-table{border-collapse:collapse;border-spacing:0}
-address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:normal}
-li{list-style:none}
-caption,th{text-align:left}
-q:before,q:after{content:''}
-abbr,acronym{border:0;font-variant:normal}
-sup{vertical-align:text-top}
-sub{vertical-align:text-bottom}
-fieldset,img,a img,iframe{border-width:0;border-style:none}
-iframe{overflow:hidden}
-img{ -ms-interpolation-mode:bicubic;}
-textarea{overflow-y:auto}
-legend{color:#000}
-a:link,a:visited{text-decoration:none}
-hr{height:0}
-label{cursor:pointer}
-.os_winXp{font-family:Tahoma}
-.os_mac{font-family:"Helvetica Neue",Helvetica,"Hiragino Sans GB",Arial}
-.os_vista,.os_win7{font-family:"Microsoft Yahei",Tahoma}
-.clearfix:before,.clearfix:after{content:".";display:block;height:0;visibility:hidden}
-.clearfix:after{clear:both}
-.clearfix{zoom:1}
-.header,nav,.footer{display:block}
-body{background-color:#f0f0f0}
-.wrap{background-color:#f5f5f5}
-.wrap .inner{width:1000px;margin:0 auto}
-iframe{background-color:transparent}
-.header{padding:19px 0 0 100px}
-.header h1{ background-image:url({$config_siteurl}statics/images/logos.gif);background-repeat:no-repeat;width:227px;height:78px;line-height:150px;overflow:hidden;font-size:0}
-.qzone_login{margin-top:55px}
-.qzone_login .qzone_cont{float:left;margin-left:112px;position:relative;width:429px;_display:inline;overflow:hidden;height:321px}
-.qzone_cont .img_list{width:429px;height:321px}
-.qzone_cont .img_list li{width:429px;height:321px;vertical-align:middle;display:table-cell}
-.qzone_cont .img_list .img_link{display:block;width:429px;text-align:center;height:321px;outline:none;overflow:hidden}
-.qzone_cont .scroll_img_box{margin:40px auto 0;height:16px;float:left}
-.qzone_cont .scroll_img{text-align:center;width:429px}
-.qzone_cont .scroll_img li{ width:10px;height:10px;background-image:url({$config_siteurl}statics/images/qzone_login.png);background-position:-663px 0;background-repeat:no-repeat;display:inline-block;margin-right:15px;cursor:pointer;*display:inline;*zoom:1;overflow:hidden}
-.qzone_cont .scroll_img .current_img{ background-image:url({$config_siteurl}statics/images/admin_img/qzone_login.png);background-position:-663px -17px}
-.qzone_login .login_main{margin:10px 0 0 68px;float:left;_display:inline;width:370px;overflow:hidden}
-.qzone_login .login_main a{color:#3da5dc}
-.login_main .login_list .input_txt{border:1px solid #d9d9d9;border-radius:3px;font-size:16px;font-family:"Microsoft Yahei",Tahoma;height:23px;width:259px;color:#666;padding:14px 0 14px 9px;margin-bottom:20px}
-.login_main .login_list .input_txt:focus{outline:0}
-.login_main .login_list .current_input{border-color:#56bdf3;box-shadow:inset 0 1px 3px rgba(0,0,0,.2);-webkit-box-shadow:inset 0 1px 3px rgba(0,0,0,.2);-moz-box-shadow:inset 0 1px 3px rgba(0,0,0,.2)}
-.login_main .login_list .login_input{position:relative;width:270px;height:73px}
-.login_main .login_list .txt_default{position:absolute;font-size:16px;font-family:"Microsoft Yahei",Tahoma;color:#666;top:17px;left:10px;cursor:text}
-.login_main .login_list .txt_click{color:#ccc}
-.login_main .login_list .yanzhengma{position:relative;color:#666}
-.login_main .login_list .yanzhengma .yanzheng_txt{margin-left:2px}
-.login_main .login_list .yanzhengma .input_txt{width:139px;margin-bottom:40px}
-.login_main .login_list .yanzhengma .yanzhengma_box{position:absolute;left:160px;top:0}
-.login_main .login_list .yanzhengma .yanzheng_img{display:block;margin-bottom:10px}
-.login_main .login_btn{ width:148px;height:48px;line-height:150px;overflow:hidden;font-size:0;*background:none;background-image:url({$config_siteurl}statics/images/qzone_login.png);background-position:-514px 0;border:none;cursor:pointer}
-.qzone_login .login_main nav{color:#d0d3d7;margin:20px 0 0 3px}
-.qzone_login .login_main nav .sep{margin:0 12px}
-.login_main .quick_login{color:#5a5b5b}
-.login_main .wrong_notice{color:red;margin:0 0 10px 1px}
-.login_main .login_change{margin:6px 0 0 3px}
-.platform_box{margin:94px 0 0 0;width:1000px;padding-bottom:16px}
-.platform_box nav{ background-image:url({$config_siteurl}statics/images/qzone_login.png);background-position:0 0;background-repeat:no-repeat;width:370px;height:52px;margin:0 auto}
-.platform_box nav .platform_link{width:86px;margin:0 1px;height:52px;line-height:160px;overflow:hidden;display:inline-block;font-size:0;*margin-top:-64px}
-.footer{ background:#f0f0f0 url({$config_siteurl}statics/images/ft_bg.jpg) repeat-x;color:#999}
-.footer .inner{width:1000px;margin:0 auto;text-align:center;padding:45px 0}
-.footer .links{margin-bottom:15px}
-.footer .links .sep{margin:0 12px;color:#d0d3d7}
-.footer .copyright{width:580px;margin:0 auto}
-.footer .copyright_en{float:left;margin-right:15px}
-.footer .copyright_ch{float:left}
-.footer .copyright_ch .copyright_link{margin-left:5px}
-.wrap {
-	overflow:hidden;
-	-webkit-animation: bounceIn 600ms linear;
-	-moz-animation: bounceIn 600ms linear;
-	-o-animation: bounceIn 600ms linear;
-	animation: bounceIn 600ms linear;
-}
-/*登录框动画*/
-@-webkit-keyframes bounceIn {
-	0% {
-		opacity: 0;
-		-webkit-transform: scale(.3);
-	}
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<!-- Apple devices fullscreen -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<!-- Apple devices fullscreen -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="keywords" content="{$Config.sitekeywords}" />
+	<meta name="description" content="{$Config.siteinfo}" />
+	<title><if condition="isset($SEO['title']) && !empty($SEO['title']) ">{$SEO['title']}</if>{$SEO['site_title']}</title>
 
-	50% {
-		opacity: 1;
-		-webkit-transform: scale(1.05);
-	}
+	<link href="public/admin/css/login.css" rel="stylesheet" type="text/css">
+	<link href="public/admin/css/font-awesome.min.css" rel="stylesheet">
+	<script src="public/admin/js/jquery.js" type="text/javascript"></script>
+	<script src="public/admin/js/common.js" type="text/javascript"></script>
+	<script src="public/admin/js/jquery.validation.min.js"></script>
+	<script src="public/admin/js/jquery.supersized.min.js" ></script>
+	<script src="public/admin/js/jquery.progressBar.js" type="text/javascript"></script>
 
-	70% {
-		-webkit-transform: scale(.9);
-	}
-
-	100% {
-		-webkit-transform: scale(1);
-	}
-}
-@-moz-keyframes bounceIn {
-	0% {
-		opacity: 0;
-		-moz-transform: scale(.3);
-	}
-
-	50% {
-		opacity: 1;
-		-moz-transform: scale(1.05);
-	}
-
-	70% {
-		-moz-transform: scale(.9);
-	}
-
-	100% {
-		-moz-transform: scale(1);
-	}
-}
-@-o-keyframes bounceIn {
-	0% {
-		opacity: 0;
-		-o-transform: scale(.3);
-	}
-
-	50% {
-		opacity: 1;
-		-o-transform: scale(1.05);
-	}
-
-	70% {
-		-o-transform: scale(.9);
-	}
-
-	100% {
-		-o-transform: scale(1);
-	}
-}
-@keyframes bounceIn {
-	0% {
-		opacity: 0;
-		transform: scale(.3);
-	}
-
-	50% {
-		opacity: 1;
-		transform: scale(1.05);
-	}
-
-	70% {
-		transform: scale(.9);
-	}
-
-	100% {
-		transform: scale(1);
-	}
-}
-</style>
-<script type="text/javascript">
-if (window.parent !== window.self) {
-	document.write = '';
-	window.parent.location.href = window.self.location.href;
-	setTimeout(function () {
-		document.body.innerHTML = '';
-	}, 0);
-}
-</script>
 </head>
 <body>
-<div class="wrap">
-  <div class="inner">
-    <div class="header">
-      <h1>{$Config.sitename}</h1>
-    </div>
-    <div class="qzone_login clearfix">
-      <div class="qzone_cont" id="_pt">
-        <li><img src="{$config_siteurl}statics/images/login_bg.jpg" alt="生活以快乐为基准，爱情以互惠为原则！"></li>
-      </div>
-      <!-- end qzone_cont -->
-      <div class="login_main">
-        <p class="wrong_notice" id="err_m" style="display:none;"></p>
-        <form id="loginform" method="post" name="loginform" action="{:U('Public/tologin')}"   >
-          <ul class="login_list"  id="web_login">
-            <li class="login_input">
-              <input  value=""  id="u" name="username"  class="input_txt" tabindex="1"   type="text" value="" placeholder="帐号名" title="帐号名"  />
-            </li>
-            <li class="login_input">
-              <input maxlength=16 type="password"  id="p" name="password" tabindex="2"   class="input_txt" type="text" value=""  placeholder="密码" title="密码"/>
-            </li>
-            <li class="yanzhengma clearfix" id="verifytip"> <span id="verifyinput">
-              <input  id="verifycode" name="code" maxlength=5 tabindex="3" class="input_txt" type="text" value=""  placeholder="请输入验证码" />
-              </span>
-              <div class="yanzhengma_box" id="verifyshow"> <img class="yanzheng_img" id="code_img" alt="" src="{$code}"><a href="javascript:;;" onClick="refreshs()" class="change_img">看不清，换一张</a> </div>
-            </li>
-            <li>
-              <button type="submit" class="login_btn" tabindex="4" id="subbtn">登录</button>
-            </li>
-          </ul>
-        </form>
-        <div class="quick_login" id="qlogin"> </div>
-      </div>
-    </div>
-    <div class="platform_box"> </div>
-  </div>
+<div class="login-layout">
+	<div class="top">
+		<h5><em></em></h5>
+		<h2>系统管理中心</h2>
+		<h6>商城  |  资讯  |  企业站  |  微商城  </h6>
+	</div>
+	<form method="post" id="form_login" action="{:U('Public/tologin')}">
+		<input type="hidden" name="form_submit" value="ok" />
+		<div class="lock-holder">
+			<div class="form-group pull-left input-username">
+				<label>帐号</label>
+				<input name="username" id="user_name" autocomplete="off" type="text" class="input-text" value="" required>
+			</div>
+			<i class="fa fa-ellipsis-h dot-left"></i> <i class="fa fa-ellipsis-h dot-right"></i>
+			<div class="form-group pull-right input-password-box">
+				<label>密码</label>
+				<input name="password" id="password" class="input-text" autocomplete="off" type="password" required pattern="[\S]{6}[\S]*" title="">
+			</div>
+		</div>
+		<div class="avatar"><img src="public/admin/images/login/admin.png" alt=""></div>
+		<div class="submit"> <span>
+      <div class="code">
+		  <div class="arrow"></div>
+		  <div class="code-img"><img src="{$code}" name="codeimage" id="codeimage" border="0"/></div>
+		  <a href="JavaScript:void(0);" id="hide" class="close" title=""><i></i></a><a href="JavaScript:void(0);" onclick="javascript:document.getElementById('codeimage').src='{$code}&refresh=1&time=' + Math.random();" class="change" title=""><i></i></a> </div>
+      <input name="code" type="text" required class="input-code" id="captcha" placeholder="请输入验证码" pattern="[A-z0-9]{4}" title="<?php echo $lang['login_index_checkcode_pattern'];?>" autocomplete="off" value="" >
+      </span> <span>
+      <input name="nchash" type="hidden" value="" />
+      <input name="" class="input-button btn-submit" type="button" value="登录">
+      </span> </div>
+		<div class="submit2"></div>
+	</form>
+	<div class="bottom">
+		<h6>Copyright 2006-2015 Shopwwi Inc.</h6>
+		<h6>Powered by <?php echo $output['setting_config']['sw_version'];?></h6>
+	</div>
 </div>
-<div class="footer">
-  <div class="inner">
-    <div class="copyright clearfix">
-      <p class="copyright_en">Copyright &copy; 2012 - {:date('Y')} , ShuipfCMS All Rights Reserved.</p>
-<!--      <p class="copyright_ch"><a href="http://www.shuipfcms.com" target="_blank">http://www.shuipfcms.com</a></p>-->
-    </div>
-  </div>
-</div>
-<script src="{$config_siteurl}statics/js/common.js"></script>
 <script>
-//刷新广告
-function refreshs(){
-	document.getElementById('code_img').src="{$code}&refresh=1&time="+Math.random();void(0);
-}
-$(function(){
-	$('#code_img').focus(function(){
-		$('a.change_img').trigger("click");
+	$(function(){
+		$.supersized({
+
+			// 功能
+			slide_interval     : 4000,
+			transition         : 1,
+			transition_speed   : 1000,
+			performance        : 1,
+
+			// 大小和位置
+			min_width          : 0,
+			min_height         : 0,
+			vertical_center    : 1,
+			horizontal_center  : 1,
+			fit_always         : 0,
+			fit_portrait       : 1,
+			fit_landscape      : 0,
+
+			// 组件
+			slide_links        : 'blank',
+			slides             : [
+				{image : 'public/admin/images/login/1.jpg'},
+				{image : 'public/admin/images/login/2.jpg'},
+				{image : 'public/admin/images/login/3.jpg'},
+				{image : 'public/admin/images/login/4.jpg'},
+				{image : 'public/admin/images/login/5.jpg'}
+			]
+
+		});
+		//显示隐藏验证码
+		$("#hide").click(function(){
+			$(".code").fadeOut("slow");
+		});
+		$("#captcha").focus(function(){
+			$(".code").fadeIn("fast");
+		});
+		//跳出框架在主窗口登录
+		if(top.location!=this.location)	top.location=this.location;
+		$('#user_name').focus();
+		if ($.browser.msie && ($.browser.version=="6.0" || $.browser.version=="7.0")){
+			window.location.href='http://www.baidu.com';
+		}
+		$("#captcha").nc_placeholder();
+		//动画登录
+		$('.btn-submit').click(function(e){
+			$('.input-username,dot-left').addClass('animated fadeOutRight')
+			$('.input-password-box,dot-right').addClass('animated fadeOutLeft')
+			$('.btn-submit').addClass('animated fadeOutUp')
+			setTimeout(function () {
+						$('.avatar').addClass('avatar-top');
+						$('.submit').hide();
+						$('.submit2').html('<div class="progress"><div class="progress-bar progress-bar-success" aria-valuetransitiongoal="100"></div></div>');
+						$('.progress .progress-bar').progressbar({
+							done : function() {$('#form_login').submit();}
+						});
+					},
+					300);
+
+		});
+
+		// 回车提交表单
+		$('#form_login').keydown(function(event){
+			if (event.keyCode == 13) {
+				$('.btn-submit').click();
+			}
+		});
 	});
-});
+
 </script>
 </body>
 </html>
