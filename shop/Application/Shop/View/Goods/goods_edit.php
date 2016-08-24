@@ -90,22 +90,15 @@
               </td>
           </tr>
           <tr>
-              <th>商品图片</th>
+              <th>商品展示图片</th>
               <td colspan="3">
               <div id="multpic" class="picList">
                 <ul>{$imgsStr}</ul>
               </div>
               <a herf="javascript:void(0);" onclick="javascript:flashupload('multpic_images', '图片上传','multpic',change_images,'20,gif|jpg|jpeg|png|bmp,1,,,0','Content','11','a2cf42020d9c063d6a49168d77823896')" class="btn"><span class="add"></span>选择图片 </a>
-              <!-- <a herf="javascript:void(0);" onclick="javascript:flashupload('multpic_images', '图片上传','multpic',change_images,'20,gif|jpg|jpeg|png|bmp,1,,,0','Content','1','98ddefc5f8293350640264e5ad5ecd32')" class="btn"><span class="add"></span>选择图片 </a> -->
-              <!-- <a href="javascript:void(0);" onclick="flashupload('imgs_images', '附件上传','imgs',change_images,'10,jpg|jpeg|gif|png|bmp,1,,,0','Content','14','4f53e09b9971776c9afed91028a69955');">
-              <img src="/statics/images/icon/upload-pic.png" id="thumb_preview" width="135" height="113" style="cursor:hand"></a></td>
-              <input type="hidden" name="goods_img" value="" id="thumb"> -->
-              <!-- <th>商品缩略图</th>
-              <td><a href="javascript:void(0);" onclick="flashupload('thumb_images', '附件上传','thumb',thumb_images,'1,jpg|jpeg|gif|png|bmp,1,,,0','Content','14','4f53e09b9971776c9afed91028a69955');return false;">
-      <img src="/statics/images/icon/upload-pic.png" id="thumb_preview" width="135" height="113" style="cursor:hand"></a></td> -->
             </tr>
               <th width="80">
-                商品参数 
+                  商品图文详情
                </th>
                <td colspan="3">
                <div id="content_tip"></div><script type="text/plain" id="content" name="content">{$content}</script>

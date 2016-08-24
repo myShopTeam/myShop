@@ -88,13 +88,13 @@
               </td>
           </tr>
           <tr>
-              <th>商品图片</th>
+              <th>商品展示图片</th>
               <td colspan="3">
               <div id="multpic" class="picList"></div>
               <a herf="javascript:void(0);" onclick="javascript:flashupload('multpic_images', '图片上传','multpic',change_images,'{$arg}','Content','11','{$authkey}')" class="btn"><span class="add"></span>选择图片 </a>
             </tr>
               <th width="80">
-                商品参数 
+                商品图文详情
                </th>
                <td colspan="3">
                <div id="content_tip"></div>

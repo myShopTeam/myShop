@@ -23,7 +23,8 @@
   'PAGE_LISTROWS' => '20',
   'VAR_PAGE' => 'page',
   'PAGE_TEMPLATE' => '<span class="all">共有{recordcount}条信息</span><span class="pageindex">{pageindex}/{pagecount}</span>{first}{prev}{liststart}{list}{listend}{next}{last}',
-  'DEFAULT_MODULE' => 'Content',
+  'DEFAULT_MODULE' => 'Site',
+  'DEFAULT_CONTROLLER' => 'Goods',
   'DEFAULT_TIMEZONE' => 'PRC',
   'DEFAULT_AJAX_RETURN' => 'JSON',
   'DEFAULT_FILTER' => 'htmlspecialchars',
@@ -33,4 +34,9 @@
   'LOAD_EXT_FILE' => 'extend',
   'DEFAULT_GROUP' => 'Contents',
   'CLOUD_ON' => false,
+  'MODULE_DENY_LIST' => array('Common','Base'), // 设置禁止访问的模块列表
+  'URL_ROUTER_ON'=> 'ture',//开启路由
+  'URL_ROUTE_RULES'=>array(//路由规则
+      'shopadmin' => '/Admin/Public/login',
+  )
 );

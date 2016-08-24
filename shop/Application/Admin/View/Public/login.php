@@ -13,13 +13,13 @@
 	<meta name="description" content="{$Config.siteinfo}" />
 	<title><if condition="isset($SEO['title']) && !empty($SEO['title']) ">{$SEO['title']}</if>{$SEO['site_title']}</title>
 
-	<link href="public/admin/css/login.css" rel="stylesheet" type="text/css">
-	<link href="public/admin/css/font-awesome.min.css" rel="stylesheet">
-	<script src="public/admin/js/jquery.js" type="text/javascript"></script>
-	<script src="public/admin/js/common.js" type="text/javascript"></script>
-	<script src="public/admin/js/jquery.validation.min.js"></script>
-	<script src="public/admin/js/jquery.supersized.min.js" ></script>
-	<script src="public/admin/js/jquery.progressBar.js" type="text/javascript"></script>
+	<link href="/public/admin/css/login.css" rel="stylesheet" type="text/css">
+	<link href="/public/admin/css/font-awesome.min.css" rel="stylesheet">
+	<script src="/public/common/js/jquery.js" type="text/javascript"></script>
+	<script src="/public/common/js/common.js" type="text/javascript"></script>
+	<script src="/public/common/js/jquery.validation.min.js"></script>
+	<script src="/public/common/js/jquery.supersized.min.js" ></script>
+	<script src="/public/common/js/jquery.progressBar.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -42,7 +42,7 @@
 				<input name="password" id="password" class="input-text" autocomplete="off" type="password" required pattern="[\S]{6}[\S]*" title="">
 			</div>
 		</div>
-		<div class="avatar"><img src="public/admin/images/login/admin.png" alt=""></div>
+		<div class="avatar"><img src="/public/admin/images/login/admin.png" alt=""></div>
 		<div class="submit"> <span>
       <div class="code">
 		  <div class="arrow"></div>
@@ -82,11 +82,11 @@
 			// 组件
 			slide_links        : 'blank',
 			slides             : [
-				{image : 'public/admin/images/login/1.jpg'},
-				{image : 'public/admin/images/login/2.jpg'},
-				{image : 'public/admin/images/login/3.jpg'},
-				{image : 'public/admin/images/login/4.jpg'},
-				{image : 'public/admin/images/login/5.jpg'}
+				{image : '/public/admin/images/login/1.jpg'},
+				{image : '/public/admin/images/login/2.jpg'},
+				{image : '/public/admin/images/login/3.jpg'},
+				{image : '/public/admin/images/login/4.jpg'},
+				{image : '/public/admin/images/login/5.jpg'}
 			]
 
 		});
