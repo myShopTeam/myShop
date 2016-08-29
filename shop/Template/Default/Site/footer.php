@@ -2,18 +2,18 @@
     <div id="cti" class="wrapper">
         <ul>
             <li><span class="icon"> <img style="width: 60px;"
-                                         src="http://127.0.0.1/data/upload/shop/contracticon/7day_60.gif"> </span>
+                                         src="/public/site/images/contracticon/7day_60.gif"> </span>
                 <span class="name"> 7天退货 </span></li>
             <li><span class="icon"> <img style="width: 60px;"
-                                         src="http://127.0.0.1/data/upload/shop/contracticon/pz_60.gif"> </span>
+                                         src="/public/site/images/contracticon/pz_60.gif"> </span>
                 <span class="name"> 品质承诺 </span></li>
             <li><span class="icon"> <img style="width: 60px;"
-                                         src="http://127.0.0.1/data/upload/shop/contracticon/psbf_60.gif"> </span>
+                                         src="/public/site/images/contracticon/psbf_60.gif"> </span>
                 <span class="name"> 破损补寄 </span></li>
             <li><span class="icon"> <img style="width: 60px;"
-                                         src="http://127.0.0.1/data/upload/shop/contracticon/jswl_60.gif"> </span>
+                                         src="/public/site/images/contracticon/jswl_60.gif"> </span>
                 <span class="name"> 急速物流 </span></li>
-            <li class="rf">客服电话：<em class="red">400-889-9646</em> <em class="rgb9">08:00-22:30(周一至周日)</em></li>
+            <li class="rf">客服电话：<em class="red">{:cache('Config.telephone')}</em> <em class="rgb9">08:00-22:30(周一至周日)</em></li>
         </ul>
     </div>
     <div id="faq">
@@ -174,10 +174,10 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="http://localhost:8009/data/resource/js/jquery.cookie.js"></script>
-<link href="http://localhost:8009/data/resource/js/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="http://localhost:8009/data/resource/js/perfect-scrollbar.min.js"></script>
-<script type="text/javascript" src="http://localhost:8009/data/resource/js/qtip/jquery.qtip.min.js"></script>
-<link href="http://localhost:8009/data/resource/js/qtip/jquery.qtip.min.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/public/common/js/jquery.cookie.js"></script>
+<link href="/public/site/css/perfect-scrollbar.min.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/public/site/js/perfect-scrollbar.min.js"></script>
+<script type="text/javascript" src="/public/common/js/jquery.qtip.min.js"></script>
+<link href="/public/common/css/jquery.qtip.min.css" rel="stylesheet" type="text/css">
 <!-- 对比 -->
-<script src="http://localhost:8009/shop/resource/js/compare.js"></script>
+<script src="/public/site/js/compare.js"></script>

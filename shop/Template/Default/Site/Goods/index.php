@@ -1,11 +1,7 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-</head>
+<template file="Site/head.php" />
+<template file="Site/top.php" />
 <body>
-test
+
 <template file="Site/footer.php" />
 </body>
 </html>

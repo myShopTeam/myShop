@@ -21,8 +21,4 @@ class BaseController extends Base
         header("Content-type:text/html;charset=utf-8");
     }
 
-    public function indexss(){
-        print_r(12);
-    }
-
 }

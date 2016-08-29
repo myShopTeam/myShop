@@ -20,7 +20,7 @@ class GoodsController extends SiteController
 
     //pc首页
     public function index(){
-$this->indexss();
+
         $this->display();
     }
 
