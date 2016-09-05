@@ -12,3 +12,4 @@ config/certi.php
 /.idea
 /d
 robots.txt
+shop/Common/Conf/dataconfig.php

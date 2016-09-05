@@ -26,3 +26,4 @@ return array(
     /* 数据缓存设置 */
     'DATA_CACHE_PREFIX' => 'u5d_', // 缓存前缀
 );
+
