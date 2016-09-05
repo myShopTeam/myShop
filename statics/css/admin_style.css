@@ -925,7 +925,7 @@ a:hover{
 ===================
 */
 .wrap{
-	padding:20px 20px 70px;
+	padding:5px 5px 10px;
 }
 .wrap_pop{
 	padding:20px;
@@ -1663,7 +1663,7 @@ input:radio+span{
 ===================
 */
 .search_type{
-	padding:10px;
+	padding:2px;
 }
 .search_type li{
 	_height:30px;
