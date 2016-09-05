@@ -18,9 +18,6 @@
     <script src="/public/site/js/html5shiv.js"></script>
     <script src="/public/site/js/respond.min.js"></script>
     <![endif]-->
-    <script>
-        var COOKIE_PRE = '4F55_';var _CHARSET = 'utf-8';var LOGIN_SITE_URL = 'http://localhost:8009/member';var MEMBER_SITE_URL = 'http://localhost:8009/member';var SITEURL = 'http://localhost:8009/shop';var SHOP_SITE_URL = 'http://localhost:8009/shop';var RESOURCE_SITE_URL = 'http://localhost:8009/data/resource';var RESOURCE_SITE_URL = 'http://localhost:8009/data/resource';var SHOP_TEMPLATES_URL = 'http://localhost:8009/shop/templates/default';
-    </script>
     <script src="/public/common/js/jquery.js"></script>
     <script src="/public/common/js/common.js" charset="utf-8"></script>
     <script src="/public/common/js/jquery-ui/jquery.ui.js"></script>

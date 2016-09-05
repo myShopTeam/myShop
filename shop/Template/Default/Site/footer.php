@@ -1,17 +1,13 @@
 <div class="wwi-footer">
     <div id="cti" class="wrapper">
         <ul>
-            <li><span class="icon"> <img style="width: 60px;"
-                                         src="/public/site/images/contracticon/7day_60.gif"> </span>
+            <li><span class="icon"> <img style="width: 60px;" src="/public/site/images/contracticon/7day_60.gif"> </span>
                 <span class="name"> 7天退货 </span></li>
-            <li><span class="icon"> <img style="width: 60px;"
-                                         src="/public/site/images/contracticon/pz_60.gif"> </span>
+            <li><span class="icon"> <img style="width: 60px;" src="/public/site/images/contracticon/pz_60.gif"> </span>
                 <span class="name"> 品质承诺 </span></li>
-            <li><span class="icon"> <img style="width: 60px;"
-                                         src="/public/site/images/contracticon/psbf_60.gif"> </span>
+            <li><span class="icon"> <img style="width: 60px;" src="/public/site/images/contracticon/psbf_60.gif"> </span>
                 <span class="name"> 破损补寄 </span></li>
-            <li><span class="icon"> <img style="width: 60px;"
-                                         src="/public/site/images/contracticon/jswl_60.gif"> </span>
+            <li><span class="icon"> <img style="width: 60px;" src="/public/site/images/contracticon/jswl_60.gif"> </span>
                 <span class="name"> 急速物流 </span></li>
             <li class="rf">客服电话：<em class="red">{:cache('Config.telephone')}</em> <em class="rgb9">08:00-22:30(周一至周日)</em></li>
         </ul>
