@@ -1,4 +1,5 @@
-\#*
+
+﻿\#*
 .*
 !.gitignore
 *.swp
@@ -12,6 +13,5 @@ config/certi.php
 /.idea
 /d
 robots.txt
-/nbproject/private/
-nbproject/project.properties
-nbproject/project.xml
+shop/Common/Conf/dataconfig.php
+

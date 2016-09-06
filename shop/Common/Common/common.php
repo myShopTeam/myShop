@@ -1070,3 +1070,22 @@ function check_mobile($mobile)
     return true;
 }
 
+function make_log($param, $filename, $path){
+    if(!$path) {
+        $path = SITE_PATH . '/data';
+        if(!file_exists($path)){
+            mkdir($path, 0777, true);
+            mkdir($path . '/log/', 0777, true);
+            $path = $path . '/log/';
+        } elseif (!file_exists($path . '/log')){
+            mkdir($path . '/log/', 0777, true);
+            $path = $path . '/log/';
+        } else {
+            $path = SITE_PATH . '/data/log/';
+        }
+        if(!$filename){
+            $filename = date('Y-m-d') . '.log';
+        }
+    }
+    file_put_contents($path . $filename, date('Y-m-d H:i:s',time()) . "  " . print_r($param,1).PHP_EOL.PHP_EOL,FILE_APPEND);
+}

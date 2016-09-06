@@ -1,0 +1,1 @@
+D:\phpStudy\php53n\php.exe -q F:\PHPWORK\qccmsswxt\Products\Team1\Water\trunk\task\test.php
