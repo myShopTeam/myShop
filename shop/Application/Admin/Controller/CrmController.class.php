@@ -69,7 +69,7 @@ class CrmController extends AdminBase
         $db = M('card');
         $count = $db->where($where)->count();
         
-        $page = $this->page($count, 8);
+        $page = $this->page($count, 20);
         $vipList = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('listorder desc,id desc')->select();
         
         $this->assign("Page", $page->show());
