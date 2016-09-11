@@ -3,9 +3,9 @@
 // +----------------------------------------------------------------------
 // | qcjh
 // +----------------------------------------------------------------------
-// | Copyright (c) 2014-2015 http://www.lovegq1314.com, All rights reserved.
+// | Copyright (c) 2014-2015 http://www.qcjh.net, All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: lp <lin19940620@sina.com>
+// | Author: wzh <wzh@qcjh.net>
 // +----------------------------------------------------------------------
 
 /**
@@ -15,6 +15,15 @@
  * @param mixed $options 缓存参数
  * @return mixed
  */
+ /**
+ * 打印
+ */
+function p($arr){
+    echo '<pre>';
+    print_r($arr);
+    echo '</pre>';
+    exit;
+}
 
 function cache($name, $value = '', $options = null) {
     static $cache = '';
@@ -654,8 +663,8 @@ function isImage($file) {
 
 /**
  * 对URL中有中文的部分进行编码处理
- * @param type $url 地址 http://www.lovegq1314.com/s?wd=博客
- * @return type ur;编码后的地址 http://www.lovegq1314.com/s?wd=%E5%8D%9A%20%E5%AE%A2
+ * @param type $url 地址 http://www.qcjh.net/s?wd=博客
+ * @return type ur;编码后的地址 http://www.qcjh.net/s?wd=%E5%8D%9A%20%E5%AE%A2
  */
 function cn_urlencode($url) {
     $pregstr = "/[\x{4e00}-\x{9fa5}]+/u"; //UTF-8中文正则
@@ -928,148 +937,6 @@ function format_bytes($size, $delimiter = '') {
 	return round($size, 2) . $delimiter . $units[$i];
 }
 
-/**
- * 打印
- */
-function p($arr){
-    echo '<pre>';
-    print_r($arr);
-    echo '</pre>';
-    exit;
-}
-
-/**
- *    作用：/data/xxx/yy.jpg文件转换为网络路径
- */
-function create_http_path($strpath)
-{
-    if (!strpos($strpath, 'http://') && $strpath != '') {
-        return 'http://' . $_SERVER['SERVER_NAME'] . $strpath;
-    }
-    return $strpath;
-}
-
-/**
- * 获取单个汉字拼音首字母。注意:此处不要纠结。汉字拼音是没有以U和V开头的
- */
-function get_first_char($s0)
-{
-    $fchar = ord($s0{0});
-    if ($fchar >= ord("A") and $fchar <= ord("z")) return strtoupper($s0{0});
-    $s1 = iconv("UTF-8", "gb2312", $s0);
-    $s2 = iconv("gb2312", "UTF-8", $s1);
-    if ($s2 == $s0) {
-        $s = $s1;
-    } else {
-        $s = $s0;
-    }
-    $asc = ord($s{0}) * 256 + ord($s{1}) - 65536;
-    if ($asc >= -20319 and $asc <= -20284) return "A";
-    if ($asc >= -20283 and $asc <= -19776) return "B";
-    if ($asc >= -19775 and $asc <= -19219) return "C";
-    if ($asc >= -19218 and $asc <= -18711) return "D";
-    if ($asc >= -18710 and $asc <= -18527) return "E";
-    if ($asc >= -18526 and $asc <= -18240) return "F";
-    if ($asc >= -18239 and $asc <= -17923) return "G";
-    if ($asc >= -17922 and $asc <= -17418) return "H";
-    if ($asc >= -17922 and $asc <= -17418) return "I";
-    if ($asc >= -17417 and $asc <= -16475) return "J";
-    if ($asc >= -16474 and $asc <= -16213) return "K";
-    if ($asc >= -16212 and $asc <= -15641) return "L";
-    if ($asc >= -15640 and $asc <= -15166) return "M";
-    if ($asc >= -15165 and $asc <= -14923) return "N";
-    if ($asc >= -14922 and $asc <= -14915) return "O";
-    if ($asc >= -14914 and $asc <= -14631) return "P";
-    if ($asc >= -14630 and $asc <= -14150) return "Q";
-    if ($asc >= -14149 and $asc <= -14091) return "R";
-    if ($asc >= -14090 and $asc <= -13319) return "S";
-    if ($asc >= -13318 and $asc <= -12839) return "T";
-    if ($asc >= -12838 and $asc <= -12557) return "W";
-    if ($asc >= -12556 and $asc <= -11848) return "X";
-    if ($asc >= -11847 and $asc <= -11056) return "Y";
-    if ($asc >= -11055 and $asc <= -10247) return "Z";
-    return NULL;
-}
-
-/**
- * 获取整条字符串汉字拼音首字母
- */
-function get_pinyin_first($zh)
-{
-    $ret = "";
-    $s1 = iconv("UTF-8", "gb2312", $zh);
-    $s2 = iconv("gb2312", "UTF-8", $s1);
-    if ($s2 == $zh) {
-        $zh = $s1;
-    }
-    for ($i = 0; $i < strlen($zh); $i++) {
-        $s1 = substr($zh, $i, 1);
-        $p = ord($s1);
-        if ($p > 160) {
-            $s2 = substr($zh, $i++, 2);
-            $ret .= $this->getfirstchar($s2);
-        } else {
-            $ret .= $s1;
-        }
-    }
-    return $ret;
-}
-
-/**
- * 验证18位身份证（计算方式在百度百科有）
- * @param  string $id 身份证
- * return boolean
- */
-function check_idcard($vStr)
-{
-    $vCity = array(
-        '11','12','13','14','15','21','22',
-        '23','31','32','33','34','35','36',
-        '37','41','42','43','44','45','46',
-        '50','51','52','53','54','61','62',
-        '63','64','65','71','81','82','91'
-    );
-
-    if (!preg_match('/^([\d]{17}[xX\d]|[\d]{15})$/', $vStr)) return false;
-
-    if (!in_array(substr($vStr, 0, 2), $vCity)) return false;
-
-    $vStr = preg_replace('/[xX]$/i', 'a', $vStr);
-    $vLength = strlen($vStr);
-
-    if ($vLength == 18)
-    {
-        $vBirthday = substr($vStr, 6, 4) . '-' . substr($vStr, 10, 2) . '-' . substr($vStr, 12, 2);
-    } else {
-        $vBirthday = '19' . substr($vStr, 6, 2) . '-' . substr($vStr, 8, 2) . '-' . substr($vStr, 10, 2);
-    }
-
-    if (date('Y-m-d', strtotime($vBirthday)) != $vBirthday) return false;
-    if ($vLength == 18)
-    {
-        $vSum = 0;
-
-        for ($i = 17 ; $i >= 0 ; $i--)
-        {
-            $vSubStr = substr($vStr, 17 - $i, 1);
-            $vSum += (pow(2, $i) % 11) * (($vSubStr == 'a') ? 10 : intval($vSubStr , 11));
-        }
-
-        if($vSum % 11 != 1) return false;
-    }
-
-    return true;
-}
-//手机号检测
-
-function check_mobile($mobile)
-{
-    if (!preg_match("/^1[34578]\d{9}$/", $mobile)) {
-        return false;
-    }
-    return true;
-}
-
 function make_log($param, $filename, $path){
     if(!$path) {
         $path = SITE_PATH . '/data';
@@ -1089,3 +956,48 @@ function make_log($param, $filename, $path){
     }
     file_put_contents($path . $filename, date('Y-m-d H:i:s',time()) . "  " . print_r($param,1).PHP_EOL.PHP_EOL,FILE_APPEND);
 }
+
+/**
+ * 验证手机号是否正确
+ * @author lp
+ * @param string $email
+ * @param boolean $test_mx
+ * @return boolean
+ */
+
+function is_email($email, $test_mx = false)
+{
+    if ((preg_match('/^[_.0-9a-z-a-z-]+@([0-9a-z][0-9a-z-]+.)+[a-z]{2,4}$/', $email))) {
+        if ($test_mx) {
+            list($username, $domain) = split("@", $email);
+            return getmxrr($domain, $mxrecords);
+        } else {
+            return true;
+        }
+    } else {
+        return false;
+    }
+
+}
+
+/**
+ * 验证手机号是否正确
+ * @author lp
+ * @param INT $mobile
+ * @return boolean
+ */
+function is_mobile($mobile) {
+    if (!is_numeric($mobile)) {
+        return false;
+    }
+    return preg_match('#^13[\d]{9}$|^14[5,7]{1}\d{8}$|^15[^4]{1}\d{8}$|^17[0,6,7,8]{1}\d{8}$|^18[\d]{9}$#', $mobile) ? true : false;
+}
+
+function msg($status = 'success', $msg = '操作成功', $data = array()){
+    if(!$msg){
+        $msg = $status == 'success' ? '操作成功' : '操作失败';
+    }
+    die (urldecode(json_encode(array('status' => $status, 'msg' => urlencode($msg), 'data' => $data))));
+}
+
+

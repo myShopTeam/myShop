@@ -1,11 +1,11 @@
 <?php
 
 // +----------------------------------------------------------------------
-// | qcjh 武大校友汇商城 商品管理
+// | 后台 商品管理
 // +----------------------------------------------------------------------
-// | Copyright (c) 2014-2015 http://www.qcjh.net, All rights reserved.
+// | Copyright (c) 2014-2015 , All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: lp <lp@qcjh.net>
+// | Author: lp <535201470@qq.com>
 // +----------------------------------------------------------------------
 
 namespace Shop\Controller;
@@ -155,7 +155,7 @@ class GoodsController extends AdminBase
             //品牌分类
             $brand = M('goods_brand')->order('listorder desc')->select();
             //格式化商品属性
-            // $attrList = $this->getFormatAttr();
+//             $attrList = $this->getFormatAttr();
             // p($attrList);
 
             $this->assign('catList', $catList);

@@ -490,7 +490,7 @@ if($("img[rel='lazy']").length > 0) {
 	});
 };
 fade();
-</script>					<link href="http://localhost:8009/chat/templates/default/css/chat.css" rel="stylesheet" type="text/css">
+</script>					<link href="/public/site/css/chat.css" rel="stylesheet" type="text/css">
 					<div style="clear: both;"></div>
 					<div id="web_chat_dialog" style="display: none;float:right;">
 					</div>

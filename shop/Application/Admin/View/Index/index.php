@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>系统后台 - {$Config.sitename} - by 启创聚核</title>
+<title>系统后台 - {$Config.sitename}</title>
 <link href="{$config_siteurl}statics/css/admin_layout.css?v=" rel="stylesheet" />
 <link href="{$config_siteurl}statics/js/artDialog/skins/default.css" rel="stylesheet" />
 <style>

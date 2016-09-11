@@ -17,14 +17,14 @@ return array(
     //模块介绍地址
     'address' => 'http://www.lovegq1314.com',
     //模块作者
-    'author' => '启创聚核',
+    'author' => 'CMS',
     //作者地址
     'authorsite' => 'http://www.lovegq1314.com',
     //作者邮箱
     'authoremail' => 'lin19940620@sina.com',
     //版本号，请不要带除数字外的其他字符
     'version' => '1.0.2',
-    //适配最低启创聚核版本，
+    //适配最低版本，
     'adaptation' => '8.3.0',
     //签名
     'sign' => '4B7B06DA1101821D6AAE4B51BC96E6AF',

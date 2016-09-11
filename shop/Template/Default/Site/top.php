@@ -235,9 +235,9 @@
 <div class="public-top-layout w">
     <div class="topbar wrapper">
         <div class="user-entry">
-            您好，欢迎来到 <a href="http://localhost:8009/shop" title="首页" alt="首页">网站演示</a> <span>[
-                <a href="http://localhost:8009/member/index.php?act=login&amp;op=index">登录</a>]</span> <span>[
-                <a href="http://localhost:8009/member/index.php?act=login&amp;op=register">注册</a>]</span>
+            您好，欢迎来到 <a href="/" title="首页" alt="首页">{$Config.sitename}</a> <span>[
+                <a href="{:U('Passport/login')}">登录</a>]</span> <span>[
+                <a href="{:U('Passport/register')}">注册</a>]</span>
         </div>
         <div class="quick-menu">
             <dl>

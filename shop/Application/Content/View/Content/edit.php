@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>编辑：《{$data.title}》 - 系统后台 - {$Config.sitename} - by 启创聚核</title>
+<title>编辑：《{$data.title}》 - 系统后台 - {$Config.sitename}</title>
 <Admintemplate file="Admin/Common/Cssjs"/>
 <script type="text/javascript">
     var catid = "{$catid}";

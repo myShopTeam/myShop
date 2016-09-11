@@ -65,3 +65,15 @@
            </ul>
     </div>
 </nav>
+
+<div class="nch-breadcrumb-layout">
+
+    <div class="nch-breadcrumb wrapper"><i class="icon-home"></i>
+
+        <span><a href="http://localhost:8009/shop">首页</a></span><span class="arrow">></span>
+
+        <span>珠宝手表</span>
+
+    </div>
+
+</div>

@@ -5,7 +5,7 @@
     <title><if condition="isset($SEO['title']) && !empty($SEO['title']) ">{$SEO['title']}</if>{$SEO['site_title']}</title>
     <meta name="keywords" content="{$Config.sitekeywords}" />
     <meta name="description" content="{$Config.siteinfo}" />
-    <meta name="author" content="ShopWWI">
+    <meta name="author" content="">
     <meta name="copyright" content="">
     <link href="/public/site/css/base.css" rel="stylesheet" type="text/css">
     <link href="/public/site/css/home_header.css" rel="stylesheet" type="text/css">
