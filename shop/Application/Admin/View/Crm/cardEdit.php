@@ -16,17 +16,11 @@
            <tr>
             <th>卡单类型<span class="red">*</span></th>
             <td>
-                <select name="card_type" class="select" id="username" >
-                    <option value='1' <if condition="$card_type eq 1"> selected </if>>家园系列</option>
-                    <option value='2' <if condition="$card_type eq 2"> selected</if>>服务系列</option>
-                </select>            
+                <input type="test" name="card_type" value="{$card_type}" class="input" id="username" placeholder="请输入卡类型"></td>       
             </td>
             <th>产品名称<span class="red">*</span></th>
             <td>
-                <select name="card_name" class="select" id="username" >
-                    <option value='1' <if condition="$card_name eq 1"> selected</if>>家园1号</option>
-                    <option value='2' <if condition="$card_name eq 1"> selected </if>>幸福1号</option>
-                </select>                 
+                <input type="test" name="card_name" value="{$card_name}" class="input" id="username" placeholder="请输入产品名称"></td>
             </td>
           </tr>
           <tr>
@@ -37,7 +31,7 @@
           </tr>
           <tr>
             <th>出生年月</th>
-            <td><input type="text" name="birthday" value="{$birthday|date='Y-m-d',###}" class="input length_2 J_date" id="birthday" value="{$_GET.start_uploadtime}" placeholder="请输入生日" style="width: 147px !important;"></td>
+            <td><input type="text" name="birthday" value="<if condition='$birthday'>{$birthday|date='Y-m-d',###}</if>" class="input length_2 J_date" id="birthday" value="{$_GET.start_uploadtime}" placeholder="请输入生日" style="width: 147px !important;"></td>
               <th>联系地址</th>
             <td><input type="text" name="live" value="{$live}" class="input" id="qq" placeholder="请输入联系地址"></td>
           </tr>

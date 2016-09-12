@@ -16,17 +16,11 @@
            <tr>
             <th>卡单类型<span class="red">*</span></th>
             <td>
-                <select name="card_type" class="select" id="username" >
-                    <option value='1'>家园系列</option>
-                    <option value='2'>服务系列</option>
-                </select>            
+                <input type="test" name="card_type" class="input" id="username" placeholder="请输入卡类型"></td>      
             </td>
             <th>产品名称<span class="red">*</span></th>
             <td>
-                <select name="card_name" class="select" id="username" >
-                    <option value='1'>家园1号</option>
-                    <option value='2'>幸福1号</option>
-                </select>                 
+                <input type="test" name="card_name" class="input" id="username" placeholder="请输入产品名称"></td>               
             </td>
           </tr>
           <tr>
