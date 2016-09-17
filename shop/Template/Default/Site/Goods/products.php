@@ -2851,8 +2851,6 @@
 
             <nav class="sort-bar" id="main-nav">
 
-                <div class="pagination"><ul><li><span>上一页</span></li><li><span>下一页</span></li></ul> </div>
-
                 <div class="nch-all-category">
 
                     <div class="all-category">
@@ -2901,175 +2899,6 @@
 
                 </div>
 
-                <div class="nch-sortbar-location">商品所在地：
-
-                    <div class="select-layer">
-
-                        <div class="holder"><em nc_type="area_name">不限地区<!-- 所在地 --></em></div>
-
-                        <div class="selected"><a nc_type="area_name">不限地区<!-- 所在地 --></a></div>
-
-                        <i class="direction"></i>
-
-                        <ul class="options">
-
-
-
-                            <div class="filter-detailc" id="addressDraw">
-
-                                <dl class="location-hots">
-
-                                    <dt>常用地区</dt>
-
-                                    <dd><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=1">北京</a></dd>
-
-                                    <dd><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=2">天津</a></dd>
-
-                                    <dd><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=9">上海</a></dd>
-
-                                    <dd><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=35">海外</a></dd>
-
-                                </dl>
-
-                                <dl class="location-all">
-
-                                    <dt>省份</dt>
-
-                                    <dd>
-
-                                        <ul>
-
-                                            <li>
-
-                                                <p class="lt">A</p>
-
-                                                <p class="lc"> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=12">安徽</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=34">澳门</a></span> </p>
-
-                                            </li>
-
-                                            <li>
-
-                                                <p class="lt">C</p>
-
-                                                <p class="lc"> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=22">重庆</a></span> </p>
-
-                                            </li>
-
-                                            <li>
-
-                                                <p class="lt">F</p>
-
-                                                <p class="lc"> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=13">福建</a></span> </p>
-
-                                            </li>
-
-                                            <li>
-
-                                                <p class="lt">G</p>
-
-                                                <p class="lc"> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=19">广东</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=28">甘肃</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=20">广西</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=24">贵州</a></span> </p>
-
-                                            </li>
-
-                                        </ul>
-
-                                        <ul>
-
-                                            <li>
-
-                                                <p class="lt">H</p>
-
-                                                <p class="lc"> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=21">海南</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=3">河北</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=16">河南</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=8">黑龙江</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=17">湖北</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=18">湖南</a></span> </p>
-
-                                            </li>
-
-                                            <li>
-
-                                                <p class="lt">J</p>
-
-                                                <p class="lc"> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=10">江苏</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=14">江西</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=7">吉林</a></span> </p>
-
-                                            </li>
-
-                                        </ul>
-
-                                        <ul>
-
-                                            <li>
-
-                                                <p class="lt">N</p>
-
-                                                <p class="lc"> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=6">辽宁</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=5">内蒙古</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=30">宁夏</a></span> </p>
-
-                                            </li>
-
-                                            <li>
-
-                                                <p class="lt">Q</p>
-
-                                                <p class="lc"> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=29">青海</a></span> </p>
-
-                                            </li>
-
-                                            <li>
-
-                                                <p class="lt">S</p>
-
-                                                <p class="lc"> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=15">山东</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=4">山西</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=27">陕西</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=23">四川</a></span> </p>
-
-                                            </li>
-
-                                        </ul>
-
-                                        <ul>
-
-                                            <li>
-
-                                                <p class="lt">T</p>
-
-                                                <p class="lc"> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=32">台湾</a></span> </p>
-
-                                            </li>
-
-                                            <li>
-
-                                                <p class="lt">X</p>
-
-                                                <p class="lc"> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=26">西藏</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=31">新疆</a></span> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=33">香港</a></span> </p>
-
-                                            </li>
-
-                                            <li>
-
-                                                <p class="lt">Y</p>
-
-                                                <p class="lc"> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=25">云南</a></span> </p>
-
-                                            </li>
-
-                                            <li>
-
-                                                <p class="lt">Z</p>
-
-                                                <p class="lc"> <span><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=11">浙江</a></span> </p>
-
-                                            </li>
-
-                                        </ul>
-
-                                    </dd>
-
-                                </dl>
-
-                                <p class="oreder-default"><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&area_id=0">不限地区</a></p>
-
-                            </div>
-
-                        </ul>
-
-                    </div>
-
-                </div>
 
             </nav>
 
@@ -3834,54 +3663,18 @@
 </div>
 
 <a id="chat_login" href="javascript:void(0)" style="display: none;"></a>
-
-<script type="text/javascript">
-
-    var LOGIN_SITE_URL = 'http://localhost:8009/member';
-
-    var CHAT_SITE_URL = 'http://localhost:8009/chat';
-
-    var SHOP_SITE_URL = 'http://localhost:8009/shop';
-
-    var connect_url = "http://localhost:8009:8091";
-
-
-    var layout = "layout/home_layout.php";
-
-    var act_op = "search_index";
-
-    var chat_goods_id = "";
-
-    var user = {};
-
-
-    user['u_id'] = "";
-
-    user['u_name'] = "";
-
-    user['s_id'] = "";
-
-    user['s_name'] = "";
-
-    user['s_avatar'] = "/public/site/images/default_store_avatar.gif";
-
-    user['avatar'] = "/public/site/images/default_user_portrait.gif";
-
-
-    $("#chat_login").nc_login({
-
-        action: '/index.php?act=login',
-
-        nchash: 'c546ef5d',
-
-        formhash: '7R-29pUmMwUVWrMY_v8JBKx_ZQgOFWj'
-
-    });
+<script type="text/html" id="cat-html">
 
 </script>
 <script type="text/javascript" src="/public/common/js/jquery.charCount.js" charset="utf-8"></script>
 <script type="text/javascript" src="/public/common/js/jquery.smilies.js" charset="utf-8"></script>
 <script type="text/javascript" src="/public/site/js/user.js" charset="utf-8"></script>
 <template file="Site/footer.php" />
+<script>
+    $(function(){
+        var global = {$data};
+
+    })
+</script>
 </body>
 </html>

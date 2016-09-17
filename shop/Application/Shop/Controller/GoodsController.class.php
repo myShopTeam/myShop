@@ -91,7 +91,7 @@ class GoodsController extends AdminBase
                 'goods_sn' => $goods_sn,
                 'cat_id' => I('post.cat_id', '', 'intval'),
                 'other_cat' => I('post.other_cat', '', 'intval'),
-                'goods_thumb' => $multpicArr[0],
+                'goods_thumb' => I('post.goods_thumb', ''),
                 'goods_img' => $goods_imgs,
                 'market_price' => $market_price,
                 'shop_price' => $shop_price,
@@ -128,6 +128,9 @@ class GoodsController extends AdminBase
             if (empty($data['goods_num'])) {
                 $this->error('商品库存不能为空');
             }
+            if (empty($data['goods_thumb'])) {
+                $this->error('商品缩略图不能为空');
+            }
             $goods_id = M('goods')->add($data);
             if ($goods_id) {
                 //判断是否为属性商品
@@ -160,7 +163,6 @@ class GoodsController extends AdminBase
 
             $this->assign('catList', $catList);
             $this->assign('otherList', $other_cat);
-            $this->assign('attrList', $attrList);
             $this->assign('brand', $brand);
             $this->assign('alumni', $alumni);
             $this->display();
@@ -174,20 +176,21 @@ class GoodsController extends AdminBase
         $goods_id = I('get.goods_id', '', intval);
         if (IS_POST) {
             //运费
-            $transtype = I('post.transtype', '免运费', trim);
+            $transtype = I('post.transtype', '免运费');
             $freight = number_format(I('post.freight', 0.00), 2, '.', '');
             $freight = $transtype == '免运费' ? 0.00 : $freight;
             //商品市场价 卖价
             $market_price = number_format(I('post.market_price', 0.00), 2, '.', '');
             $shop_price = number_format(I('post.shop_price', 0.00), 2, '.', '');
-            $goods_num = I('post.goods_num', 0, intval);
+            $goods_num = I('post.goods_num', 0, 'intval');
             $multpicArr = I('post.multpic_url', 0);
             $goods_img = '';
+            $goods_thumb = I('post.goods_thumb', '');
             for ($j = 0; $j < count($multpicArr); $j++) {
                 $goods_img .= $multpicArr[$j] . '|';
             }
             $goods_imgs = substr($goods_img, 0, -1);
-            $goods_sn = I('post.goods_sn', '', trim);
+            $goods_sn = I('post.goods_sn', '');
             //$goods_sn = empty($goods_sn) ? rand(1000,9999).date('mdHis').rand(1000,9999) : $goods_sn;
             //检查商品货号是否唯一
             if (empty($goods_sn)) {
@@ -203,7 +206,7 @@ class GoodsController extends AdminBase
                 'goods_sn' => $goods_sn,
                 'cat_id' => I('post.cat_id', '', 'intval'),
                 'other_cat' => I('post.other_cat', '', 'intval'),
-                'goods_thumb' => $multpicArr[0],
+                'goods_thumb' => $goods_thumb,
                 'goods_img' => $goods_imgs,
                 'market_price' => $market_price,
                 'shop_price' => $shop_price,
@@ -241,6 +244,9 @@ class GoodsController extends AdminBase
             }
             if (empty($data['goods_num'])) {
                 $this->error('商品库存不能为空');
+            }
+            if (empty($data['goods_thumb'])) {
+                $this->error('商品缩略图不能为空');
             }
             $bool = M('goods')->where(array('goods_id' => $goods_id))->save($data);
             if ($bool) {
@@ -324,7 +330,7 @@ class GoodsController extends AdminBase
                 $this->error("非法操作");
             }
         } else {
-            $goodsid = I('get.goods_id', '', intval);
+            $goodsid = I('get.goods_id', '', 'intval');
             $bool = M('goods')->where(array('goods_id' => $goodsid))->delete();
             if ($bool) {
                 //删除商品对应的属性
@@ -381,7 +387,7 @@ class GoodsController extends AdminBase
     //商品分类修改
     public function category_edit()
     {
-        $catid = I('get.catid', '', intval);
+        $catid = I('get.catid', '', 'intval');
         if (IS_POST) {
             $data['parent_id'] = I('post.parent_id', 0, 'intval');
             $data['cat_name'] = I('post.cat_name', '');
@@ -416,14 +422,7 @@ class GoodsController extends AdminBase
             $catArr = I('post.');
             if (is_array($catArr)) {
                 foreach ($catArr['id'] as $k => $v) {
-                    $checkGoods = M('goods')->where(array('cat_id' => $v))->find();
-                    $checkAttr = M('goods_attr')->where(array('cat_id' => $v))->find();
-                    if ($checkGoods) {
-                        $this->error("此分类下有商品，请删除商品后在删除分类");
-                    }
-                    if ($checkAttr) {
-                        $this->error("此分类下有属性，请删除属性后在删除分类");
-                    }
+                    $this->checkArr($v);
                     $catidArr[] = $v;
                 }
                 $bool = M('goods_category')->where(array('catid' => array('IN', $catidArr)))->delete();
@@ -437,16 +436,12 @@ class GoodsController extends AdminBase
             }
         } else {
             $catid = I('get.catid', '', 'intval');
-            $checkGoods = M('goods')->where(array('cat_id' => $catid))->find();
-            if (!$checkGoods) {
-                $bool = M('goods_category')->where(array('catid' => $catid))->delete();
-                if ($bool) {
-                    $this->success("删除成功", U('Goods/category_list'));
-                } else {
-                    $this->error("非法操作");
-                }
+            $this->checkArr($catid);
+            $bool = M('goods_category')->where(array('catid' => $catid))->delete();
+            if ($bool) {
+                $this->success("删除成功", U('Goods/category_list'));
             } else {
-                $this->error("此分类下有商品，请删除商品后在删除分类");
+                $this->error("非法操作");
             }
 
         }
@@ -545,6 +540,18 @@ class GoodsController extends AdminBase
 
     }
 
+    //属性删除检测
+    private function checkArr($cat_id){
+        $checkGoods = M('goods')->where(array('cat_id' => $cat_id))->find();
+        $checkAttr = M('goods_attr')->where(array('cat_id' => $cat_id))->find();
+        if ($checkGoods) {
+            $this->error("此分类下有商品，请删除商品后在删除分类");
+        }
+        if ($checkAttr) {
+            $this->error("此分类下有属性，请删除属性后在删除分类");
+        }
+    }
+
     //用户评论
     public function comment()
     {
@@ -609,23 +616,6 @@ class GoodsController extends AdminBase
 
         echo json_encode(array('html' => $str));
     }
-    //格式化属性 分类->属性->值
-    // public function getFormatAttr(){
-    //    $attrDb = M('goods_attr');
-    //    //查询属性的分类
-    //    $catIdArr = $attrDb->group('cat_id')->select();
-    //    foreach ($catIdArr as $k => $v) {
-    //       $attrNameArr = $attrDb->where(array('cat_id'=>$v['cat_id']))->group('attr_name')->select();
-    //       foreach ($attrNameArr as $key => $value) {
-    //           $array[$k]['attr'][$key]['attr_name'][] = $attrDb->
-    //       }
-    //       $array[$k]['cat_id'] = $v['cat_id'];
-    //    }
-
-
-    //    return $catIdArr;
-
-    // }
 
     //排序
     public function listorder()
@@ -660,9 +650,13 @@ class GoodsController extends AdminBase
 
     public function disposeUpload()
     {
-        $args = '20,gif|jpg|jpeg|png|bmp,1,,,0';
+        $args = '1,jpg|jpeg|gif|png|bmp,1,,,0';
         $authkey = upload_key($args);
-        $this->assign('arg', $args);
+        $args_thumb = '20,gif|jpg|jpeg|png|bmp,1,,,0';
+        $authkey_thumb = upload_key($args_thumb);
+        $this->assign('args', $args);
         $this->assign('authkey', $authkey);
+        $this->assign('args_thumb', $args_thumb);
+        $this->assign('authkey_thumb', $authkey_thumb);
     }
 }

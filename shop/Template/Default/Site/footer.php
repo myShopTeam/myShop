@@ -125,18 +125,8 @@
                                title="联系我们"> 联系我们 </a>
                         </dd>
                         <dd><a href="http://localhost:8009/member/index.php?act=article&amp;op=show&amp;article_id=22"
-                               title="关于ShopWWI"> 关于ShopWWI </a>
+                               title="关于ShopWWI"> 关于Shop </a>
                         </dd>
-                    </dl>
-                </li>
-                <li class="cooperation">
-                    <dl>
-                        <dt>商家合作</dt>
-                        <dd><p>错过天猫？别再错过我们！</p>
-
-                            <p>运维商城开启全新旅程！</p><a
-                                href="http://localhost:8009/shop/index.php?act=show_joinin&amp;op=index" class="btn"
-                                target="_blank"><span>关于入驻</span>&gt;</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -145,10 +135,7 @@
     <div id="footer">
         <div class="wrapper">
             <div class="screen clearfix">
-                <div class="fl right-flag"><a href="http://www.shopwwi.com" target="_blank" rel="nofollow"><img
-                            src="http://localhost:8009/shop/img/credit-flag3.png"></a><a href="http://www.shopwwi.com/"
-                                                                                         target="_blank" rel="nofollow"><img
-                            src="http://localhost:8009/shop/img/isc2.png"></a></div>
+                <div class="fl right-flag"></div>
                 <div class="fl about-us"><p><a href="http://localhost:8009/shop">返回首页</a> <span>|</span>
                         <a href="http://127.0.0.1/member/index.php?act=article&amp;article_id=24">招聘英才</a>
                         <span>|</span>
@@ -156,9 +143,8 @@
                         <span>|</span>
                         <a href="http://127.0.0.1/member/index.php?act=article&amp;article_id=23">联系我们</a>
                         <span>|</span>
-                        <a href="http://127.0.0.1/member/index.php?act=article&amp;article_id=22">关于ShopWWI</a><span>|</span><a
-                            href="http://localhost:8009/shop/index.php?act=link&amp;op=index">友情链接</a><span>|</span><a
-                            href="http://shop.6f99.com" target="_blank">演示网站</a></p>
+                        <a href="http://127.0.0.1/member/index.php?act=article&amp;article_id=22">关于Shop</a><span>|</span><a
+                            href="http://localhost:8009/shop/index.php?act=link&amp;op=index">友情链接</a></p>
 
                     <p>CopyRight © 2007-2016 网店运维交流中心 <a href="http://www.miibeian.gov.cn/" target="_blank" mef="sqde"
                                                          style="color:#666"></a>

@@ -6,15 +6,15 @@
             <div class="cart"><a href="javascript:void(0);" id="rtoolbar_cart"><span class="icon"></span>
                     <span class="name">购物车</span><i id="rtoobar_cart_count" class="new_msg" style="display:none;"></i></a>
             </div>
-<!--            <div class="compare"><a href="javascript:void(0);" id="compare"><span class="icon"></span><span class="tit">商品对比</span></a>-->
-<!--            </div>-->
+            <!--            <div class="compare"><a href="javascript:void(0);" id="compare"><span class="icon"></span><span class="tit">商品对比</span></a>-->
+            <!--            </div>-->
             <div class="chat"><a href="javascript:void(0);" id="chat_show_user"><span class="icon"></span>
                     <i id="new_msg" class="new_msg" style="display:none;"></i><span class="tit">在线联系</span></a>
             </div>
         </div>
         <div class="variation">
             <div class="middle">
-                <?php if ($_SESSION['is_login']) { ?>
+                <if condition="$_SESSION['is_login'] eq 1">
                     <div class="user" nctype="a-barUserInfo">
                         <a href="javascript:void(0);">
                             <div class="avatar"></div>
@@ -31,49 +31,57 @@
                             <dd>当前经验值：<strong nctype="barMemberExp"></strong></dd>
                         </dl>
                     </div>
-                <?php } else { ?>
-                <div class="user" nctype="a-barLoginBox">
-                    <a href="javascript:void(0);">
-                        <div class="avatar"></div>
-                        <span class="tit">会员登录</span>
-                    </a>
-                </div>
-                <div class="user-login-box" nctype="barLoginBox" style="display:none;"><i class="arrow"></i> <a
-                        href="javascript:void(0);" class="close-a" nctype="close-barLoginBox" title="关闭">X</a>
+                    <else/>
+                    <div class="user" nctype="a-barLoginBox">
+                        <a href="javascript:void(0);">
+                            <div class="avatar">
+                                <img src="{$member.avatar|default=$default_avatar}">
+                            </div>
+                            <span class="tit">会员登录</span>
+                        </a>
+                    </div>
+                    <div class="user-login-box" nctype="barLoginBox" style="display:none;"><i class="arrow"></i>
+                        <a href="javascript:void(0);" class="close-a" nctype="close-barLoginBox" title="关闭">X</a>
 
-                    <form id="login_form" method="post" action="" onsubmit="ajaxpost('login_form', '', '', 'onerror')">
-                        <input name="nchash" type="hidden" value="">
-                        <dl>
-                            <dt><strong>登录名</strong></dt>
-                            <dd>
-                                <input type="text" class="text" autocomplete="off" name="user_name" autofocus>
-                                <label></label>
-                            </dd>
-                        </dl>
-                        <dl>
-                            <dt><strong>登录密码</strong><a href="" target="_blank">忘记登录密码？</a></dt>
-                            <dd>
-                                <input type="password" class="text" name="password" autocomplete="off">
-                                <label></label>
-                            </dd>
-                        </dl>
-                        <dl>
-                            <dt><strong>验证码</strong><a href="javascript:void(0)" class="ml5"
-                                                       onclick="javascript:document.getElementById('codeimage').src='index.php?act=seccode&amp;op=makecode&amp;nchash=&amp;t=' + Math.random();">更换验证码</a>
-                            </dt>
-                            <dd>
-                                <input type="text" name="captcha" autocomplete="off" class="text w130" id="captcha"
-                                       maxlength="4" size="10">
-                                <img src="" name="codeimage" border="0" id="codeimage" class="vt">
-                                <label></label>
-                            </dd>
-                        </dl>
-                    </form>
-                </div>
+                        <form id="login_form" method="post" action=""
+                              onsubmit="ajaxpost('login_form', '', '', 'onerror')">
+                            <input name="nchash" type="hidden" value="">
+                            <dl>
+                                <dt><strong>登录名</strong></dt>
+                                <dd>
+                                    <input type="text" class="text" autocomplete="off" name="user_name" autofocus>
+                                    <label></label>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt><strong>登录密码</strong><a href="" target="_blank">忘记登录密码？</a></dt>
+                                <dd>
+                                    <input type="password" class="text" name="password" autocomplete="off">
+                                    <label></label>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt>
+                                    <strong>验证码</strong>
+                                    <a href="javascript:void(0)" class="ml5" onclick="javascript:document.getElementById('codeimage').src='{$site_info.domain}/index.php?g=Api&m=Checkcode&a=index&code_len=4&font_size=20&width=90&height=26&font_color=&background=&refresh=1&time=' + Math.random();">更换验证码</a>
+                                </dt>
+                                <dd>
+                                    <input type="text" name="captcha" autocomplete="off" class="text w130" id="captcha" maxlength="4" size="10">
+                                    <img src="" name="codeimage" border="0" id="codeimage" class="vt">
+                                    <label></label>
+                                </dd>
+                            </dl>
+                            <div class="bottom">
+                                <input type="submit" class="submit" value="确认">
+                                <input type="hidden" value="" name="ref_url">
+                                <a href="{:U('Passport/register')}" target="_blank">注册新用户</a>
+                            </div>
+                        </form>
+                    </div>
                 <div class="prech">&nbsp;</div>
             </div>
-<!--            <div class="l_qrcode"><a href="javascript:void(0);" class=""><span class="icon"></span>-->
-<!--                    <code><img src=""></code></a></div>-->
+            <!--            <div class="l_qrcode"><a href="javascript:void(0);" class=""><span class="icon"></span>-->
+            <!--                    <code><img src=""></code></a></div>-->
             <div class="gotop"><a href="javascript:void(0);" id="gotop"><span class="icon"></span><span
                         class="tit">返回顶部</span></a></div>
         </div>
@@ -198,40 +206,14 @@
         // 右侧bar登录
         $('div[nctype="a-barLoginBox"]').click(function () {
             $('div[nctype="barLoginBox"]').toggle();
-            document.getElementById('codeimage').src = 'index.php?act=seccode&op=makecode&nchash=&t=' + Math.random();
+            document.getElementById('codeimage').src = "{$site_info.domain}/index.php?g=Api&m=Checkcode&a=index&code_len=4&font_size=20&width=90&height=26&font_color=&background=&refresh=1&time=" + Math.random();
         });
         $('a[nctype="close-barLoginBox"]').click(function () {
             $('div[nctype="barLoginBox"]').toggle();
         });
-        <?php if ($output['cart_goods_num'] > 0) { ?>
-        $('#rtoobar_cart_count').html(<?php echo $output['cart_goods_num'];?>).show();
-        <?php } ?>
     });
 </script>
-<?php } ?>
-<?php if ($output['setting_config']['shopwwi_top_banner_status'] > 0) { ?>
-<div style=" background:<?php echo $output['setting_config']['shopwwi_top_banner_color']; ?>;">
-    <div class="wrapper" id="t-sp" style="display: none;">
-        <a href="javascript:void(0);" class="close" title="关闭"></a>
-        <a href="<?php echo $output['setting_config']['shopwwi_top_banner_url']; ?>"
-           title="<?php echo $output['setting_config']['shopwwi_top_banner_name']; ?>"><img border="0"
-                                                                                            src="<?php echo UPLOAD_SITE_URL . DS . ATTACH_COMMON . DS . $output['setting_config']['shopwwi_top_banner_pic']; ?>"
-                                                                                            alt=""></a></div>
-    <script type="text/javascript">
-        $(function () {
-            //search
-            var skey = getCookie('top_s');
-            if (skey) {
-                $("#t-sp").hide();
-            } else {
-                $("#t-sp").slideDown(800);
-            }
-            $("#t-sp .close").click(function () {
-                setCookie('top_s', 'yes', 1);
-                $("#t-sp").hide();
-            });
-        });
-    </script></div><?php } ?>
+</if>
 <div class="public-top-layout w">
     <div class="topbar wrapper">
         <div class="user-entry">
@@ -240,15 +222,6 @@
                 <a href="{:U('Passport/register')}">注册</a>]</span>
         </div>
         <div class="quick-menu">
-            <dl>
-                <dt><em class="ico_shop"></em><a href="" title="商家管理">商家管理</a><i></i></dt>
-                <dd>
-                    <ul>
-                        <li><a href="" title="招商入驻">招商入驻</a></li>
-                        <li><a href="" target="_blank" title="登录商家管理中心">商家登录</a></li>
-                    </ul>
-                </dd>
-            </dl>
             <dl>
                 <dt><em class="ico_order"></em><a
                         href="<?php echo SHOP_SITE_URL; ?>/index.php?act=member_order">我的订单</a><i></i></dt>
@@ -273,9 +246,6 @@
                         <li>
                             <a href="<?php echo SHOP_SITE_URL; ?>/index.php?act=member_favorite_goods&op=fglist">商品收藏</a>
                         </li>
-                        <li>
-                            <a href="<?php echo SHOP_SITE_URL; ?>/index.php?act=member_favorite_store&op=fslist">店铺收藏</a>
-                        </li>
                     </ul>
                 </dd>
             </dl>
@@ -293,9 +263,9 @@
 <!--                <dt>关注我们<i></i></dt>-->
 <!--                <dd>-->
 <!--                    <h4>扫描二维码<br/>关注商城微信号</h4>-->
-<!--                    <img src="--><?php //echo UPLOAD_SITE_URL . DS . ATTACH_MOBILE . DS . C('mobile_wx'); ?><!--"></dd>-->
+<!--                    <img src=""></dd>-->
 <!--            </dl>-->
         </div>
     </div>
 </div>
-<template file="Site/naviga.php" />
+<template file="Site/naviga.php"/>

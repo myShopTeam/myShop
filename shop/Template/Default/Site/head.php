@@ -19,6 +19,7 @@
     <script src="/public/site/js/respond.min.js"></script>
     <![endif]-->
     <script src="/public/common/js/jquery.js"></script>
+    <script src="/public/common/js/template.js"></script>
     <script src="/public/common/js/common.js" charset="utf-8"></script>
     <script src="/public/common/js/jquery-ui/jquery.ui.js"></script>
     <script src="/public/common/js/jquery.validation.min.js"></script>

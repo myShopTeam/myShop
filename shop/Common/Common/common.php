@@ -993,6 +993,12 @@ function is_mobile($mobile) {
     return preg_match('#^13[\d]{9}$|^14[5,7]{1}\d{8}$|^15[^4]{1}\d{8}$|^17[0,6,7,8]{1}\d{8}$|^18[\d]{9}$#', $mobile) ? true : false;
 }
 
+/**
+ * 输出json数据
+ * @param string $status
+ * @param string $msg
+ * @param array $data
+ */
 function msg($status = 'success', $msg = '操作成功', $data = array()){
     if(!$msg){
         $msg = $status == 'success' ? '操作成功' : '操作失败';
@@ -1000,4 +1006,9 @@ function msg($status = 'success', $msg = '操作成功', $data = array()){
     die (urldecode(json_encode(array('status' => $status, 'msg' => urlencode($msg), 'data' => $data))));
 }
 
+//获取带http的域名
+function get_http_type(){
+    $http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
+    return $http_type . $_SERVER['HTTP_HOST'];
+}
 

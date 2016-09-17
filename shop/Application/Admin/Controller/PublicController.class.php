@@ -21,7 +21,7 @@ class PublicController extends AdminBase {
         if (User::getInstance()->id) {
             $this->redirect('Admin/Index/index');
         }
-        $code = 'http://' . $_SERVER['HTTP_HOST'] . '/index.php?g=Api&m=Checkcode&a=index&code_len=4&font_size=20&width=130&height=50&font_color=&background=';
+        $code = get_http_type() . '/index.php?g=Api&m=Checkcode&a=index&code_len=4&font_size=20&width=130&height=50&font_color=&background=';
         $this->assign('code',$code);
         $this->display();
     }

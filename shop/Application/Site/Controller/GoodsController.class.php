@@ -28,10 +28,10 @@ class GoodsController extends SiteController
 
     //商品列表
     public function products(){
-        $filter = array();
+        $order  = array();//排序
+        $filter = array();//筛选
         //商品列表
-        $list = $this->model->getGoodsList($filter);
-//        p($this->model->select());
+        $list = $this->model->getGoodsList('*', $filter);
 
         $this->assign('list', $list);
         $this->display();
@@ -39,7 +39,31 @@ class GoodsController extends SiteController
 
     //商品详情页
     public function product(){
+        //验证商品是否存在
+        $this->checkGoods();
 
         $this->display();
+    }
+
+    /**
+     * 验证商品是否存在 默认跳转到商品列表页面
+     * @param string $url
+     */
+    private function checkGoods($url=''){
+        $url = $url ? $url : U('products');
+        $goods_id = I('get.gid', 0, 'intval');
+        //非法验证
+        if($goods_id == 0){
+            redirect($url);
+        }
+        //验证是否存在此商品
+        $goods = $this->model->where(array('goods_id' => $goods_id))->find();
+        if(!$goods){
+            redirect($url);
+        }
+        //验证商品是否上架
+        if($goods['is_show'] == 0){
+            redirect($url);
+        }
     }
 }
