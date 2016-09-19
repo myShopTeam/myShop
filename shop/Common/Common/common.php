@@ -1006,9 +1006,14 @@ function msg($status = 'success', $msg = '操作成功', $data = array()){
     die (urldecode(json_encode(array('status' => $status, 'msg' => urlencode($msg), 'data' => $data))));
 }
 
-//获取带http的域名
+//获取http类型
 function get_http_type(){
     $http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://';
-    return $http_type . $_SERVER['HTTP_HOST'];
+    return $http_type;
+}
+
+//获取带http的域名
+function get_http_host(){
+    return get_http_type() . $_SERVER['HTTP_HOST'];
 }
 

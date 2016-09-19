@@ -2932,7 +2932,7 @@
                                 <div class="goods-pic"><a
                                         href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100009"
                                         target="_blank" title="劳力士Rolex 日志型系列 116200 63200 自动机械钢带男表联保正品"><img
-                                            shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627958339099_240.jpg"
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627958339099_240.jpg"
                                             rel='lazy' src="/public/common/images/loading.gif"
                                             title="劳力士Rolex 日志型系列 116200 63200 自动机械钢带男表联保正品"
                                             alt="劳力士Rolex 日志型系列 116200 63200 自动机械钢带男表联保正品"/></a></div>
@@ -2941,7 +2941,7 @@
                                     <div class="goods-pic-scroll-show">
                                         <ul>
                                             <li class="selected"><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627958339099_60.jpg"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627958339099_60.jpg"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                         </ul>
                                     </div>
@@ -2983,7 +2983,7 @@
                                 <div class="goods-pic"><a
                                         href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100008"
                                         target="_blank" title="劳力士Rolex 宇宙计型迪通拿 自动机械皮带男表 正品116519 CR.TB"><img
-                                            shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627931531971_240.jpg"
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627931531971_240.jpg"
                                             rel='lazy' src="/public/common/images/loading.gif"
                                             title="劳力士Rolex 宇宙计型迪通拿 自动机械皮带男表 正品116519 CR.TB"
                                             alt="劳力士Rolex 宇宙计型迪通拿 自动机械皮带男表 正品116519 CR.TB"/></a></div>
@@ -2992,7 +2992,7 @@
                                     <div class="goods-pic-scroll-show">
                                         <ul>
                                             <li class="selected"><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627931531971_60.jpg"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627931531971_60.jpg"
                                                         rel='lazy' src="/public/common/images/loading.gif/"/></a></li>
                                         </ul>
                                     </div>
@@ -3035,7 +3035,7 @@
                                 <div class="goods-pic"><a
                                         href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100007"
                                         target="_blank" title="劳力士Rolex 蚝式恒动系列自动机械钢带男表正品116523-8DI-78593"><img
-                                            shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627900055146_240.png"
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627900055146_240.png"
                                             rel='lazy' src="/public/common/images/loading.gif"
                                             title="劳力士Rolex 蚝式恒动系列自动机械钢带男表正品116523-8DI-78593"
                                             alt="劳力士Rolex 蚝式恒动系列自动机械钢带男表正品116523-8DI-78593"/></a></div>
@@ -3043,7 +3043,7 @@
                                     <div class="goods-pic-scroll-show">
                                         <ul>
                                             <li class="selected"><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627900055146_60.png"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627900055146_60.png"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                         </ul>
                                     </div>
@@ -3086,7 +3086,7 @@
                                 <div class="goods-pic"><a
                                         href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100006"
                                         target="_blank" title="劳力士Rolex 蚝式恒动系列 自动机械钢带男表 正品116231-G-63201"><img
-                                            shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627871532105_240.png"
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627871532105_240.png"
                                             rel='lazy' src="/public/common/images/loading.gif"
                                             title="劳力士Rolex 蚝式恒动系列 自动机械钢带男表 正品116231-G-63201"
                                             alt="劳力士Rolex 蚝式恒动系列 自动机械钢带男表 正品116231-G-63201"/></a></div>
@@ -3094,7 +3094,7 @@
                                     <div class="goods-pic-scroll-show">
                                         <ul>
                                             <li class="selected"><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627871532105_60.png"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627871532105_60.png"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                         </ul>
                                     </div>
@@ -3137,7 +3137,7 @@
                                 <div class="goods-pic"><a
                                         href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100005"
                                         target="_blank" title="劳力士Rolex 蚝式恒动 115234-CA-72190自动机械钢带男表联保正品"><img
-                                            shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627843241680_240.jpg"
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627843241680_240.jpg"
                                             rel='lazy' src="/public/common/images/loading.gif"
                                             title="劳力士Rolex 蚝式恒动 115234-CA-72190自动机械钢带男表联保正品"
                                             alt="劳力士Rolex 蚝式恒动 115234-CA-72190自动机械钢带男表联保正品"/></a></div>
@@ -3145,7 +3145,7 @@
                                     <div class="goods-pic-scroll-show">
                                         <ul>
                                             <li class="selected"><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627843241680_60.jpg"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627843241680_60.jpg"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                         </ul>
                                     </div>
@@ -3187,7 +3187,7 @@
                                 <div class="goods-pic"><a
                                         href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100004"
                                         target="_blank" title="劳力士Rolex 日志型系列 自动机械钢带男表 联保正品 116233"><img
-                                            shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627799921979_240.jpg"
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627799921979_240.jpg"
                                             rel='lazy' src="/public/common/images/loading.gif"
                                             title="劳力士Rolex 日志型系列 自动机械钢带男表 联保正品 116233"
                                             alt="劳力士Rolex 日志型系列 自动机械钢带男表 联保正品 116233"/></a></div>
@@ -3195,19 +3195,19 @@
                                     <div class="goods-pic-scroll-show">
                                         <ul>
                                             <li class="selected"><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627799921979_60.jpg"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627799921979_60.jpg"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                             <li><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627802778337_60.jpg"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627802778337_60.jpg"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                             <li><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627805681085_60.jpg"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627805681085_60.jpg"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                             <li><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627809660767_60.jpg"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627809660767_60.jpg"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                             <li><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627813773082_60.jpg"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627813773082_60.jpg"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                         </ul>
                                     </div>
@@ -3249,7 +3249,7 @@
                                 <div class="goods-pic"><a
                                         href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100003"
                                         target="_blank" title="劳力士Rolex 日志型系列 自动机械钢带男士表 联保正品 116333"><img
-                                            shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627769865296_240.jpg"
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627769865296_240.jpg"
                                             rel='lazy' src="/public/common/images/loading.gif"
                                             title="劳力士Rolex 日志型系列 自动机械钢带男士表 联保正品 116333"
                                             alt="劳力士Rolex 日志型系列 自动机械钢带男士表 联保正品 116333"/></a></div>
@@ -3257,10 +3257,10 @@
                                     <div class="goods-pic-scroll-show">
                                         <ul>
                                             <li class="selected"><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627769865296_60.jpg"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627769865296_60.jpg"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                             <li><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627779656765_60.png"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627779656765_60.png"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                         </ul>
                                     </div>
@@ -3302,7 +3302,7 @@
                                 <div class="goods-pic"><a
                                         href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100002"
                                         target="_blank" title="劳力士Rolex MILGAUSS 116400GV-72400 自动机械钢带男表联保正品"><img
-                                            shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627750479728_240.png"
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627750479728_240.png"
                                             rel='lazy' src="/public/common/images/loading.gif"
                                             title="劳力士Rolex MILGAUSS 116400GV-72400 自动机械钢带男表联保正品"
                                             alt="劳力士Rolex MILGAUSS 116400GV-72400 自动机械钢带男表联保正品"/></a></div>
@@ -3310,7 +3310,7 @@
                                     <div class="goods-pic-scroll-show">
                                         <ul>
                                             <li class="selected"><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627750479728_60.png"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627750479728_60.png"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                         </ul>
                                     </div>
@@ -3352,7 +3352,7 @@
                                 <div class="goods-pic"><a
                                         href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100001"
                                         target="_blank" title="劳力士Rolex 深海系列 自动机械钢带男士表 联保正品116660 98210"><img
-                                            shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627707766698_240.png"
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627707766698_240.png"
                                             rel='lazy' src="/public/common/images/loading.gif"
                                             title="劳力士Rolex 深海系列 自动机械钢带男士表 联保正品116660 98210"
                                             alt="劳力士Rolex 深海系列 自动机械钢带男士表 联保正品116660 98210"/></a></div>
@@ -3360,19 +3360,19 @@
                                     <div class="goods-pic-scroll-show">
                                         <ul>
                                             <li class="selected"><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627707766698_60.png"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627707766698_60.png"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                             <li><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627711844438_60.png"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627711844438_60.png"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                             <li><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627715984525_60.png"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627715984525_60.png"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                             <li><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627723007356_60.png"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627723007356_60.png"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                             <li><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627731269795_60.png"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627731269795_60.png"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                         </ul>
                                     </div>
@@ -3414,7 +3414,7 @@
                                 <div class="goods-pic"><a
                                         href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100000"
                                         target="_blank" title="劳力士ROLEX-潜航者型 116610-LV-97200自动机械钢带男表联保正品"><img
-                                            shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627678636481_240.jpg"
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627678636481_240.jpg"
                                             rel='lazy' src="/public/common/images/loading.gif"
                                             title="劳力士ROLEX-潜航者型 116610-LV-97200自动机械钢带男表联保正品"
                                             alt="劳力士ROLEX-潜航者型 116610-LV-97200自动机械钢带男表联保正品"/></a></div>
@@ -3422,7 +3422,7 @@
                                     <div class="goods-pic-scroll-show">
                                         <ul>
                                             <li class="selected"><a href="javascript:void(0);"><img
-                                                        shopwwi-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627678636481_60.jpg"
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627678636481_60.jpg"
                                                         rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                         </ul>
                                     </div>

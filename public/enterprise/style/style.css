@@ -1,0 +1,28 @@
+﻿@charset "utf-8";
+
+/*-------------------------------------------------------------------------------------
+
+    Theme Name:Casework
+    Theme URI:http://www.mazaloo.com/themes/casework
+    Description:Design Studio Portfolio & Blog
+    Author:Mazaloo
+    Author URI:http://themeforest.net/user/Mazaloo/
+
+    Version:1.0
+
+/* ----------------------------------------------------------------------------------*/
+/* ---------->>> *00 IMPORTING STYLES
+/* ----------------------------------------------------------------------------------*/
+
+@import url('nivo-slider.css');
+
+/* Index Page Sliders (edit more in nivo-slider.css or sliderkit.css)
+-------------------------------------------------------------------------------------*/
+.BannerBox{position:relative;height:460px;padding-bottom:10px;overflow:hidden;}
+.BannerBox .BanBg{position:absolute;left:0;bottom:-20px;width:100%;height:30px;background:url(../images/BanBtm_bg.jpg) 0 0 repeat-x;z-index:99999;}
+.slider{position:relative;}
+.slider .theme-default{}
+.slider,.slider-wrapper{height:460px;}
+.slider-wrapper,.slider-wrapper div.top-shadow{width:1920px;}
+.slider-wrapper{background:#FFFFFF url(../images/loader.gif) no-repeat center center;display:block;position:absolute;top:0px;left:-360px;}
+.slider-wrapper div.top-shadow{background:url(../images/slider_top_shadow.png) center top no-repeat;height:4px;display:block;left:0px;position:absolute;top:0px;z-index:10;}
