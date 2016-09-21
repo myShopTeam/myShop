@@ -9,9 +9,11 @@
 namespace admin\Controller;
 
 use Common\Controller\AdminBase;
+use Admin\Service\User;
 
 class CrmController extends AdminBase
 {
+    
     protected $config = array(
                             'is_active' => array('1'=>'未激活','2'=>'已激活')
                             );
@@ -53,6 +55,7 @@ class CrmController extends AdminBase
     protected function _initialize()
     {
         parent::_initialize();
+        session_start();
         $this->assign('config',$this->config);
     }
 
@@ -78,13 +81,13 @@ class CrmController extends AdminBase
     }
 
     public function createWhere($post){
-        $where = '1=1 and ';
-        $where .= !empty($post['card_type'])?'card_type="'.$post['card_type'].'" and ':'';
-        $where .= !empty($post['card_name'])?'card_name="'.$post['card_name'].'" and ':'';
+        $where = '1 and ';
+        $where .= !empty($post['card_type'])?'card_type like "%'.$post['card_type'].'%" and ':'';
+        $where .= !empty($post['card_name'])?'card_name like "%'.$post['card_name'].'%" and ':'';
         $where .= !empty($post['is_active'])?'is_active='.$post['is_active'].' and ':'';
         $where .= !empty($post['start_time'])?$post['time_type'].' >= '.strtotime($post['start_time']).' and ':'';
         $where .= !empty($post['end_time'])?$post['time_type'].' < '.strtotime($post['end_time']).' and ':'';
-        $where .= !empty($post['card_num'])?'card_num like "%'.$post['card_num'].'%"':' 1 = 1';
+        $where .= !empty($post['card_num'])?'card_num like "%'.$post['card_num'].'%"':' 1';
 
         return $where;
     }
@@ -126,7 +129,8 @@ class CrmController extends AdminBase
                 $data[$k] = I('post.'.$k,'',trim);
             }
             $data['create_time'] = time();
-            $data['birthday']    = strtotime($data['birthday']);
+            $data['birthday']    = strtotime($data['birthday']);           
+            $data['creater'] = User::getInstance()->id;
             //检测卡号是否已存在
             $checkUser = M('card')->where(array('card_num' => $data['card_num']))->find();
             if ($checkUser) {

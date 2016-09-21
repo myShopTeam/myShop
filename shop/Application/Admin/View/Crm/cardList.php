@@ -8,16 +8,9 @@
     <div class="search_type cc mb10">
       <div class="mb10"> 
 	      <span class="mr20">
-                        <select name="card_type" class="select" id="card_type" >
-                            <option value="0">卡类型</option>
-                            <option value='家园系列'>家园系列</option>
-                            <option value='服务系列'>服务系列</option>
-                        </select>
-                        <select name="card_name" class="select" id="card_name" >
-                            <option value="0">卡名称</option>
-                            <option value='家园1号'>家园1号</option>
-                            <option value='希望1号'>希望1号</option>
-                        </select> 
+                        <input class="input length_2 "  name="card_type" placeholder="输入卡单类型"/>
+                        <input class="input length_2 "  name="card_name" placeholder="输入产品名称"/>
+                        
                         <select name="time_type" class="select" id="time" >
                             <option value='create_time' <if condition="$post.time_type eq 'create_time'">selected</if>>提交时间</option>
                             <option value='active_time' <if condition="$post.time_type eq 'active_time'">selected</if>>激活时间</option>
@@ -92,7 +85,7 @@
                 <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('listorder',array('str'=>vip))}">排序</button>
                 <input type="button" class="btn upload" style="background: #1b75b6;color:#ffffff !important" value="导入">
                 <input class="uploadFile" type="file" name="file_stu" style="display:none;width:180px;height:20px;line-height:16px;" />
-                <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('cardActive')}">激活</button>
+                <button class="activeDo btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('cardActive')}">激活</button>
         <?php
 		if(\Libs\System\RBAC::authenticate('delete')){
 		?>
@@ -139,6 +132,12 @@ $(function(){
             }
             $('<form method="post" action="{:U('export')}"></form>').append($('.search_form').find('input,select').clone()).submit()
         })
+        
+//        $('.activeDo').click(function(re){
+//            if(!confirm('是否确认激活？')){
+//                return false;
+//            }
+//        })
         
 })
 </script>
