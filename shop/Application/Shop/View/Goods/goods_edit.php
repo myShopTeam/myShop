@@ -17,44 +17,15 @@
           <tr>
             <th>商品分类<span class="red">*</span></th>
             <td>{$catList}
-              <a href="{:U('Goods/category_add')}" class="btn">添加分类</a></td>
-            <th>扩展分类</th>
-            <td>{$otherList}</td>
+              <a href="{:U('Category/category_add')}" class="btn">添加分类</a></td>
+              <th>运费</th>
+              <td>
+                  <input type="radio" name="transtype" value="免运费" checked>免运费
+                  <input type="radio" name="transtype" value="固定运费">固定运费&nbsp;&nbsp;&nbsp;
+                  <input type="text" class="input freight" name="freight" value="" hidden placeholder="请填写固定运费">
+              </td>
           </tr>
           <tr>
-            <th>校友分类<span class="red">*</span></th>
-            <td><select name="alumni_id">
-              <option value="">请选择</option>
-              <volist name="alumni" id="vo">
-              <option value="{$vo.alumni_id}" <if condition="$vo['alumni_id'] eq $alumni_id">selected</if>>{$vo.alumni_name}</option>
-              </volist>
-            </select></td>
-            <th>校友品牌</th>
-            <td><select name="brand_id">
-              <option value="">请选择</option>
-              <volist name="brand" id="vo">
-              <option value="{$vo.brand_id}"<if condition="$vo['brand_id'] eq $brand_id">selected</if>>{$vo.brand_name}</option>
-              </volist>
-            </select></td>
-          </tr>
-          <tr>
-          <th>特殊分类</th>
-            <td>
-                <select name="classify">
-                  <option value="">请选择</option>
-                  <option value="校友产品" <if condition="$classify eq '校友产品'">selected</if>>校友产品</option>
-                  <option value="武大纪念品" <if condition="$classify eq '武大纪念品'">selected</if>>武大纪念品</option>
-                  <option value="校友特卖" <if condition="$classify eq '校友特卖'">selected</if>>校友特卖</option>
-                  <option value="捐赠特卖" <if condition="$classify eq '捐赠特卖'">selected</if>>捐赠特卖</option>
-                </select>
-            </td>
-            <th>运费</th>
-            <td>
-                <input type="radio" name="transtype" value="免运费" checked>免运费
-                <input type="radio" name="transtype" value="固定运费">固定运费&nbsp;&nbsp;&nbsp;
-                <input type="text" class="input freight" name="freight" value="" hidden placeholder="请填写固定运费">
-            </td>
-          </tr>
           <tr>
             <th>上架</th>
             <td><input type="checkbox" name="is_show" value="1"  id="is_show" <if condition="$is_show eq 1">checked</if>>打勾表示允许销售，否则不允许销售。</td>
@@ -90,12 +61,18 @@
               </td>
           </tr>
           <tr>
+              <th>商品缩略图</th>
+              <td colspan="3"><a href="javascript:void(0);" onclick="flashupload('thumb_images', '附件上传','thumb',thumb_images,'{$args_thumb}','Content','14','{$authkey_thumb}');return false;">
+                      <img src="{$cat_img|default='/statics/images/icon/upload-pic.png'}" id="thumb_preview" width="135" height="113" style="cursor:hand"></a></td>
+              <input type="hidden"  id='thumb' name="goods_thumb" value="{$thumb}">
+          </tr>
+          <tr>
               <th>商品展示图片</th>
               <td colspan="3">
               <div id="multpic" class="picList">
                 <ul>{$imgsStr}</ul>
               </div>
-              <a herf="javascript:void(0);" onclick="javascript:flashupload('multpic_images', '图片上传','multpic',change_images,'20,gif|jpg|jpeg|png|bmp,1,,,0','Content','11','a2cf42020d9c063d6a49168d77823896')" class="btn"><span class="add"></span>选择图片 </a>
+              <a herf="javascript:void(0);" onclick="javascript:flashupload('multpic_images', '图片上传','multpic',change_images,'{$args}','Content','11','{$authkey}')" class="btn"><span class="add"></span>选择图片 </a>
             </tr>
               <th width="80">
                   商品图文详情
