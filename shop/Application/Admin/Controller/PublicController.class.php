@@ -22,6 +22,7 @@ class PublicController extends AdminBase {
             $this->redirect('Admin/Index/index');
         }
         $code = get_http_host() . '/index.php?g=Api&m=Checkcode&a=index&code_len=4&font_size=20&width=130&height=50&font_color=&background=';
+        $this->assign('public_path', get_http_host() . '/public/');
         $this->assign('code',$code);
         $this->display();
     }

@@ -27,6 +27,8 @@ class BaseController extends Base
     private function getSiteInfo(){
         //域名
         $this->site_info['domain'] = get_http_host();
+        //public目录
+        $this->site_info['public_path']     = $this->site_info['domain'] . '/public/';
         //site资源目录
         $this->site_info['site_path']       = $this->site_info['domain'] . '/public/site/';
         //common资源目录
