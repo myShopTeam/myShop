@@ -59,7 +59,7 @@
             </div>
         </div>
         <ul class="site-menu">
-            <li><a href=""><span>首页</span></a></li>
+            <li><a href="/"><span>首页</span></a></li>
             <li class="navitems-on"><a href=""><span>热卖</span></a></li>
             <li><a href=""><span>新品</span></a></li>
            </ul>

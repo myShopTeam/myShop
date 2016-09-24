@@ -1,23 +1,18 @@
 <?php
 
 // +----------------------------------------------------------------------
-// | qcjh 武大校友汇商城 商品管理
+// | base
 // +----------------------------------------------------------------------
 // | Copyright (c) 2014-2015 , All rights reserved.
 // +----------------------------------------------------------------------
 // | Author: lp <lp@qcjh.net>
 // +----------------------------------------------------------------------
 
-namespace Site\Controller;
+namespace Base\Controller;
 
-use Base\Controller\BaseController;
 
-class SiteController extends BaseController
+class base
 {
-
-    public function _initialize()
-    {
-        parent::_initialize();
-    }
+    public function _initialize(){}
 
 }

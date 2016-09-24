@@ -36,6 +36,14 @@
     <div style="width: 780px; height: 210px;" id="dituContent"></div>
 </body>
 <script type="text/javascript">
+    //采用正则表达式获取地址栏参数
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  decodeURI(r[2]); return null;
+    }
+
     //创建和初始化地图函数：
     function initMap() {
         createMap();//创建地图
@@ -72,9 +80,12 @@
         var ctrl_sca = new BMap.ScaleControl({ anchor: BMAP_ANCHOR_BOTTOM_LEFT });
         map.addControl(ctrl_sca);
     }
-
+    var company   = GetQueryString('company');
+    var phone     = GetQueryString('phone');
+    var telephone = GetQueryString('telephone');
+    var address   = GetQueryString('address');
     //标注点数组
-    var markerArr = [{ title: "湖北国安家园救援有限责任公司", content: "座机：027-50668224<br/>手机：15527767799<br/>地址：武汉市硚口区古田二路汇丰企业天地汇贤楼1", point: "114.207298|30.621126", isOpen: 1, icon: { w: 23, h: 25, l: 46, t: 21, x: 9, lb: 12 } }
+    var markerArr = [{ title: company, content: "座机：" + phone + "<br/>手机：" + telephone + "<br/>地址：" + address, point: "114.207298|30.621126", isOpen: 1, icon: { w: 23, h: 25, l: 46, t: 21, x: 9, lb: 12 } }
     ];
     //创建marker
     function addMarker() {

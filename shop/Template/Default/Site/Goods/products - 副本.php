@@ -2863,10 +2863,13 @@
 
                     <ul>
 
-                        <li class="selected"><a href="{:U('products', array('type' => 1, 'order' => $order))}"  title="默认排序">默认</a></li>
-                        <li ><a href="{:U('products', array('type' => 2, 'order' => $order))}"  title="点击按销量从高到低排序">销量<i></i></a></li>
-                        <li ><a href="{:U('products', array('type' => 3, 'order' => $order))}"  title="点击按人气从高到低排序">人气<i></i></a></li>
-                        <li ><a href="{:U('products', array('type' => 4, 'order' => $order))}"  title="点击按价格从高到低排序">价格<i></i></a></li>
+                        <li class="selected"><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&order=0&key=0"  title="默认排序">默认</a></li>
+
+                        <li ><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&key=1&order=2"  title="点击按销量从高到低排序">销量<i></i></a></li>
+
+                        <li ><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&key=2&order=2"  title="点击按人气从高到低排序">人气<i></i></a></li>
+
+                        <li ><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&key=3&order=2"  title="点击按价格从高到低排序">价格<i></i></a></li>
 
                     </ul>
 
@@ -2878,15 +2881,19 @@
 
                     <ul>
 
+                        <li><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&type=1" ><i></i>平台自营</a></li>
+
+                        <li><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&gift=1" ><i></i>赠品</a></li>
+
                         <!-- 消费者保障服务 -->
 
-                        <li><a href="" ><i></i>7天退货</a></li>
+                        <li><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&ci=1" ><i></i>7天退货</a></li>
 
-                        <li><a href="" ><i></i>品质承诺</a></li>
+                        <li><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&ci=2" ><i></i>品质承诺</a></li>
 
-                        <li><a href="" ><i></i>破损补寄</a></li>
+                        <li><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&ci=3" ><i></i>破损补寄</a></li>
 
-                        <li><a href="" ><i></i>急速物流</a></li>
+                        <li><a href="http://localhost:8009/shop/index.php?act=search&op=index&cate_id=530&ci=4" ><i></i>急速物流</a></li>
 
                     </ul>
 
@@ -2898,69 +2905,556 @@
             <!-- 商品列表循环  -->
 
             <div>
-                <div class="squares" nc_type="current_display_mode">
-                    <input type="hidden" id="lockcompare" value="unlock"/>
+
+                <style type="text/css">#box {
+                        background: #FFF;
+                        width: 238px;
+                        height: 410px;
+                        margin: -390px 0 0 0;
+                        display: block;
+                        border: solid 4px #D93600;
+                        position: absolute;
+                        z-index: 999;
+                        opacity: .5
+                    }
+
+                    .shopMenu {
+                        position: fixed;
+                        z-index: 1;
+                        right: 25%;
+                        top: 0;
+                    }</style>
+                <div class="squares" nc_type="current_display_mode"><input type="hidden" id="lockcompare"
+                                                                           value="unlock"/>
                     <ul class="list_pic">
-                        <volist name="list" id="vo">
-                            <li class="item">
-                            <div class="goods-content">
+                        <li class="item">
+                            <div class="goods-content" nctype_goods=" 100009" nctype_store="1">
                                 <div class="goods-pic">
-                                    <a href="{:U('product', array('gid' => $vo['goods_id']))}" target="_blank" title="{$vo.goods_name}">
-                                        <img data-url="{$vo.goods_thumb}" rel='lazy' src="/public/common/images/loading.gif" title="{$vo.goods_name}" alt=""/></a>
-                                </div>
-<!--                                <div class="goods-promotion"><span>团购商品</span></div>-->
+                                    <a href=""target="_blank" title="劳力士Rolex 日志型系列 116200 63200 自动机械钢带男表联保正品">
+                                        <img data-url="" rel='lazy' src="/public/common/images/loading.gif" title="" alt=""/></a></div>
+                                <div class="goods-promotion"><span>团购商品</span></div>
                                 <div class="goods-info">
                                     <div class="goods-pic-scroll-show">
                                         <ul>
-                                            <!-- 默认展示 -->
-                                            <li class="selected">
-                                                <a href="javascript:void(0);">
-                                                    <img data-url="{$vo.goods_thumb}" rel='lazy' src="/public/common/images/loading.gif"/>
-                                                </a>
-                                            </li>
-                                            <!-- 多图展示 -->
-                                            <if condition="$vo['goods_img'] neq ''">
-                                                <php>$goods_img = explode('|', $vo['goods_img']);</php>
-                                                <volist name="goods_img" id="img">
-                                                    <li class="selected">
-                                                        <a href="javascript:void(0);">
-                                                            <img data-url="{$img}" rel='lazy' src="/public/common/images/loading.gif"/>
-                                                        </a>
-                                                    </li>
-                                                </volist>
-                                            </if>
+                                            <li class="selected"><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627958339099_60.jpg"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
                                         </ul>
                                     </div>
-                                    <div class="goods-name">
-                                        <a href="{:U('product', array('gid' => $vo['goods_id']))}" target="_blank" title="{$vo.goods_name}">{$vo.goods_name}</a>
-                                    </div>
-                                    <div class="goods-price">
-                                        <em class="sale-price" title="商城价：&yen;{$vo.shop_price}">￥{$vo.shop_price}</em>
-                                        <em class="market-price" title="市场价：&yen;{$vo.market_price}">￥{$vo.market_price}</em>
+                                    <div class="goods-name"><a
+                                            href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100009"
+                                            target="_blank" title="【雅欧国际】：所有商品全新原装正品　　">劳力士Rolex 日志型系列 116200 63200
+                                            自动机械钢带男表联保正品<em>【雅欧国际】：所有商品全新原装正品　　</em></a></div>
+                                    <div class="goods-price"><em class="sale-price" title="商城价：&yen;42800.00">4.28万</em>
+                                        <em class="market-price" title="市场价：&yen;52800.00">5.28万</em>
                                         <!--<span class="raty" data-score="5"></span>--> </div>
-                                    <div class="goods-sub"></div>
+                                    <div class="goods-sub"><span class="goods-compare" nc_type="compare_100009"
+                                                                 data-param='{"gid":"100009"}'><i></i>加入对比</span></div>
                                     <div class="sell-stat">
                                         <ul>
                                             <li>
-                                                <a href="javascript:;" class="status">0</a>
-                                                <p>商品销量</p>
-                                            </li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100009#ncGoodsRate"
+                                                   target="_blank" class="status">0</a>
+
+                                                <p>商品销量</p></li>
                                             <li>
-                                                <a href="javascript:;">0</a>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=comments_list&goods_id=100009"
+                                                   target="_blank">0</a>
 
                                                 <p>用户评论</p></li>
-                                            <li><em>&nbsp;</em></li>
+                                            <li><em member_id="1">&nbsp;</em></li>
                                         </ul>
                                     </div>
-                                    <!-- 店铺 -->
-                                    <div class="store"></div>
-                                    <div class="add-cart">
-                                        <a href="javascript:void(0);" nctype="add_cart" data-gid="{$vo.goods_id}"><i class="icon-shopping-cart"></i>加入购物车</a>
-                                    </div>
+                                    <div class="store"><a
+                                            href="http://localhost:8009/shop/index.php?act=show_store&op=index&store_id=1"
+                                            title="我的店铺" class="name">我的店铺</a></div>
+                                    <div class="add-cart"><a href="javascript:void(0);" nctype="add_cart"
+                                                             data-gid="100009"><i
+                                                class="icon-shopping-cart"></i>加入购物车</a></div>
                                 </div>
                             </div>
                         </li>
-                        </volist>
+                        <li class="item">
+                            <div class="goods-content" nctype_goods=" 100008" nctype_store="1">
+                                <div class="goods-pic"><a
+                                        href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100008"
+                                        target="_blank" title="劳力士Rolex 宇宙计型迪通拿 自动机械皮带男表 正品116519 CR.TB"><img
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627931531971_240.jpg"
+                                            rel='lazy' src="/public/common/images/loading.gif"
+                                            title="劳力士Rolex 宇宙计型迪通拿 自动机械皮带男表 正品116519 CR.TB"
+                                            alt="劳力士Rolex 宇宙计型迪通拿 自动机械皮带男表 正品116519 CR.TB"/></a></div>
+                                <div class="goods-promotion"><span>限时折扣</span></div>
+                                <div class="goods-info">
+                                    <div class="goods-pic-scroll-show">
+                                        <ul>
+                                            <li class="selected"><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627931531971_60.jpg"
+                                                        rel='lazy' src="/public/common/images/loading.gif/"/></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="goods-name"><a
+                                            href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100008"
+                                            target="_blank" title="【雅欧国际】：所有商品全新原装正品　　">劳力士Rolex 宇宙计型迪通拿 自动机械皮带男表
+                                            正品116519 CR.TB<em>【雅欧国际】：所有商品全新原装正品　　</em></a></div>
+                                    <div class="goods-price"><em class="sale-price"
+                                                                 title="商城价：&yen;188550.00">18.85万</em> <em
+                                            class="market-price" title="市场价：&yen;209500.00">20.95万</em>
+                                        <!--<span class="raty" data-score="5"></span>--> </div>
+                                    <div class="goods-sub"><span class="goods-compare" nc_type="compare_100008"
+                                                                 data-param='{"gid":"100008"}'><i></i>加入对比</span></div>
+                                    <div class="sell-stat">
+                                        <ul>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100008#ncGoodsRate"
+                                                   target="_blank" class="status">0</a>
+
+                                                <p>商品销量</p></li>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=comments_list&goods_id=100008"
+                                                   target="_blank">0</a>
+
+                                                <p>用户评论</p></li>
+                                            <li><em member_id="1">&nbsp;</em></li>
+                                        </ul>
+                                    </div>
+                                    <div class="store"><a
+                                            href="http://localhost:8009/shop/index.php?act=show_store&op=index&store_id=1"
+                                            title="我的店铺" class="name">我的店铺</a></div>
+                                    <div class="add-cart"><a href="javascript:void(0);" nctype="add_cart"
+                                                             data-gid="100008"><i
+                                                class="icon-shopping-cart"></i>加入购物车</a></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="goods-content" nctype_goods=" 100007" nctype_store="1">
+                                <div class="goods-pic"><a
+                                        href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100007"
+                                        target="_blank" title="劳力士Rolex 蚝式恒动系列自动机械钢带男表正品116523-8DI-78593"><img
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627900055146_240.png"
+                                            rel='lazy' src="/public/common/images/loading.gif"
+                                            title="劳力士Rolex 蚝式恒动系列自动机械钢带男表正品116523-8DI-78593"
+                                            alt="劳力士Rolex 蚝式恒动系列自动机械钢带男表正品116523-8DI-78593"/></a></div>
+                                <div class="goods-info">
+                                    <div class="goods-pic-scroll-show">
+                                        <ul>
+                                            <li class="selected"><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627900055146_60.png"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="goods-name"><a
+                                            href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100007"
+                                            target="_blank" title="">劳力士Rolex 蚝式恒动系列自动机械钢带男表正品116523-8DI-78593<em></em></a>
+                                    </div>
+                                    <div class="goods-price"><em class="sale-price"
+                                                                 title="商城价：&yen;146300.00">14.63万</em> <em
+                                            class="market-price" title="市场价：&yen;146300.00">14.63万</em>
+                                        <!--<span class="raty" data-score="5"></span>--> </div>
+                                    <div class="goods-sub"><span class="goods-compare" nc_type="compare_100007"
+                                                                 data-param='{"gid":"100007"}'><i></i>加入对比</span></div>
+                                    <div class="sell-stat">
+                                        <ul>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100007#ncGoodsRate"
+                                                   target="_blank" class="status">0</a>
+
+                                                <p>商品销量</p></li>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=comments_list&goods_id=100007"
+                                                   target="_blank">0</a>
+
+                                                <p>用户评论</p></li>
+                                            <li><em member_id="1">&nbsp;</em></li>
+                                        </ul>
+                                    </div>
+                                    <div class="store"><a
+                                            href="http://localhost:8009/shop/index.php?act=show_store&op=index&store_id=1"
+                                            title="我的店铺" class="name">我的店铺</a></div>
+                                    <div class="add-cart"><a href="javascript:void(0);" nctype="add_cart"
+                                                             data-gid="100007"><i
+                                                class="icon-shopping-cart"></i>加入购物车</a></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="goods-content" nctype_goods=" 100006" nctype_store="1">
+                                <div class="goods-pic"><a
+                                        href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100006"
+                                        target="_blank" title="劳力士Rolex 蚝式恒动系列 自动机械钢带男表 正品116231-G-63201"><img
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627871532105_240.png"
+                                            rel='lazy' src="/public/common/images/loading.gif"
+                                            title="劳力士Rolex 蚝式恒动系列 自动机械钢带男表 正品116231-G-63201"
+                                            alt="劳力士Rolex 蚝式恒动系列 自动机械钢带男表 正品116231-G-63201"/></a></div>
+                                <div class="goods-info">
+                                    <div class="goods-pic-scroll-show">
+                                        <ul>
+                                            <li class="selected"><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627871532105_60.png"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="goods-name"><a
+                                            href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100006"
+                                            target="_blank" title="">劳力士Rolex 蚝式恒动系列 自动机械钢带男表 正品116231-G-63201<em></em></a>
+                                    </div>
+                                    <div class="goods-price"><em class="sale-price"
+                                                                 title="商城价：&yen;100500.00">10.05万</em> <em
+                                            class="market-price" title="市场价：&yen;100500.00">10.05万</em>
+                                        <!--<span class="raty" data-score="5"></span>--> </div>
+                                    <div class="goods-sub"><span class="goods-compare" nc_type="compare_100006"
+                                                                 data-param='{"gid":"100006"}'><i></i>加入对比</span></div>
+                                    <div class="sell-stat">
+                                        <ul>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100006#ncGoodsRate"
+                                                   target="_blank" class="status">0</a>
+
+                                                <p>商品销量</p></li>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=comments_list&goods_id=100006"
+                                                   target="_blank">0</a>
+
+                                                <p>用户评论</p></li>
+                                            <li><em member_id="1">&nbsp;</em></li>
+                                        </ul>
+                                    </div>
+                                    <div class="store"><a
+                                            href="http://localhost:8009/shop/index.php?act=show_store&op=index&store_id=1"
+                                            title="我的店铺" class="name">我的店铺</a></div>
+                                    <div class="add-cart"><a href="javascript:void(0);" nctype="add_cart"
+                                                             data-gid="100006"><i
+                                                class="icon-shopping-cart"></i>加入购物车</a></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="goods-content" nctype_goods=" 100005" nctype_store="1">
+                                <div class="goods-pic"><a
+                                        href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100005"
+                                        target="_blank" title="劳力士Rolex 蚝式恒动 115234-CA-72190自动机械钢带男表联保正品"><img
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627843241680_240.jpg"
+                                            rel='lazy' src="/public/common/images/loading.gif"
+                                            title="劳力士Rolex 蚝式恒动 115234-CA-72190自动机械钢带男表联保正品"
+                                            alt="劳力士Rolex 蚝式恒动 115234-CA-72190自动机械钢带男表联保正品"/></a></div>
+                                <div class="goods-info">
+                                    <div class="goods-pic-scroll-show">
+                                        <ul>
+                                            <li class="selected"><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627843241680_60.jpg"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="goods-name"><a
+                                            href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100005"
+                                            target="_blank" title="">劳力士Rolex 蚝式恒动 115234-CA-72190自动机械钢带男表联保正品<em></em></a>
+                                    </div>
+                                    <div class="goods-price"><em class="sale-price" title="商城价：&yen;65900.00">6.59万</em>
+                                        <em class="market-price" title="市场价：&yen;65900.00">6.59万</em>
+                                        <!--<span class="raty" data-score="5"></span>--> </div>
+                                    <div class="goods-sub"><span class="goods-compare" nc_type="compare_100005"
+                                                                 data-param='{"gid":"100005"}'><i></i>加入对比</span></div>
+                                    <div class="sell-stat">
+                                        <ul>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100005#ncGoodsRate"
+                                                   target="_blank" class="status">0</a>
+
+                                                <p>商品销量</p></li>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=comments_list&goods_id=100005"
+                                                   target="_blank">0</a>
+
+                                                <p>用户评论</p></li>
+                                            <li><em member_id="1">&nbsp;</em></li>
+                                        </ul>
+                                    </div>
+                                    <div class="store"><a
+                                            href="http://localhost:8009/shop/index.php?act=show_store&op=index&store_id=1"
+                                            title="我的店铺" class="name">我的店铺</a></div>
+                                    <div class="add-cart"><a href="javascript:void(0);" nctype="add_cart"
+                                                             data-gid="100005"><i
+                                                class="icon-shopping-cart"></i>加入购物车</a></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="goods-content" nctype_goods=" 100004" nctype_store="1">
+                                <div class="goods-pic"><a
+                                        href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100004"
+                                        target="_blank" title="劳力士Rolex 日志型系列 自动机械钢带男表 联保正品 116233"><img
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627799921979_240.jpg"
+                                            rel='lazy' src="/public/common/images/loading.gif"
+                                            title="劳力士Rolex 日志型系列 自动机械钢带男表 联保正品 116233"
+                                            alt="劳力士Rolex 日志型系列 自动机械钢带男表 联保正品 116233"/></a></div>
+                                <div class="goods-info">
+                                    <div class="goods-pic-scroll-show">
+                                        <ul>
+                                            <li class="selected"><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627799921979_60.jpg"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                            <li><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627802778337_60.jpg"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                            <li><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627805681085_60.jpg"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                            <li><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627809660767_60.jpg"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                            <li><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627813773082_60.jpg"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="goods-name"><a
+                                            href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100004"
+                                            target="_blank" title="【雅欧国际】：所有商品全新原装正品　　">劳力士Rolex 日志型系列 自动机械钢带男表 联保正品
+                                            116233<em>【雅欧国际】：所有商品全新原装正品　　</em></a></div>
+                                    <div class="goods-price"><em class="sale-price" title="商城价：&yen;97800.00">9.78万</em>
+                                        <em class="market-price" title="市场价：&yen;97800.00">9.78万</em>
+                                        <!--<span class="raty" data-score="5"></span>--> </div>
+                                    <div class="goods-sub"><span class="goods-compare" nc_type="compare_100004"
+                                                                 data-param='{"gid":"100004"}'><i></i>加入对比</span></div>
+                                    <div class="sell-stat">
+                                        <ul>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100004#ncGoodsRate"
+                                                   target="_blank" class="status">0</a>
+
+                                                <p>商品销量</p></li>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=comments_list&goods_id=100004"
+                                                   target="_blank">0</a>
+
+                                                <p>用户评论</p></li>
+                                            <li><em member_id="1">&nbsp;</em></li>
+                                        </ul>
+                                    </div>
+                                    <div class="store"><a
+                                            href="http://localhost:8009/shop/index.php?act=show_store&op=index&store_id=1"
+                                            title="我的店铺" class="name">我的店铺</a></div>
+                                    <div class="add-cart"><a href="javascript:void(0);" nctype="add_cart"
+                                                             data-gid="100004"><i
+                                                class="icon-shopping-cart"></i>加入购物车</a></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="goods-content" nctype_goods=" 100003" nctype_store="1">
+                                <div class="goods-pic"><a
+                                        href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100003"
+                                        target="_blank" title="劳力士Rolex 日志型系列 自动机械钢带男士表 联保正品 116333"><img
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627769865296_240.jpg"
+                                            rel='lazy' src="/public/common/images/loading.gif"
+                                            title="劳力士Rolex 日志型系列 自动机械钢带男士表 联保正品 116333"
+                                            alt="劳力士Rolex 日志型系列 自动机械钢带男士表 联保正品 116333"/></a></div>
+                                <div class="goods-info">
+                                    <div class="goods-pic-scroll-show">
+                                        <ul>
+                                            <li class="selected"><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627769865296_60.jpg"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                            <li><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627779656765_60.png"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="goods-name"><a
+                                            href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100003"
+                                            target="_blank" title="【雅欧国际】：所有商品全新原装正品　　">劳力士Rolex 日志型系列 自动机械钢带男士表 联保正品
+                                            116333<em>【雅欧国际】：所有商品全新原装正品　　</em></a></div>
+                                    <div class="goods-price"><em class="sale-price" title="商城价：&yen;89200.00">8.92万</em>
+                                        <em class="market-price" title="市场价：&yen;89200.00">8.92万</em>
+                                        <!--<span class="raty" data-score="5"></span>--> </div>
+                                    <div class="goods-sub"><span class="goods-compare" nc_type="compare_100003"
+                                                                 data-param='{"gid":"100003"}'><i></i>加入对比</span></div>
+                                    <div class="sell-stat">
+                                        <ul>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100003#ncGoodsRate"
+                                                   target="_blank" class="status">0</a>
+
+                                                <p>商品销量</p></li>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=comments_list&goods_id=100003"
+                                                   target="_blank">0</a>
+
+                                                <p>用户评论</p></li>
+                                            <li><em member_id="1">&nbsp;</em></li>
+                                        </ul>
+                                    </div>
+                                    <div class="store"><a
+                                            href="http://localhost:8009/shop/index.php?act=show_store&op=index&store_id=1"
+                                            title="我的店铺" class="name">我的店铺</a></div>
+                                    <div class="add-cart"><a href="javascript:void(0);" nctype="add_cart"
+                                                             data-gid="100003"><i
+                                                class="icon-shopping-cart"></i>加入购物车</a></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="goods-content" nctype_goods=" 100002" nctype_store="1">
+                                <div class="goods-pic"><a
+                                        href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100002"
+                                        target="_blank" title="劳力士Rolex MILGAUSS 116400GV-72400 自动机械钢带男表联保正品"><img
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627750479728_240.png"
+                                            rel='lazy' src="/public/common/images/loading.gif"
+                                            title="劳力士Rolex MILGAUSS 116400GV-72400 自动机械钢带男表联保正品"
+                                            alt="劳力士Rolex MILGAUSS 116400GV-72400 自动机械钢带男表联保正品"/></a></div>
+                                <div class="goods-info">
+                                    <div class="goods-pic-scroll-show">
+                                        <ul>
+                                            <li class="selected"><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627750479728_60.png"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="goods-name"><a
+                                            href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100002"
+                                            target="_blank" title="">劳力士Rolex MILGAUSS 116400GV-72400
+                                            自动机械钢带男表联保正品<em></em></a></div>
+                                    <div class="goods-price"><em class="sale-price" title="商城价：&yen;63200.00">6.32万</em>
+                                        <em class="market-price" title="市场价：&yen;63200.00">6.32万</em>
+                                        <!--<span class="raty" data-score="5"></span>--> </div>
+                                    <div class="goods-sub"><span class="goods-compare" nc_type="compare_100002"
+                                                                 data-param='{"gid":"100002"}'><i></i>加入对比</span></div>
+                                    <div class="sell-stat">
+                                        <ul>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100002#ncGoodsRate"
+                                                   target="_blank" class="status">0</a>
+
+                                                <p>商品销量</p></li>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=comments_list&goods_id=100002"
+                                                   target="_blank">0</a>
+
+                                                <p>用户评论</p></li>
+                                            <li><em member_id="1">&nbsp;</em></li>
+                                        </ul>
+                                    </div>
+                                    <div class="store"><a
+                                            href="http://localhost:8009/shop/index.php?act=show_store&op=index&store_id=1"
+                                            title="我的店铺" class="name">我的店铺</a></div>
+                                    <div class="add-cart"><a href="javascript:void(0);" nctype="add_cart"
+                                                             data-gid="100002"><i
+                                                class="icon-shopping-cart"></i>加入购物车</a></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="goods-content" nctype_goods=" 100001" nctype_store="1">
+                                <div class="goods-pic"><a
+                                        href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100001"
+                                        target="_blank" title="劳力士Rolex 深海系列 自动机械钢带男士表 联保正品116660 98210"><img
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627707766698_240.png"
+                                            rel='lazy' src="/public/common/images/loading.gif"
+                                            title="劳力士Rolex 深海系列 自动机械钢带男士表 联保正品116660 98210"
+                                            alt="劳力士Rolex 深海系列 自动机械钢带男士表 联保正品116660 98210"/></a></div>
+                                <div class="goods-info">
+                                    <div class="goods-pic-scroll-show">
+                                        <ul>
+                                            <li class="selected"><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627707766698_60.png"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                            <li><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627711844438_60.png"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                            <li><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627715984525_60.png"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                            <li><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627723007356_60.png"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                            <li><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627731269795_60.png"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="goods-name"><a
+                                            href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100001"
+                                            target="_blank" title="【雅欧国际】：所有商品全新原装正品　　">劳力士Rolex 深海系列 自动机械钢带男士表
+                                            联保正品116660 98210<em>【雅欧国际】：所有商品全新原装正品　　</em></a></div>
+                                    <div class="goods-price"><em class="sale-price" title="商城价：&yen;87500.00">8.75万</em>
+                                        <em class="market-price" title="市场价：&yen;87500.00">8.75万</em>
+                                        <!--<span class="raty" data-score="5"></span>--> </div>
+                                    <div class="goods-sub"><span class="goods-compare" nc_type="compare_100001"
+                                                                 data-param='{"gid":"100001"}'><i></i>加入对比</span></div>
+                                    <div class="sell-stat">
+                                        <ul>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100001#ncGoodsRate"
+                                                   target="_blank" class="status">0</a>
+
+                                                <p>商品销量</p></li>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=comments_list&goods_id=100001"
+                                                   target="_blank">0</a>
+
+                                                <p>用户评论</p></li>
+                                            <li><em member_id="1">&nbsp;</em></li>
+                                        </ul>
+                                    </div>
+                                    <div class="store"><a
+                                            href="http://localhost:8009/shop/index.php?act=show_store&op=index&store_id=1"
+                                            title="我的店铺" class="name">我的店铺</a></div>
+                                    <div class="add-cart"><a href="javascript:void(0);" nctype="add_cart"
+                                                             data-gid="100001"><i
+                                                class="icon-shopping-cart"></i>加入购物车</a></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="goods-content" nctype_goods=" 100000" nctype_store="1">
+                                <div class="goods-pic"><a
+                                        href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100000"
+                                        target="_blank" title="劳力士ROLEX-潜航者型 116610-LV-97200自动机械钢带男表联保正品"><img
+                                            data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627678636481_240.jpg"
+                                            rel='lazy' src="/public/common/images/loading.gif"
+                                            title="劳力士ROLEX-潜航者型 116610-LV-97200自动机械钢带男表联保正品"
+                                            alt="劳力士ROLEX-潜航者型 116610-LV-97200自动机械钢带男表联保正品"/></a></div>
+                                <div class="goods-info">
+                                    <div class="goods-pic-scroll-show">
+                                        <ul>
+                                            <li class="selected"><a href="javascript:void(0);"><img
+                                                        data-url="http://localhost:8009/data/upload/shop/store/goods/1/1_04752627678636481_60.jpg"
+                                                        rel='lazy' src="/public/common/images/loading.gif"/></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="goods-name"><a
+                                            href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100000"
+                                            target="_blank" title="">劳力士ROLEX-潜航者型 116610-LV-97200自动机械钢带男表联保正品<em></em></a>
+                                    </div>
+                                    <div class="goods-price"><em class="sale-price" title="商城价：&yen;70000.00">7.00万</em>
+                                        <em class="market-price" title="市场价：&yen;70000.00">7.00万</em>
+                                        <!--<span class="raty" data-score="5"></span>--> </div>
+                                    <div class="goods-sub"><span class="goods-compare" nc_type="compare_100000"
+                                                                 data-param='{"gid":"100000"}'><i></i>加入对比</span></div>
+                                    <div class="sell-stat">
+                                        <ul>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=index&goods_id=100000#ncGoodsRate"
+                                                   target="_blank" class="status">0</a>
+
+                                                <p>商品销量</p></li>
+                                            <li>
+                                                <a href="http://localhost:8009/shop/index.php?act=goods&op=comments_list&goods_id=100000"
+                                                   target="_blank">0</a>
+
+                                                <p>用户评论</p></li>
+                                            <li><em member_id="1">&nbsp;</em></li>
+                                        </ul>
+                                    </div>
+                                    <div class="store"><a
+                                            href="http://localhost:8009/shop/index.php?act=show_store&op=index&store_id=1"
+                                            title="我的店铺" class="name">我的店铺</a></div>
+                                    <div class="add-cart"><a href="javascript:void(0);" nctype="add_cart"
+                                                             data-gid="100000"><i
+                                                class="icon-shopping-cart"></i>加入购物车</a></div>
+                                </div>
+                            </div>
+                        </li>
                         <div class="clear"></div>
                     </ul>
                 </div>

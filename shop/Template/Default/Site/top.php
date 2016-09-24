@@ -14,10 +14,12 @@
         </div>
         <div class="variation">
             <div class="middle">
-                <if condition="$_SESSION['is_login'] eq 1">
+                <if condition="$member_info['is_login'] eq 1">
                     <div class="user" nctype="a-barUserInfo">
                         <a href="javascript:void(0);">
-                            <div class="avatar"></div>
+                            <div class="avatar">
+                                <img src="{$member_info.avatar}">
+                            </div>
                             <span class="tit">我的账户</span>
                         </a></div>
                     <div class="user-info" nctype="barUserInfo" style="display:none;"><i class="arrow"></i>
@@ -26,7 +28,7 @@
                             <div class="frame"></div>
                         </div>
                         <dl>
-                            <dt>Hi, <?php echo $_SESSION['member_name']; ?></dt>
+                            <dt>Hi, {$member_info.nickname}</dt>
                             <dd>当前等级：<strong nctype="barMemberGrade"></strong></dd>
                             <dd>当前经验值：<strong nctype="barMemberExp"></strong></dd>
                         </dl>
@@ -35,7 +37,7 @@
                     <div class="user" nctype="a-barLoginBox">
                         <a href="javascript:void(0);">
                             <div class="avatar">
-                                <img src="{$member.avatar|default=$default_avatar}">
+                                <img src="{$site_info.default_avatar}">
                             </div>
                             <span class="tit">会员登录</span>
                         </a>
