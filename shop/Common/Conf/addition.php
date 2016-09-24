@@ -35,8 +35,5 @@
   'DEFAULT_GROUP' => 'Contents',
   'CLOUD_ON' => false,
   'MODULE_DENY_LIST' => array('Common','Base'), // 设置禁止访问的模块列表
-  'URL_ROUTER_ON'=> 'ture',//开启路由
-  'URL_ROUTE_RULES'=>array(//路由规则
-      'shopadmin' => '/Admin/Public/login',
-  )
+  'LOAD_EXT_CONFIG' => 'routers',
 );

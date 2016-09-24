@@ -56,8 +56,8 @@
 		<div class="submit2"></div>
 	</form>
 	<div class="bottom">
-		<h6>Copyright 2006-2015</h6>
-		<h6>Powered by lp</h6>
+		<h6>{:cache('Config.copyright')}</h6>
+		<h6>{:cache('Config.company')}  &nbsp;&nbsp;&nbsp;&nbsp; {:cache('Config.put_on_records')}</h6>
 	</div>
 </div>
 <script>
