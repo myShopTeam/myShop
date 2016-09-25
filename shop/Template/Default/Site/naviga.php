@@ -34,7 +34,7 @@
                 <div class="spacer"></div>
                 <div class="list_detail">
                     <!--购物车有商品时begin-->
-                    <ul><img class="loading" src="public/site/images/loading.gif" /></ul>
+                    <ul><img class="loading" src="{$site_info.site_path}images/loading.gif" /></ul>
                     <div class="checkout_box">
                         <p class="fl">共<em class="tNum">1</em>件商品,合计：<em class="tSum">0</em></p>
                         <a rel="nofollow" class="checkout_btn" href="/index.php?act=cart" target="_self"> 去结算 </a>
@@ -70,7 +70,7 @@
 
     <div class="nch-breadcrumb wrapper"><i class="icon-home"></i>
 
-        <span><a href="http://localhost:8009/shop">首页</a></span><span class="arrow">></span>
+        <span><a href="/">首页</a></span><span class="arrow">></span>
 
         <span>珠宝手表</span>
 

@@ -1,15 +1,15 @@
 <template file="Site/head.php"/>
 <body>
-<link href="/public/site/css/home_header.css" rel="stylesheet" type="text/css">
-<link href="/public/site/css/home_login.css" rel="stylesheet" type="text/css">
-<script src="/public/site/js/taglibs.js"></script>
-<script src="/public/site/js/tabulous.js"></script>
+<link href="{$site_info.site_path}css/home_header.css" rel="stylesheet" type="text/css">
+<link href="{$site_info.site_path}css/home_login.css" rel="stylesheet" type="text/css">
+<script src="{$site_info.site_path}js/taglibs.js"></script>
+<script src="{$site_info.site_path}js/tabulous.js"></script>
 
 <div class="header-wrap">
 
     <header class="public-head-layout wrapper">
 
-        <h1 class="site-logo"><a href="/"><img src="/public/site/images/logo.png" class="pngFix"></a></h1>
+        <h1 class="site-logo"><a href="/"><img src="{$site_info.site_path}images/logo.png" class="pngFix"></a></h1>
 
         <div class="nc-login-now">我已经注册，现在就<a href="{:U('Passport/login')}" title="" class="register">登录</a></span></div>
 

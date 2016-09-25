@@ -30,6 +30,9 @@ class BaseController extends Base
         $this->setMember();
     }
 
+    /**
+     * 设置网站资源文件目录
+     */
     private function getSiteInfo(){
         //域名
         $this->site_info['domain'] = get_http_host();
@@ -47,13 +50,16 @@ class BaseController extends Base
         $this->assign('site_info', $this->site_info);
     }
 
+    /**
+     * 设置会员信息
+     */
     private function setMember(){
 
         if(!$this->isLogin()) {
 
             return false;
         }
-        if(S('member_info_' . $this->uid))
+        if(count(S('member_info_' . $this->uid)) > 3)
         {
             $this->member_info = S('member_info_' . $this->uid);
 
@@ -68,6 +74,14 @@ class BaseController extends Base
         }
 
         $this->assign('member_info', $this->member_info);
+    }
+
+    /**
+     * 消除会员信息
+     */
+    protected function delMember(){
+        $this->member_info = null;
+        S('member_info_' . $this->uid, null);
     }
 
     /**
@@ -98,7 +112,9 @@ class BaseController extends Base
     public function getMemberInfo()
     {
         if ($this->isLogin()) {
-            $this->member_info =  D('Member/Cart')->getMemberInfo($this->uid);
+
+            $this->member_info =  D('Member/Card')->getMemberInfo($this->uid);
+
         } else {
             return false;
         }
@@ -112,4 +128,20 @@ class BaseController extends Base
         return session('is_login') ? true : false;
     }
 
+    /**
+     * 设置用户登录状态
+     * @param array  $member
+     */
+    protected function setSession($member){
+        $this->uid = $member['id'];
+        //设置session
+        session('uid', $this->uid);
+        session('username', $member['username']);
+        session('is_login', 1);
+        //设置cookie
+        $_COOKIE['uid'] = $this->uid;
+        $_COOKIE['username'] = $member['username'];
+        //设置用户信息
+        $this->setMember();
+    }
 }

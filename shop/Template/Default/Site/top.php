@@ -3,13 +3,21 @@
 <div id="ncToolbar" class="nc-appbar">
     <div class="nc-appbar-tabs" id="appBarTabs">
         <div class="ever">
-            <div class="cart"><a href="javascript:void(0);" id="rtoolbar_cart"><span class="icon"></span>
-                    <span class="name">购物车</span><i id="rtoobar_cart_count" class="new_msg" style="display:none;"></i></a>
+            <div class="cart">
+                <a href="javascript:void(0);" id="rtoolbar_cart">
+                    <span class="icon"></span>
+                    <span class="name">购物车</span>
+                    <i id="rtoobar_cart_count" class="new_msg" style="display:none;"></i>
+                </a>
             </div>
             <!--            <div class="compare"><a href="javascript:void(0);" id="compare"><span class="icon"></span><span class="tit">商品对比</span></a>-->
             <!--            </div>-->
-            <div class="chat"><a href="javascript:void(0);" id="chat_show_user"><span class="icon"></span>
-                    <i id="new_msg" class="new_msg" style="display:none;"></i><span class="tit">在线联系</span></a>
+            <div class="chat">
+                <a href="javascript:void(0);" id="chat_show_user">
+                    <span class="icon"></span>
+                    <i id="new_msg" class="new_msg" style="display:none;"></i>
+                    <span class="tit">在线联系</span>
+                </a>
             </div>
         </div>
         <div class="variation">
@@ -18,19 +26,29 @@
                     <div class="user" nctype="a-barUserInfo">
                         <a href="javascript:void(0);">
                             <div class="avatar">
-                                <img src="{$member_info.avatar}">
+                                <if condition="$member_info['avatar'] eq ''">
+                                    <img src="{$site_info.default_avatar}">
+                                <else/>
+                                    <img src="{$member_info.avatar}">
+                                </if>
                             </div>
                             <span class="tit">我的账户</span>
                         </a></div>
                     <div class="user-info" nctype="barUserInfo" style="display:none;"><i class="arrow"></i>
 
                         <div class="avatar">
-                            <div class="frame"></div>
+                            <div class="frame">
+                                <if condition="$member_info['avatar'] eq ''">
+                                    <img src="{$site_info.default_avatar}">
+                                <else/>
+                                    <img src="{$member_info.avatar}">
+                                </if>
+                            </div>
                         </div>
                         <dl>
                             <dt>Hi, {$member_info.nickname}</dt>
-                            <dd>当前等级：<strong nctype="barMemberGrade"></strong></dd>
-                            <dd>当前经验值：<strong nctype="barMemberExp"></strong></dd>
+<!--                            <dd>当前等级：<strong nctype="barMemberGrade"></strong></dd>-->
+<!--                            <dd>当前经验值：<strong nctype="barMemberExp"></strong></dd>-->
                         </dl>
                     </div>
                     <else/>
@@ -45,8 +63,7 @@
                     <div class="user-login-box" nctype="barLoginBox" style="display:none;"><i class="arrow"></i>
                         <a href="javascript:void(0);" class="close-a" nctype="close-barLoginBox" title="关闭">X</a>
 
-                        <form id="login_form" method="post" action=""
-                              onsubmit="ajaxpost('login_form', '', '', 'onerror')">
+                        <form id="login_form" method="post" action="" onsubmit="ajaxpost('login_form', '', '', 'onerror')">
                             <input name="nchash" type="hidden" value="">
                             <dl>
                                 <dt><strong>登录名</strong></dt>
@@ -81,6 +98,8 @@
                         </form>
                     </div>
                 <div class="prech">&nbsp;</div>
+
+                </if>
             </div>
             <!--            <div class="l_qrcode"><a href="javascript:void(0);" class=""><span class="icon"></span>-->
             <!--                    <code><img src=""></code></a></div>-->
@@ -105,9 +124,6 @@
 
 <script type="text/javascript">
     //登录开关状态
-    var connect_qq = "<?php echo C('qq_isuse')?>";
-    var connect_sn = "<?php echo C('sina_isuse')?>";
-    var connect_wx = "<?php echo C('weixin_isuse')?>";
     $(function () {
         $(".l_qrcode a").hover(function () {
                 $(this).addClass("hover");
@@ -215,49 +231,60 @@
         });
     });
 </script>
-</if>
 <div class="public-top-layout w">
     <div class="topbar wrapper">
         <div class="user-entry">
-            您好，欢迎来到 <a href="/" title="首页" alt="首页">{$Config.sitename}</a> <span>[
-                <a href="{:U('Passport/login')}">登录</a>]</span> <span>[
-                <a href="{:U('Passport/register')}">注册</a>]</span>
+            <if condition="$member_info['is_login'] eq 1">
+                您好 <span> <a href="{:U('Member/index')}">{$member_info.nickname}</a></span> ，欢迎来到
+                <a href="/" title="首页" alt="首页">
+                    <span>{$Config.sitename}</span>
+                </a><span>[<a href="{:U('Passport/logout')}">退出</a>] </span>
+            <else/>
+                您好，欢迎来到 <a href="/" title="首页" alt="首页">{$Config.sitename}</a>
+                <span>[<a href="{:U('Passport/login')}">登录</a>]</span>
+                <span>[<a href="{:U('Passport/register')}">注册</a>]</span>
+            </if>
+
         </div>
         <div class="quick-menu">
             <dl>
-                <dt><em class="ico_order"></em><a
-                        href="<?php echo SHOP_SITE_URL; ?>/index.php?act=member_order">我的订单</a><i></i></dt>
+                <dt>
+                    <em class="ico_order"></em>
+                    <a href="">我的订单</a>
+                    <i></i>
+                </dt>
                 <dd>
                     <ul>
-                        <li>
-                            <a href="<?php echo SHOP_SITE_URL; ?>/index.php?act=member_order&state_type=state_new">待付款订单</a>
-                        </li>
-                        <li><a href="<?php echo SHOP_SITE_URL; ?>/index.php?act=member_order&state_type=state_send">待确认收货</a>
-                        </li>
-                        <li><a href="<?php echo SHOP_SITE_URL; ?>/index.php?act=member_order&state_type=state_noeval">待评价交易</a>
-                        </li>
+                        <li><a href="">待付款订单</a></li>
+                        <li><a href="">待确认收货</a></li>
+                        <li><a href="">待评价交易</a></li>
                     </ul>
                 </dd>
             </dl>
             <dl>
-                <dt><em class="ico_store"></em>
-                    <a href="">我的收藏</a><i></i>
+                <dt>
+                    <em class="ico_store"></em>
+                    <a href="">我的收藏</a>
+                    <i></i>
                 </dt>
                 <dd>
                     <ul>
                         <li>
-                            <a href="<?php echo SHOP_SITE_URL; ?>/index.php?act=member_favorite_goods&op=fglist">商品收藏</a>
+                            <a href="">商品收藏</a>
                         </li>
                     </ul>
                 </dd>
             </dl>
             <dl>
-                <dt><em class="ico_service"></em>客户服务<i></i></dt>
+                <dt>
+                    <em class="ico_service"></em>客户服务
+                    <i></i>
+                </dt>
                 <dd>
                     <ul>
-                        <li><a href="<?php echo U('article', 'article', array('ac_id' => 2)); ?>">帮助中心</a></li>
-                        <li><a href="<?php echo U('article', 'article', array('ac_id' => 5)); ?>">售后服务</a></li>
-                        <li><a href="<?php echo U('article', 'article', array('ac_id' => 6)); ?>">客服中心</a></li>
+                        <li><a href="">帮助中心</a></li>
+                        <li><a href="">售后服务</a></li>
+                        <li><a href="">客服中心</a></li>
                     </ul>
                 </dd>
             </dl>

@@ -20,4 +20,10 @@ class SiteController extends BaseController
         parent::_initialize();
     }
 
+    //PC端获取验证码
+    protected function getVerify(){
+
+        return get_http_host() . '/index.php?g=Api&m=Checkcode&a=index&code_len=4&font_size=20&width=120&height=52&font_color=&background=';
+
+    }
 }

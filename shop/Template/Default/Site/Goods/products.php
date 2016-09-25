@@ -2811,7 +2811,7 @@
 
         <!-- E 推荐展位 -->
 
-        <div class="nch-module"><a href='' title='商品列表页左侧广告位'><img style='width:206px;height:300px' border='0' src='images/7a4832d109ee46fe7677c1d3c30e067f.gif' alt=''/></a></div>
+<!--        <div class="nch-module"><a href='' title='商品列表页左侧广告位'><img style='width:206px;height:300px' border='0' src='' alt=''/></a></div>-->
 
         <!-- 最近浏览 -->
 
@@ -2906,7 +2906,8 @@
                             <div class="goods-content">
                                 <div class="goods-pic">
                                     <a href="{:U('product', array('gid' => $vo['goods_id']))}" target="_blank" title="{$vo.goods_name}">
-                                        <img data-url="{$vo.goods_thumb}" rel='lazy' src="/public/common/images/loading.gif" title="{$vo.goods_name}" alt=""/></a>
+                                        <img data-url="{$vo.goods_thumb}" rel='lazy' src="{$site_info.site_path}images/loading.gif" title="{$vo.goods_name}" alt=""/>
+                                    </a>
                                 </div>
 <!--                                <div class="goods-promotion"><span>团购商品</span></div>-->
                                 <div class="goods-info">
@@ -2915,7 +2916,7 @@
                                             <!-- 默认展示 -->
                                             <li class="selected">
                                                 <a href="javascript:void(0);">
-                                                    <img data-url="{$vo.goods_thumb}" rel='lazy' src="/public/common/images/loading.gif"/>
+                                                    <img data-url="{$vo.goods_thumb}" rel='lazy' src="{$site_info.site_path}images/loading.gif"/>
                                                 </a>
                                             </li>
                                             <!-- 多图展示 -->
@@ -2924,7 +2925,7 @@
                                                 <volist name="goods_img" id="img">
                                                     <li class="selected">
                                                         <a href="javascript:void(0);">
-                                                            <img data-url="{$img}" rel='lazy' src="/public/common/images/loading.gif"/>
+                                                            <img data-url="{$img}" rel='lazy' src="{$site_info.site_path}images/loading.gif"/>
                                                         </a>
                                                     </li>
                                                 </volist>
@@ -2965,19 +2966,18 @@
                     </ul>
                 </div>
                 <form id="buynow_form" method="post" action="http://localhost:8009/shop/index.php" target="_blank">
-                    <input id="act" name="act" type="hidden" value="buy"/><input id="op" name="op" type="hidden"
-                                                                                 value="buy_step1"/><input id="goods_id"
-                                                                                                           name="cart_id[]"
-                                                                                                           type="hidden"/>
+                    <input id="act" name="act" type="hidden" value="buy"/>
+                    <input id="op" name="op" type="hidden" value="buy_step1"/>
+                    <input id="goods_id" name="cart_id[]" type="hidden"/>
                 </form>
-                <script type="text/javascript" src="/public/common/js/jquery.raty.min.js"></script>
+                <script type="text/javascript" src="{$site_info.common_path}js/jquery.raty.min.js"></script>
                 <script type="text/javascript">
 
                     $(document).ready(function(){
 
                         $('.raty').raty({
 
-                            path: "http://localhost:8009/data/resource/js/jquery.raty/img",
+                            path: "/public/common/js/jquery.raty/img",
 
                             readOnly: true,
 
@@ -3003,7 +3003,25 @@
 
             <div class="tc mt20 mb20">
 
-                <div class="pagination"> <ul><li><span>首页</span></li><li><span>上一页</span></li><li><span class="currentpage">1</span></li><li><span>下一页</span></li><li><span>末页</span></li></ul> </div>
+                <div class="pagination">
+                    <ul>
+                        <li>
+                            <span>首页</span>
+                        </li>
+                        <li>
+                            <span>上一页</span>
+                        </li>
+                        <li>
+                            <span class="currentpage">1</span>
+                        </li>
+                        <li>
+                            <span>下一页</span>
+                        </li>
+                        <li>
+                            <span>末页</span>
+                        </li>
+                    </ul>
+                </div>
 
             </div>
 
@@ -3021,15 +3039,15 @@
 
 </div>
 
-<script src="/public/site/js/waypoints.js"></script>
+<script src="{$site_info.site_path}js/waypoints.js"></script>
 
-<script src="/public/site/js/search_category_menu.js"></script>
+<script src="{$site_info.site_path}js/search_category_menu.js"></script>
 
-<script type="text/javascript" src="/public/common/js/jquery.fly.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="{$site_info.common_path}js/jquery.fly.min.js" charset="utf-8"></script>
 
 <!--[if lt IE 10]>
 
-<script type="text/javascript" src="/public/site/js/requestAnimationFrame.js" charset="utf-8"></script>
+<script type="text/javascript" src="{$site_info.site_path}js/requestAnimationFrame.js" charset="utf-8"></script>
 
 <![endif]-->
 
@@ -3156,7 +3174,6 @@
     fade();
 
 </script>
-<link href="/public/site/css/chat.css" rel="stylesheet" type="text/css">
 
 <div style="clear: both;"></div>
 
@@ -3164,17 +3181,9 @@
 
 </div>
 
-<a id="chat_login" href="javascript:void(0)" style="display: none;"></a>
-<script type="text/html" id="cat-html">
-
-</script>
-<script type="text/javascript" src="/public/common/js/jquery.charCount.js" charset="utf-8"></script>
-<script type="text/javascript" src="/public/common/js/jquery.smilies.js" charset="utf-8"></script>
-<script type="text/javascript" src="/public/site/js/user.js" charset="utf-8"></script>
 <template file="Site/footer.php" />
 <script>
     $(function(){
-        var global = {$data};
 
     })
 </script>

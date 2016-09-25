@@ -604,7 +604,7 @@ function Ajax(recvType, waitId) {
 	aj.showLoading = function() {
 		if(aj.waitId && (aj.XMLHttpRequest.readyState != 4 || aj.XMLHttpRequest.status != 200)) {
 			aj.waitId.style.display = '';
-			aj.waitId.innerHTML = '<span><img src="' + DIALOGIMGDIR + '/loading.gif" class="vm"> ' + aj.loading + '</span>';
+			aj.waitId.innerHTML = '<span><img src="/public/site/images/loading.gif" class="vm"> ' + aj.loading + '</span>';
 		}
 	};
 

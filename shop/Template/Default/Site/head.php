@@ -7,23 +7,23 @@
     <meta name="description" content="{$Config.siteinfo}" />
     <meta name="author" content="">
     <meta name="copyright" content="">
-    <link href="/public/site/css/base.css" rel="stylesheet" type="text/css">
-    <link href="/public/site/css/home_header.css" rel="stylesheet" type="text/css">
-    <link href="/public/site/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="{$site_info.site_path}css/base.css" rel="stylesheet" type="text/css">
+    <link href="{$site_info.site_path}css/home_header.css" rel="stylesheet" type="text/css">
+    <link href="{$site_info.site_path}css/font-awesome.min.css" rel="stylesheet" />
     <!--[if IE 7]>
-    <link rel="stylesheet" href="/public/site/css/font-awesome-ie7.min.css">
+    <link rel="stylesheet" href="{$site_info.site_path}css/font-awesome-ie7.min.css">
     <![endif]-->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="/public/site/js/html5shiv.js"></script>
-    <script src="/public/site/js/respond.min.js"></script>
+    <script src="{$site_info.site_path}js/html5shiv.js"></script>
+    <script src="{$site_info.site_path}js/respond.min.js"></script>
     <![endif]-->
-    <script src="/public/common/js/jquery.js"></script>
-    <script src="/public/common/js/template.js"></script>
-    <script src="/public/common/js/common.js" charset="utf-8"></script>
-    <script src="/public/common/js/jquery-ui/jquery.ui.js"></script>
-    <script src="/public/common/js/jquery.validation.min.js"></script>
-    <script src="/public/common/js/dialog/dialog.js" id="dialog_js" charset="utf-8"></script>
+    <script src="{$site_info.common_path}js/jquery.js"></script>
+    <script src="{$site_info.common_path}js/template.js"></script>
+    <script src="{$site_info.common_path}js/common.js" charset="utf-8"></script>
+    <script src="{$site_info.common_path}js/jquery-ui/jquery.ui.js"></script>
+    <script src="{$site_info.common_path}js/jquery.validation.min.js"></script>
+    <script src="{$site_info.common_path}js/dialog/dialog.js" id="dialog_js" charset="utf-8"></script>
     <script type="text/javascript">
         var PRICE_FORMAT = '&yen;%s';
         $(function(){

@@ -305,7 +305,7 @@ function collect_goods(fav_id,jstype,jsobj){
 }
 //加载购物车信息
 function load_cart_information(){
-	$.getJSON(SITEURL+'/index.php?act=cart&op=ajax_load&callback=?', function(result){
+	$.getJSON('/index.php?act=cart&op=ajax_load&callback=?', function(result){
 	    var obj = $('.mod_minicart');
 	    if(result){
 	       	var html = '';
@@ -871,7 +871,7 @@ function load_history_information(){
 /* 加入购物车 */
 function addcart(goods_id,quantity,callbackfunc) {
     if (!quantity) return false;
-    var url = 'index.php?act=cart&op=add';
+    var url = '/index.php/Cart/addCart';
     quantity = parseInt(quantity);
     $.getJSON(url, {'goods_id':goods_id, 'quantity':quantity}, function(data) {
         if (data != null) {
