@@ -8,11 +8,12 @@
           <tr>
             <td width="10%">序号</td>
             <td width="10%" align="left" >用户名</td>
+            <td width="10%" align="left" >真实姓名</td>
             <td width="10%" align="left" >所属角色</td>
             <td width="10%"  align="left" >最后登录IP</td>
             <td width="10%"  align="left" >最后登录时间</td>
             <td width="15%"  align="left" >E-mail</td>
-            <td width="20%">备注</td>
+            <td width="10%">备注</td>
             <td width="15%" align="center">管理操作</td>
           </tr>
         </thead>
@@ -21,6 +22,7 @@
           <tr>
             <td width="10%" align="center">{$vo.id}</td>
             <td width="10%" >{$vo.username}</td>
+            <td width="10%" >{$vo.nickname}</td>
             <td width="10%" ><?php echo D('Admin/Role')->getRoleIdName($vo['role_id'])?></td>
             <td width="10%" >{$vo.last_login_ip}</td>
             <td width="10%"  >
@@ -31,7 +33,7 @@
             </if>
             </td>
             <td width="15%">{$vo.email}</td>
-            <td width="20%">{$vo.remark}</td>
+            <td width="10%">{$vo.remark}</td>
             <td width="15%"  align="center">
             <if condition="$User['username'] eq $vo['username']">
             <font color="#cccccc">修改</font> | 

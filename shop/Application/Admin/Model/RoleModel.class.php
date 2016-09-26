@@ -209,7 +209,7 @@ class RoleModel extends Model {
         $tree = new \Tree();
         $tree->icon = array('&nbsp;&nbsp;&nbsp;│ ', '&nbsp;&nbsp;&nbsp;├─ ', '&nbsp;&nbsp;&nbsp;└─ ');
         $tree->nbsp = '&nbsp;&nbsp;&nbsp;';
-        $str = "'<option value='\$id' \$selected>\$spacer\$name</option>";
+        $str = "'<option rel='\$levle' value='\$id' \$selected>\$spacer\$name</option>";
         $tree->init($this->getTreeArray());
         if ($selectStr) {
             $html = '<select ' . $selectStr . '>';

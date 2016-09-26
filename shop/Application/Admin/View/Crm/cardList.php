@@ -10,7 +10,7 @@
 	      <span class="mr20">
                         <input class="input length_2 "  name="card_type" placeholder="输入卡单类型"/>
                         <input class="input length_2 "  name="card_name" placeholder="输入产品名称"/>
-                        
+                        <input type="hidden" name="user_id" value="{$user_id}">
                         <select name="time_type" class="select" id="time" >
                             <option value='create_time' <if condition="$post.time_type eq 'create_time'">selected</if>>提交时间</option>
                             <option value='active_time' <if condition="$post.time_type eq 'active_time'">selected</if>>激活时间</option>
@@ -29,6 +29,7 @@
                         <button class="btn" >搜索</button>
                         <input type="button" class="btn export" value="导出" style="background:#1D83DB;color:#fff"/>
                         <input type="button"class="btn" onclick="javascript:window.location.href='{:U('export',array('type'=>tmp))}'" value="导入模板下载" />
+                        &nbsp&nbsp<span>姓名：<font color="blue" weight="bold" size="4px" >{$name}</font></span>
        	  </span> 
        </div>
     </div>

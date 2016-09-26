@@ -56,28 +56,58 @@ class CrmController extends AdminBase
     {
         parent::_initialize();
         session_start();
+        $this->userInfo = User::getInstance()->getInfo();
         $this->assign('config',$this->config);
     }
 
     //会员列表
     public function cardList()
     {
+        $user_id = $this->userInfo['id'];
+        $userStr = $user_id;
+        
         $post = $_POST;
         if($post){
             $where = $this->createWhere($post);
+            if($post['user_id']) $userStr = $post['user_id'];
             $this->assign('post',$post);
         }else{
             $where = '1 = 1';
         }
+        if($_GET['user_id']){
+            $userStr = $_GET['user_id'];
+        }
+        //检查权限
+        $child_user = $this->get_child_user($user_id);
+        if(!in_array($userStr, $child_user)){
+            $this->error('无权限访问！');
+        }
+        $where .=' and importId in ('.$userStr.')';
         $db = M('card');
         $count = $db->where($where)->count();
-        
         $page = $this->page($count, 20);
         $vipList = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('listorder desc,id desc')->select();
         
+        $this->assign('name',M('user')->getFieldById($userStr,'nickname'));
+        $this->assign('user_id',$user_id);
         $this->assign("Page", $page->show());
         $this->assign("vipList", $vipList);
         $this->display();
+    }
+    
+    /*
+     * 根据用户id 获取下级所有用户
+     */
+    public function get_child_user($user_id){
+        $role_id = M('user')->getFieldById($user_id,'role_id');
+        $child_role_id = D("Admin/role")->getArrchildid($role_id);
+        $userArr = M('user')->field('id')->where(array('role_id'=>array('in',$child_role_id)))->select();
+        $userIdArr = array();
+        foreach($userArr as $v){
+            $userIdArr[] = $v['id'];
+        }
+        
+        return $userIdArr;
     }
 
     public function createWhere($post){
@@ -87,6 +117,7 @@ class CrmController extends AdminBase
         $where .= !empty($post['is_active'])?'is_active='.$post['is_active'].' and ':'';
         $where .= !empty($post['start_time'])?$post['time_type'].' >= '.strtotime($post['start_time']).' and ':'';
         $where .= !empty($post['end_time'])?$post['time_type'].' < '.strtotime($post['end_time']).' and ':'';
+//        $where .= !empty($post['user_id'])?'importId in ('.$post["user_id"].') and ':'';
         $where .= !empty($post['card_num'])?'card_num like "%'.$post['card_num'].'%"':' 1';
 
         return $where;
@@ -629,26 +660,23 @@ class CrmController extends AdminBase
                  $data = $this->read($savePath . $file_name);
                  //数据处理并存入数据库
                  if(count($data) > 0){
-                     print str_repeat(" ", 4096);
                      $cardMdl = M('card');
+                     $userInfo = User::getInstance()->getInfo();
                      foreach($data as $k=>$v){
                         $v['start_time'] = strtotime($v['start_time']);
                         $v['end_time']   = strtotime($v['end_time']);
                         $v['create_time']= time();
                         $v['birthday'] = strtotime($v['birthday']);
+                        $v['importId'] = $userInfo['id'];
                         $find_data = $cardMdl->where(array('card_num' => $v['card_num']))->find();
                         if($find_data){
                             echo '卡号：'.$v['card_num'].'已经存在，不能重复导入！</br>';
-                            ob_flush();
-                            flush();
                             $result = true;
                             continue;                          
                         }
                         $insertRes = $cardMdl->add($v);
                         if(!$insertRes){
                             echo '卡号：'.$v['card_num'].'导入失败！</br>';
-                            ob_flush();
-                            flush();
                             $result = true;
                         }
                      }

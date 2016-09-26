@@ -10,6 +10,7 @@
           <th width="100">父角色</th>
           <td><?php echo D('Admin/Role')->selectHtmlOption($data['parentid'],'name="parentid"') ?></td>
         </tr>
+        <input type="hidden" name="levle" value="1">
         <tr>
           <th width="100">角色名称</th>
           <td><input type="text" name="name" value="{$data.name}" class="input" id="rolename">
@@ -41,3 +42,16 @@
 <script src="{$config_siteurl}statics/js/common.js?v"></script>
 </body>
 </html>
+<script>
+    $(function(){
+        setLevle()
+        $(".table_full select").change(function(){
+            setLevle();
+        })
+    })
+    
+    function setLevle(){
+        levle  = $(".table_full select option:selected").attr('rel')
+        $('input[name="levle"]').val(levle)
+    }
+</script>
