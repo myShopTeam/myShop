@@ -8,12 +8,13 @@
                    </volist>
                 </content>
             </a></div>
+        <php>$parent_id = getCategory($catid,'parentid');</php>
         <div class="nav fr">
             <ul class="clearfix" id="Menus">
-                <li class="thisli">
+                <li <if condition="$catid eq ''">class="thisli"</if>>
                     <a href="/" class="firsrNav-name NavH">{:getCategory(3,'catname')}</a>
                 </li>
-                <li>
+                <li <if condition="($catid eq 4) OR ($parent_id eq 4)">class="thisli"</if>>
                     <a href="{:getCategory(4,'menuurl')}" class="firsrNav-name NavA"><span class="Arrow"></span>{:getCategory(4,'catname')}</a>
                     <div class="submenu fwly" style="left: -230px; display: none;">
                         <ul>
@@ -37,7 +38,7 @@
 
                     </div>
                 </li>
-                <li>
+                <li <if condition="($catid eq 5) OR ($parent_id eq 5)">class="thisli"</if>>
                     <a href="{:getCategory(5,'menuurl')}" class="firsrNav-name NavN"><span class="Arrow"></span>{:getCategory(5,'catname')}</a>
                     <div class="submenu fwly" style="left: -330px; display: none;">
                         <ul>
@@ -60,7 +61,7 @@
                         </content>
                     </div>
                 </li>
-                <li>
+                <li <if condition="($catid eq 6) OR ($parent_id eq 6)">class="thisli"</if>>
                     <a href="{:getCategory(6,'menuurl')}" class="firsrNav-name NavP"><span class="Arrow"></span>{:getCategory(6,'catname')}</a>
                     <div class="submenu fwly" style="left: -430px; display: none;">
                         <ul>
@@ -83,7 +84,7 @@
                         </content>
                     </div>
                 </li>
-                <li>
+                <li <if condition="($catid eq 7) OR ($parent_id eq 7)">class="thisli"</if>>
                     <a href="{:getCategory(7,'menuurl')}" class="firsrNav-name NavM"><span class="Arrow"></span>{:getCategory(7,'catname')}</a>
                     <div class="submenu fwly" style="left: -430px; display: none;">
                         <ul>
@@ -106,7 +107,7 @@
                         </content>
                     </div>
                 </li>
-                <li>
+                <li <if condition="($catid eq 8) OR ($parent_id eq 8)">class="thisli"</if>>
                     <a href="{:getCategory(8,'menuurl')}" class="firsrNav-name NavR"><span class="Arrow"></span>{:getCategory(8,'catname')}</a>
                     <div class="submenu fwly" style="left: -430px; display: none;">
                         <ul>
@@ -129,7 +130,7 @@
                         </content>
                     </div>
                 </li>
-                <li>
+                <li <if condition="($catid eq 9) OR ($parent_id eq 9)">class="thisli"</if>>
                     <a href="{:getCategory(9,'menuurl')}" class="firsrNav-name NavA"><span class="Arrow"></span>{:getCategory(9,'catname')}</a>
                     <div class="submenu fwly" style="left: -430px; display: none;">
                         <ul>
@@ -152,7 +153,7 @@
                         </content>
                     </div>
                 </li>
-                <li>
+                <li <if condition="($catid eq 10) OR ($parent_id eq 10)">class="thisli"</if>>
                     <a href="{:getCategory(10,'menuurl')}" class="firsrNav-name NavR"><span class="Arrow"></span>{:getCategory(10,'catname')}</a>
                     <div class="submenu fwly" style="left: -530px; display: none;">
                         <ul>
@@ -175,7 +176,7 @@
                         </content>
                     </div>
                 </li>
-                <li>
+                <li <if condition="($catid eq 11) OR ($parent_id eq 11)">class="thisli"</if>>
                     <a href="{:getCategory(11,'menuurl')}" class="firsrNav-name NavC"><span class="Arrow"></span>{:getCategory(11,'catname')}</a>
                     <div class="submenu fwly" style="left: -630px; display: none;">
                         <ul>

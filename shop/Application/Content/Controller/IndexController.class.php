@@ -15,6 +15,13 @@ use Content\Model\ContentModel;
 
 class IndexController extends Base {
 
+    public function _initialize()
+    {
+        parent::_initialize();
+        //加载网站资源
+        $this->getSiteInfo();
+    }
+
     //首页
     public function index() {
         $page = isset($_GET[C("VAR_PAGE")]) ? $_GET[C("VAR_PAGE")] : 1;
@@ -115,6 +122,7 @@ class IndexController extends Base {
             $this->assign($category['setting']['extend']);
             $this->assign($info);
         }
+
         //把分页分配到模板
         $this->assign(C("VAR_PAGE"), $page);
         //分配变量到模板 

@@ -18,6 +18,8 @@ class ShuipFCMS extends \Think\Controller {
     public static $Cache = array();
     //当前对象
     private static $_app;
+    //网站资源
+    public $site_info;
 
     public function __get($name) {
         $parent = parent::__get($name);
@@ -245,6 +247,26 @@ class ShuipFCMS extends \Think\Controller {
     //空操作
     public function _empty() {
         $this->error('该页面不存在！');
+    }
+
+    /**
+     * 设置网站资源文件目录
+     */
+    protected function getSiteInfo(){
+        //域名
+        $this->site_info['domain'] = get_http_host();
+        //public目录
+        $this->site_info['public_path']     = $this->site_info['domain'] . '/public/';
+        //site资源目录
+        $this->site_info['site_path']       = $this->site_info['domain'] . '/public/site/';
+        //common资源目录
+        $this->site_info['common_path']     = $this->site_info['domain'] . '/public/common/';
+        //企业站资源目录
+        $this->site_info['enterprise_path'] = $this->site_info['domain'] . '/public/enterprise/';
+        //默认头像
+        $this->site_info['default_avatar']  = $this->site_info['domain'] . '/public/site/images/default_user_portrait.gif';
+        //所有网站信息
+        $this->assign('site_info', $this->site_info);
     }
 
 }

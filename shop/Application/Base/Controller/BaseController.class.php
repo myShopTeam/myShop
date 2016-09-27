@@ -14,7 +14,6 @@ use Common\Controller\Base;
 
 class BaseController extends Base
 {
-    public $site_info;
     protected $uid; //会员ID
     protected $member_info; //会员信息
 
@@ -28,26 +27,6 @@ class BaseController extends Base
         $this->getSiteInfo();
         //用户登录信息
         $this->setMember();
-    }
-
-    /**
-     * 设置网站资源文件目录
-     */
-    private function getSiteInfo(){
-        //域名
-        $this->site_info['domain'] = get_http_host();
-        //public目录
-        $this->site_info['public_path']     = $this->site_info['domain'] . '/public/';
-        //site资源目录
-        $this->site_info['site_path']       = $this->site_info['domain'] . '/public/site/';
-        //common资源目录
-        $this->site_info['common_path']     = $this->site_info['domain'] . '/public/common/';
-        //企业站资源目录
-        $this->site_info['enterprise_path'] = $this->site_info['domain'] . '/public/enterprise/';
-        //默认头像
-        $this->site_info['default_avatar']  = $this->site_info['domain'] . '/public/site/images/default_user_portrait.gif';
-        //所有网站信息
-        $this->assign('site_info', $this->site_info);
     }
 
     /**

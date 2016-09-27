@@ -2,20 +2,7 @@
 
 <body>
 <!--页头-->
-<div class="header">
-    <div class="w">
-        <div class="header_left">
-            <a href="javascript:void(0)" onclick="SetHome(this, window.location)">设为首页</a><span>&nbsp;|&nbsp;</span>
-            <a href="javascript:void(0)" onclick="AddFavorite(window.location, document.title)">加入收藏</a>
-        </div>
-        <div class="header_right">
-            
-            <div class="header_rlink">
-                <p><span>服务热线：</span><em>{:cache('Config.telephone')}</em></p>
-            </div>
-        </div>
-    </div>
-</div>
+<template file="Site/new_header.php" />
 <!--导航-->
 <template file="Site/new_naviga.php" />
 <!-- Start Slider Wrapper -->
@@ -97,9 +84,9 @@
             </div>
             <div class="tactR fr">
                 <div class="DownLoadBox">
-                    <a href="#"><img src="{$site_info.enterprise_path}images/dl_icon_01.png" /></a>
-                    <a href="#"><img src="{$site_info.enterprise_path}images/dl_icon_02.png" /></a>
-                    <a href="#"><img src="{$site_info.enterprise_path}images/dl_icon_03.png" /></a>
+                    <a href="{:U('Content/Index/lists', array('catid' => 38))}"><img src="{$site_info.enterprise_path}images/dl_icon_01.png" /></a>
+                    <a href="{:U('Content/Index/lists', array('catid' => 38))}"><img src="{$site_info.enterprise_path}images/dl_icon_02.png" /></a>
+                    <a href="{:U('Content/Index/lists', array('catid' => 38))}"><img src="{$site_info.enterprise_path}images/dl_icon_03.png" /></a>
                 </div>
                 <!--<p class="chengNuo">我们的服务及承诺：<a href="#">保修期内全年一级电话服务<span>/</span></a><a href="#">维修快速响应</a><span>/</span><a href="#">特殊情况维护</a><span>/</span><a href="#">软件服务支持</a></p>-->
                 <div class="mt25 MapBox">
