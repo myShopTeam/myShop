@@ -46,7 +46,7 @@
                     </table>
                     <dl>
                         <dt>留言内容：</dt>
-                        <dd><textarea class="reachTxt" name="content" check-error="请输入留言内容"></textarea></dd>
+                        <dd><textarea class="reachTxt" name="content" check-type="empty" check-error="请输入留言内容"></textarea></dd>
                         <div class="clear clearfix"></div>
                     </dl>
                     <dl>
