@@ -16,7 +16,7 @@ class MessageController extends AdminBase {
 
     //后台框架首页
     public function onlineMessage() {
-        $this->basePage(M('message_online'), '', 'listorder desc, id desc');
+        $this->basePage(M('message_online'), '', 'listorder desc, id desc', '', 'onlineMessage');
     }
 
     //排序
