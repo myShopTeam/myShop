@@ -297,4 +297,22 @@ class IndexController extends Base {
         $this->display("Tags/tag");
     }
 
+    //在线留言
+    public function onlineMessage(){
+        $post = I('post.');
+        $mdl = M('message_online');
+        $post['ip'] = $_SERVER['REMOTE_ADDR'];
+        $post['created'] = time();
+        $check = $mdl->where(array('company' => $post['company']))->find();
+        if($check){
+            msg('error', '数据已存在');
+        } else {
+            $id = $mdl->add($post);
+            if($id){
+                msg('success', '数据提交成功');
+            } else {
+                msg('error', '数据提交失败');
+            }
+        }
+    }
 }
