@@ -106,4 +106,14 @@ class AdminBase extends ShuipFCMS {
         return $Page;
     }
 
+    /**
+     * 检测方法
+     * @param type $params 参数
+     */
+    protected function check_params($params){
+        if(!$params){
+            $this->error('非法操作');
+        }
+    }
+
 }

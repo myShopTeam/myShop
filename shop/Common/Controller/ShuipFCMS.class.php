@@ -137,8 +137,9 @@ class ShuipFCMS extends \Think\Controller {
      * @param type $where 条件表达式
      * @param type $order 排序
      * @param type $limit 每次显示多少
+     * @param type $tmp   模板
      */
-    protected function basePage($model, $where = '', $order = '', $limit = 20) {
+    protected function basePage($model, $where = '', $order = '', $limit = 20, $tmp = '') {
         $model = $this->getModelObject($model);
         $count = $model->where($where)->count();
         $page = $this->page($count, $limit);
@@ -146,7 +147,7 @@ class ShuipFCMS extends \Think\Controller {
         $this->assign('Page', $page->show());
         $this->assign('data', $data);
         $this->assign('count', $count);
-        $this->display();
+        $this->display($tmp);
     }
 
     /**
@@ -154,8 +155,9 @@ class ShuipFCMS extends \Think\Controller {
      * @param type $model 可以是模型对象，或者表名，自定义模型请传递完整（例如：Content/Model）
      * @param type $u 添加成功后的跳转地址
      * @param type $data 需要添加的数据
+     * @param type $tmp  模板
      */
-    protected function baseAdd($model, $u = 'index', $data = '') {
+    protected function baseAdd($model, $u = 'index', $data = '', $tmp = '') {
         $model = $this->getModelObject($model);
         if (IS_POST) {
             if (empty($data)) {
@@ -168,7 +170,7 @@ class ShuipFCMS extends \Think\Controller {
                 $this->error($error? : '添加失败！');
             }
         } else {
-            $this->display();
+            $this->display($tmp);
         }
     }
 
@@ -177,8 +179,9 @@ class ShuipFCMS extends \Think\Controller {
      * @param type $model 可以是模型对象，或者表名，自定义模型请传递完整（例如：Content/Model）
      * @param type $u 修改成功后的跳转地址
      * @param type $data 需要修改的数据
+     * @param type $tmp  模板
      */
-    protected function baseEdit($model, $u = 'index', $data = '') {
+    protected function baseEdit($model, $u = 'index', $data = '', $tmp = '') {
         $model = $this->getModelObject($model);
         $fidePk = $model->getPk();
         $pk = I('request.' . $fidePk, '', '');
@@ -202,7 +205,7 @@ class ShuipFCMS extends \Think\Controller {
                 $this->error('该信息不存在！');
             }
             $this->assign('data', $data);
-            $this->display();
+            $this->display($tmp);
         }
     }
 
