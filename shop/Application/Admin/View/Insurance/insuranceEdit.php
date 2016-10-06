@@ -2,46 +2,35 @@
 <body class="J_scroll_fixed">
 <div class="wrap J_check_wrap">
    <Admintemplate file="Common/Nav"/>
-   <form class="J_ajaxForm" action="{:U('cardEdit')}" method="post" id="myform">
+   <form class="J_ajaxForm" action="{:U('insuranceEdit')}" method="post" id="myform">
    <div class="h_a">基本属性</div>
    <div class="table_full">
    <table width="100%" class="table_form contentWrap">
         <tbody>
           <tr>
-            <th width="80">卡号<span class="red">*</span></th>
-            <td width="250"><input readonly type="test" value='{$card_num}' name="card_num" class="input" id="username" placeholder="请输入卡号"></td>
-            <th width="90">校验码</th>
-            <td><input type="test" name="verify" class="input" id="verify" maxlength="6" value="{$verif}" placeholder="请输入卡号"></td>
+            <th width="80">真实姓名<span class="red">*</span></th>
+            <td width="250"><input type="test" name="realname" value="{$realname}" class="input" id="username" placeholder="请输入真实姓名"></td>
           </tr>
            <tr>
-            <th>卡单类型<span class="red">*</span></th>
+            <th>证件号码<span class="red">*</span></th>
             <td>
-                <input type="test" name="card_type" value="{$card_type}" class="input" id="username" placeholder="请输入卡类型"></td>       
+                <input type="test" name="cred_num" class="input" id="username" value="{$cred_num}" placeholder="请输入证件号码"></td>      
             </td>
-            <th>产品名称<span class="red">*</span></th>
-            <td>
-                <input type="test" name="card_name" value="{$card_name}" class="input" id="username" placeholder="请输入产品名称"></td>
             </td>
           </tr>
           <tr>
-            <th width="80">真实姓名</th>
-            <td width="350"><input type="test" value='{$realname}' name="realname" class="input" id="realname"  placeholder="请输入真实姓名"></td>
-              <th width="80">手机</th>
-            <td><input type="text" name="mobile" value="{$mobile}" class="input" id="email"  placeholder="请输入手机号"></td>
+            <th width="80">保险合同号码</th>
+            <td width="350"><input type="test" name="insurance_num" class="input" value="{$insurance_num}" id="realname"  placeholder="请输入真实姓名"></td>         
           </tr>
           <tr>
-            <th>出生年月</th>
-            <td><input type="text" name="birthday" value="<if condition='$birthday'>{$birthday|date='Y-m-d',###}</if>" class="input length_2 J_date" id="birthday" value="{$_GET.start_uploadtime}" placeholder="请输入生日" style="width: 147px !important;"></td>
-              <th>联系地址</th>
-            <td><input type="text" name="live" value="{$live}" class="input" id="qq" placeholder="请输入联系地址"></td>
-          </tr>
+            <th>保险生效日期</th>
+            <td><input type="text" name="start_time" class="input length_2 J_date"  id="birthday" value="{$start_time|date='Y-m-d',###}" placeholder="请选择保险生效日期" style="width: 147px !important;"></td>
+         </tr>
           <tr>
-            <th>省份</th>
-            <td><input type="text" name="addr_province"  value="{$addr_province}" class="input" id="phone" placeholder="请输入省份"></td>
-            <th>城市</th>
-            <td><input type="text" name="addr_city" value="{$addr_city}" class="input" id="mobile" placeholder="请输入城市"></td>
+            <th>救援服务项目生效日期</th>
+            <td><input type="text" name="rescue_time" class="input length_2 J_date" id="birthday" value="{$rescue_time|date='Y-m-d',###}" placeholder="请选择救援服务项目生效日期"></td>
           </tr>
-          <tr>
+<!--          <tr>
             <th>紧急联系人</th>
             <td><input type="text" name="contract_name" value="{$contract_name}" class="input" id="phone" placeholder="请输入紧急联系人姓名"></td>
             <th>紧急联系人电话</th>
@@ -53,7 +42,7 @@
             <td><input type="radio" name="sex" class="input" id="sex" value="保密" <if condition="$sex eq '保密'"> checked</if>>保密
             <input type="radio" name="sex" class="input" id="sex" value="男" <if condition="$sex eq '男'"> checked</if>>男
             <input type="radio" name="sex" class="input" id="sex1" value="女" <if condition="$sex eq '女'"> checked</if>>女</td>
-          <tr>
+          <tr>-->
 <!--            <tr>
               <th>头像</th>
               <td colspan="3"><a href="javascript:void(0);" onclick="flashupload('thumb_images', '附件上传','thumb',thumb_images,'1,jpg|jpeg|gif|png|bmp,1,,,0','Content','14','4f53e09b9971776c9afed91028a69955');return false;">

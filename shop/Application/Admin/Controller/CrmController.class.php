@@ -82,7 +82,9 @@ class CrmController extends AdminBase
         if(!in_array($userStr, $child_user)){
             $this->error('无权限访问！');
         }
-        $where .=' and importId in ('.$userStr.')';
+        if($user_id != '1'){           
+            $where .=' and importId in ('.$userStr.')';
+        }
         $db = M('card');
         $count = $db->where($where)->count();
         $page = $this->page($count, 20);
