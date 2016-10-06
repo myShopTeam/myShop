@@ -1,4 +1,4 @@
-<?php
+<?php 
  return array (
   'CLOUD_USERNAME' => 'lp',
   'CLOUD_PASSWORD' => 'lp546734',
@@ -6,13 +6,13 @@
   'COOKIE_DOMAIN' => '',
   'COOKIE_PATH' => '/',
   'SESSION_PREFIX' => '',
-  'SESSION_OPTIONS' =>
+  'SESSION_OPTIONS' => 
   array (
     'domain' => '',
   ),
   'SHOW_ERROR_MSG' => '0',
   'ERROR_MESSAGE' => '您浏览的页面暂时发生了错误！请稍后再试～',
-  'ERROR_PAGE' => '',
+  'ERROR_PAGE' => '/HttpCode/500.html',
   'URL_CASE_INSENSITIVE' => false,
   'URL_MODEL' => 0,
   'URL_PATHINFO_DEPR' => '/',
@@ -24,7 +24,6 @@
   'VAR_PAGE' => 'page',
   'PAGE_TEMPLATE' => '<span class="all">共有{recordcount}条信息</span><span class="pageindex">{pageindex}/{pagecount}</span>{first}{prev}{liststart}{list}{listend}{next}{last}',
   'DEFAULT_MODULE' => 'Site',
-  'DEFAULT_CONTROLLER' => 'Goods',
   'DEFAULT_TIMEZONE' => 'PRC',
   'DEFAULT_AJAX_RETURN' => 'JSON',
   'DEFAULT_FILTER' => 'htmlspecialchars',
@@ -34,6 +33,4 @@
   'LOAD_EXT_FILE' => 'extend',
   'DEFAULT_GROUP' => 'Contents',
   'CLOUD_ON' => false,
-  'MODULE_DENY_LIST' => array('Common','Base'), // 设置禁止访问的模块列表
-  'LOAD_EXT_CONFIG' => 'routers',
 );

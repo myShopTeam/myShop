@@ -1017,3 +1017,9 @@ function get_http_host(){
     return get_http_type() . $_SERVER['HTTP_HOST'];
 }
 
+//格式化金钱
+function cur(&$param){
+    //todo：设置金钱精确位数 此处可以进行扩展
+    $param = number_format($param, 2, '.', '');
+    return $param;
+}

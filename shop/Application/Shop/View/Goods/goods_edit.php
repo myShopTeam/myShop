@@ -38,7 +38,7 @@
             <th>市场售价</th>
             <td><input type="text" name="market_price" value="{$market_price}" class="input" id="market_price" size="30">&nbsp;&nbsp;元</td>
               <th>本店售价<span class="red">*</span></th>
-            <td><input type="text" name="shop_price" value="{$shop_price}" class="input" id="shop_price">&nbsp;&nbsp;元</td>
+            <td><input type="text" name="goods_price" value="{$goods_price}" class="input" id="goods_price">&nbsp;&nbsp;元</td>
           </tr>
           <tr>
             <th>商品库存<span class="red">*</span></th>

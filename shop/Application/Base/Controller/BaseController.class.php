@@ -16,6 +16,7 @@ class BaseController extends Base
 {
     protected $uid; //会员ID
     protected $member_info; //会员信息
+    protected $model; //模型
 
     public function _initialize()
     {
@@ -79,7 +80,11 @@ class BaseController extends Base
     public function checkLogin()
     {
         if (!$this->uid) {
-            redirect(U('Passport/login'));
+            if(IS_AJAX){
+                msg('error', '非法操作');
+            } else {
+                redirect(U('Site/Passport/login'));
+            }
         } else {
             //todo:其他逻辑
         }
@@ -118,8 +123,8 @@ class BaseController extends Base
         session('username', $member['username']);
         session('is_login', 1);
         //设置cookie
-        $_COOKIE['uid'] = $this->uid;
-        $_COOKIE['username'] = $member['username'];
+        cookie('uid', $this->uid);
+        cookie('username', $member['username']);
         //设置用户信息
         $this->setMember();
     }

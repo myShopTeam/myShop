@@ -25,9 +25,9 @@
             </div>
         </div>
         <div class="mod_minicart" style="">
-            <a id="nofollow" target="_self" href=/index.php?act=cart" class="mini_cart_btn">
+            <a id="nofollow" target="_self" href="{:U('Cart/Cart/index')}" class="mini_cart_btn">
                 <i class="cart_icon"></i>
-                <em class="cart_num">0</em>
+                <em class="cart_num">{$cart_num|default='0'}</em>
                 <span>购物车</span>
             </a>
             <div id="minicart_list" class="minicart_list">
@@ -38,10 +38,6 @@
                     <div class="checkout_box">
                         <p class="fl">共<em class="tNum">1</em>件商品,合计：<em class="tSum">0</em></p>
                         <a rel="nofollow" class="checkout_btn" href="/index.php?act=cart" target="_self"> 去结算 </a>
-                    </div>
-                    <div style="" class="none_tips">
-                        <i> </i>
-                        <p>购物车中没有商品，赶紧去选购！</p>
                     </div>
                 </div>
             </div>
@@ -55,7 +51,7 @@
 <nav class="public-nav-layout">
     <div class="wrapper">
         <div class="all-category">
-            <div class="title"><i></i><h3><a href="">全部分类</a></h3>
+            <div class="title"><i></i><h3><a href="javascript:;">全部分类</a></h3>
             </div>
         </div>
         <ul class="site-menu">

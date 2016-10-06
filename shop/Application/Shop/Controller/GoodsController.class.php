@@ -66,7 +66,7 @@ class GoodsController extends AdminBase
             $freight = $transtype == '免运费' ? 0.00 : $freight;
             //商品市场价 卖价
             $market_price = number_format(I('post.market_price', 0.00), 2, '.', '');
-            $shop_price = number_format(I('post.shop_price', 0.00), 2, '.', '');
+            $goods_price = number_format(I('post.goods_price', 0.00), 2, '.', '');
             $goods_num = I('post.goods_num', 0, 'intval');
             //商品展示图
             $multpicArr = I('post.multpic_url', 0);
@@ -87,27 +87,27 @@ class GoodsController extends AdminBase
             }
 
             $data = array(
-                'goods_name' => I('post.goods_name', ''),
-                'goods_sn' => $goods_sn,
-                'cat_id' => I('post.cat_id', '', 'intval'),
-                'other_cat' => I('post.other_cat', '', 'intval'),
-                'goods_thumb' => I('post.goods_thumb', ''),
-                'goods_img' => $goods_imgs,
+                'goods_name'   => I('post.goods_name', ''),
+                'goods_sn'     => $goods_sn,
+                'cat_id'       => I('post.cat_id', '', 'intval'),
+                'other_cat'    => I('post.other_cat', '', 'intval'),
+                'goods_thumb'  => I('post.goods_thumb', ''),
+                'goods_img'    => $goods_imgs,
                 'market_price' => $market_price,
-                'shop_price' => $shop_price,
-                'is_show' => I('post.is_show', 0, 'intval'),
-                'is_hot' => I('post.is_hot', 0, 'intval'),
-                'is_new' => I('post.is_new', 0, 'intval'),
-                'is_best' => I('post.is_best', 0, 'intval'),
-                'goods_num' => $goods_num,
-                'sale_num' => I('post.sale_num', 0, 'intval'),
-                'content' => I('post.content', '', ''),
-                'alumni_id' => I('post.alumni_id', '', 'intval'),
-                'brand_id' => I('post.brand_id', '', 'intval'),
-                'classify' => I('post.classify', ''),
-                'transtype' => $transtype,
-                'freight' => $freight,
-                'add_time' => time()
+                'goods_price'  => $goods_price,
+                'is_show'      => I('post.is_show', 0, 'intval'),
+                'is_hot'       => I('post.is_hot', 0, 'intval'),
+                'is_new'       => I('post.is_new', 0, 'intval'),
+                'is_best'      => I('post.is_best', 0, 'intval'),
+                'goods_num'    => $goods_num,
+                'sale_num'     => I('post.sale_num', 0, 'intval'),
+                'content'      => I('post.content', '', ''),
+                'alumni_id'    => I('post.alumni_id', '', 'intval'),
+                'brand_id'     => I('post.brand_id', '', 'intval'),
+                'classify'     => I('post.classify', ''),
+                'transtype'    => $transtype,
+                'freight'      => $freight,
+                'add_time'     => time()
             );
             //添加属性
             $attrName = I('post.attr_names', 0);
@@ -122,7 +122,7 @@ class GoodsController extends AdminBase
             if (empty($data['cat_id'])) {
                 $this->error('请选择商品分类');
             }
-            if (empty($data['shop_price'])) {
+            if (empty($data['goods_price'])) {
                 $this->error('商品售价不能为空');
             }
             if (empty($data['goods_num'])) {
@@ -140,7 +140,7 @@ class GoodsController extends AdminBase
                         $data2['attr_id'] = $attrId[$i];
                         $data2['key'] = $attrName[$i];
                         $data2['value'] = $attrValue[$i];
-                        $data2['attr_price'] = $attrMoneys[$i] == '不变' ? number_format($shop_price, 2, '.', '') : number_format($attrMoneys[$i], 2, '.', '');
+                        $data2['attr_price'] = $attrMoneys[$i] == '不变' ? number_format($goods_price, 2, '.', '') : number_format($attrMoneys[$i], 2, '.', '');
                         $data2['pro_total'] = $goods_num;
                         M('goods_sku')->add($data2);
                     }
@@ -181,7 +181,7 @@ class GoodsController extends AdminBase
             $freight = $transtype == '免运费' ? 0.00 : $freight;
             //商品市场价 卖价
             $market_price = number_format(I('post.market_price', 0.00), 2, '.', '');
-            $shop_price = number_format(I('post.shop_price', 0.00), 2, '.', '');
+            $goods_price  = number_format(I('post.goods_price', 0.00), 2, '.', '');
             $goods_num = I('post.goods_num', 0, 'intval');
             $multpicArr = I('post.multpic_url', 0);
             $goods_img = '';
@@ -209,7 +209,7 @@ class GoodsController extends AdminBase
                 'goods_thumb' => $goods_thumb,
                 'goods_img' => $goods_imgs,
                 'market_price' => $market_price,
-                'shop_price' => $shop_price,
+                'goods_price' => $goods_price,
                 'is_show' => I('post.is_show', 0, 'intval'),
                 'is_hot' => I('post.is_hot', 0, 'intval'),
                 'is_new' => I('post.is_new', 0, 'intval'),
@@ -239,7 +239,7 @@ class GoodsController extends AdminBase
             if (empty($data['cat_id'])) {
                 $this->error('请选择商品分类');
             }
-            if (empty($data['shop_price'])) {
+            if (empty($data['goods_price'])) {
                 $this->error('商品售价不能为空');
             }
             if (empty($data['goods_num'])) {
@@ -258,7 +258,7 @@ class GoodsController extends AdminBase
                         $data2['attr_id'] = $attrId[$i];
                         $data2['key'] = $attrName[$i];
                         $data2['value'] = $attrValue[$i];
-                        $data2['attr_price'] = $attrMoneys[$i] == '不变' ? number_format($shop_price, 2, '.', '') : number_format($attrMoneys[$i], 2, '.', '');
+                        $data2['attr_price'] = $attrMoneys[$i] == '不变' ? number_format($goods_price, 2, '.', '') : number_format($attrMoneys[$i], 2, '.', '');
                         $data2['pro_total'] = $goods_num;
                         M('goods_sku')->add($data2);
                     }

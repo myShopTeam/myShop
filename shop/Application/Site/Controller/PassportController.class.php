@@ -60,6 +60,8 @@ class PassportController extends SiteController
             }
             //设置用户登录信息
             $this->setSession($member);
+            //将未登录时本地浏览内容更新到数据库
+            $this->updateLocalToDb();
             $back_url = $post['back'] ? $post['back'] : U('Goods/products');
             msg('success', '登录成功', array('back' => $back_url));
         } else {
@@ -74,6 +76,20 @@ class PassportController extends SiteController
         session(null);
         //退出登录默认跳转到商品列表页
         redirect(U('Goods/products'));
+    }
+
+    //将未登录时本地浏览内容更新到数据库
+    private function updateLocalToDb(){
+        //浏览记录 look_log = 1,2,3
+        $look_log = explode(',', cookie('look_log'));
+        $cart     = explode(',', cookie('cart'));
+        if(is_array($look_log)){
+            D('Site/Goods')->updateLookLog($look_log, $this->uid);
+        }
+        //购物车 cart = 1,2,3
+        if(is_array($cart)){
+            D('Cart/GoodsCart')->updateCart($cart, $this->uid);
+        }
     }
 
 }

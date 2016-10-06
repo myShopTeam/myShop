@@ -1,9 +1,9 @@
 <template file="Site/head.php" />
 <template file="Site/top.php" />
+<template file="Site/naviga.php"/>
 <body>
-<script src="/public/site/js/search_goods.js"></script>
-
-<link href="/public/site/css/layout.css" rel="stylesheet" type="text/css">
+<script src="{$site_info.site_path}js/search_goods.js"></script>
+<link href="{$site_info.site_path}css/layout.css" rel="stylesheet" type="text/css">
 
 <style type="text/css">
 
@@ -4506,7 +4506,7 @@
                                         <a href="{:U('product', array('gid' => $vo['goods_id']))}" target="_blank" title="{$vo.goods_name}">{$vo.goods_name}</a>
                                     </div>
                                     <div class="goods-price">
-                                        <em class="sale-price" title="商城价：&yen;{$vo.shop_price}">￥{$vo.shop_price}</em>
+                                        <em class="sale-price" title="商城价：&yen;{$vo.goods_price}">￥{$vo.goods_price}</em>
                                         <em class="market-price" title="市场价：&yen;{$vo.market_price}">￥{$vo.market_price}</em>
                                         <!--<span class="raty" data-score="5"></span>--> </div>
                                     <div class="goods-sub"></div>
@@ -4541,59 +4541,15 @@
                     <input id="goods_id" name="cart_id[]" type="hidden"/>
                 </form>
                 <script type="text/javascript" src="{$site_info.common_path}js/jquery.raty.min.js"></script>
-                <script type="text/javascript">
-
-                    $(document).ready(function(){
-
-                        $('.raty').raty({
-
-                            path: "/public/common/js/jquery.raty/img",
-
-                            readOnly: true,
-
-                            width: 80,
-
-                            score: function() {
-
-                                return $(this).attr('data-score');
-
-                            }
-
-                        });
-
-                        //初始化对比按钮
-
-                        initCompare();
-
-                    });
-
-                </script>
-
-            </div>
-
-            <div class="tc mt20 mb20">
-
-                <div class="pagination">
-                    <ul>
-                        <li>
-                            <span>首页</span>
-                        </li>
-                        <li>
-                            <span>上一页</span>
-                        </li>
-                        <li>
-                            <span class="currentpage">1</span>
-                        </li>
-                        <li>
-                            <span>下一页</span>
-                        </li>
-                        <li>
-                            <span>末页</span>
-                        </li>
-                    </ul>
+                <!-- 分页 -->
+                <div class="mt30 pagelist">
+                    <div class="pager">
+                        {$pages}
+                    </div>
                 </div>
-
+                <div class="clear clearfix"></div>
             </div>
+
 
         </div>
 
@@ -4673,31 +4629,9 @@
         });
 
 
-        // 推荐商品异步显示
-
-        $('div[nctype="booth_goods"]').load('http://localhost:8009/shop/index.php?act=search&op=get_booth_goods&cate_id=530', function () {
-
-            $(this).show();
-
-        });
-
         //浏览历史处滚条
 
         $('#nchSidebarViewed').perfectScrollbar({suppressScrollX: true});
-
-
-        //猜你喜欢
-
-        $('#guesslike_div').load('http://localhost:8009/shop/index.php?act=search&op=get_guesslike', function () {
-
-            $(this).show();
-
-        });
-
-
-        //商品分类推荐
-
-        $('#gc_goods_recommend_div').load('http://localhost:8009/shop/index.php?act=search&op=get_gc_goods_recommend&cate_id=530');
 
     });
 
@@ -4750,7 +4684,7 @@
 <div id="web_chat_dialog" style="display: none;float:right;">
 
 </div>
-
+<template file="Site/script/cart_script.php" />
 <template file="Site/footer.php" />
 <script>
     $(function(){
@@ -4758,4 +4692,4 @@
     })
 </script>
 </body>
-</html>
+</html> 

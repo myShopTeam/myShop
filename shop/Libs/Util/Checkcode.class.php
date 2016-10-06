@@ -156,6 +156,7 @@ class Checkcode {
      */
     public function validate($input, $caseSensitive = false) {
         $code = $this->getVerifyCode();
+        make_log($code . '|' . $input . '|' . $caseSensitive);
         $valid = $caseSensitive ? ($input === $code) : strcasecmp($input, $code) === 0;
         $name = $this->getSessionKey() . 'count';
         $old = session($name);

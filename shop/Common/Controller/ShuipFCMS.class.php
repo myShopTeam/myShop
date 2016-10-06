@@ -249,7 +249,8 @@ class ShuipFCMS extends \Think\Controller {
 
     //空操作
     public function _empty() {
-        $this->error('该页面不存在！');
+        $this->getSiteInfo();
+        $this->display(TEMPLATE_PATH . 'Default/HttpCode/404.php');
     }
 
     /**
@@ -266,6 +267,8 @@ class ShuipFCMS extends \Think\Controller {
         $this->site_info['common_path']     = $this->site_info['domain'] . '/public/common/';
         //企业站资源目录
         $this->site_info['enterprise_path'] = $this->site_info['domain'] . '/public/enterprise/';
+        //bootstrap资源目录
+        $this->site_info['bootstrap_path']  = $this->site_info['domain'] . '/public/bootstrap/';
         //默认头像
         $this->site_info['default_avatar']  = $this->site_info['domain'] . '/public/site/images/default_user_portrait.gif';
         //所有网站信息

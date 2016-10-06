@@ -44,7 +44,7 @@
               <td align="center">{$vo.goods_name}</td>
               <td align="center">{$vo.goods_sn}</td>
               <td align="center">{$vo.cat_name}</td>
-              <td align="center">{$vo.shop_price}</td>
+              <td align="center">{$vo.goods_price}</td>
               <td align="center">{$vo.goods_num}</td>
               <td align="center">{$vo.is_show}<!--<button class="is_show btn">{$vo.is_show}</button>  --></td>
               <td align="center">{$vo.add_time|date='Y-m-d H:i:s',###}</td>
