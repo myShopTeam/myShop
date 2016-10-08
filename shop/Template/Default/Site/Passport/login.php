@@ -129,7 +129,7 @@
         //初始化Input的灰色提示信息
 
         $('input[tipMsg]').inputTipText({pwd: 'password'});
-
+        $('#login_form')[0].reset();
         //登录方式切换
 
         $('.nc-login-mode').tabulous({
@@ -177,6 +177,7 @@
                             window.location.href = res.data.back;
                         },1200);
                     } else {
+
                         showDialog(res.msg, 'alert', '错误信息', null, true, null, '', '', '', 3);
                         return;
                     }

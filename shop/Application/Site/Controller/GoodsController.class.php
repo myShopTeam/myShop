@@ -14,11 +14,19 @@ namespace Site\Controller;
 class GoodsController extends SiteController
 {
     public $model;
+    public $page_num;   //页数
+    public $page_limit; //一次加载的个数
 
     public function _initialize()
     {
         parent::_initialize();
         $this->model = D('Site/Goods');
+        $this->page_num   = 1;
+        $this->page_limit = 12;
+        //购物车商品数量
+        $cart_num = D('Cart/GoodsCart')->getCartNum($this->uid);
+
+        $this->assign('cart_num', $cart_num);
     }
 
     //pc首页
@@ -42,11 +50,17 @@ class GoodsController extends SiteController
     //商品列表
     public function products(){
         $order  = array();//排序
-        $filter = array();//筛选
+        $filter = array('is_show' => 1);//筛选 默认查询上架商品
+
+        //分页
+        $goods_num = $this->model->where($filter)->count();
+        $page = $this->page($goods_num, $this->page_limit);
+        $limit = $page->firstRow . ',' . $this->page_limit;
         //商品列表
-        $list = $this->model->getGoodsList('*', $filter);
+        $list = $this->model->getGoodsList('*', $filter, $order, $limit);
 
         $this->assign('list', $list);
+        $this->assign('pages', $page->show());
         $this->display();
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 // +----------------------------------------------------------------------
-// | qcjh 全局配置
+// | 全局配置
 // +----------------------------------------------------------------------
 // | Copyright (c) 2014-2015 http://www.lovegq1314.com, All rights reserved.
 // +----------------------------------------------------------------------
@@ -22,10 +22,11 @@ return array(
     'APP_DOMAIN_SUFFIX' => '', // 域名后缀 如果是com.cn net.cn 之类的后缀必须设置
     'ACTION_SUFFIX' => '', // 操作方法后缀
     'MULTI_MODULE' => true, // 是否允许多模块 如果为false 则必须设置 DEFAULT_MODULE
-    'MODULE_DENY_LIST' => array('Common', 'Runtime'), // 设置禁止访问的模块列表
+    'MODULE_DENY_LIST' => array('Common', 'Runtime','Base'), // 设置禁止访问的模块列表
     'CONTROLLER_LEVEL' => 1, //多级控制器
     'APP_AUTOLOAD_LAYER' => 'Controller,Model', // 自动加载的应用类库层 关闭APP_USE_NAMESPACE后有效
     'APP_AUTOLOAD_PATH' => '', // 自动加载的路径 关闭APP_USE_NAMESPACE后有效
+    'LOAD_EXT_CONFIG' => 'routers',//加载多个配置
 
     /* Cookie设置 */
     'COOKIE_EXPIRE' => 0, // Cookie有效期
@@ -40,8 +41,8 @@ return array(
     'DEFAULT_V_LAYER' => 'View', // 默认的视图层名称
     'DEFAULT_LANG' => 'zh-cn', // 默认语言
     'DEFAULT_THEME' => '', // 默认模板主题名称
-    'DEFAULT_MODULE' => 'Content', // 默认模块
-    'DEFAULT_CONTROLLER' => 'Index', // 默认控制器名称
+    'DEFAULT_MODULE' => 'Site', // 默认模块
+    'DEFAULT_CONTROLLER' => 'Goods', // 默认控制器名称
     'DEFAULT_ACTION' => 'index', // 默认操作名称
     'DEFAULT_CHARSET' => 'utf-8', // 默认输出编码
     'DEFAULT_TIMEZONE' => 'PRC', // 默认时区

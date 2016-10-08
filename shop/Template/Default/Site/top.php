@@ -7,7 +7,7 @@
                 <a href="javascript:void(0);" id="rtoolbar_cart">
                     <span class="icon"></span>
                     <span class="name">购物车</span>
-                    <i id="rtoobar_cart_count" class="new_msg" style="display:none;"></i>
+                    <i id="rtoobar_cart_count" class="new_msg" <if condition="$cart_num eq 0">style="display:none;"</if>>{$cart_num}</i>
                 </a>
             </div>
             <!--            <div class="compare"><a href="javascript:void(0);" id="compare"><span class="icon"></span><span class="tit">商品对比</span></a>-->
@@ -63,19 +63,18 @@
                     <div class="user-login-box" nctype="barLoginBox" style="display:none;"><i class="arrow"></i>
                         <a href="javascript:void(0);" class="close-a" nctype="close-barLoginBox" title="关闭">X</a>
 
-                        <form id="login_form" method="post" action="" onsubmit="ajaxpost('login_form', '', '', 'onerror')">
-                            <input name="nchash" type="hidden" value="">
+                        <form id="login_form" method="post" action="{:U('Passport/tologin')}">
                             <dl>
                                 <dt><strong>登录名</strong></dt>
                                 <dd>
-                                    <input type="text" class="text" autocomplete="off" name="user_name" autofocus>
+                                    <input type="text" class="text" name="username">
                                     <label></label>
                                 </dd>
                             </dl>
                             <dl>
                                 <dt><strong>登录密码</strong><a href="" target="_blank">忘记登录密码？</a></dt>
                                 <dd>
-                                    <input type="password" class="text" name="password" autocomplete="off">
+                                    <input type="password" class="text" name="password">
                                     <label></label>
                                 </dd>
                             </dl>
@@ -85,14 +84,13 @@
                                     <a href="javascript:void(0)" class="ml5" onclick="javascript:document.getElementById('codeimage').src='{$site_info.domain}/index.php?g=Api&m=Checkcode&a=index&code_len=4&font_size=20&width=90&height=26&font_color=&background=&refresh=1&time=' + Math.random();">更换验证码</a>
                                 </dt>
                                 <dd>
-                                    <input type="text" name="captcha" autocomplete="off" class="text w130" id="captcha" maxlength="4" size="10">
+                                    <input type="text" name="code" autocomplete="off" class="text w130" id="captcha" maxlength="4" size="10">
                                     <img src="" name="codeimage" border="0" id="codeimage" class="vt">
                                     <label></label>
                                 </dd>
                             </dl>
                             <div class="bottom">
                                 <input type="submit" class="submit" value="确认">
-                                <input type="hidden" value="" name="ref_url">
                                 <a href="{:U('Passport/register')}" target="_blank">注册新用户</a>
                             </div>
                         </form>
@@ -115,7 +113,8 @@
         <div class="content-box" id="content-cart">
             <div class="top">
                 <h3>我的购物车</h3>
-                <a href="javascript:void(0);" class="close" title="隐藏"></a></div>
+                <a href="javascript:void(0);" class="close" title="隐藏"></a>
+            </div>
             <div id="rtoolbar_cartlist"></div>
         </div>
     </div>
@@ -158,6 +157,7 @@
 
     //动画显示边条内容区域
     $(function () {
+        replace_code();
         ncToolbar();
         $(window).resize(function () {
             ncToolbar();
@@ -192,9 +192,10 @@
             if ($("#content-cart").css('right') == '-210px') {
                 $('#content-compare').animate({'right': '-210px'});
                 $("#content-cart").animate({right: '35px'});
-                if (!$("#rtoolbar_cartlist").html()) {
-                    $("#rtoolbar_cartlist").load('index.php?act=cart&op=ajax_load&type=html');
-                }
+//                if (!$("#rtoolbar_cartlist").html()) {
+                    //加载右侧购物车数据
+                    load_cart_information();
+//                }
             } else {
                 $(".close").click();
                 $(".chat-list").css("display", 'none');
@@ -223,13 +224,34 @@
         });
         // 右侧bar登录
         $('div[nctype="a-barLoginBox"]').click(function () {
+            $('#login_form')[0].reset();
             $('div[nctype="barLoginBox"]').toggle();
-            document.getElementById('codeimage').src = "{$site_info.domain}/index.php?g=Api&m=Checkcode&a=index&code_len=4&font_size=20&width=90&height=26&font_color=&background=&refresh=1&time=" + Math.random();
+
         });
         $('a[nctype="close-barLoginBox"]').click(function () {
             $('div[nctype="barLoginBox"]').toggle();
         });
+        //登录
+        $('#login_form').submit(function () {
+            var url = $(this).attr('action');
+            var data = $(this).serialize();
+            $.post(url,data, function (res) {
+                if(res.status == 'success'){
+                    showDialog(res.msg, 'succ', '提示信息', null, true, null, '', '', '', 1);
+                    setTimeout(function () {
+                        window.location.href = window.location.href;
+                    },1200);
+                } else {
+                    replace_code();
+                    showDialog(res.msg, 'alert', '错误信息', null, true, null, '', '', '', 3);
+                }
+            },'json')
+            return false;
+        })
     });
+    function replace_code(){
+        $('#codeimage').attr('src', "{$site_info.domain}/index.php?g=Api&m=Checkcode&a=index&code_len=4&font_size=20&width=90&height=26&font_color=&background=&refresh=1&time=" + Math.random());
+    }
 </script>
 <div class="public-top-layout w">
     <div class="topbar wrapper">
@@ -297,4 +319,3 @@
         </div>
     </div>
 </div>
-<template file="Site/naviga.php"/>

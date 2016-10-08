@@ -73,7 +73,7 @@ $(function(){
                 height: 0
             },
             onEnd: function(){
-                addcart(data_gid,1,'');
+                addcart(data_gid);
                 flyer.remove();
             }
         });

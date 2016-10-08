@@ -26,6 +26,7 @@
     <script src="{$site_info.common_path}js/dialog/dialog.js" id="dialog_js" charset="utf-8"></script>
     <script type="text/javascript">
         var PRICE_FORMAT = '&yen;%s';
+        var SITE_PATH = "{$site_info.domain}";
         $(function(){
             //首页左侧分类菜单
             $(".category ul.menu").find("li").each(

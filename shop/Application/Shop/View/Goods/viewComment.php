@@ -18,7 +18,7 @@
             <th><img src="{$goods_thumb}" style="max-width:80px;max-height:100px;"></th>
             <th>{$goods_name}</th>
             <th>{$market_price}</th>
-            <th>{$shop_price}</th>
+            <th>{$goods_price}</th>
             <th>{$add_time|date="Y-m-d H:i:s",###}</th>
           </tr>
         </tbody>

@@ -591,7 +591,7 @@ CREATE TABLE `tp_goods` (
   `goods_img` text COMMENT '商品图片',
   `goods_thumb` varchar(255) DEFAULT NULL COMMENT '商品缩略图',
   `market_price` decimal(10,2) DEFAULT '0.00' COMMENT '市场价格',
-  `shop_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '实际价格',
+  `goods_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '实际价格',
   `is_show` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0:下架 1:上架',
   `is_hot` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:非热销 1:热销',
   `is_new` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:非新品 1:新品',

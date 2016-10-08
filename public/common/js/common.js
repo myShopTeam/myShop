@@ -304,77 +304,77 @@ function collect_goods(fav_id,jstype,jsobj){
     });
 }
 //加载购物车信息
-function load_cart_information(){
-	$.getJSON('/index.php?act=cart&op=ajax_load&callback=?', function(result){
-	    var obj = $('.mod_minicart');
-	    if(result){
-	       	var html = '';
-	       	if(result.cart_goods_num >0){
-	            for (var i = 0; i < result['list'].length; i++){
-	                var goods = result['list'][i];
-	            	html+='<li ncTpye="cart_item_'+goods['cart_id']+'">';
-	            	html+='<a traget="_blank" class="pro_img"  href="'+goods['goods_url']+'" title="'+goods['goods_name']+'"><img src="'+goods['goods_image']+'"></a>';
-		          	html+='<a traget="_blank" class="pro_name"  href="'+goods['goods_url']+'">'+goods['goods_name']+'</a>';
-		          	html+='<div class="mcartRight"><span class="pro_price"><em>&yen;'+goods['goods_price']+'×'+goods['goods_num']+'</span>';
-		          	html+='<a href="javascript:void(0);" onClick="drop_topcart_item('+goods['cart_id']+');">删除</a></div>';
-		          	html+="</li>";
-		        }
-				$('.none_tips').remove();
-		        obj.find('.list_detail ul').html(html);
-    	        obj.find('.list_detail').perfectScrollbar('destroy');
-    	        obj.find('.list_detail').perfectScrollbar({suppressScrollX:true});
-	         	html = "共<em class='tNum'>"+result.cart_goods_num+"</em>种商品,总计金额：<em class='tSum'>&yen;"+result.cart_all_price+"</em>";
-		        obj.find('.checkout_box .fl').html(html);
-		        if (obj.find('.cart_num').size()==0) {
-		            obj.append('<em class="cart_num">0</em>');
-		        }
-		        obj.find('.cart_num').html(result.cart_goods_num);
-		        $('#rtoobar_cart_count').html(result.cart_goods_num).show();
-	      } else {
-	      	html="<div class='list_detail'><div class='none_tips'><i> </i><p>购物车中没有商品，赶紧去选购！</p></div>";
-	      	obj.find('.list_detail ul').html(html);
-			$('.checkout_box').remove();
-	      	$('.list_detail ul').remove();
-	      	$('#rtoobar_cart_count').html('').hide();
-	      	
-	      }
-	   }
-	});
-}
+//function load_cart_information(){
+//	$.getJSON('/index.php?act=cart&op=ajax_load&callback=?', function(result){
+//	    var obj = $('.mod_minicart');
+//	    if(result){
+//	       	var html = '';
+//	       	if(result.cart_goods_num >0){
+//	            for (var i = 0; i < result['list'].length; i++){
+//	                var goods = result['list'][i];
+//	            	html+='<li ncTpye="cart_item_'+goods['cart_id']+'">';
+//	            	html+='<a traget="_blank" class="pro_img"  href="'+goods['goods_url']+'" title="'+goods['goods_name']+'"><img src="'+goods['goods_image']+'"></a>';
+//		          	html+='<a traget="_blank" class="pro_name"  href="'+goods['goods_url']+'">'+goods['goods_name']+'</a>';
+//		          	html+='<div class="mcartRight"><span class="pro_price"><em>&yen;'+goods['goods_price']+'×'+goods['goods_num']+'</span>';
+//		          	html+='<a href="javascript:void(0);" onClick="drop_topcart_item('+goods['cart_id']+');">删除</a></div>';
+//		          	html+="</li>";
+//		        }
+//				$('.none_tips').remove();
+//		        obj.find('.list_detail ul').html(html);
+//    	        obj.find('.list_detail').perfectScrollbar('destroy');
+//    	        obj.find('.list_detail').perfectScrollbar({suppressScrollX:true});
+//	         	html = "共<em class='tNum'>"+result.cart_goods_num+"</em>种商品,总计金额：<em class='tSum'>&yen;"+result.cart_all_price+"</em>";
+//		        obj.find('.checkout_box .fl').html(html);
+//		        if (obj.find('.cart_num').size()==0) {
+//		            obj.append('<em class="cart_num">0</em>');
+//		        }
+//		        obj.find('.cart_num').html(result.cart_goods_num);
+//		        $('#rtoobar_cart_count').html(result.cart_goods_num).show();
+//	      } else {
+//	      	html="<div class='list_detail'><div class='none_tips'><i> </i><p>购物车中没有商品，赶紧去选购！</p></div>";
+//	      	obj.find('.list_detail ul').html(html);
+//			$('.checkout_box').remove();
+//	      	$('.list_detail ul').remove();
+//	      	$('#rtoobar_cart_count').html('').hide();
+//
+//	      }
+//	   }
+//	});
+//}
 
 //头部删除购物车信息，登录前使用goods_id,登录后使用cart_id
-function drop_topcart_item(cart_id){
-    $.getJSON(SITEURL+'/index.php?act=cart&op=del&cart_id='+cart_id+'&callback=?', function(result){
-        if(result.state){
-            var obj = $('.mod_minicart');
-            //删除成功
-            if(result.quantity == 0){
-    	      	html="<div class='list_detail'><div class='none_tips'><i> </i><p>购物车中没有商品，赶紧去选购！</p></div>";
-    	      	obj.find('.list_detail ul').html(html);
-    	      	obj.find('.checkout_box .fl').html('');
-    	      	obj.find('.cart_num').remove();
-    	      	$('.cart-list').html('<li><dl><dd style="text-align: center; ">暂无商品</dd></dl></li>');
-    	      	$('div[ncType="rtoolbar_total_price"]').html('');
-    	      	$('#rtoobar_cart_count').html('').hide();
-            }else{
-                $('li[ncTpye="cart_item_'+ cart_id+'"]').remove();
-                $('li[ncTpye="cart_item_'+ cart_id+'"]').remove();
-	         	html="共<em class='tNum'>"+result.quantity+"</em>种商品,总计金额：<em class='tSum'>&yen;"+result.amount+"</em>";
-	         	obj.find('.checkout_box .fl').html(html);
-		        obj.find('.cart_num').html(result.quantity);
-    	        obj.find('.list_detail').perfectScrollbar('destroy');
-    	        obj.find('.list_detail').perfectScrollbar({suppressScrollX:true});
-    	        $('div[ncType="rtoolbar_total_price"]').html("共计金额：<em class='goods-price'>&yen;"+result.amount+"</em>");
-    	        $('#rtoobar_cart_count').html(result.quantity);
-    	        if ($('#rtoolbar_cartlist > ul').children().size() != result.quantity) {
-    	        	$("#rtoolbar_cartlist").load(SHOP_SITE_URL+ '/index.php?act=cart&op=ajax_load&type=html');return ;
-    	        }
-            }
-        }else{
-            alert(result.msg);
-        }
-    });
-}
+//function drop_topcart_item(cart_id){
+//    $.getJSON(SITEURL+'/index.php?act=cart&op=del&cart_id='+cart_id+'&callback=?', function(result){
+//        if(result.state){
+//            var obj = $('.mod_minicart');
+//            //删除成功
+//            if(result.quantity == 0){
+//    	      	html="<div class='list_detail'><div class='none_tips'><i> </i><p>购物车中没有商品，赶紧去选购！</p></div>";
+//    	      	obj.find('.list_detail ul').html(html);
+//    	      	obj.find('.checkout_box .fl').html('');
+//    	      	obj.find('.cart_num').remove();
+//    	      	$('.cart-list').html('<li><dl><dd style="text-align: center; ">暂无商品</dd></dl></li>');
+//    	      	$('div[ncType="rtoolbar_total_price"]').html('');
+//    	      	$('#rtoobar_cart_count').html('').hide();
+//            }else{
+//                $('li[ncTpye="cart_item_'+ cart_id+'"]').remove();
+//                $('li[ncTpye="cart_item_'+ cart_id+'"]').remove();
+//	         	html="共<em class='tNum'>"+result.quantity+"</em>种商品,总计金额：<em class='tSum'>&yen;"+result.amount+"</em>";
+//	         	obj.find('.checkout_box .fl').html(html);
+//		        obj.find('.cart_num').html(result.quantity);
+//    	        obj.find('.list_detail').perfectScrollbar('destroy');
+//    	        obj.find('.list_detail').perfectScrollbar({suppressScrollX:true});
+//    	        $('div[ncType="rtoolbar_total_price"]').html("共计金额：<em class='goods-price'>&yen;"+result.amount+"</em>");
+//    	        $('#rtoobar_cart_count').html(result.quantity);
+//    	        if ($('#rtoolbar_cartlist > ul').children().size() != result.quantity) {
+//    	        	$("#rtoolbar_cartlist").load(SHOP_SITE_URL+ '/index.php?act=cart&op=ajax_load&type=html');return ;
+//    	        }
+//            }
+//        }else{
+//            alert(result.msg);
+//        }
+//    });
+//}
 
 //加载最近浏览的商品
 function load_history_information(){
@@ -869,25 +869,25 @@ function load_history_information(){
 })(jQuery);
 
 /* 加入购物车 */
-function addcart(goods_id,quantity,callbackfunc) {
-    if (!quantity) return false;
-    var url = '/index.php/Cart/addCart';
-    quantity = parseInt(quantity);
-    $.getJSON(url, {'goods_id':goods_id, 'quantity':quantity}, function(data) {
-        if (data != null) {
-            if (data.state) {
-            	if(callbackfunc){
-            		eval(callbackfunc + "(data)");
-            	}
-                // 头部加载购物车信息mef="sqde"
-                load_cart_information();
-                $("#rtoolbar_cartlist").load(SHOP_SITE_URL + '/index.php?act=cart&op=ajax_load&type=html');
-            } else {
-                alert(data.msg);
-            }
-        }
-    });
-}
+//function addcart(goods_id,quantity,callbackfunc) {
+//    if (!quantity) return false;
+//    var url = '/index.php/Cart/addCart';
+//    quantity = parseInt(quantity);
+//    $.getJSON(url, {'goods_id':goods_id, 'quantity':quantity}, function(data) {
+//        if (data != null) {
+//            if (data.state) {
+//            	if(callbackfunc){
+//            		eval(callbackfunc + "(data)");
+//            	}
+//                // 头部加载购物车信息mef="sqde"
+//                load_cart_information();
+//                $("#rtoolbar_cartlist").load(SHOP_SITE_URL + '/index.php?act=cart&op=ajax_load&type=html');
+//            } else {
+//                alert(data.msg);
+//            }
+//        }
+//    });
+//}
 
 function setCookie(name,value,days){
         var exp=new Date();
