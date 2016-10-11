@@ -92,4 +92,31 @@ class GoodsModel extends Model {
         M('goods_look')->addAll($data_list);
     }
 
+    /**
+     * 获取最大运费
+     * @param array $filter
+     * @return int
+     */
+    public function getMaxFreight($filter){
+        $freights = $this->field('freight')->where($filter)->select();
+        $freight_list = array();
+        foreach($freights as $v){
+            $freight_list[] = $v['freight'];
+        }
+        return max($freight_list);
+    }
+
+    /**
+     * 获取最小运费
+     * @param array $filter
+     * @return int
+     */
+    public function getMinFreight($filter){
+        $freights = $this->field('freight')->where($filter)->select();
+        $freight_list = array();
+        foreach($freights as $v){
+            $freight_list[] = $v['freight'];
+        }
+        return min($freight_list);
+    }
 }

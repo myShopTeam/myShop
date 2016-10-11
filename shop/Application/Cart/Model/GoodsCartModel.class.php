@@ -103,4 +103,26 @@ class GoodsCartModel extends Model {
         return $check ? true : false;
     }
 
+    /**
+     * 获取购物车详细数据
+     * @params int $uid
+     */
+    public function getCartInfo($uid){
+        $info = array();
+        $info['carts'] = $this->where(array('uid' => $uid))->select();
+        if($info['carts']){
+            foreach($info['carts'] as $k => $cart){
+                //判断商品是否有属性 使用price不需要前台判断
+                $info['carts'][$k]['price'] = $cart['sku'] ? $cart['attr_price'] : $cart['goods_price'];
+                //商品小计
+                $info['carts'][$k]['goods_subtotal'] = $info['carts'][$k]['price'] * $cart['goods_num'];
+                //总价
+                $info['total'] += $info['carts'][$k]['goods_subtotal'];
+                //商品goods_id
+                $info['goods'][] = $cart['goods_id'];
+            }
+        }
+        return $info;
+    }
+
 }

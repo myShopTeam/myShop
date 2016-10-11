@@ -30,19 +30,11 @@ class CartController extends BaseController
      * 购物车
      */
     public function index(){
-        $carts = $this->model->where(array('uid' => $this->uid))->select();
-        if($carts){
-            $total = 0;
-            foreach($carts as $k => $cart){
-                //判断商品是否有属性
-                $carts[$k]['price'] = $cart['sku'] ? $cart['attr_price'] : $cart['goods_price'];
-                $carts[$k]['goods_subtotal'] = $carts[$k]['price'] * $cart['goods_num'];
-                $total += $carts[$k]['goods_subtotal'];
-            }
-            $this->assign('total', $total);
-        }
-        $checkCart = $carts ? 1 : 0;
-        $this->assign('carts', $carts);
+        $info = $this->model->getCartInfo($this->uid);
+
+        $checkCart = $info['carts'] ? 1 : 0;
+        $this->assign('total', $info['total']);
+        $this->assign('carts', $info['carts']);
         $this->assign('checkCart', $checkCart);
         $this->display();
     }
@@ -60,7 +52,7 @@ class CartController extends BaseController
                     //判断是否添加过购物车
                     if(!$this->model->checkGoodsInCart($goods)){
                         //处理购物车数据
-                        $data = $this->discountCartData($goods);
+                        $data = $this->__discountCartData($goods);
                         $data['uid'] = $this->uid;
 
                         $cart_id = M('goods_cart')->add($data);
@@ -81,10 +73,10 @@ class CartController extends BaseController
                 }
             } else {
                 //非登录用户
-                if($this->addCartToCookie($goods['goods_id'])){
+                if($this->__addCartToCookie($goods['goods_id'])){
                     if($goods){
                         //处理购物车数据
-                        $data = $this->discountCartData($goods);
+                        $data = $this->__discountCartData($goods);
                         //购物车总计
                         $result = array('cart_info' => $data);
                         $this->getCartTotal($result);
@@ -130,7 +122,7 @@ class CartController extends BaseController
                 }
             } else {
                 //非登录用户
-                if($this->delCartToCookie($cart_id)){
+                if($this->__delCartToCookie($cart_id)){
                     //购物车总计
                     $result = array('cart_info' => array());
                     $this->getCartTotal($result);
@@ -170,7 +162,7 @@ class CartController extends BaseController
      * @params int $goods_id
      * @return bool
      */
-    private function addCartToCookie($goods_id){
+    private function __addCartToCookie($goods_id){
         $cookie_goods = cookie('cart');
         if($cookie_goods){
             $cart = explode(',', $cookie_goods);
@@ -194,7 +186,7 @@ class CartController extends BaseController
      * @params int $goods_id
      * @return bool
      */
-    private function delCartToCookie($goods_id){
+    private function __delCartToCookie($goods_id){
         $cookie_goods = cookie('cart');
         if($cookie_goods){
             $cart = explode(',', $cookie_goods);
@@ -222,7 +214,7 @@ class CartController extends BaseController
      * @params array $goods
      * @return bool
      */
-    private function discountCartData($goods){
+    private function __discountCartData($goods){
         $data = array(
             'goods_id'       => $goods['goods_id'],
             'created'        => time(),
@@ -299,7 +291,7 @@ class CartController extends BaseController
                 $quantity = intval($get['quantity']);
                 //验证商品库存
                 $cart_info = $this->model->find($cart_id);
-                $this->checkSku($cart_info, $quantity);
+                $this->__checkSku($cart_info, $quantity);
 
                 $filter = array('cart_id' => $cart_id, 'uid' => $this->uid);
                 $data   = array('goods_num' => $quantity);
@@ -333,7 +325,7 @@ class CartController extends BaseController
      * @param array $params
      * @param int $quantity
      */
-    private function checkSku($params, &$quantity){
+    private function __checkSku($params, &$quantity){
         //根据商品的sku判断库存
         if($params['sku']){
             $total = M('goods_sku')->where(array('sku_id' => $params['sku']))->getField('sku_total');
