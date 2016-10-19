@@ -737,6 +737,85 @@ class CrmController extends AdminBase
         }
         unset($arr[1]);//去掉第一行的标题数据
         return  $arr;
-    } 
+    }
+    
+    public function cardConfig(){
+        $type = M('card_config')->where(array('parent_id'=>0))->select();
+        $sql  = 'select n.*,t.card_name name from tp_card_config n inner join tp_card_config t on n.parent_id = t.id where n.parent_id > 0 ';    
+        $name = M('card_config')->query($sql);
+        $this->assign('card_type',$type);
+        $this->assign('name',$name);
+        $this->display();
+    }
+    
+    public function typeAdd(){
+        if($_POST['card_name']){
+            $data['card_name']   = $_POST['card_name'];
+            $data['create_user'] = $this->userInfo['id'];
+            $data['create_time'] = time();
+            $result = M('card_config')->where(array('card_name'=>$data['card_name']))->find();
+            if($result){
+                $this->error("卡单类型已存在");
+            }
+            $result = M('card_config')->add($data);
+            if ($result) {
+                $this->success("添加成功", U('Crm/cardConfig'));
+            } else {
+                $this->error("非法操作");
+            }
+        }
+        $this->display();
+    }
+    
+    public function productAdd(){   
+        if($_POST['card_name']){
+            $data['card_name']   = $_POST['card_name'];
+            $data['parent_id']   = $_POST['parent_id'];
+            $data['create_user'] = $this->userInfo['id'];
+            $data['create_time'] = time();
+            $result = M('card_config')->where(array('card_name'=>$data['card_name']))->find();
+            if($result){
+                $this->error("产品名已存在");
+            }
+            $result = M('card_config')->add($data);
+            if ($result) {
+                $this->success("添加成功", U('Crm/cardConfig'));
+            } else {
+                $this->error("非法操作");
+            }
+        }
+        $type = M('card_config')->where(array('parent_id'=>0))->select();
+        $this->assign('type',$type);
+        $this->display();
+    }
+    
+    //会员删除
+    public function productDelete()
+    {
+        if (IS_POST) {
+            $numArr = I('post.');
+            if (is_array($numArr)) {
+                foreach ($numArr['id'] as $k => $v) {
+                    $cardArr[] = $v;
+                }
+                $bool = M('card_config')->where(array('id' => array('IN', $cardArr)))->delete();
+                if ($bool) {
+                    $this->success("删除成功", U('Crm/cardConfig'));
+                } else {
+                    $this->error("删除失败");
+                }
+            } else {
+                $this->error("非法操作");
+            }
+        } else {
+            $vipid = I('get.id', '', intval);
+            $bool = M('card_config')->where(array('id' => $vipid))->delete();
+            if ($bool) {
+                $this->success("删除成功", U('Crm/cardConfig'));
+            } else {
+                $this->error("非法操作");
+            }
+        }
+    }
     
 }

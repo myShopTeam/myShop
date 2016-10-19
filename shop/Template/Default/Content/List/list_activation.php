@@ -29,10 +29,8 @@
                             <dl>
                                 <dt>卡类型</dt>
                                 <dd>
-                                    <select name="card_type">
+                                    <select name="card_type" class="selectType">
                                         <option selected="selected">请选择卡片类型</option>
-                                        <option value='家园系列'>家园系列</option>
-                                        <option value='校园卡'>家园卡2</option>
                                     </select>
                                 </dd>
                             </dl>
@@ -158,7 +156,8 @@ $(document).ready(function () {
     var _global = {};
     //页面加载获取验证码
     $.post("{:U('Content/Crm/cardActive')}",'',function(re){
-        $('.verifycode').attr('src',re)
+        $('.verifycode').attr('src',re.code)
+        $('.selectType').append(re.card_type)
     },'json')
     
     //卡单验证

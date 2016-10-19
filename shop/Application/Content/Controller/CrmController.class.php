@@ -17,9 +17,15 @@ class CrmController extends Base {
     
     //获取验证码
     public function cardActive(){
-        $code = get_http_host() . '/index.php?g=Api&m=Checkcode&a=index&code_len=4&font_size=20&width=130&height=50&font_color=&background=';
+        $data['code'] = get_http_host() . '/index.php?g=Api&m=Checkcode&a=index&code_len=4&font_size=20&width=130&height=50&font_color=&background=';
         $this->assign('public_path', get_http_host() . '/public/');
-        echo json_encode($code);die;
+        $card_type = M('card_config')->where(array('parent_id'=>0))->select();
+        $html = ' ';
+        foreach($card_type as $v){
+            $html .= "<option value=".$v['card_name'].">".$v['card_name']."</option>" ;   
+        }
+        $data['card_type'] = $html;
+        echo json_encode($data);die;
     }
     
     //卡单验证
