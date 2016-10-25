@@ -83,7 +83,7 @@ class PassportController extends SiteController
         //浏览记录 look_log = 1,2,3
         $look_log = explode(',', cookie('look_log'));
         $cart     = explode(',', cookie('cart'));
-        if(is_array($look_log)){
+        if($look_log && is_array($look_log)){
             D('Site/Goods')->updateLookLog($look_log, $this->uid);
         }
         //购物车 cart = 1,2,3

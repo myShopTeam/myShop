@@ -939,7 +939,7 @@ function format_bytes($size, $delimiter = '') {
 
 function make_log($param, $filename, $path){
     if(!$path) {
-        $path = SITE_PATH . '/data';
+        $path = SITE_PATH . 'data';
         if(!file_exists($path)){
             mkdir($path, 0777, true);
             mkdir($path . '/log/', 0777, true);
@@ -948,7 +948,7 @@ function make_log($param, $filename, $path){
             mkdir($path . '/log/', 0777, true);
             $path = $path . '/log/';
         } else {
-            $path = SITE_PATH . '/data/log/';
+            $path = SITE_PATH . 'data/log/';
         }
         if(!$filename){
             $filename = date('Y-m-d') . '.log';
@@ -997,13 +997,24 @@ function is_mobile($mobile) {
  * 输出json数据
  * @param string $status
  * @param string $msg
- * @param array $data
+ * @param array  $data
+ * @param string $url
  */
-function msg($status = 'success', $msg = '操作成功', $data = array()){
+function msg($status = 'success', $msg = '操作成功', $data = array(), $url=''){
     if(!$msg){
         $msg = $status == 'success' ? '操作成功' : '操作失败';
     }
-    die (urldecode(json_encode(array('status' => $status, 'msg' => urlencode($msg), 'data' => $data))));
+    $result = array(
+        'status' => $status,
+        'msg' => urlencode($msg)
+    );
+    if($data){
+        $result['data'] = $data;
+    }
+    if($url){
+        $result['url'] = $url;
+    }
+    die (urldecode(json_encode($result)));
 }
 
 //获取http类型
@@ -1022,4 +1033,26 @@ function cur(&$param){
     //todo：设置金钱精确位数 此处可以进行扩展
     $param = number_format($param, 2, '.', '');
     return $param;
+}
+
+if ( ! function_exists( 'array_bind_key' ) )
+{
+    /**
+     * 根据传入的数组和数组中值的键值，将对数组的键进行替换
+     *
+     * @param array $array
+     * @param string $key
+     */
+    function array_bind_key($array, $key )
+    {
+        foreach( (array)$array as $value )
+        {
+            if( !empty($value[$key]) || $value[$key] === '0' || $value[$key] === 0)
+            {
+                $k = $value[$key];
+                $result[$k] = $value;
+            }
+        }
+        return $result;
+    }
 }

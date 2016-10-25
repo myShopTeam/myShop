@@ -128,4 +128,43 @@ class BaseController extends Base
         //设置用户信息
         $this->setMember();
     }
+
+    /**
+     * 地区
+     */
+    public function getFormatArea(){
+        $areas = array();
+        $city  = array();
+        $logistics = json_decode(file_get_contents(SITE_PATH . 'public/common/js/area.json'), true);
+        if(!$logistics) {
+            $logistics = M('logistics')->field('region_id,local_name,p_region_id')->select();
+            foreach($logistics as $key => $logistic){
+                if($logistic['p_region_id'] == 0){
+                    $areas['province'][$logistic['region_id']] = $logistic['local_name'];
+                    unset($logistics[$key]);
+                }
+            }
+            foreach($areas['province'] as $k => $area){
+                foreach($logistics as $key => $logistic){
+                    if($logistic['p_region_id'] == $k){
+                        $city[$logistic['region_id']] = $logistic['local_name'];
+                        $areas['city'][$k][$logistic['region_id']] = $logistic['local_name'];
+                        unset($logistics[$key]);
+                    }
+                }
+            }
+            foreach($city as $k => $area){
+                foreach($logistics as $key => $logistic){
+                    if($logistic['p_region_id'] == $k){
+                        $areas['area'][$k][$logistic['region_id']] = $logistic['local_name'];
+                        unset($logistics[$key]);
+                    }
+                }
+            }
+            return $areas;
+        } else {
+            return $logistics;
+        }
+
+    }
 }

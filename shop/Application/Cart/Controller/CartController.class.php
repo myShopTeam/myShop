@@ -14,13 +14,13 @@ use Base\Controller\BaseController;
 
 class CartController extends BaseController
 {
-    private $whiteList = array('addCart', 'delCart', 'getCartInfo'); //白名单 不需要验证登录
+    private $__whiteList = array('addCart', 'delCart', 'getCartInfo'); //白名单 不需要验证登录
 
     public function _initialize()
     {
         parent::_initialize();
         //验证是否登录
-        if (!in_array(ACTION_NAME, $this->whiteList)) {
+        if (!in_array(ACTION_NAME, $this->__whiteList)) {
             $this->checkLogin();
         }
         $this->model = D('Cart/GoodsCart');
@@ -31,6 +31,9 @@ class CartController extends BaseController
      */
     public function index(){
         $info = $this->model->getCartInfo($this->uid);
+        //判断商品是否下架 todo
+
+        //判断商品是否还有库存
 
         $checkCart = $info['carts'] ? 1 : 0;
         $this->assign('total', $info['total']);
@@ -168,7 +171,6 @@ class CartController extends BaseController
             $cart = explode(',', $cookie_goods);
             if(!in_array($goods_id, $cart)){
                 $cookie_goods = $cookie_goods . ',' . $goods_id;
-                make_log('购物车数据：' . $cookie_goods);
                 cookie('cart', $cookie_goods, 0);
                 return true;
             } else {
@@ -318,6 +320,27 @@ class CartController extends BaseController
         } else {
             msg('error', '非法操作');
         }
+    }
+
+    /**
+     * 清除购物车
+     * @param array  $cart_ids
+     * @return bool
+     */
+    public function clearCart($cart_ids){
+        if($cart_ids){
+            return $this->model->where(array('cart_id' => array('IN', $cart_ids)))->delete();
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 清除此用户购物车缓存
+     */
+    public function clearCartCache(){
+        S('cart' . $this->uid, null);
+        S('is_cart' . $this->uid, null);
     }
 
     /**

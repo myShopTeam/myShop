@@ -18,12 +18,31 @@
         <!-- 内容 -->
         <div class="RightContent">
             <div class="article_box">
-                <div class="article_tit">希望1号</div>
-                <div class="article_time">来源：国安救援　　发布时间：2016-07-10　　浏览量：54</div>
+                <div class="article_tit">{$title}</div>
+                <div class="article_time">来源：{$copyfrom|default='国安救援'} 日期：{$updatetime} &nbsp;&nbsp;&nbsp;浏览：{$views}次</div>
                 <div class="article_content tcc twb">
-
+                    {$content}
                 </div>
-
+                <div class="article_sh">
+                    <div class="left">
+                        <p>上一篇：<pre catid="$catid" id="$id" target="1" msg="已经没有了" /> </p>
+                        <p>下一篇：<next catid="$catid" id="$id" target="1" msg="已经没有了" /></p>
+                    </div>
+                    <div class="right">
+                        <div class="share">
+                            <div class="sharel">
+                                <!-- Baidu Button BEGIN -->
+                                <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare"> <span class="bds_more">分享到：</span> <a class="bds_qzone"></a> <a class="bds_tsina"></a> <a class="bds_tqq"></a> <a class="bds_renren"></a> <a class="bds_t163"></a> <a class="shareCount"></a> </div>
+                                <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=775360"></script>
+                                <script type="text/javascript" id="bdshell_js"></script>
+                                <script type="text/javascript">
+                                    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date() / 3600000)
+                                </script>
+                                <!-- Baidu Button END -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>

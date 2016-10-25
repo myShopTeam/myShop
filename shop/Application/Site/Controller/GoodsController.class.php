@@ -69,7 +69,11 @@ class GoodsController extends SiteController
         //验证商品是否存在
         $goods = $this->checkGoods();
         //最近浏览
-
+        $look_data = array(
+            'goods' => $goods,
+            'uid'   => $this->uid
+        );
+        $this->model->addLookLog($look_data);
         $this->display();
     }
 
@@ -85,7 +89,7 @@ class GoodsController extends SiteController
             redirect($url);
         }
         //验证是否存在此商品
-        $goods = $this->model->where(array('goods_id' => $goods_id))->find();
+        $goods = $this->model->find($goods_id);
         if(!$goods){
             redirect($url);
         }

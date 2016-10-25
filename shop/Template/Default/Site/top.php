@@ -257,7 +257,7 @@
     <div class="topbar wrapper">
         <div class="user-entry">
             <if condition="$member_info['is_login'] eq 1">
-                您好 <span> <a href="{:U('Member/index')}">{$member_info.nickname}</a></span> ，欢迎来到
+                您好 <span> <a href="{:U('Member/Member/index')}">{$member_info.nickname}</a></span> ，欢迎来到
                 <a href="/" title="首页" alt="首页">
                     <span>{$Config.sitename}</span>
                 </a><span>[<a href="{:U('Passport/logout')}">退出</a>] </span>

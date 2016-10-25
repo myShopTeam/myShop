@@ -95,7 +95,8 @@ class GoodsCartModel extends Model {
 
     /**
      * 验证用户购物车数据
-     * @params $filter
+     * @param $filter
+     * @return bool
      */
     public function checkCart($filter){
         $check = $this->where($filter)->find();
@@ -105,11 +106,12 @@ class GoodsCartModel extends Model {
 
     /**
      * 获取购物车详细数据
-     * @params int $uid
+     * @param array $filter
+     * @return array
      */
-    public function getCartInfo($uid){
+    public function getCartInfo($filter){
         $info = array();
-        $info['carts'] = $this->where(array('uid' => $uid))->select();
+        $info['carts'] = $this->where($filter)->select();
         if($info['carts']){
             foreach($info['carts'] as $k => $cart){
                 //判断商品是否有属性 使用price不需要前台判断
