@@ -216,6 +216,31 @@ class OrderController extends BaseController
     }
 
     /**
+     * 取消订单
+     */
+    public function orderCancel(){
+        if(IS_POST){
+            $order_id = I('post.oid', 0, 'intval');
+            $state_info  = I('post.state_info');
+            $state_info1 = I('post.state_info1');
+            if($order_id){
+                $cancel_msg = $state_info ? $state_info : $state_info1;
+                $data = array(
+                    'order_status' => '5',
+                    'cancel_msg'   => $cancel_msg
+                );
+                M('goods_orderinfo')->where(array('order_id' => $order_id))->save($data);
+                $url = $_SERVER['HTTP_REFERER'] ? $_SERVER['HTTP_REFERER'] : U('Member/Member/index');
+                redirect($url);
+            } else {
+                redirect(U('Member/Member/index'));
+            }
+        } else {
+            redirect(U('Member/Member/index'));
+        }
+    }
+
+    /**
      * 处理参数
      * @param array $data
      */

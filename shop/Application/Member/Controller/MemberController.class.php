@@ -29,6 +29,7 @@ class MemberController extends BaseController
         $cart_num = D('Cart/GoodsCart')->getCartNum($this->uid);
 
         $this->assign('cart_num', $cart_num);
+        $this->assign('selected', 'Member_Order_' . ACTION_NAME);
     }
 
     /**

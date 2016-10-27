@@ -299,7 +299,8 @@
     </div>
     <div class="right-layout">
         <!-- 右侧内容 -->
-        <template file="Member/Member/common/home_right.php"/>
+        <in name="right" value="order_list"><template file="Member/Order/common/order_right.php"/></in>
+        <in name="right" value="order_detail"><template file="Member/Order/common/order_detail.php"/></in>
     </div>
     <div class="clear"></div>
 </div>
