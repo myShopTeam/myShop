@@ -29,7 +29,7 @@ class MemberController extends BaseController
         $cart_num = D('Cart/GoodsCart')->getCartNum($this->uid);
 
         $this->assign('cart_num', $cart_num);
-        $this->assign('selected', 'Member_Order_' . ACTION_NAME);
+        $this->assign('selected', 'Member_Member_' . ACTION_NAME);
     }
 
     /**
@@ -62,6 +62,7 @@ class MemberController extends BaseController
 
         $this->assign($data);
         $this->assign('orders_num', $orders_status);
+        $this->assign('right', 'home');
         $this->display();
     }
 
@@ -93,16 +94,50 @@ class MemberController extends BaseController
      * 用户关注的商品
      */
     public function favoriteGoods(){
+        $collects = M('goods_collect')->where(array('uid' => $this->uid))->order('addtime DESC')->select();
 
-        $this->display();
+        if($collects){
+            $collect_ids = array_keys(array_bind_key($collects, 'id'));
+            $goods = M('goods')->where(array('goods_id' => array('IN',$collect_ids)))->select();
+
+            $this->assign('items', $goods);
+        }
+
+        $this->assign('right', 'collect_right');
+        $this->display('index');
+    }
+
+    /**
+     * 取消关注
+     */
+    public function delFavoriteGoods(){
+        if(IS_AJAX){
+            $collect_id = I('cid', '', 'intval');
+            //非法操作
+            if(!$collect_id){
+                msg('error', '非法操作');
+            }
+            //判断用户是否关注
+            $check = M('goods_collect')->where(array('id' => $collect_id, 'uid' => $this->uid))->find();
+            if(!$check){
+                msg('error', '不存在该商品');
+            } else {
+                M('goods_collect')->where(array('id' => $collect_id))->delete();
+                msg('success', '取消成功', array(), U('Member/Member/favoriteGoods'));
+            }
+        }
     }
 
     /**
      * 用户足迹
      */
     public function goodsBrowse(){
+        $browses = M('goods_look')->where(array('uid' => $this->uid))->order('created DESC')->select();
 
-        $this->display();
+
+        $this->assign('browses', $browses);
+        $this->assign('right', 'browse_right');
+        $this->display('index');
     }
 
     /**

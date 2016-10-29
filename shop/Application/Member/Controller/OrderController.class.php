@@ -75,16 +75,34 @@ class OrderController extends BaseController
         $this->assign('orders', $orders);
         $this->assign('status_type', $status_type);
         $this->assign('right', 'order_list');
-        $this->display();
+        $this->display('Member/Member/index');
     }
 
     /**
      * 订单详情
      */
     public function orderDetail(){
+        $order_id = I('get.oid', '', 'intval');
+        //非法操作
+        if(!$order_id){
+            redirect(U('Member/Order/index'));
+        }
+        $order_info = M('goods_orderinfo')->find($order_id);
+        //不存在此订单
+        if(!$order_info){
+            redirect(U('Member/Order/index'));
+        } else {
+            $items = M('goods_order')->where(array('order_id' => $order_id))->select();
+            $order_info['items'] = $items;
+            $order_info['items_num'] = count($items);
+        }
+        //用户操作日志
+        $order_log = M('order_log')->where(array('uid' => $this->uid, 'order_id' => $order_id))->order('created DESC')->limit(3)->select();
 
+        $this->assign($order_info);
+        $this->assign('order_log', $order_log);
         $this->assign('right', 'order_detail');
-        $this->display('index');
+        $this->display('Member/Member/index');
     }
 
     /**

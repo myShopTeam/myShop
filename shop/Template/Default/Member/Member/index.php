@@ -7,35 +7,35 @@
 <script type="text/javascript" src="{$site_info.site_path}js/ToolTip.js"></script>
 <script>
     //sidebar-menu
-//    $(document).ready(function () {
-//        $.each($(".side-menu > a"), function () {
-//            $(this).click(function () {
-//                var ulNode = $(this).next("ul");
+    $(document).ready(function () {
+        $.each($(".side-menu > a"), function () {
+            $(this).click(function () {
+                var ulNode = $(this).next("ul");
 //                if (ulNode.css('display') == 'block') {
 //                    $.cookie(COOKIE_PRE + 'Mmenu_' + $(this).attr('key'), 1);
 //                } else {
 //                    $.cookie(COOKIE_PRE + 'Mmenu_' + $(this).attr('key'), null);
 //                }
-//                ulNode.slideToggle();
-//                if ($(this).hasClass('shrink')) {
-//                    $(this).removeClass('shrink');
-//                } else {
-//                    $(this).addClass('shrink');
-//                }
-//            });
-//        });
-//        $.each($(".side-menu-quick > a"), function () {
-//            $(this).click(function () {
-//                var ulNode = $(this).next("ul");
-//                ulNode.slideToggle();
-//                if ($(this).hasClass('shrink')) {
-//                    $(this).removeClass('shrink');
-//                } else {
-//                    $(this).addClass('shrink');
-//                }
-//            });
-//        });
-//    });
+                ulNode.slideToggle();
+                if ($(this).hasClass('shrink')) {
+                    $(this).removeClass('shrink');
+                } else {
+                    $(this).addClass('shrink');
+                }
+            });
+        });
+        $.each($(".side-menu-quick > a"), function () {
+            $(this).click(function () {
+                var ulNode = $(this).next("ul");
+                ulNode.slideToggle();
+                if ($(this).hasClass('shrink')) {
+                    $(this).removeClass('shrink');
+                } else {
+                    $(this).addClass('shrink');
+                }
+            });
+        });
+    });
 
 </script>
 
@@ -299,7 +299,12 @@
     </div>
     <div class="right-layout">
         <!-- 右侧内容 -->
-        <template file="Member/Member/common/home_right.php"/>
+        <in name="right" value="home"><template file="Member/Member/common/home_right.php"/></in>
+        <in name="right" value="collect_right"><template file="Member/Member/common/collect_right.php"/></in>
+        <in name="right" value="browse_right"><template file="Member/Member/common/browse_right.php"/></in>
+
+        <in name="right" value="order_list"><template file="Member/Order/common/order_right.php"/></in>
+        <in name="right" value="order_detail"><template file="Member/Order/common/order_detail.php"/></in>
     </div>
     <div class="clear"></div>
 </div>

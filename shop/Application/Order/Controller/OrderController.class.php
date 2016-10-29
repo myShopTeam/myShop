@@ -230,6 +230,11 @@ class OrderController extends BaseController
                     'cancel_msg'   => $cancel_msg
                 );
                 M('goods_orderinfo')->where(array('order_id' => $order_id))->save($data);
+                //记录用户操作日志
+                $data['order_id'] = $order_id;
+                $data['created']  = time();
+                $data['uid']      = $this->uid;
+                M('order_log')->add($data);
                 $url = $_SERVER['HTTP_REFERER'] ? $_SERVER['HTTP_REFERER'] : U('Member/Member/index');
                 redirect($url);
             } else {
