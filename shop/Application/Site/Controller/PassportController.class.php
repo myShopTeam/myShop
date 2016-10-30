@@ -5,7 +5,7 @@
 // +----------------------------------------------------------------------
 // | Copyright (c) 2014-2015 , All rights reserved.
 // +----------------------------------------------------------------------
-// | Author: lp <lp@qcjh.net>
+// | Author: lp <535201470@qq.com>
 // +----------------------------------------------------------------------
 
 namespace Site\Controller;
@@ -58,6 +58,10 @@ class PassportController extends SiteController
             if($password !== $member['password']){
                 msg('error', '帐号或者密码不正确');
             }
+            //设置上次登录时间
+            M('card')->where(array('id' => $member['id']))->save(array('last_time' => $member['login_time'], 'login_time' => time()));
+            $member['last_time']  = $member['login_time'];
+            $member['login_time'] = time();
             //设置用户登录信息
             $this->setSession($member);
             //将未登录时本地浏览内容更新到数据库

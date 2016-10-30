@@ -8,7 +8,7 @@
                 <h3>交易提醒</h3>
                 <ul>
                     <li>
-                        <a href="index.php?act=member_order&amp;state_type=state_new">待付款<em>{$orders_num[0].order_num|default='0'}</em></a>
+                        <a href="javascript:;">待付款<em>{$orders_num[0].order_num|default='0'}</em></a>
                     </li>
                     <li>
                         待发货<em>{$orders_num[2].order_num|default='0'}</em>
