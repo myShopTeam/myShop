@@ -4,7 +4,9 @@
 <div class="wrap J_check_wrap">
   <Admintemplate file="Common/Nav"/>
 
-  <div class="h_a">订单详情</div>
+  <div class="h_a">订单详情
+      <a href="{:U('order_delivery',array('oid'=>$oid))}"><button type="submit" <if condition="$order_status == 3">disabled</if> class="btn btn_submit mr10 J_ajax_submit_btn" style="margin-left: 40px;background: #00A1CB;color:#fff"><if condition="$order_status == 3">已</if>发货</button></a>
+  </div>
     <div class="table_full">
       <table cellpadding="0" cellspacing="0" class="table_form" width="100%">
         <tbody>
@@ -31,14 +33,20 @@
           <tr>
             <th width="80">下单人：</th>
             <td>{$username}</td>
-            <th width="80">送货方式：</th>
-            <td>快递</td>
-          </tr>
-          <tr>
             <th width="80">支付总金额：</th>
             <td>{$goods_amount}</td>
+          </tr>
+          <tr>
+            <th width="80">送货方式：</th>
+            <td>快递</td>
             <th width="80">运 费：</th>
             <td>{$shipping_fee}</td>
+          </tr>
+          <tr>
+            <th width="80">物流单号：</th>
+            <td>{$shipping_num}</td>
+            <th width="80">发货时间：</th>
+            <td>{$send_goods_time|date='Y-m-d H:i:s',###}</td>
           </tr>
         </tbody>
       </table>
