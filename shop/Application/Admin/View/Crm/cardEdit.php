@@ -15,13 +15,23 @@
           </tr>
            <tr>
             <th>卡单类型<span class="red">*</span></th>
-            <td>
-                <input type="test" name="card_type" value="{$card_type}" class="input" id="username" placeholder="请输入卡类型"></td>       
-            </td>
-            <th>产品名称<span class="red">*</span></th>
-            <td>
-                <input type="test" name="card_name" value="{$card_name}" class="input" id="username" placeholder="请输入产品名称"></td>
-            </td>
+                <td>
+                    <select name="card_type" class="select" id="card_type">
+                        <option ></option>
+                        <volist name="type" id="vo">
+                            <option <eq name="vo.card_name" value="$card_type">selected</eq> value="{$vo.card_name}">{$vo.card_name}</option>
+                        </volist>
+                    </select>
+                </td>
+                <th>产品名称<span class="red">*</span></th>
+                <td>
+                    <select name="card_name" class="select" id="card_name">
+                        <option ></option>
+                        <volist name="product" id="vo">
+                            <option <eq name="vo.card_name" value="$card_name">selected</eq> value="{$vo.card_name}">{$vo.card_name}</option>
+                        </volist>
+                    </select>
+               </td>
           </tr>
           <tr>
             <th width="80">真实姓名</th>
@@ -88,3 +98,16 @@
 <style type="text/css">.content_attr{ border:1px solid #CCC; padding:5px 8px; background:#FFC; margin-top:6px}</style>
 </body>
 </html>
+<script>
+    $('#card_type').change(function(){
+        var url   = "{:U('ajaxGetProduct')}";
+        var data  = 'card_type='+$(this).val()
+        $.post(url,data,function(re){
+            if(re.res == 'success'){
+                $('#card_name').html(re.data)
+            }else{
+                alert(re.msg);
+            }
+        },'json')
+    })
+</script>
