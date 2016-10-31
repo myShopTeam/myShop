@@ -63,36 +63,35 @@ class OrderController extends AdminBase
         // p($order_id);
         $this->assign($orderInfo);
         $this->assign('list', $order);
+        $this->assign('oid',$order_id);
         $this->display();
     }
+    
 
     //标记发货
-    public function delivery()
+    public function order_delivery()
     {
-        $orderInfoDb = M('goods_orderinfo');
-        $order_id = I('post.oid', '', intval);
-        //查询是否存在此订单
-        $checkOrder = $orderInfoDb->where(array('order_id' => $order_id))->find();
-        if ($checkOrder) {
-            $bool = $orderInfoDb->where(array('order_id' => $order_id))->save(array('order_status' => 3));
-            if ($bool) {
-                $result = array(
-                    'status' => 1,
-                    'msg' => '发货成功'
-                );
+        if($_POST['oid']){
+            $orderInfoDb = M('goods_orderinfo');
+            $order_id = I('post.oid', '', intval);
+            $data['shipping_num'] = $_POST['shipping_num'];
+            $data['send_goods_time'] = strtotime($_POST['time']);
+            $data['order_status'] = 3;
+            //查询是否存在此订单
+            $checkOrder = $orderInfoDb->where(array('order_id' => $order_id))->find();
+            if ($checkOrder) {
+                $bool = $orderInfoDb->where(array('order_id' => $order_id))->save($data);
+                if ($bool) {
+                    $this->success('发货成功！', U('order_detail',array('oid'=>$order_id)));
+                } else {
+                    $this->error('发货失败！');
+                }
             } else {
-                $result = array(
-                    'status' => 0,
-                    'msg' => '发货失败'
-                );
+                $this->error('非法操作！');
             }
-        } else {
-            $result = array(
-                'status' => 0,
-                'msg' => '非法操作'
-            );
         }
-        echo json_encode($result);
+        $this->assign('oid',I('get.oid', '', intval));
+        $this->display();
     }
 
     //排序

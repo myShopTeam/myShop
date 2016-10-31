@@ -161,6 +161,9 @@ class CrmController extends AdminBase
             foreach($_POST as $k=>$v){
                 $data[$k] = I('post.'.$k,'',trim);
             }
+            if(empty($data['card_name'])){
+                $this->error('产品名称必填！');
+            }
             $data['create_time'] = time();
             $data['birthday']    = strtotime($data['birthday']);           
             $data['creater'] = User::getInstance()->id;
@@ -177,6 +180,8 @@ class CrmController extends AdminBase
                 $this->error('卡单添加失败');
             }
         } else {
+            $type = M('card_config')->where(array('parent_id'=>0))->select();
+            $this->assign('type',$type);
             $this->display();
         }
     }
@@ -205,6 +210,9 @@ class CrmController extends AdminBase
             }
         } else {
             $vipList = M('card')->where(array('card_num' => $card_num))->find();
+            $vipList['type'] = M('card_config')->where(array('parent_id'=>0))->select();
+            $sql = "SELECT c.*  from tp_card_config c  JOIN tp_card_config p ON c.parent_id = p.id WHERE p.card_name = '".$vipList['card_type']."'";
+            $vipList['product'] = M('card_config')->query($sql);
             $this->assign($vipList);
             $this->display();
         }
@@ -815,6 +823,26 @@ class CrmController extends AdminBase
             } else {
                 $this->error("非法操作");
             }
+        }
+    }
+    
+    /*
+     * ajax根据卡单类型获取产品名称
+     */
+    public function ajaxGetProduct(){
+        $card_type    = $_POST['card_type'];
+        $sql = "SELECT c.*  from tp_card_config c  JOIN tp_card_config p ON c.parent_id = p.id WHERE p.card_name = '".$card_type."'";
+        $product_list = M('card_config')->query($sql);
+        if($product_list){
+            $product_html = '<option></option>';
+            foreach($product_list as $v){
+                $product_html .= '<option value='.$v['card_name'].'>'.$v['card_name'].'</option>';
+            }
+            echo json_encode(array('res'=>'success','data'=>$product_html));
+            exit;
+        }else{
+            echo json_encode(array('res'=>'faile','msg'=>'未查到对应产品！'));
+            exit;
         }
     }
     
