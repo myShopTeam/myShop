@@ -24,7 +24,18 @@
                                 </volist>
                             </content>
                         </ul>
-                        <content action="lists" catid="18" num="2" order="listorder asc, id desc">
+                        <content action="lists" catid="13" num="1" order="listorder asc, id desc">
+                            <volist name="data" id="vo">
+                                <if condition="$data neq ''">
+                                    <div class="fwly_box">
+                                        <a href="{$vo.url}"><img src="{$vo.thumb}" /></a>
+                                        <h3><a href="{$vo.url}">{$vo.title}</a></h3>
+                                        <p>{$vo.description}</p>
+                                    </div>
+                                </if>
+                            </volist>
+                        </content>
+                        <content action="lists" catid="14" num="1" order="listorder asc, id desc">
                             <volist name="data" id="vo">
                                 <if condition="$data neq ''">
                                     <div class="fwly_box">
@@ -48,7 +59,18 @@
                                 </volist>
                             </content>
                         </ul>
-                        <content action="lists" catid="23" num="2" order="listorder asc, id desc">
+                        <content action="lists" catid="19" num="1" order="listorder asc, id desc">
+                            <volist name="data" id="vo">
+                                <if condition="$data neq ''">
+                                    <div class="fwly_box">
+                                        <a href="{$vo.url}"><img src="{$vo.thumb}" /></a>
+                                        <h3><a href="{$vo.url}">{$vo.title}</a></h3>
+                                        <p>{$vo.description}</p>
+                                    </div>
+                                </if>
+                            </volist>
+                        </content>
+                        <content action="lists" catid="20" num="1" order="listorder asc, id desc">
                             <volist name="data" id="vo">
                                 <if condition="$data neq ''">
                                     <div class="fwly_box">
@@ -71,7 +93,18 @@
                                 </volist>
                             </content>
                         </ul>
-                        <<content action="lists" catid="31" num="2" order="listorder asc, id desc">
+                        <content action="lists" catid="25" num="1" order="listorder asc, id desc">
+                            <volist name="data" id="vo">
+                                <if condition="$data neq ''">
+                                    <div class="fwly_box">
+                                        <a href="{$vo.url}"><img src="{$vo.thumb}" /></a>
+                                        <h3><a href="{$vo.url}">{$vo.title}</a></h3>
+                                        <p>{$vo.description}</p>
+                                    </div>
+                                </if>
+                            </volist>
+                        </content>
+                        <content action="lists" catid="26" num="1" order="listorder asc, id desc">
                             <volist name="data" id="vo">
                                 <if condition="$data neq ''">
                                     <div class="fwly_box">
@@ -94,7 +127,7 @@
                                 </volist>
                             </content>
                         </ul>
-                        <content action="lists" catid="33" num="2" order="listorder asc, id desc">
+                        <content action="lists" catid="32" num="2" order="listorder asc, id desc">
                             <volist name="data" id="vo">
                                 <if condition="$data neq ''">
                                     <div class="fwly_box">
@@ -117,7 +150,18 @@
                                 </volist>
                             </content>
                         </ul>
-                        <content action="lists" catid="37" num="2" order="listorder asc, id desc">
+                        <content action="lists" catid="34" num="1" order="listorder asc, id desc">
+                            <volist name="data" id="vo">
+                                <if condition="$data neq ''">
+                                    <div class="fwly_box">
+                                        <a href="{$vo.url}"><img src="{$vo.thumb}" /></a>
+                                        <h3><a href="{$vo.url}">{$vo.title}</a></h3>
+                                        <p>{$vo.description}</p>
+                                    </div>
+                                </if>
+                            </volist>
+                        </content>
+                        <content action="lists" catid="35" num="1" order="listorder asc, id desc">
                             <volist name="data" id="vo">
                                 <if condition="$data neq ''">
                                     <div class="fwly_box">
@@ -140,7 +184,7 @@
                                 </volist>
                             </content>
                         </ul>
-                        <content action="lists" catid="39" num="2" order="listorder asc, id desc">
+                        <content action="lists" catid="38" num="2" order="listorder asc, id desc">
                             <volist name="data" id="vo">
                                 <if condition="$data neq ''">
                                     <div class="fwly_box">
@@ -163,7 +207,7 @@
                                 </volist>
                             </content>
                         </ul>
-                        <content action="lists" catid="41" num="2" order="listorder asc, id desc">
+                        <content action="lists" catid="40" num="2" order="listorder asc, id desc">
                             <volist name="data" id="vo">
                                 <if condition="$data neq ''">
                                     <div class="fwly_box">
@@ -186,7 +230,18 @@
                                 </volist>
                             </content>
                         </ul>
-                        <content action="lists" catid="44" num="2" order="listorder asc, id desc">
+                        <content action="lists" catid="42" num="1" order="listorder asc, id desc">
+                            <volist name="data" id="vo">
+                                <if condition="$data neq ''">
+                                    <div class="fwly_box">
+                                        <a href="{$vo.url}"><img src="{$vo.thumb}" /></a>
+                                        <h3><a href="{$vo.url}">{$vo.title}</a></h3>
+                                        <p>{$vo.description}</p>
+                                    </div>
+                                </if>
+                            </volist>
+                        </content>
+                        <content action="lists" catid="43" num="1" order="listorder asc, id desc">
                             <volist name="data" id="vo">
                                 <if condition="$data neq ''">
                                     <div class="fwly_box">

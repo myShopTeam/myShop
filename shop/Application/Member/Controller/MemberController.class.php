@@ -71,7 +71,8 @@ class MemberController extends BaseController
      */
     public function member(){
 
-        $this->display();
+        $this->assign('right', 'member_right');
+        $this->display('index');
     }
 
     /**
@@ -87,7 +88,8 @@ class MemberController extends BaseController
      */
     public function modifyAvatar(){
 
-        $this->display();
+        $this->assign('right', 'avatar_right');
+        $this->display('index');
     }
 
     /**
@@ -161,6 +163,7 @@ class MemberController extends BaseController
      */
     public function address(){
 
-        $this->display();
+        $this->assign('right', 'address_right');
+        $this->display('index');
     }
 }

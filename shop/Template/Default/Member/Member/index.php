@@ -302,6 +302,9 @@
         <in name="right" value="home"><template file="Member/Member/common/home_right.php"/></in>
         <in name="right" value="collect_right"><template file="Member/Member/common/collect_right.php"/></in>
         <in name="right" value="browse_right"><template file="Member/Member/common/browse_right.php"/></in>
+        <in name="right" value="member_right"><template file="Member/Member/common/member_right.php"/></in>
+        <in name="right" value="avatar_right"><template file="Member/Member/common/avatar_right.php"/></in>
+        <in name="right" value="address_right"><template file="Member/Member/common/address_right.php"/></in>
 
         <in name="right" value="order_list"><template file="Member/Order/common/order_right.php"/></in>
         <in name="right" value="order_detail"><template file="Member/Order/common/order_detail.php"/></in>
