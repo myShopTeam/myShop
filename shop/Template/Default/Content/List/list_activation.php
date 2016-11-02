@@ -29,8 +29,8 @@
                             <dl>
                                 <dt>卡类型</dt>
                                 <dd>
-                                    <select name="card_type" class="selectType">
-                                        <option selected="selected">请选择卡片类型</option>
+                                    <select name="card_name" class="selectType">
+                                        <option selected="selected">--请选择--</option>
                                     </select>
                                 </dd>
                             </dl>

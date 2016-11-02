@@ -22,7 +22,11 @@ class CrmController extends Base {
         $card_type = M('card_config')->where(array('parent_id'=>0))->select();
         $html = ' ';
         foreach($card_type as $v){
-            $html .= "<option value=".$v['card_name'].">".$v['card_name']."</option>" ;   
+            $card_name = M('card_config')->where(array('parent_id'=>$v['id']))->select();
+            $html .= "<option disabled style='color:#999' value='".$v['card_name']."'>".$v['card_name']."</option>" ;  
+            foreach($card_name as $vv){
+                $html .= "<option value='".$vv['card_name']."'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp".$vv['card_name']."</option>" ;  
+            }
         }
         $data['card_type'] = $html;
         echo json_encode($data);die;
@@ -30,11 +34,11 @@ class CrmController extends Base {
     
     //卡单验证
     public function cardVerify(){
-        $card['card_type'] = I("post.card_type", "", "trim");
+        $card['card_name'] = I("post.card_name", "", "trim");
         $card['card_num'] = I("post.card_num", "", "trim");
         $card['verif'] = I("post.verif", "", "trim");
         $code = I("post.code", "", "trim");
-        if (empty($card['card_type'])) {
+        if (empty($card['card_name'])) {
             $this->error("请选择卡单类型！");
         }
         if (empty($card['card_num'])) {
