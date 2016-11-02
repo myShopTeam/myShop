@@ -2,12 +2,12 @@
     {{if is_list == 'no'}}
     <li nctpye="cart_item_{{if cart_info.cart_id }}{{cart_info.cart_id}}{{else}}{{cart_info.goods_id}}{{/if}}">
         <div class="goods-pic">
-            <a href="{:U('product')}&gid={{cart_info.goods_id}}" title="{{cart_info.goods_name}}" target="_blank">
+            <a href="{:U('Site/Goods/product')}&gid={{cart_info.goods_id}}" title="{{cart_info.goods_name}}" target="_blank">
                 <img src="{{cart_info.goods_thumb}}" alt="{{cart_info.goods_name}}"></a>
         </div>
         <dl>
             <dt class="goods-name">
-                <a href="{:U('product')}&gid={{cart_info.goods_id}}" title="{{cart_info.goods_name}}" target="_blank">{{cart_info.goods_name}}</a>
+                <a href="{:U('Site/Goods/product')}&gid={{cart_info.goods_id}}" title="{{cart_info.goods_name}}" target="_blank">{{cart_info.goods_name}}</a>
             </dt>
             <dd><em class="goods-price">¥{{if cart_info.sku }}{{cart_info.attr_price}}{{else}}{{cart_info.goods_price}}{{/if}}</em>×{{cart_info.goods_num}}</dd>
         </dl>
@@ -18,12 +18,12 @@
     {{each cart_info as v i}}
     <li nctpye="cart_item_{{if v.cart_id }}{{v.cart_id}}{{else}}{{v.goods_id}}{{/if}}">
         <div class="goods-pic">
-            <a href="{:U('product')}&gid={{v.goods_id}}" title="{{v.goods_name}}" target="_blank">
+            <a href="{:U('Site/Goods/product')}&gid={{v.goods_id}}" title="{{v.goods_name}}" target="_blank">
                 <img src="{{v.goods_thumb}}" alt="{{v.goods_name}}"></a>
         </div>
         <dl>
             <dt class="goods-name">
-                <a href="{:U('product')}&gid={{v.goods_id}}" title="{{v.goods_name}}"
+                <a href="{:U('Site/Goods/product')}&gid={{v.goods_id}}" title="{{v.goods_name}}"
                    target="_blank">{{v.goods_name}}</a>
             </dt>
             <dd><em class="goods-price">¥{{if v.sku }}{{v.attr_price}}{{else}}{{v.goods_price}}{{/if}}</em>×{{v.goods_num}}</dd>
