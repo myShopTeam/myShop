@@ -8,17 +8,17 @@
     <div class="search_type cc mb10">
       <div class="mb10"> 
 	      <span class="mr20">
-                        <input class="input length_2 "  name="card_type" placeholder="输入卡单类型"/>
-                        <input class="input length_2 "  name="card_name" placeholder="输入产品名称"/>
+                        <input class="input length_2 " value="{$post.card_type}"  name="card_type" placeholder="输入卡单类型"/>
+                        <input class="input length_2 " value="{$post.card_name}" name="card_name" placeholder="输入产品名称"/>
                         <input type="hidden" name="user_id" value="{$user_id}">
                         <select name="time_type" class="select" id="time" >
                             <option value='create_time' <if condition="$post.time_type eq 'create_time'">selected</if>>提交时间</option>
                             <option value='active_time' <if condition="$post.time_type eq 'active_time'">selected</if>>激活时间</option>
                         </select> 
                         
-                        <input type="text" id="start_time" name="start_time" class="input length_2 J_date" value="{$post.start_time}">
+                        <input type="text" id="start_time" name="start_time" class="input length_2 J_datetime" value="{$post.start_time}">
                             -
-                        <input type="text" id="end_time" class="input length_2 J_date" name="end_time" value="{$post.end_time}">
+                        <input type="text" id="end_time" class="input length_2 J_datetime" name="end_time" value="{$post.end_time}">
 		      	卡号：
                         <input type="text" class="input length_2" name="card_num" style="width:160px;" value="{$post.card_num}" placeholder="请输入卡号...">
                         <select name="is_active" class="select" id="status" >
@@ -84,7 +84,7 @@
       <div class="btn_wrap_pd">
         <label class="mr20"><input type="checkbox" class="J_check_all" data-direction="y" data-checklist="J_check_y">全选</label> 
                 <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('listorder',array('str'=>vip))}">排序</button>
-                <input type="button" class="btn upload" style="background: #1b75b6;color:#ffffff !important" value="导入">
+                <input type="button" class="btn upload" style="background: #1b75b6;color:#ffffff !important;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25)" value="导入">
                 <input class="uploadFile" type="file" name="file_stu" style="display:none;width:180px;height:20px;line-height:16px;" />
                 <button class="activeDo btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('cardActive')}">激活</button>
         <?php
