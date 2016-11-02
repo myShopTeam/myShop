@@ -12,7 +12,7 @@
             <td width="250">
                 <select name="parent_id">
                     <volist name="type" id="vo">
-                    <option value="{$vo.id}">{$vo.card_name}</option>
+                        <option <eq name="id" value="$vo.id">selected</eq> value="{$vo.id}">{$vo.card_name}</option>
                     </volist>
                 </select>
             </td>

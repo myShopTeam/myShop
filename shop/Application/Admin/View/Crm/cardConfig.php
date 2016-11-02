@@ -9,20 +9,23 @@
       <table width="100%" cellspacing="0">
         <thead>
           <tr>
-            <td align="center">序号</td>
-            <td align="center">卡单类型</td>
-            <td align="center">产品名称</td>
-            <td align="center">操作</td>
+            <td align="center" width="5%">序号</td>
+            <td align="center"width="85%" style="text-align: left">卡单类型</td>
+            <td align="center"width="10%" >操作</td>
           </tr>
         </thead>
         <tbody>
           <volist name="name" id="vo">
             <tr>
               <td align="center">{$vo.id}</td>
-              <td align="center" style="color:blue">{$vo.name}</td>
-              <td align="center" >{$vo.card_name}</td>
-              <td align="center" width="60">
-              <a class="J_ajax_del" href="{:U('productDelete',array('id'=>$vo['id']))}">删除</a>
+              <td align="center" style="<if condition="$vo.parent_id == 0">color:blue;</if>text-align: left"><if condition="$vo.parent_id != 0">|——</if>{$vo.card_name}</td>
+              <td align="center"  width="60">
+              <if condition="$vo.parent_id == 0">
+                <a  href="{:U('productAdd',array('id'=>$vo['id']))}">添加产品</a> | 
+                <a class="J_ajax_del" href="{:U('typeDelete',array('id'=>$vo['id']))}">删除</a>
+              <else/>
+                <a class="J_ajax_del" href="{:U('productDelete',array('id'=>$vo['id']))}">删除</a>
+              </if>
               </td>
             </tr>
           </volist>
