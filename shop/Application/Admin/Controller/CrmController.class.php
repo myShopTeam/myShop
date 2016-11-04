@@ -305,6 +305,7 @@ class CrmController extends AdminBase
             ->setDescription("数据EXCEL导出")
             ->setKeywords("excel")
             ->setCategory("result file");
+            
         $where = $this->createWhere(I('post.'));
         $arr = M('card')->where($where)->select();
         array_unshift($arr,$this->card_field);
@@ -316,6 +317,7 @@ class CrmController extends AdminBase
         foreach($arr as $key => $val) { // 注意 key 是从 0 还是 1 开始，此处是 0
             $num = $key + 1;
             $object = $Excel ->setActiveSheetIndex(0);
+            
             $abcKey    = 'A';        
             foreach($this->card_field as $k=>$v){
                      //Excel的第A列，uid是你查出数组的键值，下面以此类推     
@@ -327,6 +329,7 @@ class CrmController extends AdminBase
             }
         }
         $Excel->getActiveSheet()->setTitle('export');
+        $Excel->getActiveSheet()->getStyle()->getFont()->setName('宋体' );
         $Excel->setActiveSheetIndex(0);
         $name='example_export.xlsx';
 

@@ -11,7 +11,7 @@
             <th width="80">卡号<span class="red">*</span></th>
             <td width="250"><input readonly type="test" value='{$card_num}' name="card_num" class="input" id="username" placeholder="请输入卡号"></td>
             <th width="90">校验码</th>
-            <td><input type="test" name="verify" class="input" id="verify" maxlength="6" value="{$verif}" placeholder="请输入卡号"></td>
+            <td><input type="test" name="verif" class="input" id="verify" maxlength="6" value="{$verif}" placeholder="请输入卡号"></td>
           </tr>
            <tr>
             <th>卡单类型<span class="red">*</span></th>
