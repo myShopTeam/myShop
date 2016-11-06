@@ -1,7 +1,7 @@
 <div class="header-wrap">
     <header class="public-head-layout wrapper">
         <h1 class="site-logo"><a href="/"><img src="" class="pngFix"></a></h1>
-        <div class="logo-test">好货·好快·好便宜</div>
+        <div class="logo-test"><!--好货·好快·好便宜--></div>
 
         <div class="head-search-layout">
             <div class="head-search-bar" id="head-search-bar">
@@ -17,6 +17,7 @@
             </div>
             <div class="keyword">
                 <ul>
+                    <li><a href="javascript:;" style="color: #f55;">热门搜索：</a></li>
                     <li><a href="">手机</a></li>
                     <li><a href="">内衣</a></li>
                     <li><a href="">手表</a></li>

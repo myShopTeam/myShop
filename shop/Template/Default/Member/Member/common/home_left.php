@@ -8,7 +8,7 @@
         </li>
 <!--        <li><a href="http://shop.local.com/shop/index.php?act=member_vr_order&op=index">虚拟兑码订单</a></li>-->
         <li <in name="selected" value="Member_Order_comment">class="selected"</in>>
-            <a href="{:U('Member/Order/comment')}">交易评价/晒单</a>
+            <a href="{:U('Member/Order/comment')}">交易评价</a>
         </li>
 <!--        <li><a href="http://shop.local.com/shop/index.php?act=member_appoint&op=list">预约/到货通知</a></li>-->
     </ul>
@@ -50,8 +50,21 @@
         <li <in name="selected" value="Member_Member_member">class="selected"</in>>
             <a href="{:U('Member/Member/member')}">账户信息</a>
         </li>
+
         <li <in name="selected" value="Member_Member_address">class="selected"</in>>
             <a href="{:U('Member/Member/address')}">收货地址</a>
+        </li>
+
+        <li <in name="selected" value="Member_Member_modifyPwd">class="selected"</in>>
+            <a href="{:U('Member/Member/modifyPwd')}">修改登录密码</a>
+        </li>
+
+        <li <in name="selected" value="Member_Member_modifyAvatar">class="selected"</in>>
+            <a href="{:U('Member/Member/modifyAvatar')}">修改头像</a>
+        </li>
+
+        <li <in name="selected" value="Member_Member_modifyEmail">class="selected"</in>>
+            <a href="{:U('Member/Member/modifyEmail')}">邮件绑定</a>
         </li>
     </ul>
 </li>

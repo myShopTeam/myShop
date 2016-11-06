@@ -344,7 +344,7 @@ function collect_goods(fav_id,jstype,jsobj){
 
 //头部删除购物车信息，登录前使用goods_id,登录后使用cart_id
 //function drop_topcart_item(cart_id){
-//    $.getJSON(SITEURL+'/index.php?act=cart&op=del&cart_id='+cart_id+'&callback=?', function(result){
+//    $.getJSON('/index.php?act=cart&op=del&cart_id='+cart_id+'&callback=?', function(result){
 //        if(result.state){
 //            var obj = $('.mod_minicart');
 //            //删除成功
@@ -378,7 +378,7 @@ function collect_goods(fav_id,jstype,jsobj){
 
 //加载最近浏览的商品
 function load_history_information(){
-    $.getJSON(SITEURL+'/index.php?act=index&op=viewed_info', function(result){
+    $.getJSON('/index.php?act=index&op=viewed_info', function(result){
         var obj = $('.head-user-menu .my-mall');
         if(result['m_id'] >0){
             if (typeof result['consult'] !== 'undefined') obj.find('#member_consult').html(result['consult']);
@@ -562,7 +562,7 @@ function load_history_information(){
 		return this.each(function(){
 			var $this = $(this);
 			var data_str = $(this).attr('data-param');eval('data_str = '+data_str);
-			var _uri = SITEURL+'/index.php?act=member_card&callback=?&uid='+data_str.id+'&from='+options.type;
+			var _uri = '/index.php?act=member_card&callback=?&uid='+data_str.id+'&from='+options.type;
 			var _dl = '';
 			$this.qtip({
 	            content: {
@@ -762,7 +762,7 @@ function load_history_information(){
 			}
 			this.settings = settings;
 			if ($inputArea.val() && /^\d+$/.test($inputArea.val())) {
-				$.getJSON(SITEURL + "/index.php?act=index&op=json_area_show&area_id=" + $inputArea.val() + "&callback=?", function(data) {
+				$.getJSON("/index.php?act=index&op=json_area_show&area_id=" + $inputArea.val() + "&callback=?", function(data) {
 					$("#_area_span").html(data.text == null ? "无" : data.text)
 				})
 			}
@@ -842,7 +842,7 @@ function load_history_information(){
 		}
 		function loadAreaArray(callback) {
 			if (typeof nc_a === "undefined") {
-				$.getJSON(SITEURL + "/index.php?act=index&op=json_area&src=" + settings.src + "&callback=?", function(data) {
+				$.getJSON("/index.php?act=index&op=json_area&src=" + settings.src + "&callback=?", function(data) {
 					nc_a = data;
 					callback()
 				})

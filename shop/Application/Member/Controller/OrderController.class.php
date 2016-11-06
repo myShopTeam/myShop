@@ -42,19 +42,18 @@ class OrderController extends BaseController
             'addtime' => 'DESC'
         );
 
-        if(IS_POST){
-            $order_sn    = I('post.order_sn');
-            $status_type = I('post.status_type', 'all');
-            //订单状态
-            if($status_type != 'all'){
-                $filter['order_status'] = intval($status_type);
-            }
-            //订单号
-            if($order_sn){
-                $filter['order_sn'] = intval($order_sn);
-                $this->assign('search_sn', $order_sn);
-            }
+        $order_sn = I('request.order_sn');
+        $status_type = I('request.status_type', 'all');
+        //订单状态
+        if ($status_type != 'all') {
+            $filter['order_status'] = intval($status_type);
         }
+        //订单号
+        if ($order_sn) {
+            $filter['order_sn'] = intval($order_sn);
+            $this->assign('search_sn', $order_sn);
+        }
+
 
         $count = M('goods_orderinfo')->where($filter)->count();
         $page = $this->page($count, 5);

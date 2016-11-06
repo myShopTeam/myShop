@@ -29,4 +29,15 @@ class CardModel extends Model {
         return $member;
     }
 
+    /**
+     * 验证是否存在此昵称
+     * @param array $params
+     * @return boolean
+     */
+    public function checkNickname($params){
+        $check = $this->where(array('nickname' => $params['nickname'], 'id' => array('neq',$params['uid'])))->find();
+
+        return $check ? true : false;
+    }
+
 }

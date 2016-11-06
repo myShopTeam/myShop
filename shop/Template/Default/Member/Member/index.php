@@ -54,7 +54,7 @@
                     </a>
                 </div>
                 <dl>
-                    <dt><a href="{:U('Member/Member/editMember')}" title="修改资料">{$member_info.nickname}</a></dt>
+                    <dt><a href="{:U('Member/Member/Member')}" title="修改资料">{$member_info.nickname}</a></dt>
 
 <!--                    <dd>会员等级：-->
 <!--                        <div class="nc-grade-mini" style="cursor:pointer;"-->
@@ -119,13 +119,13 @@
                 </dl>
                 <ul class="trade-function-02">
                     <li>
-                        <a href="{:U('Member/Order/index', array('order_type' => 0))}">
+                        <a href="{:U('Member/Order/index', array('status_type' => 0))}">
                             <sup>1</sup>
                             <span class="tf04"></span>
                             <h5>待付款</h5>
                         </a></li>
                     <li>
-                        <a href="{:U('Member/Order/index', array('order_type' => 3))}">
+                        <a href="{:U('Member/Order/index', array('status_type' => 3))}">
                             <span class="tf05"></span>
                             <h5>待收货</h5>
                         </a></li>
@@ -136,7 +136,7 @@
 <!--                        </a>-->
 <!--                    </li>-->
                     <li>
-                        <a href="{:U('Member/Order/index', array('order_type' => 8))}">
+                        <a href="{:U('Member/Order/index', array('status_type' => 8))}">
                             <span class="tf07"></span>
                             <h5>待评价</h5>
                         </a>
@@ -171,7 +171,7 @@
         <div class="ncm-header-nav">
             <ul class="nav-menu">
                 <li><a href="{:U('Member/Member/index')}" class="current">我的商城</a></li>
-                <li class="set"><a href="{:U('Member/Member/member')}">用户设置<i></i></a>
+<!--                <li class="set"><a href="{:U('Member/Member/member')}">用户设置<i></i></a>-->
 
                     <div class="sub-menu">
                         <dl>
@@ -192,7 +192,7 @@
                         </dl>
                         <dl>
                             <dt>
-                                <a href="{:U('Member/Member/editMember')}" style="color: #EA746B">个人资料</a>
+                                <a href="{:U('Member/Member/member')}" style="color: #EA746B">个人资料</a>
                             </dt>
                             <dd>
                                 <a href="{:U('Member/Member/address')}"">收货地址</a>

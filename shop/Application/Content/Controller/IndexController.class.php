@@ -19,7 +19,7 @@ class IndexController extends Base {
     {
         parent::_initialize();
         //加载网站资源
-        $this->getSiteInfo();
+        $this->_getSiteInfo();
     }
 
     //首页

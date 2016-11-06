@@ -249,14 +249,14 @@ class ShuipFCMS extends \Think\Controller {
 
     //空操作
     public function _empty() {
-        $this->getSiteInfo();
+        $this->_getSiteInfo();
         $this->display(TEMPLATE_PATH . 'Default/HttpCode/404.php');
     }
 
     /**
      * 设置网站资源文件目录
      */
-    protected function getSiteInfo(){
+    protected function _getSiteInfo(){
         //域名
         $this->site_info['domain'] = get_http_host();
         //public目录

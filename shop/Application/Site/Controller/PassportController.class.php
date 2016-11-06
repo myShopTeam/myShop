@@ -62,8 +62,12 @@ class PassportController extends SiteController
             M('card')->where(array('id' => $member['id']))->save(array('last_time' => $member['login_time'], 'login_time' => time()));
             $member['last_time']  = $member['login_time'];
             $member['login_time'] = time();
+            //保持登录 记住登录状态
+            if($post['keep_login']){
+                $member['keep_login'] = true;
+            }
             //设置用户登录信息
-            $this->setSession($member);
+            $this->_setSession($member);
             //将未登录时本地浏览内容更新到数据库
             $this->updateLocalToDb();
             $back_url = $post['back'] ? $post['back'] : U('Goods/products');
@@ -76,7 +80,7 @@ class PassportController extends SiteController
     //退出登录
     public function logout(){
         //删除会员缓存信息
-        $this->delMember();
+        $this->_delMember();
         session(null);
         //退出登录默认跳转到商品列表页
         redirect(U('Goods/products'));
@@ -94,6 +98,11 @@ class PassportController extends SiteController
         if(is_array($cart)){
             D('Cart/GoodsCart')->updateCart($cart, $this->uid);
         }
+    }
+
+    //记住登录状态
+    private function keepLogin(){
+
     }
 
 }

@@ -99,4 +99,8 @@ class GoodsController extends SiteController
         }
         return $goods;
     }
+
+    public function test(){
+        echo 1111;
+    }
 }
