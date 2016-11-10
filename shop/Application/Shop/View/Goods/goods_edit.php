@@ -12,7 +12,7 @@
             <td width="350"><input type="test" name="goods_name" class="input" id="goods_name" value="{$goods_name}">
               <span class="gray">请输入商品名称</span></td>
               <th width="80">商品货号</th>
-            <td><input type="text" name="goods_sn" class="input" id="goods_sn" value="{$goods_sn}"><span class="gray">如果您不输入商品货号，系统将自动生成一个唯一的货号。</span></td>
+            <td><input type="text" name="goods_serial" class="input" id="goods_serial" value="{$goods_serial}"><span class="gray">如果您不输入商品货号，系统将自动生成一个唯一的货号。</span></td>
           </tr>
           <tr>
             <th>商品分类<span class="red">*</span></th>
@@ -42,7 +42,7 @@
           </tr>
           <tr>
             <th>商品库存<span class="red">*</span></th>
-            <td><input type="text" name="goods_num" value="{$goods_num}" class="input" id="goods_num" size="30">&nbsp;&nbsp;件</td>
+            <td><input type="text" name="goods_total" value="{$goods_total}" class="input" id="goods_total" size="30">&nbsp;&nbsp;件</td>
               <th>销售数量</th>
             <td><input type="text" name="sale_num" value="{$sale_num}" class="input" id="sale_num">&nbsp;&nbsp;件</td>
           </tr>
@@ -63,8 +63,8 @@
           <tr>
               <th>商品缩略图</th>
               <td colspan="3"><a href="javascript:void(0);" onclick="flashupload('thumb_images', '附件上传','thumb',thumb_images,'{$args_thumb}','Content','14','{$authkey_thumb}');return false;">
-                      <img src="{$cat_img|default='/statics/images/icon/upload-pic.png'}" id="thumb_preview" width="135" height="113" style="cursor:hand"></a></td>
-              <input type="hidden"  id='thumb' name="goods_thumb" value="{$thumb}">
+                      <img src="{$goods_thumb|default='/statics/images/icon/upload-pic.png'}" id="thumb_preview" width="135" height="113" style="cursor:hand"></a></td>
+              <input type="hidden"  id='thumb' name="goods_thumb" value="{$goods_thumb}">
           </tr>
           <tr>
               <th>商品展示图片</th>
@@ -161,9 +161,12 @@
     })
     $('.addAttr').click(function(){
       var _this = $(this);
-      var attr_name = $('select[name=attr_name]').val();
-      var attr_value = $('select[name=attr_value] option:selected').attr('data-val');
-      var attr_id = $('select[name=attr_value] option:selected').val();
+        var attr_name1 = $('select[name=attr_name1]').val();
+        var attr_value1 = $('select[name=attr_value1] option:selected').attr('data-val');
+        var attr_id1 = $('select[name=attr_value1] option:selected').val();
+        var attr_name2 = $('select[name=attr_name2]').val();
+        var attr_value2 = $('select[name=attr_value2] option:selected').attr('data-val');
+        var attr_id2 = $('select[name=attr_value2] option:selected').val();
       var attrMoney = $('.attrMoney').val();
       //单属性检测
       var attr_names = $('.attr_names').val();
@@ -173,22 +176,32 @@
           return false;
         }
       }
-      if(attrMoney==''){
-         attrMoney = '不变';
-      }
-      if(attr_name==0){
-        alert("请选择商品属性名");
-        return false;
-      }
-      if(attr_value==0 || attr_value==undefined){
-        alert("请选择商品属性值");
-        return false;
-      }
+        if(attrMoney==''){
+            attrMoney = '不变';
+        }
+        if(attr_name1==0){
+            alert("请选择商品属性名");
+            return false;
+        }
+        if(attr_value1 ==0 || attr_value1 == undefined){
+            alert("请选择商品属性值");
+            return false;
+        }
       $str = '';
-      $str += '<div class="line"><input type="text" class="input attr_names" name="attr_names[]" readOnly="true" value='+attr_name+' />&nbsp;';
-      $str += '<input type="text" class="input attr_values" name="attr_values[]" readOnly="true" value='+attr_value+' />&nbsp;';
-      $str += '<input type="text" class="input attrMoneys" name="attrMoneys[]" value="'+attrMoney+'" />&nbsp;';
-      $str += '<input type="hidden" name="attr_id[]" value="'+attr_id+'" >';
+        if(attr_name2 && attr_value2 && attr_id2){
+            $str += '<div class="line"><input type="text" class="input attr_names" name="attr_names[]" readOnly="true" value='+attr_name1+' />&nbsp;';
+            $str += '<input type="text" class="input attr_values" name="attr_values[]" readOnly="true" value='+attr_value1+' />&nbsp;';
+            $str += '<input type="hidden" name="attr_id[]" value="'+attr_id1+'" >';
+            $str += '<input type="text" class="input attr_names" name="attr_names[]" readOnly="true" value='+attr_name2+' />&nbsp;';
+            $str += '<input type="text" class="input attr_values" name="attr_values[]" readOnly="true" value='+attr_value2+' />&nbsp;';
+            $str += '<input type="text" class="input attrMoneys" name="attrMoneys[]" value="'+attrMoney+'" />&nbsp;';
+            $str += '<input type="hidden" name="attr_id[]" value="'+attr_id2+'" >';
+        } else {
+            $str += '<div class="line"><input type="text" class="input attr_names" name="attr_names[]" readOnly="true" value='+attr_name1+' />&nbsp;';
+            $str += '<input type="text" class="input attr_values" name="attr_values[]" readOnly="true" value='+attr_value1+' />&nbsp;';
+            $str += '<input type="text" class="input attrMoneys" name="attrMoneys[]" value="'+attrMoney+'" />&nbsp;';
+            $str += '<input type="hidden" name="attr_id[]" value="'+attr_id1+'" >';
+        }
       // $str += '<input type="button" class="button" onclick="javascript:flashupload(\'image_images\', \'附件上传\',\'image\',submit_images,\'1,jpg|jpeg|gif|bmp|png,1,,,0\',\'content\',\'\',\'8c87cb0d024e5607ccb8d97e49a17e80\')" value="上传图片">';
       $str += '<input type="button" class="btn close" value="删除" /></div>';
       _this.parents('td').append($str);

@@ -11,7 +11,7 @@
             <th width="80">商品名称<span class="red">*</span></th>
             <td width="350"><input type="test" name="goods_name" class="input" id="goods_name" size="50" placeholder="请输入商品名称"></td>
               <th width="80">商品货号</th>
-            <td><input type="text" name="goods_sn" value="" class="input" id="goods_sn"><span class="gray">如果您不输入商品货号，系统将自动生成一个唯一的货号。</span></td>
+            <td><input type="text" name="goods_serial" value="" class="input" id="goods_serial"><span class="gray">如果您不输入商品货号，系统将自动生成一个唯一的货号。</span></td>
           </tr>
           <tr>
             <th>商品分类<span class="red">*</span></th>
@@ -40,7 +40,7 @@
           </tr>
           <tr>
             <th>商品库存<span class="red">*</span></th>
-            <td><input type="text" name="goods_num" value="" class="input" id="goods_num" size="30">&nbsp;&nbsp;件</td>
+            <td><input type="text" name="goods_total" value="" class="input" id="goods_total" size="30">&nbsp;&nbsp;件</td>
               <th>销售数量</th>
             <td><input type="text" name="sale_num" value="" class="input" id="sale_num">&nbsp;&nbsp;件</td>
           </tr>
@@ -240,7 +240,6 @@
                 return false;
             }
             $str = '';
-            alert(attr_name2)
             if(attr_name2 && attr_value2 && attr_id2){
                 $str += '<div class="line"><input type="text" class="input attr_names" name="attr_names[]" readOnly="true" value='+attr_name1+' />&nbsp;';
                 $str += '<input type="text" class="input attr_values" name="attr_values[]" readOnly="true" value='+attr_value1+' />&nbsp;';

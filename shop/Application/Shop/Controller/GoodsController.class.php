@@ -35,7 +35,7 @@ class GoodsController extends AdminBase
                 $this->assign('searchGoods', $searchGoods);
             }
             if (!empty($searchSn)) {
-                $where['goods_sn'] = array('like', "%$searchSn%");
+                $where['goods_serial'] = array('like', "%$searchSn%");
                 $this->assign('searchSn', $searchSn);
             }
         }
@@ -43,8 +43,13 @@ class GoodsController extends AdminBase
         $page = $this->page($count, 10);
         $goodsList = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('listorder desc,goods_id desc')->select();
         foreach ($goodsList as $k => $v) {
-            $imgs = explode('|', $goodsList[$k]['goods_img']);
-            $goodsList[$k]['goods_img'] = $imgs[0];
+            if(!$v['goods_thumb']){
+                $imgs = explode('|', $goodsList[$k]['goods_img']);
+                $goods_thumb = $imgs[0];
+            } else {
+                $goods_thumb = $v['goods_thumb'];
+            }
+            $goodsList[$k]['goods_img'] = $goods_thumb;
             $goodsList[$k]['is_show'] = $v['is_show'] == 0 ? '下架' : '上架';
             $goodsList[$k]['is_hot'] = $v['is_hot'] == 0 ? '非热销' : '热销';
             $goodsList[$k]['is_new'] = $v['is_new'] == 0 ? '非新品' : '新品';
@@ -67,7 +72,7 @@ class GoodsController extends AdminBase
             //商品市场价 卖价
             $market_price = number_format(I('post.market_price', 0.00), 2, '.', '');
             $goods_price = number_format(I('post.goods_price', 0.00), 2, '.', '');
-            $goods_num = I('post.goods_num', 0, 'intval');
+            $goods_total = I('post.goods_total', 0, 'intval');
             //商品展示图
             $multpicArr = I('post.multpic_url', 0);
             $goods_img = '';
@@ -76,9 +81,9 @@ class GoodsController extends AdminBase
             }
             $goods_imgs = substr($goods_img, 0, -1);
             //检查商品货号是否唯一
-            $goods_sn = I('post.goods_sn', '');
+            $goods_serial = I('post.goods_serial', '');
             if (empty($goods_sn)) {
-                $goods_sn = rand(1000, 9999) . date('mdHis') . rand(1000, 9999);
+                $goods_serial = rand(1000, 9999) . date('mdHis') . rand(1000, 9999);
             } else {
                 $checkGoodsSn = $goodsDb->where(array('goods_sn' => $goods_sn))->find();
                 if ($checkGoodsSn) {
@@ -88,9 +93,9 @@ class GoodsController extends AdminBase
 
             $data = array(
                 'goods_name'   => I('post.goods_name', ''),
-                'goods_sn'     => $goods_sn,
+                'goods_serial' => $goods_serial,
                 'cat_id'       => I('post.cat_id', '', 'intval'),
-                'other_cat'    => I('post.other_cat', '', 'intval'),
+//                'other_cat'    => I('post.other_cat', '', 'intval'),
                 'goods_thumb'  => I('post.goods_thumb', ''),
                 'goods_img'    => $goods_imgs,
                 'market_price' => $market_price,
@@ -99,12 +104,9 @@ class GoodsController extends AdminBase
                 'is_hot'       => I('post.is_hot', 0, 'intval'),
                 'is_new'       => I('post.is_new', 0, 'intval'),
                 'is_best'      => I('post.is_best', 0, 'intval'),
-                'goods_num'    => $goods_num,
+                'goods_total'  => $goods_total,
                 'sale_num'     => I('post.sale_num', 0, 'intval'),
                 'content'      => I('post.content', '', ''),
-                'alumni_id'    => I('post.alumni_id', '', 'intval'),
-                'brand_id'     => I('post.brand_id', '', 'intval'),
-                'classify'     => I('post.classify', ''),
                 'transtype'    => $transtype,
                 'freight'      => $freight,
                 'add_time'     => time()
@@ -125,7 +127,7 @@ class GoodsController extends AdminBase
             if (empty($data['goods_price'])) {
                 $this->error('商品售价不能为空');
             }
-            if (empty($data['goods_num'])) {
+            if (empty($data['goods_total'])) {
                 $this->error('商品库存不能为空');
             }
             if (empty($data['goods_thumb'])) {
@@ -141,7 +143,7 @@ class GoodsController extends AdminBase
                         $data2['key'] = $attrName[$i];
                         $data2['value'] = $attrValue[$i];
                         $data2['attr_price'] = $attrMoneys[$i] == '不变' ? number_format($goods_price, 2, '.', '') : number_format($attrMoneys[$i], 2, '.', '');
-                        $data2['pro_total'] = $goods_num;
+                        $data2['pro_total'] = $goods_total;
                         M('goods_sku')->add($data2);
                     }
                 }
@@ -152,19 +154,10 @@ class GoodsController extends AdminBase
         } else {
             //查询商品分类
             $catList = D('Shop/Role')->selectHtmlOption(0, 'name="cat_id"', 1, "请选择");
-            $other_cat = D('Shop/Role')->selectHtmlOption(0, 'name="other_cat"', 1, "请选择");
-            //校友分类
-            $alumni = M('goods_alumni')->order('listorder desc')->select();
-            //品牌分类
-            $brand = M('goods_brand')->order('listorder desc')->select();
-            //格式化商品属性
-//             $attrList = $this->getFormatAttr();
-            // p($attrList);
+//            $other_cat = D('Shop/Role')->selectHtmlOption(0, 'name="other_cat"', 1, "请选择");
 
             $this->assign('catList', $catList);
-            $this->assign('otherList', $other_cat);
-            $this->assign('brand', $brand);
-            $this->assign('alumni', $alumni);
+//            $this->assign('otherList', $other_cat);
             $this->display();
         }
     }
@@ -182,30 +175,30 @@ class GoodsController extends AdminBase
             //商品市场价 卖价
             $market_price = number_format(I('post.market_price', 0.00), 2, '.', '');
             $goods_price  = number_format(I('post.goods_price', 0.00), 2, '.', '');
-            $goods_num = I('post.goods_num', 0, 'intval');
-            $multpicArr = I('post.multpic_url', 0);
-            $goods_img = '';
-            $goods_thumb = I('post.goods_thumb', '');
+            $goods_total  = I('post.goods_total', 0, 'intval');
+            $multpicArr   = I('post.multpic_url', 0);
+            $goods_img    = '';
+            $goods_thumb  = I('post.goods_thumb', '');
             for ($j = 0; $j < count($multpicArr); $j++) {
                 $goods_img .= $multpicArr[$j] . '|';
             }
-            $goods_imgs = substr($goods_img, 0, -1);
-            $goods_sn = I('post.goods_sn', '');
+            $goods_imgs   = substr($goods_img, 0, -1);
+            $goods_serial = I('post.goods_serial', '');
             //$goods_sn = empty($goods_sn) ? rand(1000,9999).date('mdHis').rand(1000,9999) : $goods_sn;
             //检查商品货号是否唯一
-            if (empty($goods_sn)) {
-                $goods_sn = rand(1000, 9999) . date('mdHis') . rand(1000, 9999);
+            if (empty($goods_serial)) {
+                $goods_serial = rand(1000, 9999) . date('mdHis') . rand(1000, 9999);
             } else {
-                $checkGoodsSn = $goodsDb->where(array('goods_sn' => $goods_sn, 'goods_id' => array('neq', $goods_id)))->find();
+                $checkGoodsSn = $goodsDb->where(array('goods_serial' => $goods_serial, 'goods_id' => array('neq', $goods_id)))->find();
                 if ($checkGoodsSn) {
                     $this->error("货号已存在,不填货号系统会自动生成唯一货号");
                 }
             }
             $data = array(
                 'goods_name' => I('post.goods_name', ''),
-                'goods_sn' => $goods_sn,
+                'goods_serial' => $goods_serial,
                 'cat_id' => I('post.cat_id', '', 'intval'),
-                'other_cat' => I('post.other_cat', '', 'intval'),
+//                'other_cat' => I('post.other_cat', '', 'intval'),
                 'goods_thumb' => $goods_thumb,
                 'goods_img' => $goods_imgs,
                 'market_price' => $market_price,
@@ -214,13 +207,9 @@ class GoodsController extends AdminBase
                 'is_hot' => I('post.is_hot', 0, 'intval'),
                 'is_new' => I('post.is_new', 0, 'intval'),
                 'is_best' => I('post.is_best', 0, 'intval'),
-                'goods_num' => $goods_num,
+                'goods_total' => $goods_total,
                 'sale_num' => I('post.sale_num', 0, 'intval'),
                 'content' => I('post.content', '', ''),
-                'alumni_id' => I('post.alumni_id', '', 'intval'),
-                'brand_id' => I('post.brand_id', '', 'intval'),
-                'classify' => I('post.classify', '', 'intval'),
-                'is_best' => I('post.is_best', 0, 'intval'),
                 'transtype' => $transtype,
                 'freight' => $freight,
                 'update_time' => time()
@@ -242,7 +231,7 @@ class GoodsController extends AdminBase
             if (empty($data['goods_price'])) {
                 $this->error('商品售价不能为空');
             }
-            if (empty($data['goods_num'])) {
+            if (empty($data['goods_total'])) {
                 $this->error('商品库存不能为空');
             }
             if (empty($data['goods_thumb'])) {
@@ -259,7 +248,7 @@ class GoodsController extends AdminBase
                         $data2['key'] = $attrName[$i];
                         $data2['value'] = $attrValue[$i];
                         $data2['attr_price'] = $attrMoneys[$i] == '不变' ? number_format($goods_price, 2, '.', '') : number_format($attrMoneys[$i], 2, '.', '');
-                        $data2['pro_total'] = $goods_num;
+                        $data2['pro_total'] = $goods_total;
                         M('goods_sku')->add($data2);
                     }
                 }
@@ -271,7 +260,7 @@ class GoodsController extends AdminBase
         } else {
             $goodsList = $goodsDb->alias('a')->field('a.*,b.catid,b.cat_name')->join('left join tp_goods_category b ON a.cat_id=b.catid')->where(array('a.goods_id' => $goods_id))->find();
             $catList = D('Shop/Role')->selectHtmlOption($goodsList['catid'], 'name="cat_id"', 1, "请选择");
-            $other_cat = D('Shop/Role')->selectHtmlOption($goodsList['other_cat'], 'name="other_cat"', 1, "请选择");
+//            $other_cat = D('Shop/Role')->selectHtmlOption($goodsList['other_cat'], 'name="other_cat"', 1, "请选择");
 
             //首次进入页面默认分类下的属性
             $attrName = M('goods_attr')->where(array('cat_id' => $goodsList['catid']))->group('attr_name')->select();
@@ -292,19 +281,13 @@ class GoodsController extends AdminBase
             foreach ($skuArr as $key => $vo) {
                 $skuStr .= '<div class="line"><input type="text" class="input attr_names" name="attr_names[]" readonly="true" value="' . $vo['key'] . '">&nbsp;<input type="text" class="input attr_values" name="attr_values[]" readonly="true" value="' . $vo['value'] . '">&nbsp;<input type="text" class="input attrMoneys" name="attrMoneys[]" value="' . $vo['attr_price'] . '">&nbsp;<input type="hidden" name="attr_id[]" value="' . $vo['attr_id'] . '"><input type="button" class="btn close" value="删除"></div>';
             }
-            //校友分类
-            $alumni = M('goods_alumni')->order('listorder desc')->select();
-            //品牌分类
-            $brand = M('goods_brand')->order('listorder desc')->select();
 
             $this->assign($goodsList);
             $this->assign('catList', $catList);
-            $this->assign('otherList', $other_cat);
+//            $this->assign('otherList', $other_cat);
             $this->assign('attrHtml', $attrHtml);
             $this->assign('imgsStr', $imgsStr);
             $this->assign('skuStr', $skuStr);
-            $this->assign('brand', $brand);
-            $this->assign('alumni', $alumni);
             $this->display();
         }
     }
