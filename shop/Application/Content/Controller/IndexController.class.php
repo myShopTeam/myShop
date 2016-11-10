@@ -315,4 +315,28 @@ class IndexController extends Base {
             }
         }
     }
+
+    /**
+     * 会员捐赠
+     */
+    public function donation(){
+        $catid = I('get.catid', '', 'intval');
+        if(!$catid){
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+        $this->assign('catid', $catid);
+        $this->display();
+    }
+
+    /**
+     * 会员捐赠
+     */
+    public function doDetail(){
+        $catid = I('get.catid', '', 'intval');
+        if(!$catid){
+            redirect($_SERVER['HTTP_REFERER']);
+        }
+        $this->assign('catid', $catid);
+        $this->display('detail');
+    }
 }

@@ -82,7 +82,7 @@ class BaseController extends Base
             if(IS_AJAX){
                 msg('error', '非法操作');
             } else {
-                redirect(U('Site/Passport/login'));
+                redirect(U('Site/Passport/login',5,'damiofjfofw'));
             }
         } else {
             //todo:其他逻辑

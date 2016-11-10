@@ -271,28 +271,26 @@
         <div class="quick-menu">
             <dl>
                 <dt>
-                    <em class="ico_order"></em>
-                    <a href="">我的订单</a>
+                    <em class="ico_order"></em><a href="{:U('Member/Order/index')}">我的订单</a>
                     <i></i>
                 </dt>
                 <dd>
                     <ul>
-                        <li><a href="">待付款订单</a></li>
-                        <li><a href="">待确认收货</a></li>
-                        <li><a href="">待评价交易</a></li>
+                        <li><a href="{:U('Member/Order/index', array('status_type' => 0))}">待付款订单</a></li>
+                        <li><a href="{:U('Member/Order/index', array('status_type' => 3))}">待确认收货</a></li>
+                        <li><a href="{:U('Member/Order/comment')}">待评价交易</a></li>
                     </ul>
                 </dd>
             </dl>
             <dl>
                 <dt>
-                    <em class="ico_store"></em>
-                    <a href="">我的收藏</a>
+                    <em class="ico_store"></em><a href="{:U('Member/Member/favoriteGoods')}">我的收藏</a>
                     <i></i>
                 </dt>
                 <dd>
                     <ul>
                         <li>
-                            <a href="">商品收藏</a>
+                            <a href="{:U('Member/Member/favoriteGoods')}">商品收藏</a>
                         </li>
                     </ul>
                 </dd>

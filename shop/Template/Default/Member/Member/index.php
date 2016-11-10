@@ -175,8 +175,7 @@
 
                     <div class="sub-menu">
                         <dl>
-                            <dt><a href="http://shop.local.com/member/index.php?act=member_security&op=index"
-                                   style="color: #3AAC8A;">安全设置</a></dt>
+                            <dt><a href="{:U('Member/Member/modifyPwd')}" style="color: #3AAC8A;">安全设置</a></dt>
                             <dd>
                                 <a href="{:U('Member/Member/modifyPwd')}">修改登录密码</a>
                             </dd>

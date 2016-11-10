@@ -52,18 +52,18 @@ a{color:#666;}
 .HRotate3D{transition:all 0.5s ease-out 0.1s;}
 .HRotate3D:hover{transform:rotateY(360deg);-webkit-transform:rotateY(360deg); /* Safari and Chrome */-moz-transform:rotateY(360deg); /* Firefox */}
 /* 鼠标经过图片放大 */
-a.HoverBig img{-webkit-transition: all ease .5s;transition: all ease .5s }
+a.HoverBig img{-webkit-transition:all ease .5s;transition:all ease .5s }
 a.HoverBig:hover img{-webkit-transform:scale(1.1,1.1);-moz-transform:scale(1.1,1.1);-transform:scale(1.1,1.1);}
 /* 阴影 */
 .shadow{box-shadow:2px 2px 3px #ccc;}
 /* 渐变 */
 .gradient{
-    background: -moz-linear-gradient(top, #000000 0%, #ffffff 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000000), color-stop(100%,#ffffff));
-    background: -webkit-linear-gradient(top, #000000 0%,#ffffff 100%);
-    background: -o-linear-gradient(top, #000000 0%,#ffffff 100%);
-    background: -ms-linear-gradient(top, #000000 0%,#ffffff 100%);
-    background: linear-gradient(to bottom, #000000 0%,#ffffff 100%);
+    background:-moz-linear-gradient(top, #000000 0%, #ffffff 100%);
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#000000), color-stop(100%,#ffffff));
+    background:-webkit-linear-gradient(top, #000000 0%,#ffffff 100%);
+    background:-o-linear-gradient(top, #000000 0%,#ffffff 100%);
+    background:-ms-linear-gradient(top, #000000 0%,#ffffff 100%);
+    background:linear-gradient(to bottom, #000000 0%,#ffffff 100%);
 }
 
 /*
@@ -181,19 +181,19 @@ a:hover img.opacity{filter:alpha(opacity=80);opacity:0.8;-moz-opacity:0.8;}
 .pagelist div.pager{color:#666;clear:both;width:100%;margin:20px auto;text-align:center;}
 .pagelist div.pager span,.pagelist div.pager .nolink,.pagelist div.pager a{display:inline-block;border:solid 1px #cbcbcb;line-height:22px;margin:0 1px;padding:0px 8px;}
 .pagelist div.pager .nolink{color:#666;}
-.pagelist div.pager a {color:#666;text-decoration:none;}
+.pagelist div.pager a{color:#666;text-decoration:none;}
 .pagelist div.pager a:hover{color:#FFF;}
-.pagelist div.pager a:hover, .pagelist div.pager .cpb {background: #FFF;border: solid 1px #ff6600;color:#ff6600}
+.pagelist div.pager a:hover, .pagelist div.pager .cpb{background:#FFF;border:solid 1px #ff6600;color:#ff6600}
 /*隐藏页码信息*/
-.pagelist div.pager .pageinfo{display: none;}
+.pagelist div.pager .pageinfo{display:none;}
 /*当前页*/
 .pagelist div.pager .cpb{color:#ff6600;font-weight:100;}
 /*如需要修改颜色：替换"#e0830c"*/
 
 /*================= 新闻详细页 ===================*/
-.article_box{padding:0 30px 30px;overflow:hidden;}
-.article_tit{width:100%;line-height:50px;text-align:center;font-size:20px;color:#018845;font-family: microsoft yahei;}
-.article_time{line-height:30px;font-size:14px;padding-bottom:5px;clear:both;text-align:center;/*background: url(../images/news_details_line.png) no-repeat center bottom;*/color: #666;border-bottom:1px dashed #e4e4e4;}
+.article_box{position:relative;padding:0 30px 30px;overflow:hidden;}
+.article_tit{width:100%;line-height:50px;text-align:center;font-size:20px;color:#018845;font-family:microsoft yahei;}
+.article_time{line-height:30px;font-size:14px;padding-bottom:5px;clear:both;text-align:center;/*background:url(../images/news_details_line.png) no-repeat center bottom;*/color:#666;border-bottom:1px dashed #e4e4e4;}
 .article_content{overflow:hidden;clear:both;padding:10px 50px 25px;line-height:26px;color:#555;font-size:14px;}
 .article_content img{max-width:100%;display:block;margin:0 auto;}
 .article_content .imgs{margin:15px auto;text-align:center;}
@@ -210,7 +210,7 @@ p.ml10{text-indent:25px;font-size:14px;}
 .header_left span{padding:0 5px;color:#FFF;}
 .header_lefta:hover{text-decoration:underline;}
 .header_left .clear_bg{background:none;}
-.header_right {float:right;}
+.header_right{float:right;}
 .header_rlink p{height:45px;}
 .header_rlink p span{font-size:14px;}
 .header_rlink p em{font-size:22px;}
@@ -223,9 +223,9 @@ p.ml10{text-indent:25px;font-size:14px;}
 .input_box input{width:170px;height:27px;line-height:27px;color:#999;padding-left:3px;border:0;background:transparent;}
 .button_Search{width:32px;height:29px;border:none;cursor:pointer;vertical-align:middle;background:url(../images/button_Search.jpg) no-repeat;}
 .header_rlink .two_code{display:inline-block;height:30px;color:#fff;line-height:30px;margin:0;top:0;padding-left:30px;z-index:9999;}
-.header_rlink .codeToWx {background:url(../images/weixin.png) no-repeat left center;}
-.header_rlink .codeToZw {background:url(../images/icon_china.jpg) no-repeat left center;}
-.header_rlink .codeToYw {background:url(../images/icon_English.jpg) no-repeat left center;padding-right:50px;}
+.header_rlink .codeToWx{background:url(../images/weixin.png) no-repeat left center;}
+.header_rlink .codeToZw{background:url(../images/icon_china.jpg) no-repeat left center;}
+.header_rlink .codeToYw{background:url(../images/icon_English.jpg) no-repeat left center;padding-right:50px;}
 .header_rlink .pop_code{top:30px;left:-20px;height:101px;width:103px;position:absolute;z-index:9999;background:#FFF;opacity:0;}
 .header_rlink .pop_code .code_con{text-align:center;}
 .header_rlink .pop_code .code_con b{display:block;font-size:14px;margin-top:6px;color:#666}
@@ -468,7 +468,7 @@ h3.IndexTitle.orangeBg em{color:#ef8200;}
 .content .nb_cent_r .webMapTitle a.last{color:#e73d00;}
 .content .nb_cent_r .webMapTitle a:hover{text-decoration:underline;}
 .content .nb_cent_r .webMapTitle span.wz{display:inline-block;padding-left:10px;background:url(../images/webMapTitle.jpg) 0px 14px no-repeat;}
-.RightContent{position:relative;padding:30px 0 60px;min-height:650px;}
+.RightContent{position:relative;padding:30px 0 0px;min-height:650px;border:1px solid #e1e1e1;border-top:none;margin-bottom:40px;}
 
 /*================== 经典案例 ===================*/
 #main{margin-top:20px;height:1080px;}
@@ -632,8 +632,8 @@ ul.CompanySJ li .SJ_News p{padding-top:}
 .MessageBox input.btn:hover{opacity:.7;}
 
 /*============== 联系我们 ===============*/
-.ContactUs{padding-top:30px;}
-.ContactUs .ctMaps{width:570px;border:1px solid #d2d2d2;}
+.ContactUs{padding-top:30px;padding-left:10px;}
+.ContactUs .ctMaps{width:560px;border:1px solid #d2d2d2;border-right:none;overflow:hidden;}
 .ContactUs .ctMaps,.ContactUs .ctInfo{height:320px;}
 .ContactUs .ctInfo{width:355px}
 .ContactUs .ctInfo h3{line-height:40px;font-size:18px;color:#ff6600;}
@@ -645,7 +645,7 @@ ul.CompanySJ li .SJ_News p{padding-top:}
 .ContactUs .ctInfo p span.ct_phone{background:url(../images/ct_phone.png) -1px 6px no-repeat;}
 .ContactUs .ctInfo p span.ct_tel{background:url(../images/ct_tel.png) -1px 6px no-repeat;}
 
-/*==============  =================*/
+/*============== 新闻 =================*/
 .RC_NewsList .news_first{width:100%;height:177px;}
 .RC_NewsList .n_f_img{width:231px;height:163px;margin-left:10px;margin-top:5px;}
 .RC_NewsList .n_f_con{width:655px;margin-top:5px;}
@@ -658,9 +658,31 @@ ul.CompanySJ li .SJ_News p{padding-top:}
 .RC_NewsList .news_ul li span{float:right;}
 .RC_NewsList .news_ul li a:hover,.RC_NewsList .n_f_con h3 a:hover{text-decoration:underline;color:#ff6600;}
 
+/*============== 捐赠 =================*/
+.DonationBox{position:relative;}
+.DonationBox ul li{margin:0 72px 25px;}
+.DonationBox ul li,.DonationBox ul li .imgBox,.DonationBox ul li .imgBox img{width:320px;}
+.DonationBox ul li .imgBox,.DonationBox ul li .imgBox img{display:block;height:150px;}
+.DonationBox ul li .cenBox{padding:14px 0 16px}
+.DonationBox ul li .cenBox h3{font-size:16px;height:30px;line-height:30px;}
+.DonationBox ul li .cenBox h3 a{color:#666;}
+.DonationBox ul li .cenBox h3 a:hover{color:#50961e;}
+.DonationBox ul li .cenBox h4{margin:3px 0 6px 0;color:#929292;height:36px;overflow:hidden;font-family:宋体;}
+.DonationBox ul li .cenBox p{height:28px;line-height:28px;color:#929292;}
+.DonationBox ul li .cenBox p i{color:#f43f00;}
+.DonationBox ul li .cenBox p a.btn_Jz{float:left;width:70px;height:23px;color:#fff;text-align:center;line-height:23px;font-family:宋体;font-size:12px;background:url(../images/Ds_btn_gather.png) 0 -236px no-repeat;transition:all .5s;}
+.DonationBox ul li .cenBox p a.btn_Jz:hover{opacity:.65;}
+.DonationBox ul li .cenBox p em{float:left;margin-left:20px;color:#929292;}
+.jzBtn{position:absolute;top:22px;right:35px;width:170px;height:50px;background:url(../images/Ds_btn_gather.png) 0 -48px no-repeat;color:transparent;text-shadow:none;display:block;transition:all .5s;}
+.jzBtn:hover{opacity:.75;}
 
-
-
+/* closeMonthBox */
+.ShowBox{position:fixed;z-index:1000000;left:0;top:0;width:100%;height:100%;background:url(../images/showbox_bg.png) repeat;}
+.closeMonthBox{position:fixed;left:50%;top:50%;width:440px;margin-left:-220px;margin-top:-238px;z-index:1000000;}
+.closeMonthBox .title{position:relative;height:48px;padding-left:24px;font-size:16px;color:#fff;line-height:48px;background-color:#4e931c;}
+.closeMonthBox .title .closeBox{position:absolute;right:20px;top:15px;width:14px;height:14px;background:url(../images/icon_close.png) no-repeat;cursor:pointer;}
+.closeMonthBox .cont{padding:42px 0px 48px;background-color:#fff;text-align:center;}
+.closeMonthBox .cont img{display:block;width:208px;margin:0px auto 27px;border:1px solid #ddd;font-size:18px;font-family:"Microsoft Yahei";line-height:18px;color:#333;}
 
 
 
