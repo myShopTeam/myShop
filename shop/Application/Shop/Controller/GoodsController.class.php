@@ -357,14 +357,15 @@ class GoodsController extends AdminBase
             //商品图片
             $imgsStr = '';
             $imgsArr = explode('|', $goodsList['goods_img']);
-            $rand = substr(time(), -4);
-            for ($i = 0; $i < count($imgsArr); $i++) {
-                $imgsStr .= '<li id="image' . $rand . $i . '"><input type="text" name="multpic_url[]" value="' . $imgsArr[$i] . '" style="width:310px;" ondblclick="image_priview(this.value);" class="input"> <input type="text" name="multpic_alt[]" value="' . md5(time()) . '" style="width:160px;" class="input" onfocus="if(this.value == this.defaultValue) this.value = \'\'" onblur="if(this.value.replace(\' \',\'\') == \'\') this.value = this.defaultValue;"> <a href="javascript:remove_div(\'image' . $rand . $i . '\')">移除</a> </li>';
+            if(pos($imgsArr)){
+                $rand = substr(time(), -4);
+                for ($i = 0; $i < count($imgsArr); $i++) {
+                    $imgsStr .= '<li id="image' . $rand . $i . '"><input type="text" name="multpic_url[]" value="' . $imgsArr[$i] . '" style="width:310px;" ondblclick="image_priview(this.value);" class="input"> <input type="text" name="multpic_alt[]" value="' . md5(time()) . '" style="width:160px;" class="input" onfocus="if(this.value == this.defaultValue) this.value = \'\'" onblur="if(this.value.replace(\' \',\'\') == \'\') this.value = this.defaultValue;"> <a href="javascript:remove_div(\'image' . $rand . $i . '\')">移除</a> </li>';
+                }
             }
             //商品属性
             $skuStr = '';
             $skuArr = M('goods_sku')->where(array('goods_id' => $goods_id))->select();
-            make_log($skuArr);
             foreach ($skuArr as $key => $vo) {
                 $skuStr .= '<div class="line"><input type="text" class="input attr_names1" name="attr_names[]" readonly="true" value="' . $vo['attr_name1'] . '">&nbsp;<input type="text" class="input attr_values1" name="attr_values[]" readonly="true" value="' . $vo['attr_value1'] . '">&nbsp;<input type="hidden" class="attr_id1" name="attr_id[]" value="' . $vo['attr_id1'] . '">';
                 if($vo['attr_value2']){
