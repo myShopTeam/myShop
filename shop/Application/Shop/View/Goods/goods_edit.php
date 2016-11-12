@@ -49,11 +49,17 @@
           <tr>
               <th>商品属性</th>
               <td colspan="3">
-                  <select name="attr_name" style="width: 156px;">
+                  <select name="attr_name1" style="width: 156px;">
                     {$attrHtml}
                   </select>
-                  <select name="attr_value" style="width: 156px;">
+                  <select name="attr_value1" style="width: 156px;">
                     <option value="0">请选择商品属性值</option>
+                  </select>
+                  <select name="attr_name2" style="width: 156px;">
+                      {$attrHtml}
+                  </select>
+                  <select name="attr_value2" style="width: 156px;">
+                      <option value="0">请选择商品属性值</option>
                   </select>
                   <input type="text" hidden value="" class="attrMoney input" placeholder="价格(相同可不填)" />
                   <input type="button" class="btn addAttr" value="添加" />
@@ -87,7 +93,8 @@
       </table>
    </div>
    <div class="btn_wrap" style="z-index:9999 !important;">
-      <div class="btn_wrap_pd">             
+      <div class="btn_wrap_pd">
+          <input type="hidden" id="attr_json" name="attr_json" value="">
         <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit">修改</button>
       </div>
     </div>
@@ -140,42 +147,53 @@
 <style type="text/css">.content_attr{ border:1px solid #CCC; padding:5px 8px; background:#FFC; margin-top:6px}</style>
 <script>
   $(function(){
-    //获取属性名
-    $('select[name=cat_id]').change(function(){
-        $value = $(this).val();
-        $.post("{:U('getAttr')}",{catid:$value,type:0},function(res){
-            $('select[name=attr_name]').html(res.html);
+      var attr_json = '{$attr_json}';
+      $('#attr_json').val(attr_json);
+      //获取属性名
+      $('select[name=cat_id]').change(function(){
+          $value = $(this).val();
+          $.post("{:U('getAttr')}",{catid:$value,type:0},function(res){
+              $('select[name=attr_name1]').html(res.html);
+              $('select[name=attr_name2]').html(res.html);
           },'json')
-    })
-    //获取属性值
-    $('select[name=attr_name]').change(function(){
-        $value = $(this).val();
-        $catid = $('select[name=cat_id]').val();
-        $.post("{:U('getAttr')}",{attrName:$value,catid:$catid,type:1},function(res){
-            $('select[name=attr_value]').html(res.html);
+      })
+      //获取属性值
+      $('select[name=attr_name1]').change(function(){
+          $value = $(this).val();
+          $catid = $('select[name=cat_id]').val();
+          $.post("{:U('getAttr')}",{attrName:$value,catid:$catid,type:1},function(res){
+              $('select[name=attr_value1]').html(res.html);
           },'json')
-    })
+      })
+      //获取属性值
+      $('select[name=attr_name2]').change(function(){
+          $value = $(this).val();
+          $catid = $('select[name=cat_id]').val();
+          $.post("{:U('getAttr')}",{attrName:$value,catid:$catid,type:1},function(res){
+              $('select[name=attr_value2]').html(res.html);
+          },'json')
+      })
     //显示上传属性缩略图和价格
-    $('select[name=attr_value]').change(function(){
+    $('select[name=attr_value1]').change(function(){
       $('.attrMoney').show();
     })
     $('.addAttr').click(function(){
-      var _this = $(this);
+        var _this = $(this);
         var attr_name1 = $('select[name=attr_name1]').val();
         var attr_value1 = $('select[name=attr_value1] option:selected').attr('data-val');
         var attr_id1 = $('select[name=attr_value1] option:selected').val();
         var attr_name2 = $('select[name=attr_name2]').val();
         var attr_value2 = $('select[name=attr_value2] option:selected').attr('data-val');
         var attr_id2 = $('select[name=attr_value2] option:selected').val();
-      var attrMoney = $('.attrMoney').val();
-      //单属性检测
-      var attr_names = $('.attr_names').val();
-      if(attr_names!=attr_name){
-        if(attr_names!=undefined){
-          alert('商品只能选择单属性');
-          return false;
-        }
-      }
+        var attrMoney = $('.attrMoney').val();
+        //单属性检测
+        var attr_names = $('.attr_names').val();
+//            if(attr_names!=attr_name){
+//                if(attr_names!=undefined){
+//                    alert('商品只能选择单属性');
+//                    return false;
+//                }
+//            }
         if(attrMoney==''){
             attrMoney = '不变';
         }
@@ -187,30 +205,67 @@
             alert("请选择商品属性值");
             return false;
         }
-      $str = '';
+        $str = '';
         if(attr_name2 && attr_value2 && attr_id2){
-            $str += '<div class="line"><input type="text" class="input attr_names" name="attr_names[]" readOnly="true" value='+attr_name1+' />&nbsp;';
-            $str += '<input type="text" class="input attr_values" name="attr_values[]" readOnly="true" value='+attr_value1+' />&nbsp;';
-            $str += '<input type="hidden" name="attr_id[]" value="'+attr_id1+'" >';
-            $str += '<input type="text" class="input attr_names" name="attr_names[]" readOnly="true" value='+attr_name2+' />&nbsp;';
-            $str += '<input type="text" class="input attr_values" name="attr_values[]" readOnly="true" value='+attr_value2+' />&nbsp;';
+            $str += '<div class="line"><input type="text" class="input attr_names1" name="attr_names[]" readOnly="true" value='+attr_name1+' />&nbsp;';
+            $str += '<input type="text" class="input attr_values1" name="attr_values[]" readOnly="true" value='+attr_value1+' />&nbsp;';
+            $str += '<input type="hidden" class="attr_id1" name="attr_id[]" value="'+attr_id1+'" >';
+            $str += '<input type="text" class="input attr_names2" name="attr_names[]" readOnly="true" value='+attr_name2+' />&nbsp;';
+            $str += '<input type="text" class="input attr_values2" name="attr_values[]" readOnly="true" value='+attr_value2+' />&nbsp;';
             $str += '<input type="text" class="input attrMoneys" name="attrMoneys[]" value="'+attrMoney+'" />&nbsp;';
-            $str += '<input type="hidden" name="attr_id[]" value="'+attr_id2+'" >';
+            $str += '<input type="hidden" class="attr_id2" name="attr_id[]" value="'+attr_id2+'" >';
         } else {
-            $str += '<div class="line"><input type="text" class="input attr_names" name="attr_names[]" readOnly="true" value='+attr_name1+' />&nbsp;';
-            $str += '<input type="text" class="input attr_values" name="attr_values[]" readOnly="true" value='+attr_value1+' />&nbsp;';
+            $str += '<div class="line"><input type="text" class="input attr_names1" name="attr_names[]" readOnly="true" value='+attr_name1+' />&nbsp;';
+            $str += '<input type="text" class="input attr_values1" name="attr_values[]" readOnly="true" value='+attr_value1+' />&nbsp;';
             $str += '<input type="text" class="input attrMoneys" name="attrMoneys[]" value="'+attrMoney+'" />&nbsp;';
-            $str += '<input type="hidden" name="attr_id[]" value="'+attr_id1+'" >';
+            $str += '<input type="hidden" class="attr_id1" name="attr_id[]" value="'+attr_id1+'" >';
         }
-      // $str += '<input type="button" class="button" onclick="javascript:flashupload(\'image_images\', \'附件上传\',\'image\',submit_images,\'1,jpg|jpeg|gif|bmp|png,1,,,0\',\'content\',\'\',\'8c87cb0d024e5607ccb8d97e49a17e80\')" value="上传图片">';
-      $str += '<input type="button" class="btn close" value="删除" /></div>';
-      _this.parents('td').append($str);
-      $('.close').unbind('click');
-      $('.close').bind('click',function(){});
+        // $str += '<input type="button" class="button" onclick="javascript:flashupload(\'image_images\', \'附件上传\',\'image\',submit_images,\'1,jpg|jpeg|gif|bmp|png,1,,,0\',\'content\',\'\',\'8c87cb0d024e5607ccb8d97e49a17e80\')" value="上传图片">';
+        $str += '<input type="button" class="btn close" value="删除" /></div>';
+        _this.parents('td').append($str);
+        $('.close').unbind('click');
+        $('.close').bind('click',function(){});
+        attrJson();
     })
-    $(document).on('click','.close',function(){
-      $(this).parent('.line').remove();
-    })
+      $(document).on('click','.close',function(){
+          $(this).parent('.line').remove();
+          attrJson();
+      })
+
+      function attrJson(){
+          var attr_arr = [];
+          var two_attr = 0;
+          $('.line').each(function () {
+              var _this = $(this);
+              //判断是否双属性
+              var attr_data = {};
+              attr_data.attr_id1      = _this.children('.attr_id1').val();
+              attr_data.attr_name1    = _this.children('.attr_names1').val();
+              attr_data.attr_value1   = _this.children('.attr_values1').val();
+              attr_data.attrMoneys    = _this.children('.attrMoneys').val();
+
+              if(_this.children('.attr_id2').val() != undefined){
+                  if(two_attr == 1){
+                      alert('商品不能存在同时有单属性或者双属性,请删除此行数据');
+                      return false;
+                  }
+                  two_attr = 2;
+                  attr_data.attr_id2      = _this.children('.attr_id2').val();
+                  attr_data.attr_name2    = _this.children('.attr_names2').val();
+                  attr_data.attr_value2   = _this.children('.attr_values2').val();
+              } else {
+                  //数据格式检测
+                  if(two_attr == 2){
+                      alert('商品不能存在同时有单属性或者双属性,请删除此行数据');
+                      return false;
+                  }
+                  two_attr = 1;
+
+              }
+              attr_arr.push(attr_data);
+          })
+          $('#attr_json').val(JSON.stringify(attr_arr));
+      }
 
     //运费
     $('input[name=transtype]').change(function(){

@@ -107,15 +107,16 @@ class GoodsController extends AdminBase
                 'goods_total'  => $goods_total,
                 'sale_num'     => I('post.sale_num', 0, 'intval'),
                 'content'      => I('post.content', '', ''),
+                'attr_json'    => I('post.attr_json', '', ''),
                 'transtype'    => $transtype,
                 'freight'      => $freight,
                 'add_time'     => time()
             );
             //添加属性
-            $attrName = I('post.attr_names', 0);
-            $attrValue = I('post.attr_values', 0);
-            $attrMoneys = I('post.attrMoneys', 0);
-            $attrId = I('post.attr_id', 0);
+//            $attrName = I('post.attr_names', 0);
+//            $attrValue = I('post.attr_values', 0);
+//            $attrMoneys = I('post.attrMoneys', 0);
+//            $attrId = I('post.attr_id', 0);
             $multpicUrl = I('post.multpicUrl', 0);
 
             if (empty($data['goods_name'])) {
@@ -133,19 +134,61 @@ class GoodsController extends AdminBase
             if (empty($data['goods_thumb'])) {
                 $this->error('商品缩略图不能为空');
             }
+
             $goods_id = M('goods')->add($data);
             if ($goods_id) {
                 //判断是否为属性商品
-                if (!empty($attrMoneys) || !empty($attrId)) {
-                    for ($i = 0; $i < count($attrName); $i++) {
-                        $data2['goods_id'] = $goods_id;
-                        $data2['attr_id'] = $attrId[$i];
-                        $data2['key'] = $attrName[$i];
-                        $data2['value'] = $attrValue[$i];
-                        $data2['attr_price'] = $attrMoneys[$i] == '不变' ? number_format($goods_price, 2, '.', '') : number_format($attrMoneys[$i], 2, '.', '');
-                        $data2['pro_total'] = $goods_total;
-                        M('goods_sku')->add($data2);
+                $attr_json = I('post.attr_json', '', '');
+                $attr_arr = json_decode($attr_json, 1);
+
+                if ($attr_json && is_array($attr_arr)) {
+                    //判断数据是否正确
+                    $is_two = 0;
+                    $attr_data = array();
+                    foreach($attr_arr as $k => $attr){
+                        //单属性
+                        $attr_data[$k]['attr_id1']     = $attr['attr_id1'];
+                        $attr_data[$k]['attr_name1']   = $attr['attr_name1'];
+                        $attr_data[$k]['attr_value1']  = $attr['attr_value1'];
+                        if($attr['attr_id2']){
+                            if($is_two == 1){
+                                $this->error('商品不能存在同时有单属性或者双属性,请删除此行数据');
+                            }
+                            $is_two = 2;
+                            //双属性
+                            $attr_data[$k]['attr_id2']     = $attr['attr_id2'];
+                            $attr_data[$k]['attr_name2']   = $attr['attr_name2'];
+                            $attr_data[$k]['attr_value2']  = $attr['attr_value2'];
+                        } else {
+                            if($is_two == 2){
+                                $this->error('商品不能存在同时有单属性或者双属性,请删除此行数据');
+                            }
+                            $is_two = 1;
+                        }
+                        //组装数据
+                        $attr_data[$k]['goods_id']   = $goods_id;
+                        $attr_data[$k]['attr_price'] = (!$attr['attrMoneys'] || $attr['attrMoneys'] == '不变') ? $goods_price : $attr['attrMoneys'];
+                        //给第一条属性设为默认属性
+                        $attr_data[$k]['default_sku'] = $k == 0 ? 1 : 0;
+                        //库存
+                        $attr_data[$k]['sku_total']  = (!$attr['sku_total'] || $attr['sku_total'] == '不变') ? $data['goods_total'] : $attr['sku_total'];
+                        //条码
+                        if($attr['attr_barcode']){
+                            $attr_data[$k]['attr_barcode'] = $attr['attr_barcode'];
+                        }
+                        //货号
+                        if($attr['attr_serial']){
+                            $attr_data[$k]['attr_serial'] = $attr['attr_serial'];
+                        }
+                        //属性图片
+                        if($attr['imgs']){
+                            $attr_data[$k]['imgs'] = $attr['imgs'];
+                        }
                     }
+                    //todo:需要验证数据的合法性
+
+                    //添加商品属性
+                    M('goods_sku')->addAll($attr_data);
                 }
                 $this->success('商品添加成功', U('Goods/goods_index'));
             } else {
@@ -210,16 +253,17 @@ class GoodsController extends AdminBase
                 'goods_total' => $goods_total,
                 'sale_num' => I('post.sale_num', 0, 'intval'),
                 'content' => I('post.content', '', ''),
+                'attr_json'    => I('post.attr_json', '', ''),
                 'transtype' => $transtype,
                 'freight' => $freight,
                 'update_time' => time()
             );
 
             //添加属性
-            $attrName = I('post.attr_names', 0);
-            $attrValue = I('post.attr_values', 0);
-            $attrMoneys = I('post.attrMoneys', 0);
-            $attrId = I('post.attr_id', 0);
+//            $attrName = I('post.attr_names', 0);
+//            $attrValue = I('post.attr_values', 0);
+//            $attrMoneys = I('post.attrMoneys', 0);
+//            $attrId = I('post.attr_id', 0);
             $multpicUrl = I('post.multpicUrl', 0);
 
             if (empty($data['goods_name'])) {
@@ -240,17 +284,59 @@ class GoodsController extends AdminBase
             $bool = M('goods')->where(array('goods_id' => $goods_id))->save($data);
             if ($bool) {
                 //判断是否为属性商品
-                if (!empty($attrMoneys) || !empty($attrId)) {
-                    M('goods_sku')->where(array('goods_id' => $goods_id))->delete();
-                    for ($i = 0; $i < count($attrName); $i++) {
-                        $data2['goods_id'] = $goods_id;
-                        $data2['attr_id'] = $attrId[$i];
-                        $data2['key'] = $attrName[$i];
-                        $data2['value'] = $attrValue[$i];
-                        $data2['attr_price'] = $attrMoneys[$i] == '不变' ? number_format($goods_price, 2, '.', '') : number_format($attrMoneys[$i], 2, '.', '');
-                        $data2['pro_total'] = $goods_total;
-                        M('goods_sku')->add($data2);
+                $attr_json = I('post.attr_json', '', '');
+                $attr_arr = json_decode($attr_json, 1);
+
+                if ($attr_json && is_array($attr_arr)) {
+                    //判断数据是否正确
+                    $is_two = 0;
+                    $attr_data = array();
+                    foreach($attr_arr as $k => $attr){
+                        //单属性
+                        $attr_data[$k]['attr_id1']     = $attr['attr_id1'];
+                        $attr_data[$k]['attr_name1']   = $attr['attr_name1'];
+                        $attr_data[$k]['attr_value1']  = $attr['attr_value1'];
+                        if($attr['attr_id2']){
+                            if($is_two == 1){
+                                $this->error('商品不能存在同时有单属性或者双属性,请删除此行数据');
+                            }
+                            $is_two = 2;
+                            //双属性
+                            $attr_data[$k]['attr_id2']     = $attr['attr_id2'];
+                            $attr_data[$k]['attr_name2']   = $attr['attr_name2'];
+                            $attr_data[$k]['attr_value2']  = $attr['attr_value2'];
+                        } else {
+                            if($is_two == 2){
+                                $this->error('商品不能存在同时有单属性或者双属性,请删除此行数据');
+                            }
+                            $is_two = 1;
+                        }
+                        //组装数据
+                        $attr_data[$k]['goods_id']   = $goods_id;
+                        $attr_data[$k]['attr_price'] = $attr_data[$k]['attr_price'] = (!$attr['attrMoneys'] || $attr['attrMoneys'] == '不变') ? $goods_price : $attr['attrMoneys'];
+                        //给第一条属性设为默认属性
+                        $attr_data[$k]['default_sku'] = $k == 0 ? 1 : 0;
+                        //库存
+                        $attr_data[$k]['sku_total']  = (!$attr['sku_total'] || $attr['sku_total'] == '不变') ? $data['goods_total'] : $attr['sku_total'];
+                        //条码
+                        if($attr['attr_barcode']){
+                            $attr_data[$k]['attr_barcode'] = $attr['attr_barcode'];
+                        }
+                        //货号
+                        if($attr['attr_serial']){
+                            $attr_data[$k]['attr_serial'] = $attr['attr_serial'];
+                        }
+                        //属性图片
+                        if($attr['imgs']){
+                            $attr_data[$k]['imgs'] = $attr['imgs'];
+                        }
                     }
+                    //todo:需要验证数据的合法性
+
+                    //先删除已有的属性
+                    M('goods_sku')->where(array('goods_id' => $goods_id))->delete();
+                    //添加商品属性
+                    M('goods_sku')->addAll($attr_data);
                 }
                 $this->success('商品修改成功', U('Goods/goods_index'));
             } else {
@@ -278,8 +364,13 @@ class GoodsController extends AdminBase
             //商品属性
             $skuStr = '';
             $skuArr = M('goods_sku')->where(array('goods_id' => $goods_id))->select();
+            make_log($skuArr);
             foreach ($skuArr as $key => $vo) {
-                $skuStr .= '<div class="line"><input type="text" class="input attr_names" name="attr_names[]" readonly="true" value="' . $vo['key'] . '">&nbsp;<input type="text" class="input attr_values" name="attr_values[]" readonly="true" value="' . $vo['value'] . '">&nbsp;<input type="text" class="input attrMoneys" name="attrMoneys[]" value="' . $vo['attr_price'] . '">&nbsp;<input type="hidden" name="attr_id[]" value="' . $vo['attr_id'] . '"><input type="button" class="btn close" value="删除"></div>';
+                $skuStr .= '<div class="line"><input type="text" class="input attr_names1" name="attr_names[]" readonly="true" value="' . $vo['attr_name1'] . '">&nbsp;<input type="text" class="input attr_values1" name="attr_values[]" readonly="true" value="' . $vo['attr_value1'] . '">&nbsp;<input type="hidden" class="attr_id1" name="attr_id[]" value="' . $vo['attr_id1'] . '">';
+                if($vo['attr_value2']){
+                    $skuStr .= '<input type="text" class="input attr_names2" name="attr_names[]" readonly="true" value="' . $vo['attr_name2'] . '">&nbsp;<input type="text" class="input attr_values2" name="attr_values[]" readonly="true" value="' . $vo['attr_value2'] . '">&nbsp;<input type="hidden" class="attr_id2" name="attr_id[]" value="' . $vo['attr_id2'] . '">';
+                }
+                $skuStr .= '&nbsp;<input type="text" class="input attrMoneys" name="attrMoneys[]" value="' . $vo['attr_price'] . '"><input type="button" class="btn close" value="删除"></div>';
             }
 
             $this->assign($goodsList);
