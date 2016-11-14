@@ -2,3 +2,4 @@
 2.2016-10-25 tp_card 表新建字段 login_time 登录时间 last_time 上一次登录时间
 3.2016-11-11 tp_card 表更新 member_area 会员所在地区。
 4.2016-11-13 tp_menu 表更新商城分类数据。
+5.2016-11-14 tp_goods表新建字段comments评论次数 browse 浏览次数 

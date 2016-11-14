@@ -111,6 +111,9 @@ class GoodsModel extends Model {
         $check_look = M('goods_look')->where($filter)->find();
         if($check_look){
             M('goods_look')->where($filter)->delete();
+        } else {
+            //不存在此记录的时候 更新此商品的浏览量
+            M('goods')->where(array('goods_id'=> $params['goods']['goods_id']))->setInc('browse', 1);
         }
         $look_data = array(
             'goods_id'     => $params['goods']['goods_id'],
@@ -177,5 +180,25 @@ class GoodsModel extends Model {
         $browses = M('goods_look')->where($filter)->limit($limit)->order($order)->select();
 
         return  $browses;
+    }
+
+    /**
+     * 获取分类 限制最大只支持2级分类
+     */
+    public function getCats(){
+        $cats = M('goods_category')->field('catid,cat_name,parent_id')->where(array('is_show' => 1))->order('catid ASC')->select();
+        $cat_data = array();
+        if($cats){
+            foreach($cats as $k => $cat){
+                if($cat['parent_id'] == 0){
+                    $cat_data[$cat['catid']] = $cat;
+                } else {
+                    if($cat_data[$cat['parent_id']]){
+                        $cat_data[$cat['parent_id']]['childs'][$cat['catid']] = $cat;
+                    }
+                }
+            }
+        }
+        return $cat_data;
     }
 }
