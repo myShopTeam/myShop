@@ -14,7 +14,7 @@
         <ul>
             <content action="category" catid="47" num="4" order="listorder ASC">
                 <volist name="data" id="vo" key="k">
-                    <li class="pro_0{$k}"><h3 class="Title">{$vo.catname}</h3><div class="ProImgBox"><a href="{$vo.url}"><img src="{$site_info.enterprise_path}images/Pro_img_01.jpg" /><p></p></a></div></li>
+                    <li class="pro_0{$k}"><h3 class="Title">{$vo.catname}</h3><div class="ProImgBox"><a href="{$vo.url}"><img src="{$site_info.enterprise_path}images/Pro_img_0{$k}.jpg" /><p></p></a></div></li>
                 </volist>
             </content>
         </ul>
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="fr NewsBox">
-            <h3 class="IndexTitle blueBg"><span>{:getCategory(19,'catname')}</span><em>{:getCategory(19,'catdir')}</em><a href="{:getCategory(19,'catdir')}"><img src="{$site_info.enterprise_path}images/About_more.jpg" /></a></h3>
+            <h3 class="IndexTitle blueBg"><span>{:getCategory(19,'catname')}</span><em>{:getCategory(19,'catdir')}</em><a href="{:getCategory(5,'menuurl')}"><img src="{$site_info.enterprise_path}images/About_more.jpg" /></a></h3>
             <ul class="mt15">
                 <content action="lists" catid="19" num="8" order="listorder DESC, id DESC">
                    <volist name="data" id="vo" key="k">
@@ -60,7 +60,7 @@
         </div>
     </div>
     <div class="ContactBox">
-        <h3 class="IndexTitle orangeBg"><span>{:getCategory(42,'catname')}</span><em>{:getCategory(42,'catdir')}</em><a href="#"><img src="{$site_info.enterprise_path}images/ContactMore.jpg" /></a></h3>
+        <h3 class="IndexTitle orangeBg"><span>{:getCategory(42,'catname')}</span><em>{:getCategory(42,'catdir')}</em><a href="{:getCategory(11,'menuurl')}"><img src="{$site_info.enterprise_path}images/ContactMore.jpg" /></a></h3>
         <div class="Contact">
             <div class="tactL fl">
                 <content action="lists" catid="42" num="1" moreinfo="1" order="listorder DESC, id DESC">

@@ -28,8 +28,8 @@
                             <volist name="data" id="vo">
                                 <if condition="$data neq ''">
                                     <div class="fwly_box">
-                                        <a href="{$vo.url}"><img src="{$vo.thumb}" /></a>
-                                        <h3><a href="{$vo.url}">{$vo.title}</a></h3>
+                                        <a href="{:U('Content/Index/lists',array('catid' => 13))}"><img src="{$vo.thumb}" /></a>
+                                        <h3><a href="{:U('Content/Index/lists',array('catid' => 13))}">{$vo.title}</a></h3>
                                         <p>{$vo.description}</p>
                                     </div>
                                 </if>
@@ -39,8 +39,8 @@
                             <volist name="data" id="vo">
                                 <if condition="$data neq ''">
                                     <div class="fwly_box">
-                                        <a href="{$vo.url}"><img src="{$vo.thumb}" /></a>
-                                        <h3><a href="{$vo.url}">{$vo.title}</a></h3>
+                                        <a href="{:U('Content/Index/lists',array('catid' => 14))}"><img src="{$vo.thumb}" /></a>
+                                        <h3><a href="{:U('Content/Index/lists',array('catid' => 14))}">{$vo.title}</a></h3>
                                         <p>{$vo.description}</p>
                                     </div>
                                 </if>
@@ -131,8 +131,8 @@
                             <volist name="data" id="vo">
                                 <if condition="$data neq ''">
                                     <div class="fwly_box">
-                                        <a href="{$vo.url}"><img src="{$vo.thumb}" /></a>
-                                        <h3><a href="{$vo.url}">{$vo.title}</a></h3>
+                                        <a href="{:U('Content/Index/lists',array('catid' => 32))}"><img src="{$vo.thumb}" /></a>
+                                        <h3><a href="{:U('Content/Index/lists',array('catid' => 32))}">{$vo.title}</a></h3>
                                         <p>{$vo.description}</p>
                                     </div>
                                 </if>
@@ -188,8 +188,8 @@
                             <volist name="data" id="vo">
                                 <if condition="$data neq ''">
                                     <div class="fwly_box">
-                                        <a href="{$vo.url}"><img src="{$vo.thumb}" /></a>
-                                        <h3><a href="{$vo.url}">{$vo.title}</a></h3>
+                                        <a href="{:U('Content/Index/lists',array('catid' => 38))}"><img src="{$vo.thumb}" /></a>
+                                        <h3><a href="{:U('Content/Index/lists',array('catid' => 38))}">{$vo.title}</a></h3>
                                         <p>{$vo.description}</p>
                                     </div>
                                 </if>
@@ -211,8 +211,8 @@
                             <volist name="data" id="vo">
                                 <if condition="$data neq ''">
                                     <div class="fwly_box">
-                                        <a href="{$vo.url}"><img src="{$vo.thumb}" /></a>
-                                        <h3><a href="{$vo.url}">{$vo.title}</a></h3>
+                                        <a href="{:U('Content/Index/lists',array('catid' => 40))}"><img src="{$vo.thumb}" /></a>
+                                        <h3><a href="{:U('Content/Index/lists',array('catid' => 40))}">{$vo.title}</a></h3>
                                         <p>{$vo.description}</p>
                                     </div>
                                 </if>
@@ -234,8 +234,8 @@
                             <volist name="data" id="vo">
                                 <if condition="$data neq ''">
                                     <div class="fwly_box">
-                                        <a href="{$vo.url}"><img src="{$vo.thumb}" /></a>
-                                        <h3><a href="{$vo.url}">{$vo.title}</a></h3>
+                                        <a href="{:U('Content/Index/lists',array('catid' => 42))}"><img src="{$vo.thumb}" /></a>
+                                        <h3><a href="{:U('Content/Index/lists',array('catid' => 42))}">{$vo.title}</a></h3>
                                         <p>{$vo.description}</p>
                                     </div>
                                 </if>

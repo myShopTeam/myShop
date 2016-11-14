@@ -33,7 +33,7 @@
       <tr>
         <th width="140">保存远程图片过滤域名:</th>
         <th><input type="text" class="input" name="fileexclude" id="fileexclude" style="width:314px;" value="{$Site.fileexclude}"/>
-        <span class="gray">多个用"|"隔开，域名以"/"结尾，例如：http://www.lovegq1314.com/</span></th>
+        <span class="gray">多个用"|"隔开，域名以"/"结尾，例如：http://{$_SERVER['HTTP_HOST']}/</span></th>
       </tr>
       <tr>
         <th width="140">FTP服务器地址:</th>

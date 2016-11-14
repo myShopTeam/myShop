@@ -13,11 +13,11 @@ return array(
     //模块简介
     'introduce' => '这是一个功能强大的内容管理模块。',
     //模块介绍地址
-    'address' => 'http://www.lovegq1314.com',
+    'address' => '/',
     //模块作者
     'author' => 'lp',
     //作者地址
-    'authorsite' => 'http://www.lovegq1314.com',
+    'authorsite' => '/',
     //作者邮箱
     'authoremail' => 'lin19940620@sina.com',
     //版本号，请不要带除数字外的其他字符

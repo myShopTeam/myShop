@@ -7,7 +7,7 @@
     <ul>
       <li>模块管理可以很好的扩展网站运营中所需功能！</li>
       <li><font color="#FF0000">获取更多模块请到官方网站模块扩展中下载安装！安装非官方发表模块需谨慎，有被清空数据库的危险！</font></li>
-      <li>官网地址：<font color="#FF0000">http://www.lovegq1314.com</font>，<a href="http://www.lovegq1314.com" target="_blank">立即前往</a>！</li>
+      <li>官网地址：<font color="#FF0000">/</font>，<a href="javascript:;" target="_blank">立即前往</a>！</li>
     </ul>
   </div>
   <div class="table_list">

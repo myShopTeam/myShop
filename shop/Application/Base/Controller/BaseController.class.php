@@ -69,7 +69,7 @@ class BaseController extends Base
     public function updateMember(){
         if($this->isLogin()){
             $this->getMemberInfo();
-            S('member_info_' . $this->uid, $this->member_info);
+            S('member_info_' . $this->uid, $this->member_info, 7200);
         }
     }
 

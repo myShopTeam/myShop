@@ -9,12 +9,12 @@
                     <tr>
                         <th width="140">帐号:</th>
                         <td><input type="text" class="input"  name="CLOUD_USERNAME" value="{$addition.CLOUD_USERNAME}" size="40">
-                        <span class="gray"> http://www.lovegq1314.com 会员帐号</span></td>
+                        <span class="gray"> 会员帐号</span></td>
                     </tr>
                     <tr>
                         <th width="140">密码:</th>
                         <td><input type="password" class="input"  name="CLOUD_PASSWORD" value="{$addition.CLOUD_PASSWORD}" size="40">
-                        <span class="gray"> http://www.lovegq1314.com 会员密码</span></td>
+                        <span class="gray"> 会员密码</span></td>
                     </tr>
                 </table>
                 <div class="h_a">Cookie配置</div>
@@ -27,7 +27,7 @@
                     <tr>
                         <th width="140">Cookie有效域名:</th>
                         <td><input type="text" class="input"  name="COOKIE_DOMAIN" value="{$addition.COOKIE_DOMAIN}" size="40">
-                            <span class="gray"> 例如：“.qcjh.net”表示这个域名下都可以访问</span></td>
+                            <span class="gray"> 例如：“.xxx.com”表示这个域名下都可以访问</span></td>
                     </tr>
                     <tr>
                         <th width="140">Cookie路径:</th>
@@ -45,7 +45,7 @@
                     <tr>
                         <th width="140">Session域名:</th>
                         <td><input type="text" class="input"  name="SESSION_OPTIONS[domain]" value="{$addition.SESSION_OPTIONS.domain}" size="40">
-                            <span class="gray"> 一般是“.qcjh.net”</span></td>
+                            <span class="gray"> 一般是“.xxx.com”</span></td>
                     </tr>
                 </table>
                 <div class="h_a">错误设置</div>
@@ -61,7 +61,7 @@
                     <tr>
                         <th width="140">错误定向页面:</th>
                         <td><input type="text" class="input"  name="ERROR_PAGE" value="{$addition.ERROR_PAGE}" size="40">
-                            <span class="gray">例如：http://www.lovegq1314.com/error.html</span></td>
+                            <span class="gray">例如：http://{$_SERVER['HTTP_HOST']}/error.html</span></td>
                     </tr>
                 </table>
                 <div class="h_a">URL设置</div>

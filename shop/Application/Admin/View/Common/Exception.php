@@ -53,7 +53,7 @@ if (C('LAYOUT_ON')) {
         </div>
         <div class="copyright">
             <p>
-                <a title="官方网站" href="http://www.lovegq1314.com" target="_blank">QCCMS</a>
+                <a title="官方网站" href="javascript:;" target="_blank">MYSHOP</a>
                 <sup><?php echo SHUIPF_VERSION ?> - <?php echo SHUIPF_BUILD ?></sup>
                 官方交流群：<a href="javascript:;" title="QQ群" target="_blank">178827384</a>
             </p>
