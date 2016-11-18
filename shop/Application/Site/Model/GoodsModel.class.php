@@ -124,7 +124,6 @@ class GoodsModel extends Model {
             'uid'          => $params['uid'],
             'created'      => time(),
         );
-        make_log($look_data);
         M('goods_look')->add($look_data);
     }
 
@@ -186,7 +185,7 @@ class GoodsModel extends Model {
      * 获取分类 限制最大只支持2级分类
      */
     public function getCats(){
-        $cats = M('goods_category')->field('catid,cat_name,parent_id')->where(array('is_show' => 1))->order('catid ASC')->select();
+        $cats = M('goods_category')->field('catid,cat_img,cat_name,parent_id')->where(array('is_show' => 1))->order('catid ASC')->select();
         $cat_data = array();
         if($cats){
             foreach($cats as $k => $cat){

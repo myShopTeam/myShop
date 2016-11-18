@@ -27,7 +27,10 @@ class MemberController extends BaseController
         $this->model = D('card');
         //购物车商品数量
         $cart_num = D('Cart/GoodsCart')->getCartNum($this->uid);
+        //商品分类
+        $cats = D('Site/Goods')->getCats();
 
+        $this->assign('goods_cats', $cats);
         $this->assign('cart_num', $cart_num);
         $this->assign('selected', 'Member_Member_' . ACTION_NAME);
     }

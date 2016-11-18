@@ -86,9 +86,10 @@
                     <!--                <span>-->
                     <!--                    <a href="http://shopwwi.local.com/shop/index.php?act=show_store&amp;op=index&amp;store_id=1" title="我的店铺">我的店铺</a>-->
                     <!--                </span>-->
-                    <if condition="$vo['order_status'] neq '0'">
+                    <if condition="($vo['order_status'] eq '1') OR ($vo['order_status'] eq '5')">
                         <a href="javascript:void(0);" class="share-goods" onclick="ajax_get_confirm('您确定要删除吗?删除后该订单不可恢复！', '{:U(\"Order/Order/delOrder\", array(\"oi\d" => $vo[\"order_id\"]))}');"><i class="icon-trash"></i>删除</a>
                     </if>
+
                     <!-- QQ -->
                     <!--          <span member_id="1">wang wang</span>-->
                     <!--                <a href="javascript:void(0)" class="share-goods" nc_type="sharegoods" data-param="{&quot;gid&quot;:&quot;100004&quot;}">-->
@@ -168,6 +169,19 @@
                                 </a>
                             </p>
                         </if>
+                        <!-- 退款 -->
+                        <if condition="($vo['order_status'] eq '2') OR ($vo['order_status'] eq '3')">
+                            <p><a href="{:U('Member/Order/refundApply', array('oid' => $vo['order_id']))}" class="ncbtn"><i class="icon-legal"></i>订单退款</a></p>
+                        </if>
+                        <!-- 确认收货 -->
+                        <if condition="$vo['order_status'] eq '3'">
+                            <p><a href="javascript:void(0)" class="ncbtn" nc_type="dialog" dialog_id="buyer_order_confirm_order" dialog_width="480" dialog_title="确认收货" uri="index.php?act=member_order&amp;op=change_state&amp;state_type=order_receive&amp;order_sn=8000000000000401&amp;order_id=4" id="order4_action_confirm">确认收货</a></p>
+                        </if>
+                        <!-- 评论 -->
+                        <if condition="($item['comment_status'] eq '0') AND ($vo['order_status'] eq '1')">
+                            <p><a class="ncbtn ncbtn-aqua" href="{:U('Member/Order/comment', array('oid' => $vo['order_id']))}"><i class="icon-thumbs-up-alt"></i>我要评价</a></p>
+                        </if>
+
                     </td>
                     <!-- E 合并TD -->
                 </if>

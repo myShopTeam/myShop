@@ -695,9 +695,9 @@ class GoodsController extends AdminBase
     //排序
     public function listorder()
     {
-        $info = I('post.', '');
+        $info = I('post.listorder');
         $id = 'id';
-        switch (I('get.str', '')) {
+        switch (I('get.str')) {
             case "cat":
                 $db = M('goods_category');
                 $a = 'Goods/category_list';
@@ -716,10 +716,10 @@ class GoodsController extends AdminBase
                 $id = 'attr_id';
                 break;
         }
-        foreach ($info['id'] as $k => $v) {
-            $db->where(array($id => $v))->save(array('listorder' => $info['listorder'][$v]));
+        foreach ($info as $k => $v) {
+            $db->where(array($id => $k))->save(array('listorder' => $v));
         }
-        // p($info);
+
         $this->success('排序成功！', U($a));
     }
 

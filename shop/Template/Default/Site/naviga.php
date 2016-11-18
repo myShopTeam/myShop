@@ -15,15 +15,15 @@
                     <input type="submit" id="button" value="搜索" class="input-submit">
                 </form>
             </div>
-            <div class="keyword">
-                <ul>
-                    <li><a href="javascript:;" style="color: #f55;">热门搜索：</a></li>
-                    <li><a href="">手机</a></li>
-                    <li><a href="">内衣</a></li>
-                    <li><a href="">手表</a></li>
-                    <li><a href="">电脑</a></li>
-                </ul>
-            </div>
+<!--            <div class="keyword">-->
+<!--                <ul>-->
+<!--                    <li><a href="javascript:;" style="color: #f55;">热门搜索：</a></li>-->
+<!--                    <li><a href="">手机</a></li>-->
+<!--                    <li><a href="">内衣</a></li>-->
+<!--                    <li><a href="">手表</a></li>-->
+<!--                    <li><a href="">电脑</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
         </div>
         <div class="mod_minicart" style="">
             <a id="nofollow" target="_self" href="{:U('Cart/Cart/index')}" class="mini_cart_btn">
@@ -53,6 +53,26 @@
     <div class="wrapper">
         <div class="all-category">
             <div class="title"><i></i><h3><a href="javascript:;">全部分类</a></h3>
+            </div>
+            <div class="category">
+                <ul class="menu">
+                    <if condition="$goods_cats neq ''">
+                        <volist name="goods_cats" id="vo">
+                            <li cat_id="{$vo.catid}" class="odd">
+                                <div class="class">
+                                    <span class="ico">
+                                         <if condition="$vo['cat_img'] neq ''"><img src="{$vo.cat_img}"></if>
+                                    </span>
+                                    <h4>
+                                        <a href="{:U('Site/Goods/products', array('catid' => $vo['catid']))}">{$vo.cat_name}</a>
+                                    </h4>
+                                    <span class="arrow"></span>
+                                </div>
+                            </li>
+                        </volist>
+                    </if>
+
+                </ul>
             </div>
         </div>
         <ul class="site-menu">

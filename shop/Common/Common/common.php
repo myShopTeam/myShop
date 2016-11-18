@@ -1084,3 +1084,36 @@ if (!function_exists('array_column')) {
         return $arr;
     }
 }
+
+//创建一个唯一ID
+function create_id(){
+    return md5(uniqid(rand()));
+}
+
+//官方uniqid()参考手册有用户提供的方法，结果类似：{E2DFFFB3-571E-6CFC-4B5C-9FEDAAF2EFD7}
+if (!function_exists('create_guid')) {
+    function create_guid($namespace = '') {
+        static $guid = '';
+        $uid = uniqid("", true);
+        $data = $namespace;
+        $data .= $_SERVER['REQUEST_TIME'];
+        $data .= $_SERVER['HTTP_USER_AGENT'];
+        $data .= $_SERVER['LOCAL_ADDR'];
+        $data .= $_SERVER['LOCAL_PORT'];
+        $data .= $_SERVER['REMOTE_ADDR'];
+        $data .= $_SERVER['REMOTE_PORT'];
+        $hash = strtoupper(hash('ripemd128', $uid . $guid . md5($data)));
+        $guid = '{' .
+            substr($hash, 0, 8) .
+            '-' .
+            substr($hash, 8, 4) .
+            '-' .
+            substr($hash, 12, 4) .
+            '-' .
+            substr($hash, 16, 4) .
+            '-' .
+            substr($hash, 20, 12) .
+            '}';
+        return $guid;
+    }
+}

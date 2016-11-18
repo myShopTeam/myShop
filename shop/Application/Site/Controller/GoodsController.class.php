@@ -25,7 +25,10 @@ class GoodsController extends SiteController
         $this->page_limit = 12;
         //购物车商品数量
         $cart_num = D('Cart/GoodsCart')->getCartNum($this->uid);
+        //商品分类
+        $cats = $this->model->getCats();
 
+        $this->assign('goods_cats', $cats);
         $this->assign('cart_num', $cart_num);
     }
 
@@ -167,6 +170,14 @@ class GoodsController extends SiteController
             );
             $this->model->addLookLog($look_data);
         }
+        $goods['goods_img'] = explode('|', $goods['goods_img']);
+        //商品评论和数量
+        $goods['comment_num'] = M('goods_comment')->where(array('goods_id' => $goods['goods_id']))->count();
+        $goods['comment_num'] = M('goods_comment')->where(array('goods_id' => $goods['goods_id']))->order('created DESC')->select();
+        //我的足迹
+        $goods['browses'] = M('goods_look')->where(array('uid' => $this->uid))->limit(8)->order('created DESC')->select();
+
+        $this->assign($goods);
         $this->display();
     }
 
