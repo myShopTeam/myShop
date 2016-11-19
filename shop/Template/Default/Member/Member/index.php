@@ -307,6 +307,11 @@
 
         <in name="right" value="order_list"><template file="Member/Order/common/order_right.php"/></in>
         <in name="right" value="order_detail"><template file="Member/Order/common/order_detail.php"/></in>
+        <in name="right" value="order_refund"><template file="Member/Order/common/order_refund.php"/></in>
+        <in name="right" value="goods_comment"><template file="Member/Order/common/goods_comment.php"/></in>
+        <in name="right" value="comment_list"><template file="Member/Order/common/comment_list.php"/></in>
+        <in name="right" value="complaint"><template file="Member/Order/common/complaint.php"/></in>
+        <in name="right" value="order_refund_apply"><template file="Member/Order/common/order_refund_apply.php"/></in>
     </div>
     <div class="clear"></div>
 </div>

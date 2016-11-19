@@ -26,8 +26,8 @@ class OrderController extends AdminBase
         $db = M('goods_orderinfo');
         $order_status = 'all';
         if (IS_POST) {
-            $order_status = I('post.order_status', 'all', trim);
-            $order_sn = I('post.order_sn', '', trim);
+            $order_status = I('post.order_status', 'all');
+            $order_sn = I('post.order_sn');
             if ($order_status != 'all') {
                 $where['order_status'] = $order_status;
             }
@@ -51,7 +51,7 @@ class OrderController extends AdminBase
     public function order_detail()
     {
         $orderDb = M('goods_order');
-        $order_id = I('get.oid', '', intval);
+        $order_id = I('get.oid', '', 'intval');
         $orderInfoDb = M('goods_orderinfo');
         $orderInfo = $orderInfoDb->where(array('order_id' => $order_id))->find();
         $order = $orderDb->where(array('order_id' => $order_id))->select();
@@ -71,11 +71,12 @@ class OrderController extends AdminBase
     //标记发货
     public function order_delivery()
     {
-        if($_POST['oid']){
+        $oid = I('get.oid', '', 'intval');
+        if($oid){
             $orderInfoDb = M('goods_orderinfo');
-            $order_id = I('post.oid', '', intval);
-            $data['shipping_num'] = $_POST['shipping_num'];
-            $data['send_goods_time'] = strtotime($_POST['time']);
+            $order_id = I('post.oid', '', 'intval');
+            $data['shipping_num'] = I('post.shipping_num');
+            $data['send_goods_time'] = strtotime(I('post.time'));
             $data['order_status'] = 3;
             //查询是否存在此订单
             $checkOrder = $orderInfoDb->where(array('order_id' => $order_id))->find();
@@ -90,32 +91,53 @@ class OrderController extends AdminBase
                 $this->error('非法操作！');
             }
         }
-        $this->assign('oid',I('get.oid', '', intval));
+        $this->assign('oid',$oid);
+        $this->display();
+    }
+
+    //退货退款
+    public function after_sales(){
+        $db = M('goods_aftersales');
+        //退货退款
+        $where = array('order_status' => 4);
+        if (IS_POST) {
+            $order_status = I('post.order_status', 'all');
+            $order_sn = I('post.order_sn');
+            if ($order_status != 'all') {
+                $where['order_status'] = $order_status;
+            }
+            if ($order_sn) {
+                $where['order_sn'] = array('like', "%$order_sn%");
+                $this->assign('order_sn', $order_sn);
+            }
+        }
+        $count = $db->where($where)->count();
+        $page = $this->page($count, 10);
+        $order_list = $db->where($where)->order(array('listorder' => 'desc', 'order_id' => 'desc'))
+            ->limit($page->firstRow . ',' . $page->listRows)->select();
+
+        $this->assign("Page", $page->show());
+        $this->assign('order_status', $order_status);
+        $this->assign("order_list", $order_list);
         $this->display();
     }
 
     //排序
     public function listorder()
     {
-        $info = I('post.', '', trim);
+        $info = I('post.listorder');
         $id = 'id';
-        switch (I('get.str', '', trim)) {
-            case "cat":
-                $db = M('goods_category');
-                $a = 'Goods/category_list';
-                $id = 'catid';
+        switch (I('get.str')) {
+            case "order":
+                $db = M('goods_order');
+                $a = 'Order/order_list';
+                $id = 'order_id';
                 break;
+        }
+        foreach ($info as $k => $v) {
+            $db->where(array($id => $k))->save(array('listorder' => $v));
+        }
 
-            case "goods":
-                $db = M('takeaway_goods');
-                $a = 'Goods/goods_index';
-                $id = 'goods_id';
-                break;
-        }
-        foreach ($info['id'] as $k => $v) {
-            $db->where(array($id => $v))->save(array('listorder' => $info['listorder'][$v]));
-        }
-        // p($info);
         $this->success('排序成功！', U($a));
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 // +----------------------------------------------------------------------
-// | 后台用户角色表
+// | 商品分类
 // +----------------------------------------------------------------------
 // | Copyright (c) 2014-2016, All rights reserved.
 // +----------------------------------------------------------------------
@@ -22,7 +22,7 @@ class GoodsCategoryModel extends Model {
      */
     public function getTreeArray() {
         $dataList = array();
-        $data = $this->order(array("listorder" => "asc", "catid" => "asc"))->select();
+        $data = $this->where(array('parent_id' => 0))->order(array("listorder" => "asc", "catid" => "asc"))->select();
         foreach ($data as $rs) {
             $dataList[$rs['catid']] = $rs;
         }

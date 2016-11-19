@@ -295,19 +295,19 @@
                     </ul>
                 </dd>
             </dl>
-            <dl>
-                <dt>
-                    <em class="ico_service"></em>客户服务
-                    <i></i>
-                </dt>
-                <dd>
-                    <ul>
-                        <li><a href="">帮助中心</a></li>
-                        <li><a href="">售后服务</a></li>
-                        <li><a href="">客服中心</a></li>
-                    </ul>
-                </dd>
-            </dl>
+<!--            <dl>-->
+<!--                <dt>-->
+<!--                    <em class="ico_service"></em>客户服务-->
+<!--                    <i></i>-->
+<!--                </dt>-->
+<!--                <dd>-->
+<!--                    <ul>-->
+<!--                        <li><a href="">帮助中心</a></li>-->
+<!--                        <li><a href="">售后服务</a></li>-->
+<!--                        <li><a href="">客服中心</a></li>-->
+<!--                    </ul>-->
+<!--                </dd>-->
+<!--            </dl>-->
 <!--            <dl class="weixin">-->
 <!--                <dt>关注我们<i></i></dt>-->
 <!--                <dd>-->

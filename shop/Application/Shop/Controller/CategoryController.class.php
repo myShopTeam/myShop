@@ -95,7 +95,7 @@ class CategoryController extends AdminBase
         }
         $info = $this->model->where(array('catid' => $catid))->find();
 
-        $this->assign('catList', D('Shop/Role')->selectHtmlOption($catid, 'name="parent_id"', 1, "一级分类"));
+        $this->assign('catList', $this->model->selectHtmlOption($info['parent_id'], 'name="parent_id"', 1, "一级分类"));
         $this->assign($info);
         $this->display();
     }
@@ -147,9 +147,9 @@ class CategoryController extends AdminBase
     //排序
     public function listorder()
     {
-        $info = I('post.', '');
-        foreach ($info['id'] as $k => $v) {
-            $this->model->where(array('catid' => $v))->save(array('listorder' => $info['listorder'][$v]));
+        $info = I('post.listorder');
+        foreach ($info as $k => $v) {
+            $this->model->where(array('catid' => $k))->save(array('listorder' => $v));
         }
         $this->success('排序成功！', U('index'));
     }

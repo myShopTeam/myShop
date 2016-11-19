@@ -7,8 +7,8 @@
             <a href="{:U('Member/Order/index')}">交易订单</a>
         </li>
 <!--        <li><a href="http://shop.local.com/shop/index.php?act=member_vr_order&op=index">虚拟兑码订单</a></li>-->
-        <li <in name="selected" value="Member_Order_comment">class="selected"</in>>
-            <a href="{:U('Member/Order/comment')}">交易评价</a>
+        <li <in name="selected" value="Member_Order_comment,Member_Order_commentList">class="selected"</in>>
+            <a href="{:U('Member/Order/commentList')}">交易评价</a>
         </li>
 <!--        <li><a href="http://shop.local.com/shop/index.php?act=member_appoint&op=list">预约/到货通知</a></li>-->
     </ul>
@@ -32,7 +32,7 @@
         <h3>客户服务</h3>
     </a>
     <ul>
-        <li <in name="selected" value="Member_Order_refund,Member_Order_returnGoods">class="selected"</in>>
+        <li <in name="selected" value="Member_Order_refund,Member_Order_returnGoods,Member_Order_refundApply">class="selected"</in>>
             <a href="{:U('Member/Order/refund')}">退款及退货</a>
         </li>
         <li <in name="selected" value="Member_Order_complaint">class="selected"</in>>

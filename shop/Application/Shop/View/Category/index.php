@@ -41,7 +41,7 @@
               <td align="center">{$vo.cat_name}</td>
               <td align="center"><if condition="$vo['is_show'] eq 1">显示<else/>不显示</if></td>
               <td align="center" width="200">
-              <a href="{:U('category_add',array('catid'=>$vo['catid']))}">添加子分类</a>|
+              <if condition="$vo['parent_id'] eq 0"><a href="{:U('category_add',array('catid'=>$vo['catid']))}">添加子分类</a>|</if>
               <a href="{:U('category_edit',array('catid'=>$vo['catid']))}">修改</a>|
               <a class="J_ajax_del" href="{:U('category_delete',array('catid'=>$vo['catid']))}">删除</a>
               </td>

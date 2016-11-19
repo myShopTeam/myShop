@@ -27,7 +27,10 @@ class OrderController extends BaseController
         $this->model = D('card');
         //购物车商品数量
         $cart_num = D('Cart/GoodsCart')->getCartNum($this->uid);
+        //商品分类
+        $cats = D('Site/Goods')->getCats();
 
+        $this->assign('goods_cats', $cats);
         $this->assign('cart_num', $cart_num);
         $this->assign('selected', 'Member_Order_' . ACTION_NAME);
     }
@@ -105,11 +108,29 @@ class OrderController extends BaseController
     }
 
     /**
-     * 退款
+     * 退款列表
      */
     public function refund(){
+        $aftersales_mdl = M('goods_aftersales');
+        $count = $aftersales_mdl->where(array('uid' => $this->uid))->count();
+        $page = $this->page($count, 5);
+        $aftersales = $aftersales_mdl->where(array('uid' => $this->uid))->limit($page->firstRow . ',' . $page->listRows)->order('created DESC')->select();
 
-        $this->display();
+        $this->assign('aftersales', $aftersales);
+        $this->assign('right', 'order_refund');
+        $this->display('Member/Member/index');
+    }
+
+    /**
+     * 退款申请
+     */
+    public function refundApply(){
+        if(IS_POST){
+
+        } else {
+            $this->assign('right', 'order_refund_apply');
+            $this->display('Member/Member/index');
+        }
     }
 
     /**
@@ -117,15 +138,48 @@ class OrderController extends BaseController
      */
     public function returnGoods(){
 
-        $this->display();
+        $this->assign('right', 'order_returngoods');
+        $this->display('Member/Member/index');
     }
 
     /**
      * 投诉
      */
     public function complaint(){
+        $complaint_mdl = M('goods_complaint');
+        $count = $complaint_mdl->where(array('uid' => $this->uid))->count();
+        $page = $this->page($count, 5);
+        $complaint = $complaint_mdl->where(array('uid' => $this->uid))->limit($page->firstRow . ',' . $page->listRows)->order('created DESC')->select();
 
-        $this->display();
+        $this->assign('complaint', $complaint);
+        $this->assign('right', 'complaint');
+        $this->display('Member/Member/index');
+    }
+
+    /**
+     * 我的评价
+     */
+    public function commentList(){
+        $comment_mdl = M('goods_comment');
+        $count = $comment_mdl->where(array('uid' => $this->uid))->count();
+        $page = $this->page($count, 5);
+        $comments = $comment_mdl->where(array('uid' => $this->uid))->limit($page->firstRow . ',' . $page->listRows)->order('created DESC')->select();
+
+        $this->assign('comments', $comments);
+        $this->assign('right', 'comment_list');
+        $this->display('Member/Member/index');
+    }
+
+    /**
+     * 我要评价
+     */
+    public function comment(){
+        if(IS_POST){
+
+        } else {
+            $this->assign('right', 'goods_comment');
+            $this->display('Member/Member/index');
+        }
     }
 
     /**
