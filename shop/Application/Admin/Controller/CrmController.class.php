@@ -208,6 +208,8 @@ class CrmController extends AdminBase
                 $this->error('此卡号不存在！');             
             }
             if ($bool) {
+                $new_data = M('card')->where(array('id'=>$data['id']))->find();
+                S('member_info_' . $data['id'], $new_data, 7200);
                 $this->success('修改成功', U('Crm/cardList'));
             } else {
                 $this->error('修改失败！');

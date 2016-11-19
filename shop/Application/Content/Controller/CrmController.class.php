@@ -62,10 +62,11 @@ class CrmController extends Base {
     public function cardActiveDo(){
         $card_num   = I("post.card_num", "", "trim");
         $card_verif = M('card')->field('is_active,verif')->where(array('card_num'=>$card_num))->find();
+        //var_dump($card_verif);die;
         if($card_verif['is_active'] == '2'){
             $this->error('该卡单已激活过，请勿重复激活！');
         }
-        $verifCode = md5($card_num.$card_verif['verif']);
+        $verifCode = md5($card_num.trim($card_verif['verif']));
         if($verifCode != session('verifCode')){
             $this->error('非法激活！');
         }
@@ -79,7 +80,7 @@ class CrmController extends Base {
             'realname' => I("post.realname", "", "trim"),
             'sex' => I("post.sex", "", "trim"),
             'mobile' => I("post.mobile", "", "trim"),
-            'birthday' => strtotime(I("post.realname")),
+            'birthday' => strtotime(I("post.birthday")),
             'addr_province' => I("post.Province", "", "trim"),
             'addr_city' => I("post.City", "", "trim"),
             'cred_num' => I("post.cred_num", "", "trim"),
@@ -88,15 +89,42 @@ class CrmController extends Base {
             'active_time'=> time(),
             'is_active'=>2
         );
+        
         $bool = M('card')->where(array('card_num' => $card_num))->save($data);
         if($bool){   
             session('verifCode',NULL);
+            $push_data = array(
+			'cpmc'=>$card_verif['card_name'],
+			'xmz'=>I("post.realname", "", "trim"),
+			'xb'=>I("post.sex", "", "trim"),
+			'yxzjlx'=>'身份证',
+			'jzh'=>I("post.cred_num", "", "trim"),
+			'kh'=>$card_num,
+			'csny'=>I("post.birthday"),
+			'brlxfs'=>I("post.mobile", "", "trim"),
+			'zt'=>'在保',
+			'creator'=>'b22631250f8543c6bd34c3b930d862f5',
+		);
+            $this->push_msg($data);
             $this->success('激活成功！');
         }else{
             $this->success('激活失败！');           
         }
     }
     
+    /*
+     * 激活，远程推送
+     */
+    protected function push_msg($data){
+        $ws = "http://www.buma.net.cn:8080/BUMAWs/services/BumaDataInputService?wsdl";//webservice服务的地址
+        $client = new \SoapClient ($ws);
+        $result=$client->putUser($data);
+        if(!$result){
+            M('card')->update(array('push_result'=>$result));
+        }
+    }
+
+
     //卡单查询
     public  function cardSearch(){
         $cred_num = I('post.cred_num','','trim');
