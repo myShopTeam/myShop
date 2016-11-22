@@ -36,14 +36,14 @@
               <input type="hidden" name="headpic" value="" id="thumb">
 -->      
             <tr>
-                <th>商品缩略图</th>
+                <th>募捐缩略图</th>
                 <td colspan="3"><a href="javascript:void(0);" onclick="flashupload('thumb_images', '附件上传','thumb',thumb_images,'{$args_thumb}','Content','9','{$authkey_thumb}');return false;">
                 <img src="{$cat_img|default='/statics/images/icon/upload-pic.png'}" id="thumb_preview" width="135" height="113" style="cursor:hand"></a></td>
                 <input type="hidden"  id='thumb' name="col_thumb" value="">
             </tr>
              <tr>
               <th width="80">
-                商品参数 
+                募捐详情
                </th>
                <td colspan="3">
                <div id="content_tip"></div>

@@ -32,8 +32,8 @@
           <tr>
             <th width="80">真实姓名</th>
             <td width="350"><input type="test" name="realname" class="input" id="realname"  placeholder="请输入真实姓名"></td>
-              <th width="80">手机</th>
-            <td><input type="text" name="mobile" value="" class="input" id="email"  placeholder="请输入手机号"></td>
+              <th width="80">身份证号</th>
+            <td><input type="text" name="cred_num" value="" class="input" id="email"  placeholder="请输入身份证号"></td>
           </tr>
           <tr>
             <th>出生年月</th>
@@ -41,6 +41,10 @@
               <th>联系地址</th>
             <td><input type="text" name="live" value="" class="input" id="qq" placeholder="请输入联系地址"></td>
           </tr>
+          <tr>          
+            <th width="80">手机</th>
+            <td><input type="text" name="mobile" value="" class="input" id="email"  placeholder="请输入手机号"></td>
+          </tr>   
           <tr>
             <th>省份</th>
             <td><input type="text" name="addr_province" value="" class="input" id="phone" placeholder="请输入省份"></td>
@@ -52,13 +56,16 @@
             <td><input type="text" name="contract_name" value="" class="input" id="phone" placeholder="请输入紧急联系人姓名"></td>
             <th>紧急联系人电话</th>
             <td><input type="text" name="contract_way" value="" class="input" id="mobile" placeholder="请输入紧急联系人电话"></td>
-          </tr>
-          <tr>
+          </tr> 
           <tr>
             <th>性别</th>
             <td><input type="radio" name="sex" class="input" id="sex" value="保密" checked>保密
             <input type="radio" name="sex" class="input" id="sex" value="男">男
             <input type="radio" name="sex" class="input" id="sex1" value="女">女</td>
+            <th>是否激活</th>
+            <td>
+            <input type="radio" name="is_active" class="input" id="sex" value="2">是
+            <input type="radio" name="is_active" class="input" id="sex1" value="1" checked>否</td>
           <tr>
 <!--            <tr>
               <th>头像</th>

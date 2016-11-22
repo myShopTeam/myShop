@@ -37,14 +37,19 @@
           <tr>
             <th width="80">真实姓名</th>
             <td width="350"><input type="test" value='{$realname}' name="realname" class="input" id="realname"  placeholder="请输入真实姓名"></td>
-              <th width="80">手机</th>
+            <th width="80">身份证</th>
             <td><input type="text" name="mobile" value="{$mobile}" class="input" id="email"  placeholder="请输入手机号"></td>
+        
           </tr>
           <tr>
             <th>出生年月</th>
             <td><input type="text" name="birthday" value="<if condition='$birthday'>{$birthday|date='Y-m-d',###}</if>" class="input length_2 J_date" id="birthday" value="{$_GET.start_uploadtime}" placeholder="请输入生日" style="width: 147px !important;"></td>
               <th>联系地址</th>
             <td><input type="text" name="live" value="{$live}" class="input" id="qq" placeholder="请输入联系地址"></td>
+          </tr>
+          <tr>
+                <th width="80">手机</th>
+            <td><input type="text" name="mobile" value="{$mobile}" class="input" id="email"  placeholder="请输入手机号"></td>
           </tr>
           <tr>
             <th>省份</th>
@@ -64,6 +69,8 @@
             <td><input type="radio" name="sex" class="input" id="sex" value="保密" <if condition="$sex eq '保密'"> checked</if>>保密
             <input type="radio" name="sex" class="input" id="sex" value="男" <if condition="$sex eq '男'"> checked</if>>男
             <input type="radio" name="sex" class="input" id="sex1" value="女" <if condition="$sex eq '女'"> checked</if>>女</td>
+            <th>状态</th>
+            <td style="color:green"><if condition="$is_active == 2">已激活<else/><font color="red">未激活</font></if></td>
           <tr>
 <!--            <tr>
               <th>头像</th>

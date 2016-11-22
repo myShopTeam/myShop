@@ -170,7 +170,13 @@ class CrmController extends AdminBase
             }
             $data['create_time'] = time();
             $data['birthday']    = strtotime($data['birthday']);           
-            $data['creater'] = User::getInstance()->id;
+            $data['importId'] = User::getInstance()->id;
+            if($data['is_active'] == 2){
+                if(!D('Card')->create()){
+                    $this->error(D('Card')->getError());
+                }
+                $data['active_time'] = time();
+            }
             //检测卡号是否已存在
             $checkUser = M('card')->where(array('card_num' => $data['card_num']))->find();
             if ($checkUser) {
@@ -179,6 +185,21 @@ class CrmController extends AdminBase
                 $card_num = M('card')->add($data);
             }
             if ($card_num) {
+                    if($data['is_active']){
+                        $push_data = array(
+                            'cpmc'=>$data['card_name'],
+                            'xmz'=>$data['realname'],
+                            'xb'=>$data['sex'],
+                            'yxzjlx'=>'身份证',
+                            'jzh'=>$data['cred_num'],
+                            'kh'=>$data['card_num'],
+                            'csny'=>$data['birthday'],
+                            'brlxfs'=>$data['mobile'],
+                            'zt'=>'在保',
+                            'creator'=>'b22631250f8543c6bd34c3b930d862f5',
+                        );
+                        $this->push_msg($data);
+                    }
                 $this->success('卡单添加成功', U('Crm/cardList'));
             } else {
                 $this->error('卡单添加失败');
@@ -270,11 +291,68 @@ class CrmController extends AdminBase
                 $a = 'Member/alumni_supervise';
                 $id = 'id';
                 break;
+            case "card_config":
+                $db = M('card_config');
+                $a = 'Crm/cardConfig';
+                $id = 'id';
+                break;
         }
         foreach ($info['listorder'] as $k => $v) {
             $db->where(array($id => $k))->save(array('listorder' =>$v));
         }
         $this->success('排序成功！', U($a));
+    }
+    
+    //修改卡单最大激活数
+    public function updateNum()
+    {
+        $info = I('post.', '', trim);
+        $id = 'id';
+        switch (I('get.str', '', trim)) {
+            case "vip":
+                $db = M('card');
+                $a = 'Crm/cardList';
+                $id = 'id';
+                break;
+
+            case "school":
+                $db = M('goods_school');
+                $a = 'Member/alumni_supervise';
+                $id = 'id';
+                break;
+            case "card_config":
+                $db = M('card_config');
+                $a = 'Crm/cardConfig';
+                $id = 'id';
+                break;
+        }
+        foreach ($info['num'] as $k => $v) {
+            $db->where(array($id => $k))->save(array('max_active' =>$v));
+        }
+        $this->success('修改成功！', U($a));
+    }
+    
+    //修改会员信息
+    public function typeUpdate()
+    {
+        $id = I('get.id', '', '');
+        if (IS_POST) {
+            foreach($_POST as $k=>$v){
+                $data[$k] = I('post.'.$k,'',trim);
+            }
+            $data['content'] = I('post.content', 1, trim);
+            //检测是否重名
+            $bool = M('card_config')->where(array('id' => $id))->save($data);
+            if ($bool) {
+                $this->success('修改成功', U('Crm/cardConfig'));
+            } else {
+                $this->error('修改失败！');
+            }
+        } else {
+            $vipList = M('card_config')->where(array('id' => $id))->find();
+            $this->assign($vipList);
+            $this->display();
+        }
     }
 
     //随机生成N位数字和字符串
@@ -461,23 +539,33 @@ class CrmController extends AdminBase
     }
     
     public function cardConfig(){
-        $type = M('card_config')->where(array('parent_id'=>0))->select();
-        $card_type = M('card_config')->where(array('parent_id'=>0))->select();
-        $html = array();
+        $card_type = M('card_config')->where(array('parent_id'=>0))->order('listorder asc')->select();
+        $html_nomal = array();
+        $html_car   = array();
         foreach($card_type as $v){
-            $card_name = M('card_config')->where(array('parent_id'=>$v['id']))->select();
-            $html[] = $v ;
-            foreach($card_name as $vv){
-                $html[] = $vv;
+            $card_name = M('card_config')->where(array('parent_id'=>$v['id']))->order('listorder asc')->select();
+            if($v['type'] == 1){
+                $html_nomal[] = $v ;
+                foreach($card_name as $vv){
+                    $html_nomal[] = $vv;
+                }
+            }else{
+                $html_car[] = $v ;
+                foreach($card_name as $vv){
+                    $html_car[] = $vv;
+                }
             }
         }
-        $this->assign('name',$html);
+        $this->assign('nomal_card',$html_nomal);
+        $this->assign('car_card',$html_car);
         $this->display();
     }
     
     public function typeAdd(){
         if($_POST['card_name']){
             $data['card_name']   = $_POST['card_name'];
+            $data['type']        = $_POST['type'];
+            $data['content']     = $_POST['content'];
             $data['create_user'] = $this->userInfo['id'];
             $data['create_time'] = time();
             $result = M('card_config')->where(array('card_name'=>$data['card_name']))->find();
@@ -598,6 +686,18 @@ class CrmController extends AdminBase
         }else{
             echo json_encode(array('res'=>'faile','msg'=>'未查到对应产品！'));
             exit;
+        }
+    }
+    
+    /*
+     * 激活，远程推送
+     */
+    protected function push_msg($data){
+        $ws = "http://www.buma.net.cn:8080/BUMAWs/services/BumaDataInputService?wsdl";//webservice服务的地址
+        $client = new \SoapClient ($ws);
+        $result=$client->putUser($data);
+        if(!$result){
+            M('card')->update(array('push_result'=>$result));
         }
     }
     

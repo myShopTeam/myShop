@@ -4,23 +4,59 @@
 <div class="wrap J_check_wrap">
   <Admintemplate file="Common/Nav"/>
 
-  <form action="{:U('cardDelete')}" method="post" class="J_ajaxForm">
+  <form action="{:U('index')}" method="post" class="J_ajaxForm">
     <div class="table_list">
       <table width="100%" cellspacing="0">
         <thead>
           <tr>
-            <td align="center" width="5%">序号</td>
-            <td align="center"width="85%" style="text-align: left">卡单类型</td>
+            <td align="center" width="5%">排序</td>
+            <td align="center"width="35%" style="text-align: left">卡单类型</td>
+            <td align="center"width="50%" style="text-align: left">卡单最大激活数</td>
             <td align="center"width="10%" >操作</td>
           </tr>
         </thead>
-        <tbody>
-          <volist name="name" id="vo">
+        <thead>
+            <tr><td style="background: #72a8cf">普通卡</td>
+                <td style="background: #72a8cf"></td>
+                <td style="background: #72a8cf"></td>
+                <td style="background: #72a8cf"></td>
             <tr>
-              <td align="center">{$vo.id}</td>
+        </thead>
+        <tbody>
+          <volist name="nomal_card" id="vo">
+            <tr>
+              <td align="center"><input size="1" class="input" name="listorder[{$vo.id}]" value="{$vo.listorder}"/></td>
               <td align="center" style="<if condition="$vo.parent_id == 0">color:blue;</if>text-align: left"><if condition="$vo.parent_id != 0">|——</if>{$vo.card_name}</td>
+              <td ><input size="1" class="input" name="num[{$vo.id}]" value="{$vo.max_active}"/></td>
               <td align="center"  width="60">
               <if condition="$vo.parent_id == 0">
+                <a  href="{:U('typeUpdate',array('id'=>$vo['id']))}">修改</a> | 
+                <a  href="{:U('productAdd',array('id'=>$vo['id']))}">添加产品</a> | 
+                <a class="J_ajax_del" href="{:U('typeDelete',array('id'=>$vo['id']))}">删除</a>
+              <else/>
+                <a class="J_ajax_del" href="{:U('productDelete',array('id'=>$vo['id']))}">删除</a>
+              </if>
+              </td>
+            </tr>
+          </volist>
+        </tbody
+        <if condition="$car_card">
+        <thead>
+            <tr><td style="background: #72a8cf">车卡</td>
+                <td style="background: #72a8cf"></td>
+                <td style="background: #72a8cf"></td>
+                <td style="background: #72a8cf"></td>
+            <tr>
+        </thead>
+        <tbody>
+          <volist name="car_card" id="vo">
+            <tr>
+              <td align="center"><input size="1" class="input" name="listorder[{$vo.id}]" value="{$vo.listorder}"/></td>
+              <td align="center" style="<if condition="$vo.parent_id == 0">color:blue;</if>text-align: left"><if condition="$vo.parent_id != 0">|——</if>{$vo.card_name}</td>
+                <td ><input size="1" class="input" name="num[{$vo.id}]" value="{$vo.max_active}"/></td>
+              <td align="center"  width="60">
+              <if condition="$vo.parent_id == 0">
+                <a  href="{:U('typeUpdate',array('id'=>$vo['id']))}">修改</a> | 
                 <a  href="{:U('productAdd',array('id'=>$vo['id']))}">添加产品</a> | 
                 <a class="J_ajax_del" href="{:U('typeDelete',array('id'=>$vo['id']))}">删除</a>
               <else/>
@@ -30,10 +66,13 @@
             </tr>
           </volist>
         </tbody>
+        </if>
       </table>
       <div class="p10">
         <div class="pages"> {$Page} </div>
       </div>
+        <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('listorder',array('str'=>'card_config'))}">排序</button>
+        <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('updateNum',array('str'=>'card_config'))}">修改卡单最大激活数</button>
     </div>
   </form>
 </div>

@@ -10,13 +10,16 @@
           <tr>
             <th width="80">类型<span class="red">*</span></th>
             <td width="250">
-                <input name='type' type='radio' value='1' checked>普通卡</input>
-                <input name='type' type='radio' value='2'/>车卡</input>
+                <if condition="$type == 1">
+                <input type='radio'checked>普通卡</input>
+                <else/>
+                <input type='radio'checked>车卡</input>
+                </IF>
             </td>
          </tr>
           <tr>
             <th width="80">卡单类型名称<span class="red">*</span></th>
-            <td width="250"><input type="test" name="card_name" class="input" id="username" placeholder="请输入名称"></td>
+            <td width="250"><span>{$card_name}</span></td>
          </tr>
                       <tr>
               <th width="80">
