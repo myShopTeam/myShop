@@ -9,21 +9,25 @@
 // +----------------------------------------------------------------------
 
 /**
+ * 打印
+ * @param array $arr
+ * @param boolean $bool
+ */
+function p($arr,$bool=false){
+    echo '<pre>';
+    print_r($arr);
+    echo '</pre>';
+    if($bool) exit;
+
+}
+
+/**
  * 系统缓存缓存管理
  * @param mixed $name 缓存名称
  * @param mixed $value 缓存值
  * @param mixed $options 缓存参数
  * @return mixed
  */
- /**
- * 打印
- */
-function p($arr){
-    echo '<pre>';
-    print_r($arr);
-    echo '</pre>';
-    exit;
-}
 
 function cache($name, $value = '', $options = null) {
     static $cache = '';
@@ -56,6 +60,7 @@ function cache($name, $value = '', $options = null) {
  * 用法：array2file($info, SITE_PATH.'post.txt');
  * @param type $array
  * @param type $filename
+ * @return mixed
  */
 function array2file($array, $filename) {
     if (defined("APP_DEBUG") && APP_DEBUG) {
@@ -937,7 +942,7 @@ function format_bytes($size, $delimiter = '') {
 	return round($size, 2) . $delimiter . $units[$i];
 }
 
-function make_log($param, $filename, $path){
+function make_log($param, $filename, $path, $append=true){
     if(!$path) {
         $path = SITE_PATH . 'data';
         if(!file_exists($path)){
@@ -954,7 +959,11 @@ function make_log($param, $filename, $path){
             $filename = date('Y-m-d') . '.log';
         }
     }
-    file_put_contents($path . $filename, date('Y-m-d H:i:s',time()) . "  " . print_r($param,1).PHP_EOL.PHP_EOL,FILE_APPEND);
+    if($append){
+        file_put_contents($path . $filename, date('Y-m-d H:i:s',time()) . "  " . print_r($param,1).PHP_EOL.PHP_EOL,FILE_APPEND);
+    } else {
+        file_put_contents($path . $filename, date('Y-m-d H:i:s',time()) . "  " . print_r($param,1));
+    }
 }
 
 /**

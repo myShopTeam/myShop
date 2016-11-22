@@ -11,6 +11,8 @@
 namespace Site\Controller;
 
 
+use Base\Controller\socket;
+
 class GoodsController extends SiteController
 {
     public $model;
