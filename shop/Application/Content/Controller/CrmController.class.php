@@ -61,10 +61,16 @@ class CrmController extends Base {
     //卡单激活页面
     public function cardActiveDo(){
         $card_num   = I("post.card_num", "", "trim");
+        $birthday   = I("post.birthday", "", "trim");
         $card_verif = M('card')->field('is_active,verif')->where(array('card_num'=>$card_num))->find();
-        //var_dump($card_verif);die;
         if($card_verif['is_active'] == '2'){
             $this->error('该卡单已激活过，请勿重复激活！');
+        }
+        $eightyTime  = strtotime('1998-1-1');
+        $six_fiveTime = strtotime('1951-1-1');
+        $birthday = strtotime(I("post.birthday"));
+        if($birthday > $eightyTime || $birthday < $six_fiveTime){
+            $this->error('参保年龄为18~65岁，您的年龄不符！');
         }
         $verifCode = md5($card_num.trim($card_verif['verif']));
         if($verifCode != session('verifCode')){
