@@ -19,7 +19,7 @@ class CrmController extends Base {
     public function cardActive(){
         $data['code'] = get_http_host() . '/index.php?g=Api&m=Checkcode&a=index&code_len=4&font_size=20&width=130&height=50&font_color=&background=';
         $this->assign('public_path', get_http_host() . '/public/');
-        $card_type = M('card_config')->where(array('parent_id'=>0))->select();
+        $card_type = M('card_config')->where(array('parent_id'=>0,'type'=>1))->select();
         $html = ' ';
         foreach($card_type as $v){
             $card_name = M('card_config')->where(array('parent_id'=>$v['id']))->select();
