@@ -275,4 +275,23 @@ class ShuipFCMS extends \Think\Controller {
         $this->assign('site_info', $this->site_info);
     }
 
+    //获取返回上个页面的url
+    protected function back_url(){
+        $back_url = $_SERVER['HTTP_REFERER'];
+        if(strpos($back_url, 'page')){
+            $this->assign('back_url', $back_url);
+        }
+    }
+
+    //验证是否有权限
+    protected function checkRole($params){
+        $params['role_id'] = User::getInstance()->role_id;
+        $check = M('access')->where($params)->find();
+        if($check && $check['status'] == 1){
+            return $check;
+        } else {
+            return false;
+        }
+    }
+
 }
