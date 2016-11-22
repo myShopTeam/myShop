@@ -71,8 +71,12 @@
       <div class="p10">
         <div class="pages"> {$Page} </div>
       </div>
-        <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('listorder',array('str'=>'card_config'))}">排序</button>
-        <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('updateNum',array('str'=>'card_config'))}">修改卡单最大激活数</button>
+      <div class="btn_wrap">
+        <div class="btn_wrap_pd">
+            <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('listorder',array('str'=>'card_config'))}">排序</button>
+            <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('updateNum',array('str'=>'card_config'))}">修改卡单最大激活数</button>
+        </div>
+      </div>
     </div>
   </form>
 </div>
