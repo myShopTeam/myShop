@@ -2,7 +2,7 @@
 <body class="J_scroll_fixed">
 <div class="wrap J_check_wrap">
    <Admintemplate file="Common/Nav"/>
-   <form class="J_ajaxForm" action="{:U('typeAdd')}" method="post" id="myform">
+   <form class="J_ajaxForm" action="{:U('typeUpdate',array('id'=>$id))}" method="post" id="myform">
    <div class="h_a">基本属性</div>
    <div class="table_full">
    <table width="100%" class="table_form contentWrap">
@@ -25,8 +25,8 @@
               <th width="80">
                 投保风险告知函
                </th>
-               <td colspan="3">
-               <div id="content_tip"></div>
+               <td colspan="3">   
+               <div id="content_tip"></div><script type="text/plain" id="content" name="content">{$content}</script>
                <div id="content" class="edui-default" style="">
                <span>
 </div></span></td>
