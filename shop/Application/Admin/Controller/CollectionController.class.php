@@ -237,7 +237,7 @@ class CollectionController extends AdminBase{
         $time = time();
         $sql = 'select id from tp_collection where period < '.$time.' and status = 1';
         $result = M('Collection')->query($sql);
-        if(is_array($result)){
+//        if(is_array($result)){
             foreach($result as $v){
                 //修改募捐状态
                 $sql2 = 'update tp_collection set status=3 where id = '.$v['id'];
@@ -281,10 +281,10 @@ class CollectionController extends AdminBase{
                 }    
             }
             return true;
-        }else{
-            $msg = '查询过期募捐失败！';
-            return false;
-        }
+//        }else{
+//            $msg = '查询过期募捐失败！';
+//            return false;
+//        }
     }
 
     /*
