@@ -274,34 +274,19 @@ function collect_store(fav_id,jstype,jsobj){
     });
 }
 //收藏商品js
-function collect_goods(fav_id,jstype,jsobj){
-    $.get('index.php?act=index&op=login', function(result){
-        if(result=='0'){
-            login_dialog();
-        }else{
-            var url = 'index.php?act=member_favorite_goods&op=favoritegoods';
-            $.getJSON(url, {'fid':fav_id}, function(data){
-                if (data.done)
-            {
-                showDialog(data.msg, 'succ','','','','','','','','',2);
-                if(jstype == 'count'){
-                    $('[nctype="'+jsobj+'"]').each(function(){
-                        $(this).html(parseInt($(this).text())+1);
-                    });
-                }
-                if(jstype == 'succ'){
-                    $('[nctype="'+jsobj+'"]').each(function(){
-                        $(this).html("收藏成功");
-                    });
-                }
+function collect_goods(gid,type){
+    $.getJSON('index.php?g=Site&m=Goods&a=toCollect',{gid:gid} , function(res){
+        if(res.status == 'success'){
+            if(type == 'goods_collect'){
+                $('[nctype="'+type+'"]').html(parseInt($('[nctype="'+type+'"]').text())+1);
             }
-                else
-            {
-                showDialog(data.msg, 'notice');
+        } else {
+            showDialog(res.msg, 'notice');
+            if(res.url){
+                window.location.href = res.url;
             }
-            });
         }
-    });
+    })
 }
 //加载购物车信息
 //function load_cart_information(){

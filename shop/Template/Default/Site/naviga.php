@@ -89,8 +89,17 @@
     <div class="nch-breadcrumb wrapper"><i class="icon-home"></i>
 
         <span><a href="/">首页</a></span><span class="arrow">></span>
+        <if condition="$cat_name eq ''">
+            <if condition="$cat_nav['parent'] neq ''">
+                <span>{$cat_nav.parent.cat_name}</span>
+            </if>
+            <span>{$cat_nav.cat.cat_name}</span>
+            <span class="arrow">></span>
+            <span>{$goods_name}</span>
+        <else/>
+            <span>{$cat_name}</span>
+        </if>
 
-        <span>{$cat_name}</span>
 
     </div>
 
