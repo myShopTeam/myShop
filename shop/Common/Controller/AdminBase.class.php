@@ -26,6 +26,7 @@ class AdminBase extends ShuipFCMS {
             "REQUIRE_AUTH_MODULE" => "", //需要认证模块
             "NOT_AUTH_MODULE" => "Public", //无需认证模块
             "USER_AUTH_GATEWAY" => U("Admin/Public/login"), //登录地址
+            "NOT_AUTH_ACTION"=>"ajaxGetProduct",
         ));
         if (false == RBAC::AccessDecision(MODULE_NAME)) {
             //检查是否登录
