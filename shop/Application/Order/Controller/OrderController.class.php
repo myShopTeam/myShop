@@ -72,7 +72,8 @@ class OrderController extends BaseController
         $address = array();
         $address['list'] = D('Member/MemberAddress')->getAddress($this->uid);
         if ($address['list']) {
-            if (current($address['list'])['default_address'] == 1) {
+            $first_address = current($address['list']);
+            if ($first_address['default_address'] == 1) {
                 $default_address = current($address['list']);
             } else {
                 $end_address_id = S('end_address_' . $this->uid);

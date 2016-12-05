@@ -61,7 +61,7 @@ class GoodsCartModel extends Model {
         //判断商品是否有属性
         $filter = $goods['is_sku'] == 1 ? array('sku_id' => $goods['sku_id']) : array('goods_id' => $goods['goods_id']);
         $cart = $this->where($filter)->find();
-        return $cart ? true : false;
+        return $cart;
     }
 
     /**
@@ -72,7 +72,7 @@ class GoodsCartModel extends Model {
     public function getCartNum($uid){
         //没有登录的用户通过cookie获取商品
         if($uid){
-            $count = $this->where(array('uid' => $uid))->count();
+            $count = $this->where(array('uid' => $uid))->sum('goods_num');
         } else {
             $count = cookie('cart') ? count(explode(',', cookie('cart'))) : 0;
         }

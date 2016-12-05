@@ -106,15 +106,20 @@
         })
     }
     //添加购物车操作
-    function addcart(gid){
+    function addcart(gid, num){
         if(!gid){
             return false;
         }
-        $.getJSON("{:U('Cart/Cart/addCart')}", {gid:gid},function (res) {
+        $.getJSON("{:U('Cart/Cart/addCart')}", {gid:gid,num:num},function (res) {
             console.log(res);
-            var cart_num = Number($('#nofollow').find('.cart_num').text()) + 1;
+//            var cart_num = Number($('#nofollow').find('.cart_num').text()) + 1;
+            if(!res.data){
+                return false;
+            }
             if(res.data.cart_info){
                 res.data.is_list = 'no';
+                var cart_id = res.data.cart_info.cart_id;
+                var cart_num = res.data.cart_info.goods_num;
                 var cart_html = template('cart-list-html', res.data);
                 var submit_html = template('cart-list-submit', res.data.cart_total)
                 //顶部购物车
@@ -128,7 +133,8 @@
                     $('#minicart_list .list_detail').html(top_cart+top_submit);
                     $('#rtoolbar_cartlist').html(cart_html+submit_html);
                 } else {
-                    if($.trim($('li[ncTpye="cart_item_'+ gid+'"]').text()) == '' ){
+                    $('li[ncTpye="cart_item_'+ cart_id +'"]').remove();
+                    if($.trim($('li[ncTpye="cart_item_'+ cart_id +'"]').text()) == '' ){
                         $('#rtoolbar_cartlist ul').append(cart_html);
                         $('#minicart_list .list_detail ul').append(top_cart);
                     }

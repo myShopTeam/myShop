@@ -48,14 +48,16 @@ class CartController extends BaseController
     public function addCart(){
         if(IS_AJAX){
             $goods_id =  I('get.gid', 0, 'intval');
+            $num =  I('get.num', 1, 'intval');
             $goods = D('Site/Goods')->getGoods('*', array('goods_id' => $goods_id), true);
             //添加购物车 1.登录用户存数据库 2.非登录用户存cookie
             if($this->isLogin() === true){
                 if($goods){
                     //判断是否添加过购物车
-                    if(!$this->model->checkGoodsInCart($goods)){
+                    $cart = $this->model->checkGoodsInCart($goods);
+                    if(!$cart){
                         //处理购物车数据
-                        $data = $this->__discountCartData($goods);
+                        $data = $this->__discountCartData($goods,$num);
                         $data['uid'] = $this->uid;
 
                         $cart_id = M('goods_cart')->add($data);
@@ -69,7 +71,13 @@ class CartController extends BaseController
                         }
                     } else {
                         //已加入购物车的商品 点击加入购物车的处理 比如：数量+1等
-                        msg('success', '加入购物车成功');
+                        $num = ($num+$cart['goods_num']) > $goods['goods_total'] ? $goods['goods_total'] : ($num+$cart['goods_num']);
+                        M('goods_cart')->where(array('goods_id' => $goods_id, 'uid' => $this->uid))->save(array('goods_num' => $num));
+                        //购物车总计
+                        $data = M('goods_cart')->where(array('goods_id' => $goods_id, 'uid' => $this->uid))->find();
+                        $result = array('cart_info' => $data);
+                        $this->getCartTotal($result);
+                        msg('success', '加入购物车成功',$result);
                     }
                 } else {
                     msg('error', '不存在此商品');
@@ -213,10 +221,11 @@ class CartController extends BaseController
 
     /**
      * 未登录用户添加商品到购物车后
-     * @params array $goods
+     * @param array $goods
+     * @param int   $goods_num
      * @return bool
      */
-    private function __discountCartData($goods){
+    private function __discountCartData($goods,$goods_num=1){
         $data = array(
             'goods_id'       => $goods['goods_id'],
             'created'        => time(),
@@ -226,7 +235,7 @@ class CartController extends BaseController
             'market_price'   => $goods['market_price'],
             'goods_price'    => $goods['goods_price'],
             'goods_thumb'    => $goods['goods_thumb'],
-            'goods_num'      => 1,
+            'goods_num'      => $goods_num > $goods['goods_total'] ? $goods['goods_total'] : $goods_num,
         );
 
         //处理属性 默认属性商品加入购物车
@@ -244,8 +253,8 @@ class CartController extends BaseController
 
     /**
      * 购物车总计
-     * @params array $cart_info
-     * @params string $type
+     * @param array $cart_info
+     * @param string $type
      */
     public function getCartTotal(&$cart_info, $type=''){
         //cart_total 里存购物车统计数据

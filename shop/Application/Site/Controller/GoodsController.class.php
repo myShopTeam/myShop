@@ -10,9 +10,6 @@
 
 namespace Site\Controller;
 
-
-use Base\Controller\socket;
-
 class GoodsController extends SiteController
 {
     public $model;
@@ -178,9 +175,40 @@ class GoodsController extends SiteController
         $goods['comment_num'] = M('goods_comment')->where(array('goods_id' => $goods['goods_id']))->order('created DESC')->select();
         //我的足迹
         $goods['browses'] = M('goods_look')->where(array('uid' => $this->uid))->limit(8)->order('created DESC')->select();
-
+        //商品收藏数量
+        $goods['collect_num'] = M('goods_collect')->where(array('goods_id' => $goods['goods_id']))->count();
+        //此商品分类
+        $goods['cat_nav'] = $this->getGoodsCatNav($goods);
         $this->assign($goods);
         $this->display();
+    }
+
+    //添加商品到收藏
+    public function toCollect(){
+        $goods_id = I('get.gid', '', 'intval');
+        if(!$this->uid){
+            msg('error', '请登录后收藏', '', U('Site/Passport/login'));
+        }
+        if($goods_id){
+            if(!M('goods_collect')->where(array('goods_id' => $goods_id, 'uid' => $this->uid))->find()){
+                if(M('goods_collect')->add(array('goods_id' => $goods_id, 'uid' => $this->uid, 'addtime' => time()))){
+                    msg('success', '收藏成功');
+                } else {
+                    msg('error', '收藏失败');
+                }
+            } else {
+                msg('error', '此商品已经收藏过了哦');
+            }
+        }
+    }
+
+    //获取商品的分类路径
+    private function getGoodsCatNav($goods){
+        $cat = array('cat' => M('goods_category')->find($goods['cat_id']));
+        if($cat['cat']['parent_id']){
+            $cat['parent'] = M('goods_category')->find($goods['parent_id']);
+        }
+        return $cat;
     }
 
     /**
