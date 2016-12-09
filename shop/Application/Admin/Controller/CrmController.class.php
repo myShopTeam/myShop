@@ -383,6 +383,38 @@ class CrmController extends AdminBase {
         }
         $this->success('修改成功！', U($a));
     }
+    
+    
+    //修改卡单最大激活数
+    public function updateLimitAge() {
+        $info = I('post.', '', trim);
+        $id = 'id';
+        switch (I('get.str', '', trim)) {
+            case "vip":
+                $db = M('card');
+                $a = 'Crm/cardList';
+                $id = 'id';
+                break;
+
+            case "school":
+                $db = M('goods_school');
+                $a = 'Member/alumni_supervise';
+                $id = 'id';
+                break;
+            case "card_config":
+                $db = M('card_config');
+                $a = 'Crm/cardConfig';
+                $id = 'id';
+                break;
+        }
+        foreach ($info['min_age'] as $k => $v) {
+            $db->where(array($id => $k))->save(array('min_age' => $v));
+        }
+        foreach ($info['max_age'] as $k => $v) {
+            $db->where(array($id => $k))->save(array('max_age' => $v));
+        }
+        $this->success('修改成功！', U($a));
+    }
 
     //修改会员信息
     public function typeUpdate() {
@@ -453,7 +485,7 @@ class CrmController extends AdminBase {
             foreach ($this->card_field as $k => $v) {
                 //Excel的第A列，uid是你查出数组的键值，下面以此类推     
                 if (($k == 'start_time' || $k == 'end_time' || $k == 'birthday' || $k == 'active_time') && $num != 1) {
-                    $val[$k] = date('Y-m-d', $val[$k]);
+                    $val[$k] = $val[$k]?date('Y-m-d', $val[$k]):'';
                 }
                 $object->setCellValue($abcKey . $num, $val[$k] . ' ');
                 $abcKey++;
@@ -510,7 +542,7 @@ class CrmController extends AdminBase {
                         $v['start_time'] = strtotime($v['start_time']);
                         $v['end_time'] = strtotime($v['end_time']);
                         $v['create_time'] = time();
-                        $v['birthday'] = strtotime($v['birthday']);
+                        $v['birthday'] = $v['birthday']?strtotime($v['birthday']):'';
                         $v['importId'] = $userInfo['id'];
                         $find_data = $cardMdl->where(array('card_num' => $v['card_num']))->find();
                         if ($find_data) {

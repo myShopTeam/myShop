@@ -10,13 +10,15 @@
         <thead>
           <tr>
             <td align="center" width="5%">排序</td>
-            <td align="center"width="35%" style="text-align: left">卡单类型</td>
-            <td align="center"width="50%" style="text-align: left">卡单最大激活数</td>
+            <td align="center"width="25%" style="text-align: left">卡单类型</td>
+            <td align="center"width="20%" style="text-align: left">卡单最大激活数</td>
+            <td align="center"width="30%" style="text-align: left">参保年龄范围</td>
             <td align="center"width="10%" >操作</td>
           </tr>
         </thead>
         <thead>
             <tr><td style="background: #72a8cf">普通卡</td>
+                <td style="background: #72a8cf"></td>
                 <td style="background: #72a8cf"></td>
                 <td style="background: #72a8cf"></td>
                 <td style="background: #72a8cf"></td>
@@ -28,6 +30,7 @@
               <td align="center"><input size="1" class="input" name="listorder[{$vo.id}]" value="{$vo.listorder}"/></td>
               <td align="center" style="<if condition="$vo.parent_id == 0">color:blue;</if>text-align: left"><if condition="$vo.parent_id != 0">|——</if>{$vo.card_name}</td>
               <td ><input size="1" class="input" name="num[{$vo.id}]" value="{$vo.max_active}"/></td>
+              <td ><input size="1" class="input" name="min_age[{$vo.id}]" value="{$vo.min_age}"/>&nbsp;~&nbsp; <input size="1" class="input" name="max_age[{$vo.id}]" value="{$vo.max_age}"/></td>
               <td align="center"  width="60">
               <if condition="$vo.parent_id == 0">
                 <a  href="{:U('typeUpdate',array('id'=>$vo['id']))}">修改</a> | 
@@ -46,6 +49,7 @@
                 <td style="background: #72a8cf"></td>
                 <td style="background: #72a8cf"></td>
                 <td style="background: #72a8cf"></td>
+                <td style="background: #72a8cf"></td>
             <tr>
         </thead>
         <tbody>
@@ -54,6 +58,7 @@
               <td align="center"><input size="1" class="input" name="listorder[{$vo.id}]" value="{$vo.listorder}"/></td>
               <td align="center" style="<if condition="$vo.parent_id == 0">color:blue;</if>text-align: left"><if condition="$vo.parent_id != 0">|——</if>{$vo.card_name}</td>
                 <td ><input size="1" class="input" name="num[{$vo.id}]" value="{$vo.max_active}"/></td>
+                <td ><input size="1" class="input" name="min_age[{$vo.id}]" value="{$vo.min_age}"/>&nbsp;~&nbsp;<input size="1" class="input" name="max_age[{$vo.id}]" value="{$vo.max_age}"/></td>
               <td align="center"  width="60">
               <if condition="$vo.parent_id == 0">
                 <a  href="{:U('typeUpdate',array('id'=>$vo['id']))}">修改</a> | 
@@ -75,6 +80,7 @@
         <div class="btn_wrap_pd">
             <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('listorder',array('str'=>'card_config'))}">排序</button>
             <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('updateNum',array('str'=>'card_config'))}">修改卡单最大激活数</button>
+            <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('updateLimitAge',array('str'=>'card_config'))}">修改参保年龄范围</button>
         </div>
       </div>
     </div>
