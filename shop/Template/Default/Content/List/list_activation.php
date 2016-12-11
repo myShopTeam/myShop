@@ -327,7 +327,7 @@ $(document).ready(function () {
         })
         /*end*/
         if(!result) return false;
-        if(card_type){
+        if(card_type == 2){
             if($('select[name="car_type"]').val() =='')
             {
                 alert('车辆类型必填')

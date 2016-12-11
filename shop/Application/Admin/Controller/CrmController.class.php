@@ -38,6 +38,7 @@ class CrmController extends AdminBase {
         'num_plate'=>'车牌号',
         'engine_number'=>'发动机号',
         'car_seat_num'=>'核定 座位数',
+        
     );
     protected $tmp_table = array(
         'card_type' => '幸福家园系列',
@@ -468,7 +469,7 @@ class CrmController extends AdminBase {
                 ->setDescription("数据EXCEL导出")
                 ->setKeywords("excel")
                 ->setCategory("result file");
-
+        $this->card_field = $this->card_field + array('area'=>'区域','section'=>'部门','name'=>'销售');
         $where = $this->createWhere(I('post.'));
         $arr = M('card')->where($where)->select();
         array_unshift($arr, $this->card_field);
@@ -477,16 +478,21 @@ class CrmController extends AdminBase {
             $arr[0] = $this->card_field;
             $arr[1] = $this->tmp_table;
         }
+        $role_area = $this->selectUserArea();
         foreach ($arr as $key => $val) { // 注意 key 是从 0 还是 1 开始，此处是 0
             $num = $key + 1;
             $object = $Excel->setActiveSheetIndex(0);
-
             $abcKey = 'A';
             foreach ($this->card_field as $k => $v) {
+                
                 //Excel的第A列，uid是你查出数组的键值，下面以此类推     
                 if (($k == 'start_time' || $k == 'end_time' || $k == 'birthday' || $k == 'active_time') && $num != 1) {
                     $val[$k] = $val[$k]?date('Y-m-d', $val[$k]):'';
                 }
+                if(($k == 'area' || $k == 'section' || $k == 'name' )&& $num != 1){
+                    $val[$k] = $role_area[$val['importId']][$k];
+                }
+                
                 $object->setCellValue($abcKey . $num, $val[$k] . ' ');
                 $abcKey++;
             }
@@ -817,6 +823,32 @@ class CrmController extends AdminBase {
         $result = M('role')->where(array('parentid' => $roleId))->select();
 
         echo json_encode($result);
+    }
+    
+    public function selectUserArea(){
+        $user_list = M('user')->select();
+        $role_arr = array();
+        foreach($user_list as $v){
+            $sql = "SELECT s.levle,s.name,b.name section,q.name area FROM tp_role s INNER JOIN tp_role b ON  s.parentid = b.id INNER JOIN tp_role q ON b.parentid = q.id  WHERE s.id = ".$v['role_id'];
+            $user_rol = M('role')->query($sql);
+            if($user_rol[0]['levle'] == 4){
+                $role_arr[$v['id']]['area'] = $user_rol[0]['area'];
+                $role_arr[$v['id']]['section'] = $user_rol[0]['section'];
+            }else if($user_rol[0]['levle'] == 3){
+                $role_arr[$v['id']]['area'] = $user_rol[0]['section'];
+                $role_arr[$v['id']]['section'] = $user_rol[0]['name'];
+            }else if(!$user_rol[0]['levle']){
+                $sql = "select levle,name from tp_role where id = ".$v['role_id'];
+                $area_rol = M('role')->query($sql);
+                if($area_rol[0]['levle'] == 2){
+                    $role_arr[$v['id']]['area'] = $area_rol[0]['name'];
+                } 
+            }
+            $role_arr[$v['id']]['name'] = $v['nickname'];
+
+        }
+        return $role_arr;
+        
     }
 
 }

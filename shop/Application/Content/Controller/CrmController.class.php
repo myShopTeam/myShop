@@ -90,7 +90,7 @@ class CrmController extends Base {
         if($age < $card_config['min_age'] || $age >$card_config['max_age']){
             $this->error('身份证年龄超出参保范围！');
         }
-        
+        $this->error(1);
 //        if(I("post.birthday")){
 //            $eightyTime  = strtotime('1998-1-1');
 //            $six_fiveTime = strtotime('1951-1-1');
