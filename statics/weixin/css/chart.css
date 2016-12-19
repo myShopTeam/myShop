@@ -1,0 +1,19 @@
+@charset "utf-8";
+/* CSS Document */
+.chart_box { height: auto; width: 98%; FILTER: progid:DXImageTransform.Microsoft.Gradient(startColorstr=#88000000, endColorstr=#88000000);-webkit-transition: height .3s ease-in-out .3s; -moz-transition: height .3s ease-in-out .3s; -o-transition: height .3s ease-in-out .3s; -ms-transition: height .3s ease-in-out .3s; transition: height .3s ease-in-out .3s; border: 1px #CCC solid; margin: 8px; }
+.chart_box .chart_content { width: 99%; height: 99%; display: inline-block; overflow: hidden; padding: 4px; background: #FFF; }
+.pf-close { font-size: 24px; float: right; padding: 5px 10px; cursor: pointer; font-style: normal; color: #999; line-height: 27px; font-weight: 700; }
+.chart_box .chart_content .chart_title { height: 45px; font-size: 18px; line-height: 46px; border-bottom: 1px solid #E1E1E1; color: #4d4d4d; text-indent: 20px; background-color: #f9f9f9; background: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(#f9f9f9)); }
+.chart_box .chart_content .message_title { border-bottom: 1px solid #d3d3d3; height: 45px; }
+.chart_box .chart_content .message_title h2 { float: left; color: #F70; font-size: 14px; font-weight: 700; padding: 12px 3px 0 15px; margin-right: 5px; }
+.chart_box .chart_content .message_title .ft-date { float: right; font-size: 14px; color: #527397; margin: 12px 15px 0 0; font-weight: bold; padding-left: 27px; background: url(https://i.alipayobjects.com/e/201312/1ebe29YIWD.png) -1px -1px no-repeat; }
+.chart_content .title2 { height: auto; line-height: 22px; padding: 5px 15px; border-bottom: 1px solid #d3d3d3; }
+.attNumber { height: 80px; border-bottom: solid 1px #d3d3d3; background: -webkit-linear-gradient(#fefefe, #f3f3f3); background: -moz-linear-gradient(#fefefe, #f3f3f3); background: -o-linear-gradient(#fefefe, #f3f3f3); background: linear-gradient(#fefefe, #f3f3f3); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fefefe', endColorstr='#f3f3f3')
+}
+.chart_content .attNumber .attItem { width: 170px; border-right: solid 1px #d3d3d3; padding: 15px 0 0 25px; font-weight: bold; font-size: 14px; float: left; height: 65px; color: #f60; }
+.chart_content .attNumber .attItemL { width: 525px }
+.chart_content .attNumber .attItem .top { font-size: 18px }
+.chart_content .attNumber .attItem .num { font-size: 20px; font-family: "Microsoft Yahei"; font-weight: normal }
+.chart_content .attNumber .cityName { display: block; float: left; max-width: 70px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 3px }
+.chart_content .title { border-bottom: 1px solid #d3d3d3; height: 45px; }
+.chart_content .title h2{ float: left; color: #F70; font-size: 14px; font-weight: 700; padding: 12px 3px 0 15px; margin-right: 5px; }

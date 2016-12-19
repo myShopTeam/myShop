@@ -28,7 +28,8 @@ class WechatController extends \Think\Controller
     }
 
     private function checkSignature(){
-        $data = array(C('WECHAT_AUTH_TOKEN'),$_GET['timestamp'], $_GET['nonce']);
+        $wxuser = S('wxuser');
+        $data = array($wxuser['token'],$_GET['timestamp'], $_GET['nonce']);
         $sign = $_GET['signature'];
         sort($data, SORT_STRING);
         $signature = sha1(implode($data));
@@ -37,9 +38,5 @@ class WechatController extends \Think\Controller
         } else {
             return false;
         }
-    }
-
-    public function createToken(){
-        echo genRandomString(20);
     }
 }
