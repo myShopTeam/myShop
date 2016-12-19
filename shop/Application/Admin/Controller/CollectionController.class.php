@@ -56,7 +56,7 @@ class CollectionController extends AdminBase{
      *  发起募捐
      */
     public function add(){
-        $mem_count = M('card')->where(array('is_active'=>'2'))->count();
+        $mem_count = M('member')->count();
         if($_POST){
             $mdl_collection = D('Collection');
             if(!$mdl_collection->create()){
@@ -74,7 +74,7 @@ class CollectionController extends AdminBase{
                 }
                 
                 $data['issue_time'] = time();
-                $mem_arr = $this->select_member($data['member_num'],' where is_active = 2 ');
+                $mem_arr = $this->select_member($data['member_num'],'');
                 $data['member'] = serialize($mem_arr);
                 $result = $mdl_collection->add($data);
                 if($result){
@@ -105,7 +105,7 @@ class CollectionController extends AdminBase{
      * 募捐重启
      */
     public function again_collection(){
-        $mem_count = M('card')->count();
+        $mem_count = M('member')->count();
         $msg = "发布成功！";
         if($_POST){
             $mdl_collection = D('Collection');
@@ -120,7 +120,6 @@ class CollectionController extends AdminBase{
                 }else if($data['aver_money'] * $data['member_num'] != $data['total_money']){
                     $this->error('捐款金额有误，请重新输入！');
                 }
-                var_dump($data);die;
                 $result = $mdl_collection->add($data);
                 if($result){
                     $collection_id = $mdl_collection->getLastInsID();
@@ -175,7 +174,7 @@ class CollectionController extends AdminBase{
             $data['total_money'] = $data['aver_money']*$data['member_num'];
             $data['times'] = $result['times'] + 1;
             /*之前捐款的人不参与后续募捐*/
-            $sql2        = 'select member from tp_collection where number = '.$number;
+            $sql2        = 'select tp_member from tp_collection where number = '.$number;
             $result2     = M('Collection')->query($sql2);
             if(is_array($result2)){
                 $result_mem_arr = array();
@@ -185,7 +184,7 @@ class CollectionController extends AdminBase{
                 }
             }    
             $result_mem_str = implode(',', $result_mem_arr);
-            $where = ' where id not in('.$result_mem_str.') and is_active = 2 ';
+            $where = ' where id not in('.$result_mem_str.') ';
             $max_mem_num = $this->select_member($data['member_num'],$where);
             $member_num = count($max_mem_num);
             //如果可捐款人数不足，则从之前的募捐中捐款失败的人中重新抽取
@@ -219,8 +218,8 @@ class CollectionController extends AdminBase{
      */
     public function select_member($num_mem,$where=''){
         //成功捐款次数正序、参与捐款总次数正序、最近捐款时间倒叙
-        $sql = "select id from tp_card ".$where." order by donation_times_succ asc,donation_times_totol asc,donation_lately_time asc limit 0,".$num_mem;
-        $mem_list = M('card')->query($sql);
+        $sql = "select id from tp_member ".$where." order by donation_times_succ asc,donation_times_totol asc,donation_lately_time asc limit 0,".$num_mem;
+        $mem_list = M('member')->query($sql);
         $arr_mem  = array();
         if(is_array($mem_list)){
             foreach($mem_list as $v){
@@ -258,8 +257,8 @@ class CollectionController extends AdminBase{
                                 }
                             }
                             $mem_str = implode(',', $arr_mem);
-                            $sql5 = 'UPDATE tp_card SET donation_times_faile = donation_times_faile + 1 where id in('.$mem_str.')';
-                            $result5 = M("Card")->query($sql5);
+                            $sql5 = 'UPDATE tp_member SET donation_times_faile = donation_times_faile + 1 where id in('.$mem_str.')';
+                            $result5 = M("member")->query($sql5);
                             if(is_array($result5)){
                                 return true;
                             }else{
@@ -323,8 +322,8 @@ class CollectionController extends AdminBase{
     private function add_times($mem_arr,&$msg){
         if(is_array($mem_arr)){
             $mem_str = implode(',', $mem_arr);
-            $sql = 'update tp_card set donation_times_totol = donation_times_totol + 1 where id in('.$mem_str.')';
-            $result = M('Card')->query($sql);
+            $sql = 'update tp_member set donation_times_totol = donation_times_totol + 1 where id in('.$mem_str.')';
+            $result = M('member')->query($sql);
             if(is_array($result)){
                 return true;
             }        
@@ -357,7 +356,7 @@ class CollectionController extends AdminBase{
         $count = $db->query($sql3);
         $page = $this->page($count[0]['count'], 20);       
         
-        $sql = 'select d.*,c.realname,c.donation_times_totol as total,c.donation_times_faile as faile from tp_donation d INNER JOIN tp_card c ON c.id = d.donation_user_id  where '.$where.' ORDER BY d.donation_time asc LIMIT  '.$page->firstRow . ',' . $page->listRows;
+        $sql = 'select d.*,c.realname,c.donation_times_totol as total,c.donation_times_faile as faile from tp_donation d INNER JOIN tp_member c ON c.id = d.donation_user_id  where '.$where.' ORDER BY d.donation_time asc LIMIT  '.$page->firstRow . ',' . $page->listRows;
         $result = M('Donation')->query($sql);
         $sql2 = 'select * from tp_collection where id ='.$don_id;
         $result2 = M('Donation')->query($sql2);

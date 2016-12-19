@@ -26,8 +26,8 @@ Class ReportController extends AdminBase
      * 区域销售报表
      */
     public function areaReport(){
-        $area_id =  $this->userInfo['id'];
-        $where['parentid'] = $this->userInfo['id'];
+        $area_id =  $this->userInfo['role_id'];
+        $where['parentid'] = $this->userInfo['role_id'];
         //超级管理员身份
         if($this->userInfo['role_id'] == '1'){
             $area = M('role')->where(array('parentid'=>1))->select();
@@ -80,9 +80,9 @@ Class ReportController extends AdminBase
         //判断是否有权限访问
         if($_GET['id'] || $_POST['id']){
             $id = $_GET['id']?$_GET['id']:$_POST['id'];
-            $parentid = M('Role')->getFieldById($id,'parentid');
-            
-            if($this->userInfo['id'] != 1 && $this->userInfo['id'] != $parentid){
+            //$parentid = M('Role')->getFieldById($id,'parentid');
+            $childId = $this->get_child_user($section_id);
+            if($this->userInfo['id'] != 1 && !in_array($id,$childId)){
                 $this->error('无权限访问！');
             }
             //保留区域查询数据   非超管即区域负责人
@@ -130,7 +130,7 @@ Class ReportController extends AdminBase
         }
         
         $this->assign('section_name',M('Role')->getFieldById($section_id,'name'));
-        $this->assign('card_active_count',$card_active_count[0]['counts']);
+        $this->assign('card_add_count',$card_add_count[0]['counts']);
         $this->assign('card_active_count',$card_active_count[0]['counts']);
         $this->assign("Page", $page->show());
         $this->assign('count',$count);
@@ -167,6 +167,16 @@ Class ReportController extends AdminBase
         }else{
             $this->error('区域不能为空');
         }
+    }
+    
+    /*
+     * 根据用户id 获取下级所有用户
+     */
+    public function get_child_user($role_id){
+        $child_role_id = D("Admin/role")->getArrchildid($role_id);
+        $child_role_arr = explode(',', $child_role_id);
+        
+        return $child_role_arr;
     }
 }
 

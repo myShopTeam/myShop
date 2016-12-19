@@ -18,7 +18,7 @@ define('IN_ADMIN', true);
 
 class AdminBase extends ShuipFCMS {
 
-    public $whiteAction = '';
+    public $whiteAction = 'ajaxGetProduct';
     //初始化
     protected function _initialize() {
         C(array(

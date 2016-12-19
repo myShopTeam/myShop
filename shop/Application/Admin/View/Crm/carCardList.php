@@ -8,17 +8,8 @@
     <div class="search_type cc mb10">
       <div class="mb10"> 
 	      <span class="mr20">
-                        <!--<input class="input length_2 " value="{$post.card_type}"  name="card_type" placeholder="输入卡单类型"/>-->
-                        <select name="card_type" class="select" id="card_type">
-                            <option value="">选择卡单类型</option>
-                            <volist name="type" id="vo">
-                            <option value="{$vo.card_name}">{$vo.card_name}</option>
-                            </volist>
-                        </select>
-                        <select name="card_name" class="select" id="card_name">
-                            <option value="">选择产品名称</option>
-                        </select>
-                        <!--<input class="input length_2 " value="{$post.card_name}" name="card_name" placeholder="输入产品名称"/>-->
+                        <input class="input length_2 " value="{$post.card_type}"  name="card_type" placeholder="输入卡单类型"/>
+                        <input class="input length_2 " value="{$post.card_name}" name="card_name" placeholder="输入产品名称"/>
                         <input type="hidden" name="user_id" value="{$user_id}">
                         <select name="time_type" class="select" id="time" >
                             <option value='create_time' <if condition="$post.time_type eq 'create_time'">selected</if>>提交时间</option>
@@ -40,24 +31,7 @@
                         <input type="button"class="btn" onclick="javascript:window.location.href='{:U('export',array('type'=>tmp))}'" value="导入模板下载" />
                         &nbsp&nbsp<span>姓名：<font color="blue" weight="bold" size="4px" >{$name}</font></span>
        	  </span> 
-
        </div>
-        <if condition="$user_id == 1">
-         <span class="mr30">
-                <select name="area" onchange="selectAuto()" data-id='{$post.area}' class="selectArea" id="time" >
-                    <option value="" >选择区域</option>
-                    <volist name="role" id="vo">
-                        <option value='{$vo.id}' <eq name="post.area" value="$vo.id">selected</eq>>{$vo.name}</option>
-                    </volist>    
-                </select> 
-             <select name="section" onchange="selectAuto()" data-id="{$post.section}" class="selectSection" style="display: none" id="time" >
-                    <option value="" >选择部门</option> 
-                </select>
-                <select name="stuff" onchange="selectAuto()" data-id="{$post.stuff}" class="selectStuff" style="display: none" id="time" >
-                    <option value="" >选择职员</option> 
-                </select> 
-          </span>
-        </if>
     </div>
   </form> 
   <form action="{:U('cardDelete')}" method="post" class="J_ajaxForm">
@@ -129,55 +103,6 @@
 <script>
 //鼠标悬停在列表食品缩略图上展示大图
 $(function(){
-        $('#card_type').change(function(){
-            var url   = "{:U('ajaxGetProduct')}";
-            var data  = 'card_type='+$(this).val()
-            $.post(url,data,function(re){
-                if(re.res == 'success'){
-                    $('#card_name').html(re.data)
-                }else{
-                    //alert(re.msg);
-                }
-            },'json')
-        })
-        var card_name = "{$post.card_name}";
-        var card_type = "{$post.card_type}";
-        if(card_name && card_type){
-           $('#card_type').val(card_type) 
-           cardTypeChange(card_type,card_name)
-        }else if(card_type){
-           $('#card_type').val(card_type) 
-        }
-        
-        function cardTypeChange(type,name){
-            var url   = "{:U('ajaxGetProduct')}";
-            var data  = 'card_type='+type+'&card_name='+name
-            $.post(url,data,function(re){
-                if(re.res == 'success'){
-                    $('#card_name').html(re.data)
-                }else{
-                    //alert(re.msg);
-                }
-            },'json')
-        }
-        
-        $('#status').change(function(){
-            $('.search_form').submit()
-        })
-    
-        area_id = $('.selectArea').data('id')
-        section_id = $('.selectSection').data('id')
-        sutff_id = $('.selectStuff').data('id')
-        if(sutff_id){
-           selectArea(area_id,section_id,sutff_id);
-        }else if(section_id){
-            selectArea(area_id,section_id,sutff_id);
-        }else if(area_id){
-            selectArea(area_id,section_id,sutff_id);
-        }else{
-            selectArea(area_id,section_id,sutff_id)
-        }
-        
 	var img;
 	$('.img').mouseover(function(){
 		img = $(this).attr('src');
@@ -194,7 +119,12 @@ $(function(){
             }else{
                 $('.uploadFile').addClass('active')
                 $('.uploadFile').css('display','')
-            }   
+            }
+            
+        })
+        
+        $('#card_type,#card_name,#status').change(function(){
+            $('.search_form').submit()
         })
         
         $('.export').click(function(){
@@ -204,52 +134,13 @@ $(function(){
             $('<form method="post" action="{:U('export')}"></form>').append($('.search_form').find('input,select').clone()).submit()
         })
         
-        function selectArea(area,section,stuff){
-            var url  = "{:U('ajaxSelectRole')}";
-            var selectHtml = '<option value="" >选择部门</option>'
-            if(area){
-                $.ajax({
-                    type:'post',
-                    url:url,
-                    data:'role='+area,
-                    async:false,
-                    dataType:'json',
-                    success:function(re){
-                        $.each(re,function(key,value){
-                            if(section == value.id){
-                               $('.selectStuff').css('display','')
-                               selectHtml += "<option selected  value='" + value.id + "'>" + value.name + "</option>"
-                            }else{
-                               selectHtml += "<option value='" + value.id + "'>" + value.name + "</option>" 
-                            }
-                        })
-                        $('.selectSection').css('display','')
-                        $('.selectSection').html(selectHtml)
-                    }
-                })
-            }
-            if(section){
-                var selectHtml = '<option value="" >选择职员</option>'
-                $.post(url,'role='+section,function(re){
-                 $.each(re,function(key,value){
-                     if(stuff == value.id){
-                        selectHtml += "<option selected  value='" + value.id + "'>" + value.name + "</option>"
-                    }else{
-                        selectHtml += "<option value='" + value.id + "'>" + value.name + "</option>" 
-                    }
-                 })
-                 $('.selectStuff').html(selectHtml)
-                },'json')
-            }
-        }
-     
+//        $('.activeDo').click(function(re){
+//            if(!confirm('是否确认激活？')){
+//                return false;
+//            }
+//        })
+        
 })
-
-        function selectAuto(){
-            $('.search_form').submit()
-        }
-
-    
 </script>
 </body>
 </html>
