@@ -18,6 +18,7 @@ define('IN_ADMIN', true);
 
 class AdminBase extends ShuipFCMS {
 
+    public $whiteAction = 'ajaxGetProduct';
     //初始化
     protected function _initialize() {
         C(array(
@@ -26,7 +27,7 @@ class AdminBase extends ShuipFCMS {
             "REQUIRE_AUTH_MODULE" => "", //需要认证模块
             "NOT_AUTH_MODULE" => "Public", //无需认证模块
             "USER_AUTH_GATEWAY" => U("Admin/Public/login"), //登录地址
-            "NOT_AUTH_ACTION"=>"ajaxGetProduct",
+            "NOT_AUTH_ACTION" => $this->whiteAction, //无需认证方法
         ));
         if (false == RBAC::AccessDecision(MODULE_NAME)) {
             //检查是否登录

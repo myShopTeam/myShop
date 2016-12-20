@@ -1,0 +1,193 @@
+/**
+ * Created by hua on 14-4-28.
+ */
+
+.add-people-container .preFlag,
+.people-info-container .preFlag {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
+}
+
+/* edited by wenyao.mwy 14-7-4 */
+.add-people-container .c1{background-color: #ff3333}
+.add-people-container .c2{background-color: #cc6633}
+.add-people-container .c3{background-color: #ff9933}
+.add-people-container .c4{background-color: #ffcc33}
+.add-people-container .c5{background-color: #cccc33}
+.add-people-container .c6{background-color: #99cc33}
+.add-people-container .c7{background-color: #009933}
+.add-people-container .c8{background-color: #669999}
+.add-people-container .c9{background-color: #66cccc}
+.add-people-container .c10{background-color: #6699cc}
+.add-people-container .c11{background-color: #0066cc}
+.add-people-container .c12{background-color: #333399}
+.add-people-container .c13{background-color: #660099}
+.add-people-container .c14{background-color: #990099}
+.add-people-container .c15{background-color: #cc0066}
+.add-people-container .c16{background-color: #cc9933}
+.add-people-container .c17{background-color: #cccccc}
+.add-people-container .c18{background-color: #ffcc99}
+.add-people-container .c19{background-color: #ff9999}
+.add-people-container .c20{background-color: #999966}
+.add-people-container .c21{background-color: #cccc99}
+.add-people-container .c22{background-color: #99cc99}
+.add-people-container .c23{background-color: #99ccff}
+.add-people-container .c24{background-color: #999999}
+.add-people-container .c25{background-color: #ccccff}
+.add-people-container .c26{background-color: #cc66ff}
+.add-people-container .c27{background-color: #33ccff}
+.add-people-container .c28{background-color: #0099ff}
+.add-people-container .c29{background-color: #6633ff}
+.add-people-container .c30{background-color: #ff00cc}
+
+.people-info-container .c1 {
+  background-color: #ccc;
+}
+.people-info-container .c2 {
+  background-color: #99cc00;
+}
+.people-info-container .c3 {
+  background-color: #cccc00;
+}
+.people-info-container .c4 {
+  background-color: #ffff33;
+}
+.people-info-container .c5 {
+  background-color: #ffcc33;
+}
+.people-info-container .c6 {
+  background-color: #ffa53b;
+}
+.people-info-container .c7 {
+  background-color: #ff6e3b;
+}
+.people-info-container .c8 {
+  background-color: #ff493b;
+}
+.add-people-container .ap-bts {
+  border-top: 1px solid #d3d3d3;
+}
+.add-people-container .ap-chart,
+.add-people-container .ap-table {
+  float: left;
+}
+.add-people-container .ap-chart {
+  width: 240px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+.add-people-container .ap-chart.blank {
+  background: url(https://i.alipayobjects.com/i/localhost/png/201405/2aJAbeiGQ1.png) no-repeat;
+  height: 346px;
+  background-position: 10px;
+}
+.add-people-container .ap-chart.blank > * {
+  display: none!important;
+}
+.add-people-container .ap-table {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  width: 540px;
+  border: 2px solid #d8e3ee;
+  background-color: #fff;
+}
+.add-people-container .ap-table th {
+  background-color: #ebf1fa;
+  font-size: 14px;
+  height: 34px;
+  line-height: 34px;
+  text-align: left;
+}
+.add-people-container .ap-table td {
+  font-size: 12px;
+  height: 24px;
+  line-height: 24px;
+}
+.add-people-container .ap-table tr {
+  border-top: 1px solid #d8e3ee;
+}
+.add-people-container .ap-table tr:first-child {
+  border-top: none;
+}
+.add-people-container .ap-table th:first-child,
+.add-people-container .ap-table td:first-child {
+  padding-left: 10px;
+}
+.people-info-container .pi-chart-container1 {
+  width: 340px;
+}
+.people-info-container .pi-chart-container2 {
+  width: 480px;
+}
+.people-info-container .pi-chart-container1,
+.people-info-container .pi-chart-container2 {
+  float: left;
+  margin: 25px 0 0 32px;
+}
+.people-info-container .chart-wrap {
+  position: relative;
+}
+.people-info-container .cw1 {
+  margin-top: -40px;
+}
+.people-info-container .pi-chart1 {
+  width: 176px;
+}
+.people-info-container .pi-chart1.blank {
+  background: url(https://i.alipayobjects.com/i/localhost/png/201405/2aeJKNO3Nt.png) no-repeat;
+  height: 346px;
+  background-position: 10px;
+}
+.people-info-container .pi-chart1.blank > * {
+  display: none!important;
+}
+.people-info-container .cw2 {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.people-info-container .pi-chart2 {
+  width: 260px;
+  max-height: 300px;
+}
+.people-info-container .info-des {
+  position: absolute;
+  line-height: 25px;
+}
+.people-info-container .id1 {
+  left: 200px;
+  width: 145px;
+  top: 100px;
+  border: 2px solid #d8e3ee;
+}
+.people-info-container .id1 li {
+  padding-left: 10px;
+  border-bottom: 1px solid #d8e3ee;
+}
+.people-info-container .id1 li:last-child {
+  border-bottom: none;
+}
+.people-info-container .id1 .pi-ratio {
+  float: right;
+  margin-right: 10px;
+}
+.people-info-container .id2 {
+  left: 300px;
+  bottom: 50px;
+}
+.people-info-container .id2 .c1 {
+  background-color: #eeca44;
+}
+.people-info-container .id2 .c2 {
+  background-color: #ee8844;
+}
+.people-info-container .id2 .c3 {
+  background-color: #ee6739;
+}
+.people-info-container .id2 .c4 {
+  background-color: #d0313b;
+}
+.people-info-container .id2 .c5 {
+  background-color: #a42d04;
+}

@@ -8,7 +8,7 @@
 
     <header class="public-head-layout wrapper">
 
-        <h1 class="site-logo"><a href="/"><img src="{$site_info.site_path}images/logo.png" class="pngFix"></a></h1>
+        <h1 class="site-logo"><a href="/"><img src="" class="pngFix"></a></h1>
 
         <div class="nc-regist-now">
 

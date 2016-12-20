@@ -1,0 +1,51 @@
+
+html {
+    overflow-y: scroll;
+}
+body {
+    background: #fff none repeat scroll 0 0;
+    color: #333;
+    font-family: "΢���ź�";
+    font-size: 16px;
+}
+img {
+    border: 0 none;
+}
+.error {
+    padding: 24px 48px;
+}
+.face {
+    font-size: 100px;
+    font-weight: normal;
+    line-height: 120px;
+    margin-bottom: 12px;
+}
+h1 {
+    font-size: 32px;
+    line-height: 48px;
+}
+.error .content {
+    padding-top: 10px;
+}
+.error .info {
+    margin-bottom: 12px;
+}
+.error .info .title {
+    margin-bottom: 3px;
+}
+.error .info .title h3 {
+    color: #000;
+    font-size: 16px;
+    font-weight: 700;
+}
+.error .info .text {
+    line-height: 24px;
+}
+.copyright {
+    color: #999;
+    padding: 12px 48px;
+}
+.copyright a {
+    color: #000;
+    text-decoration: none;
+}

@@ -56,7 +56,7 @@
 <body>
 
 <header class="ncc-head-layout">
-    <div class="site-logo"><a href="/"><img src="{$site_info.site_path}images/logo.png" class="pngFix"></a>
+    <div class="site-logo"><a href="/"><img src="" class="pngFix"></a>
     </div>
     <ul class="ncc-flow">
         <li class=""><i class="step1"></i>

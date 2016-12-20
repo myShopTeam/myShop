@@ -10,5 +10,4 @@
 return array(
     'WECHAT_APPID'     => 'wx7c1bdcbc86a9b6f6',
     'WECHAT_APPSECRET' => '90aefed68f4c1a5ed2844540ddd02299',
-    'WECHAT_AUTH_TOKEN'=> 'HJeSJ2M58YsvQ0vLgjM5',
 );

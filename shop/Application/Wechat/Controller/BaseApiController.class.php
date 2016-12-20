@@ -22,7 +22,4 @@ class BaseApiController extends \Think\Controller
         $this->curl = new \Curl();
     }
 
-    public function getAccessToken(){
-
-    }
 }
