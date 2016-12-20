@@ -16,6 +16,9 @@ class CrmController extends AdminBase {
     protected $config = array(
         'is_active' => array('1' => '未激活', '2' => '已激活')
     );
+    
+    //查询条件保存前缀
+    protected $_prefix = '';
     //导入的字段
     protected $card_field = array(
         'card_type' => '卡类型',
@@ -66,6 +69,7 @@ class CrmController extends AdminBase {
     protected function _initialize() {
         parent::_initialize();
         session_start();
+        $this->_prefix = 'admin';
         $this->userInfo = User::getInstance()->getInfo();
         $this->assign('config', $this->config);
     }
@@ -74,20 +78,32 @@ class CrmController extends AdminBase {
     public function cardList() {
         $user_id = $this->userInfo['id'];
         $userStr = $user_id;
+       //var_dump($_POST);die;
 //        //普通卡还是车卡
 //        $type = $_GET['type']?2:1;
-        $post = $_POST;
-        if ($post) {
+        //var_dump(session($this->_prefix."_".__CLASS__."_".__FUNCTION__));die;
+        if ($_POST) {
+            $post = $_POST;
+            session($this->_prefix."_".__CLASS__."_".__FUNCTION__,$post);
             $where = $this->createWhere($post);
             if ($post['user_id'])
                 $userStr = $post['user_id'];
             $this->assign('post', $post);
-        }else {
+            //var_dump($where);die;
+        }else if(session($this->_prefix."_".__CLASS__."_".__FUNCTION__)){
+            $post = session($this->_prefix."_".__CLASS__."_".__FUNCTION__);
+            $where = $this->createWhere($post);
+            if ($post['user_id'])
+                $userStr = $post['user_id'];
+            $this->assign('post', $post);
+        }
+        else{
             $where = ' 1 = 1 '; //' card_type_int = '.$type;
         }
         if ($_GET['user_id']) {
             $userStr = $_GET['user_id'];
         }
+        
         //检查权限
         $child_user = $this->get_child_user($user_id);
         if (!in_array($userStr, $child_user)) {
@@ -99,7 +115,8 @@ class CrmController extends AdminBase {
         $db = M('card');
         $count = $db->where($where)->count();
         $page = $this->page($count, 20);
-        $vipList = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('listorder desc,id desc')->select();
+        $vipList = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('listorder desc')->select();
+        //var_dump($vipList);die;
         $roleSql = 'SELECT * FROM tp_role WHERE parentid = 1';
         $roleResult = M('role')->query($roleSql);
 
@@ -470,13 +487,14 @@ class CrmController extends AdminBase {
                 ->setKeywords("excel")
                 ->setCategory("result file");
         $this->card_field = $this->card_field + array('area'=>'区域','section'=>'部门','name'=>'销售');
-        $where = $this->createWhere(I('post.'));
-        $arr = M('card')->where($where)->select();
-        array_unshift($arr, $this->card_field);
         if (I('get.type') == 'tmp') {
             $arr = array();
             $arr[0] = $this->card_field;
             $arr[1] = $this->tmp_table;
+        }else{
+            $where = $this->createWhere($_POST);
+            $arr = M('card')->where($where)->select();
+            array_unshift($arr, $this->card_field);
         }
         $role_area = $this->selectUserArea();
         foreach ($arr as $key => $val) { // 注意 key 是从 0 还是 1 开始，此处是 0
@@ -762,7 +780,7 @@ class CrmController extends AdminBase {
         $sql = "SELECT c.*  from tp_card_config c  JOIN tp_card_config p ON c.parent_id = p.id WHERE p.card_name = '" . $card_type . "'";
         $product_list = M('card_config')->query($sql);
         if ($product_list) {
-            $product_html = '<option>选择产品名称</option>';
+            $product_html = '<option value="">选择产品名称</option>';
             foreach ($product_list as $v) {
                 if ($card_name == $v['card_name']) {
                     $product_html .= '<option selected  value=' . $v['card_name'] . '>' . $v['card_name'] . '</option>';

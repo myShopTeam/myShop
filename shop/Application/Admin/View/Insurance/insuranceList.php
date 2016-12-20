@@ -45,8 +45,8 @@
               <td align="center">{$vo.realname}</td>
               <td align="center">{$vo.cred_num}</td>
               <td align="center">{$vo.insurance_num}</td>
-              <td align="center">{$vo.start_time|date='Y-m-d H:i:s',###}</td>
-              <td align="center"><if condition="$vo.rescue_time">{$vo.rescue_time|date='Y-m-d H:i:s',###}<else/>以卡单激活时间为准</if></td>
+              <td align="center">{$vo.start_time}</td>
+              <td align="center"><if condition="$vo.rescue_time">{$vo.rescue_time}<else/>以卡单激活时间为准</if></td>
               <td align="center" width="60">
               <a href="{:U('insuranceEdit',array('insurance_num'=>$vo[insurance_num]))}">修改</a>|
               <a class="J_ajax_del" href="{:U('insuranceDelete',array('id'=>$vo['id']))}">删除</a>
