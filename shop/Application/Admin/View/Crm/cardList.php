@@ -190,6 +190,9 @@ $(function(){
         
         $('.upload').click(function(){
             if($('.uploadFile').hasClass('active')){
+                if(!confirm('请确认已将excel整体转换为宋体格式！')){
+                    e.topPropagation();
+                }
                 $('<form method="post" action="{:U('upload')}" enctype="multipart/form-data"></form>').append($('.uploadFile')).submit()
             }else{
                 $('.uploadFile').addClass('active')

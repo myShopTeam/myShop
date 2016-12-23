@@ -274,10 +274,13 @@ $(document).ready(function () {
                     alert('该卡单已激活！')
                 }else if(re.is_active == '1'){
                     $('.firstStep').css('display','none')
-                    $('.content_title').after(re.content);
                     $('.site_content').css('display','none')
                     $('.secondStep').css('display','block')
                     $('#card_num').val(re.card_num)   
+                    if(re.content == ''){
+                        $('.secondStepBtn').click()
+                    }
+                    $('.content_title').after(re.content);
                 }
             }else{
                 alert('卡单不存在或者校验码、卡类型错误！')

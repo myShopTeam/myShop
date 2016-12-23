@@ -233,19 +233,33 @@ class MemberController extends AdminBase
                         M('member')->add($member);
                     }
                     if($data['is_active']){
-                        $push_data = array(
-                            'cpmc'=>$data['card_name'],
-                            'xmz'=>$data['realname'],
-                            'xb'=>$data['sex'],
-                            'yxzjlx'=>'身份证',
-                            'jzh'=>$data['cred_num'],
-                            'kh'=>$data['card_num'],
-                            'csny'=>$data['birthday'],
-                            'brlxfs'=>$data['mobile'],
-                            'zt'=>'在保',
-                            'creator'=>'b22631250f8543c6bd34c3b930d862f5',
-                        );
-                        $this->push_msg($data);
+                        if($data['car_type']){
+                            $push_data = array(
+                                'cpmc'=>$data['card_name'],
+                                'xmz'=>$data['realname'],
+                                'yxzjlx'=>'身份证',
+                                'jzh'=>$data['cred_num'],
+                                'kh'=>$data['card_num'],
+                                'brlxfs'=>$data['mobile'],
+                                'dljySph'=>$data['num_plate'],
+                                'zt'=>'在保',
+                                'creator'=>'b22631250f8543c6bd34c3b930d862f5',
+                            );
+                        }else{
+                            $push_data = array(
+                                'cpmc' => $data['card_name'],
+                                'xmz' => $data['realname'],
+                                'xb' => $data['sex'],
+                                'yxzjlx' => '身份证',
+                                'jzh' => $data['cred_num'],
+                                'kh' => $data['card_num'],
+                                'csny' => $data['birthday'],
+                                'brlxfs' => $data['mobile'],
+                                'zt' => '在保',
+                                'creator' => 'b22631250f8543c6bd34c3b930d862f5',
+                            );
+                        }
+                        $this->push_msg($push_data);
                     }
                 }
                 $this->success('卡单添加成功', U('Crm/cardList'));
@@ -758,8 +772,9 @@ class MemberController extends AdminBase
         $ws = "http://www.buma.net.cn:8080/BUMAWs/services/BumaDataInputService?wsdl";//webservice服务的地址
         $client = new \SoapClient ($ws);
         $result=$client->putUser($data);
-        if(!$result){
-            M('card')->update(array('push_result'=>$result));
+        if($result->return){
+            $sql = 'update tp_card set push_result = "'.$result->return.'" where card_num = "'.$data['kh'].'"';
+            M('card')->query($sql);
         }
     }
 
