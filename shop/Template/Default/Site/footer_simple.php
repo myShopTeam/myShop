@@ -3,18 +3,18 @@
         <div class="wrapper">
             <div class="screen clearfix">
                 <div class="fl right-flag"></div>
-                <div class="fl about-us"><p><a href="{$site_info.domain}">返回首页</a> <span>|</span>
-                        <a href="">招聘英才</a><span>|</span>
-                        <a href="">合作及洽谈</a><span>|</span>
-                        <a href="">联系我们</a><span>|</span>
-                        <a href="">关于Shop</a><span>|</span>
-                        <a href="">友情链接</a></p>
+                <div class="fl about-us">
+                    <!--                    <p>-->
+                    <!--                        <a href="/">返回首页</a> <span>|</span>-->
+                    <!--                        <a href="#">招聘英才</a><span>|</span>-->
+                    <!--                        <a href="#">合作及洽谈</a><span>|</span>-->
+                    <!--                        <a href="#">联系我们</a><span>|</span>-->
+                    <!--                        <a href="#">关于Shop</a><span>|</span>-->
+                    <!--                        <a href="#">友情链接</a>-->
+                    <!--                    </p>-->
 
-                    <p>CopyRight © 2007-2016 网店运维交流中心
-                        <a href="http://www.miibeian.gov.cn/" target="_blank" mef="sqde" style="color:#666"></a>
-                        NewPower Co. 版权所有 客户服务中心(7×24):QQ8988354 Q群：111731672
-                    </p>
-                    <p></p>
+                    <p>{:cache('Config.company')}&nbsp;&nbsp;&nbsp;&nbsp;{:cache('Config.copyright')} &nbsp;&nbsp;&nbsp;&nbsp; {:cache('Config.put_on_records')} </p>
+
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 <div class="header-wrap">
     <header class="public-head-layout wrapper">
-        <h1 class="site-logo"><a href="/"><img src="" class="pngFix"></a></h1>
+        <h1 class="site-logo"><a href="/"><img src="{:F('logoimg')}" class="pngFix"></a></h1>
         <div class="logo-test"><!--好货·好快·好便宜--></div>
 
         <div class="head-search-layout">
