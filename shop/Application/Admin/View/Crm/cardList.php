@@ -35,7 +35,7 @@
                             <option value='1' <if condition="$post.is_active eq 1">selected</if>>未激活</option>
                             <option value='2' <if condition="$post.is_active eq 2">selected</if>>已激活</option>
                         </select> 
-                        <button class="btn" >搜索</button>
+                        <button class="btn serach_btn" >搜索</button>
                         <input type="button" class="btn export" value="导出" style="background:#1D83DB;color:#fff"/>
                         <input type="button"class="btn" onclick="javascript:window.location.href='{:U('export',array('type'=>tmp))}'" value="导入模板下载" />
                         &nbsp&nbsp<span>姓名：<font color="blue" weight="bold" size="4px" >{$name}</font></span>
@@ -190,6 +190,9 @@ $(function(){
         
         $('.upload').click(function(){
             if($('.uploadFile').hasClass('active')){
+                if(!confirm('请确认已将excel整体转换为宋体格式！')){
+                    e.topPropagation();
+                }
                 $('<form method="post" action="{:U('upload')}" enctype="multipart/form-data"></form>').append($('.uploadFile')).submit()
             }else{
                 $('.uploadFile').addClass('active')
@@ -201,7 +204,12 @@ $(function(){
             if(!confirm('是否确认导出为excel?')){
                 return false;
             }
-            $('<form method="post" action="{:U('export')}"></form>').append($('.search_form').find('input,select').clone()).submit()
+            $('.search_form').attr('action',"{:U('export')}").submit()
+            
+        })
+        
+        $('.serach_btn').click(function(){
+            $('.search_form').attr('action',"{:U('cardList')}").submit()
         })
         
         function selectArea(area,section,stuff){

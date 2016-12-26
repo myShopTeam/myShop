@@ -24,11 +24,11 @@
           </tr>
           <tr>
             <th>保险生效日期</th>
-            <td><input type="text" name="start_time" class="input length_2 J_date"  id="birthday" value="{$start_time|date='Y-m-d',###}" placeholder="请选择保险生效日期" style="width: 147px !important;"></td>
+            <td><input type="text" name="start_time" class="input length_2 "  id="birthday" value="{$start_time}" placeholder="请选择保险生效日期" style="width: 147px !important;"></td>
          </tr>
           <tr>
             <th>救援服务项目生效日期</th>
-            <td><input type="text" name="rescue_time" class="input length_2 J_date" id="birthday" value="{$rescue_time|date='Y-m-d',###}" placeholder="请选择救援服务项目生效日期"></td>
+            <td><input type="text" name="rescue_time" class="input length_2 " id="birthday" value="{$rescue_time}" placeholder="请选择救援服务项目生效日期"></td>
           </tr>
 <!--          <tr>
             <th>紧急联系人</th>

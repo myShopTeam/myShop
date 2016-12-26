@@ -16,6 +16,9 @@ class CrmController extends AdminBase {
     protected $config = array(
         'is_active' => array('1' => '未激活', '2' => '已激活')
     );
+    
+    //查询条件保存前缀
+    protected $_prefix = '';
     //导入的字段
     protected $card_field = array(
         'card_type' => '卡类型',
@@ -66,6 +69,7 @@ class CrmController extends AdminBase {
     protected function _initialize() {
         parent::_initialize();
         session_start();
+        $this->_prefix = 'admin';
         $this->userInfo = User::getInstance()->getInfo();
         $this->assign('config', $this->config);
     }
@@ -74,20 +78,34 @@ class CrmController extends AdminBase {
     public function cardList() {
         $user_id = $this->userInfo['id'];
         $userStr = $user_id;
+        if(empty($_POST) && empty($_GET['page'])){
+            unset($_SESSION[$this->_prefix."_".__CLASS__."_".__FUNCTION__]);
+        }
+       //var_dump($_POST);die;
 //        //普通卡还是车卡
 //        $type = $_GET['type']?2:1;
-        $post = $_POST;
-        if ($post) {
+        //var_dump(session($this->_prefix."_".__CLASS__."_".__FUNCTION__));die;
+        if ($_POST) {
+            $post = $_POST;
+            session($this->_prefix."_".__CLASS__."_".__FUNCTION__,$post);
             $where = $this->createWhere($post);
             if ($post['user_id'])
                 $userStr = $post['user_id'];
             $this->assign('post', $post);
-        }else {
+        }else if(session($this->_prefix."_".__CLASS__."_".__FUNCTION__)){
+            $post = session($this->_prefix."_".__CLASS__."_".__FUNCTION__);
+            $where = $this->createWhere($post);
+            if ($post['user_id'])
+                $userStr = $post['user_id'];
+            $this->assign('post', $post);
+        }
+        else{
             $where = ' 1 = 1 '; //' card_type_int = '.$type;
         }
         if ($_GET['user_id']) {
             $userStr = $_GET['user_id'];
         }
+        
         //检查权限
         $child_user = $this->get_child_user($user_id);
         if (!in_array($userStr, $child_user)) {
@@ -99,7 +117,8 @@ class CrmController extends AdminBase {
         $db = M('card');
         $count = $db->where($where)->count();
         $page = $this->page($count, 20);
-        $vipList = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('listorder desc,id desc')->select();
+        $vipList = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('listorder desc')->select();
+        //var_dump($vipList);die;
         $roleSql = 'SELECT * FROM tp_role WHERE parentid = 1';
         $roleResult = M('role')->query($roleSql);
 
@@ -131,6 +150,9 @@ class CrmController extends AdminBase {
     }
 
     public function createWhere($post, $type) {
+        foreach($post as $k=>$v){
+            $post[$k] = trim($v);
+        }
         $where = '1 and ';
         if (!empty($post['stuff'])) {
             $where .= ' importId = ' . $post['stuff'] . ' and ';
@@ -240,19 +262,33 @@ class CrmController extends AdminBase {
                         M('member')->add($member);
                     }
                     if ($data['is_active']) {
-                        $push_data = array(
-                            'cpmc' => $data['card_name'],
-                            'xmz' => $data['realname'],
-                            'xb' => $data['sex'],
-                            'yxzjlx' => '身份证',
-                            'jzh' => $data['cred_num'],
-                            'kh' => $data['card_num'],
-                            'csny' => $data['birthday'],
-                            'brlxfs' => $data['mobile'],
-                            'zt' => '在保',
-                            'creator' => 'b22631250f8543c6bd34c3b930d862f5',
-                        );
-                        $this->push_msg($data);
+                        if($data['car_type']){
+                            $push_data = array(
+                                'cpmc'=>$data['card_name'],
+                                'xmz'=>$data['realname'],
+                                'yxzjlx'=>'身份证',
+                                'jzh'=>$data['cred_num'],
+                                'kh'=>$data['card_num'],
+                                'brlxfs'=>$data['mobile'],
+                                'dljySph'=>$data['num_plate'],
+                                'zt'=>'在保',
+                                'creator'=>'b22631250f8543c6bd34c3b930d862f5',
+                            );
+                        }else{
+                            $push_data = array(
+                                'cpmc' => $data['card_name'],
+                                'xmz' => $data['realname'],
+                                'xb' => $data['sex'],
+                                'yxzjlx' => '身份证',
+                                'jzh' => $data['cred_num'],
+                                'kh' => $data['card_num'],
+                                'csny' => $data['birthday'],
+                                'brlxfs' => $data['mobile'],
+                                'zt' => '在保',
+                                'creator' => 'b22631250f8543c6bd34c3b930d862f5',
+                            );
+                        }
+                        $this->push_msg($push_data);
                     }
                 }
                 $this->success('卡单添加成功', U('Crm/cardList'));
@@ -291,6 +327,7 @@ class CrmController extends AdminBase {
             }
         } else {
             $vipList = M('card')->where(array('card_num' => $card_num))->find();
+            $vipList['card_type'] = trim($vipList['card_type']); 
             $vipList['card_type_name'] = M('card_config')->where(array('parent_id' => 0))->select();
             $sql = "SELECT c.*  from tp_card_config c  JOIN tp_card_config p ON c.parent_id = p.id WHERE p.card_name = '" . $vipList['card_type'] . "'";
             $vipList['product'] = M('card_config')->query($sql);
@@ -311,7 +348,7 @@ class CrmController extends AdminBase {
                 }
                 $bool = M('card')->where(array('id' => array('IN', $cardArr)))->delete();
                 if ($bool) {
-                    $this->success("删除成功", U('Crm/cardList'));
+                    $this->success("删除成功", U('Crm/cardList',array('page'=>1)));
                 } else {
                     $this->error("删除失败");
                 }
@@ -322,7 +359,7 @@ class CrmController extends AdminBase {
             $vipid = I('get.id', '', intval);
             $bool = M('card')->where(array('id' => $vipid))->delete();
             if ($bool) {
-                $this->success("删除成功", U('Crm/cardList'));
+                $this->success("删除成功", U('Crm/cardList',array('page'=>1)));
             } else {
                 $this->error("非法操作");
             }
@@ -416,6 +453,36 @@ class CrmController extends AdminBase {
         }
         $this->success('修改成功！', U($a));
     }
+    
+    //修改卡单最大激活数
+    public function updateContentL() {
+        $info = I('post.', '', trim);
+        $id = 'id';
+        switch (I('get.str', '', trim)) {
+            case "vip":
+                $db = M('card');
+                $a = 'Crm/cardList';
+                $id = 'id';
+                break;
+
+            case "school":
+                $db = M('goods_school');
+                $a = 'Member/alumni_supervise';
+                $id = 'id';
+                break;
+            case "card_config":
+                $db = M('card_config');
+                $a = 'Crm/cardConfig';
+                $id = 'id';
+                break;
+        }
+        $sql= 'update tp_card_config set is_content = 0';
+        $db->query($sql);
+        foreach ($info['is_content'] as $k => $v) {
+            $db->where(array($id => $k))->save(array('is_content' => $v));
+        }
+        $this->success('修改成功！', U($a));
+    }
 
     //修改会员信息
     public function typeUpdate() {
@@ -470,13 +537,14 @@ class CrmController extends AdminBase {
                 ->setKeywords("excel")
                 ->setCategory("result file");
         $this->card_field = $this->card_field + array('area'=>'区域','section'=>'部门','name'=>'销售');
-        $where = $this->createWhere(I('post.'));
-        $arr = M('card')->where($where)->select();
-        array_unshift($arr, $this->card_field);
         if (I('get.type') == 'tmp') {
             $arr = array();
             $arr[0] = $this->card_field;
             $arr[1] = $this->tmp_table;
+        }else{
+            $where = $this->createWhere($_POST);
+            $arr = M('card')->where($where)->select();
+            array_unshift($arr, $this->card_field);
         }
         $role_area = $this->selectUserArea();
         foreach ($arr as $key => $val) { // 注意 key 是从 0 还是 1 开始，此处是 0
@@ -487,16 +555,22 @@ class CrmController extends AdminBase {
                 
                 //Excel的第A列，uid是你查出数组的键值，下面以此类推     
                 if (($k == 'start_time' || $k == 'end_time' || $k == 'birthday' || $k == 'active_time') && $num != 1) {
-                    $val[$k] = $val[$k]?date('Y-m-d', $val[$k]):'';
+                    $val[$k] = $val[$k]?date('Y-m-d H:i:s', $val[$k]):'';
                 }
                 if(($k == 'area' || $k == 'section' || $k == 'name' )&& $num != 1){
                     $val[$k] = $role_area[$val['importId']][$k];
                 }
-                
-                $object->setCellValue($abcKey . $num, $val[$k] . ' ');
+                $object->setCellValue($abcKey . $num, $val[$k].' ',\PHPExcel_Cell_DataType::TYPE_STRING);
                 $abcKey++;
             }
         }
+        $Excel->getActiveSheet()->getColumnDimension('A')->setWidth(15);
+        $Excel->getActiveSheet()->getColumnDimension('C')->setWidth(15);
+        $Excel->getActiveSheet()->getColumnDimension('B')->setWidth(15);
+        $Excel->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+        $Excel->getActiveSheet()->getColumnDimension('L')->setWidth(15);
+        $Excel->getActiveSheet()->getColumnDimension('H')->setWidth(15);
+        $Excel->getActiveSheet()->getColumnDimension('K')->setWidth(20);
         $Excel->getActiveSheet()->setTitle('export');
         $Excel->getActiveSheet()->getStyle()->getFont()->setName('宋体');
         $Excel->setActiveSheetIndex(0);
@@ -545,10 +619,19 @@ class CrmController extends AdminBase {
                     $cardMdl = M('card');
                     $userInfo = User::getInstance()->getInfo();
                     foreach ($data as $k => $v) {
+                        foreach($v as $kk=>$vv){
+                            $v[$kk] = trim($vv);
+                        }
                         $v['start_time'] = strtotime($v['start_time']);
                         $v['end_time'] = strtotime($v['end_time']);
                         $v['create_time'] = time();
+ 
+                        if(!empty($v['cred_num']) && !empty($v['active_time'])){
+                            $v['is_active'] = 2;
+                            $v['push_result'] = 3;
+                        }
                         $v['birthday'] = $v['birthday']?strtotime($v['birthday']):'';
+                        $v['active_time'] = $v['active_time']?strtotime($v['active_time']):'';
                         $v['importId'] = $userInfo['id'];
                         $find_data = $cardMdl->where(array('card_num' => $v['card_num']))->find();
                         if ($find_data) {
@@ -561,6 +644,7 @@ class CrmController extends AdminBase {
                             echo '卡号：' . $v['card_num'] . '导入失败！</br>';
                             $result = true;
                         }
+                        
                     }
                     if (!$result) {
                         $this->success('数据导入完成！');
@@ -762,7 +846,7 @@ class CrmController extends AdminBase {
         $sql = "SELECT c.*  from tp_card_config c  JOIN tp_card_config p ON c.parent_id = p.id WHERE p.card_name = '" . $card_type . "'";
         $product_list = M('card_config')->query($sql);
         if ($product_list) {
-            $product_html = '<option>选择产品名称</option>';
+            $product_html = '<option value="">选择产品名称</option>';
             foreach ($product_list as $v) {
                 if ($card_name == $v['card_name']) {
                     $product_html .= '<option selected  value=' . $v['card_name'] . '>' . $v['card_name'] . '</option>';
@@ -795,9 +879,10 @@ class CrmController extends AdminBase {
     protected function push_msg($data) {
         $ws = "http://www.buma.net.cn:8080/BUMAWs/services/BumaDataInputService?wsdl"; //webservice服务的地址
         $client = new \SoapClient($ws);
-        $result = $client->putUser($data);
-        if (!$result) {
-            M('card')->update(array('push_result' => $result));
+        $result=$client->putUser($data);
+        if($result->return){
+            $sql = 'update tp_card set push_msg = "'.$result->return.'",push_result = 2 where card_num = "'.$data['kh'].'"';
+            M('card')->query($sql);
         }
     }
 
@@ -848,6 +933,56 @@ class CrmController extends AdminBase {
 
         }
         return $role_arr;
+        
+    }
+    
+    public function again_push(){
+        $this->error('暂停使用');die;
+        $ws = "http://www.buma.net.cn:8080/BUMAWs/services/BumaDataInputService?wsdl";//webservice服务的地址
+        $client = new \SoapClient ($ws);
+        
+        $user =  M('card')->where(array('is_active'=>2))->select();
+        foreach($user as $data){
+            
+            if(!empty($data['car_type'])){
+                $push_data = array(
+                    'cpmc'=>$data['card_name'],
+                    'xmz'=>$data['realname'],
+                    'yxzjlx'=>'身份证',
+                    'jzh'=>$data['cred_num'],
+                    'kh'=>$data['card_num'],
+                    'brlxfs'=>$data['mobile'],
+                    'dljySph'=>$data['num_plate'],
+                    'zt'=>'在保',
+                    'creator'=>'b22631250f8543c6bd34c3b930d862f5',
+                );
+            }else{
+                echo 1;
+                $push_data = array(
+                    'cpmc' => $data['card_name'],
+                    'xmz' => $data['realname'],
+                    'xb' => $data['sex'],
+                    'yxzjlx' => '身份证',
+                    'jzh' => $data['cred_num'],
+                    'kh' => $data['card_num'],
+                    'csny' => date('Y-m-d',$data['birthday']),
+                    'brlxfs' => $data['mobile'],
+                    'zt' => '在保',
+                    'creator' => 'b22631250f8543c6bd34c3b930d862f5',
+                );
+            }
+            $result=$client->putUser($push_data);
+            if($result->return){
+                $sql = 'update tp_card set push_msg = "'.$result->return.'",push_result = 2 where card_num = "'.$push_data['kh'].'"';
+                M('card')->query($sql);       
+                echo $push_data['kh']."<font color='red'>失败</font></br>";
+                
+            }else{
+                $sql = 'update tp_card set push_msg = "",push_result = 1 where card_num = "'.$push_data['kh'].'"';
+                M('card')->query($sql);     
+                echo $push_data['kh']."成功</br>";
+            }
+        }
         
     }
 

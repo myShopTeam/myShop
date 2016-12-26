@@ -274,10 +274,13 @@ $(document).ready(function () {
                     alert('该卡单已激活！')
                 }else if(re.is_active == '1'){
                     $('.firstStep').css('display','none')
-                    $('.content_title').after(re.content);
                     $('.site_content').css('display','none')
                     $('.secondStep').css('display','block')
                     $('#card_num').val(re.card_num)   
+                    if(re.content == ''){
+                        $('.secondStepBtn').click()
+                    }
+                    $('.content_title').after(re.content);
                 }
             }else{
                 alert('卡单不存在或者校验码、卡类型错误！')
@@ -335,15 +338,11 @@ $(document).ready(function () {
             }
         }
         
-        if (!thisform.find("#mobile").val().match(/^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/)) { 
-            alert("手机号码格式不正确！"); 
-            return false;
-        }
-
-        if (!cred_num_val.match(/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/) && !cred_num_val.match(/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$/)) { 
-            alert("身份证号格式不正确！"); 
-            return false;
-        }
+        //if (!thisform.find("#mobile").val().match(/^(((13[0-9]{1})|(177)|(126)|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/)) { 
+//        if (!thisform.find("#mobile").val() =='') { 
+//            alert("手机号码格式不正确！"); 
+//            return false;
+//        }
         
         var data=thisform.serialize()
         $.post("{:U('Content/Crm/ajaxCheckMobile')}",'mobile='+thisform.find("#mobile").val(),function(re){

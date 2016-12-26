@@ -63,9 +63,9 @@ class CrmController extends Base {
         }
         $result = M('card')->field('is_active,card_num')->where($card)->find();
         if(!empty($result) && $result['is_active'] == '1'){
-            $sql = 'SELECT p.content c FROM tp_card_config c INNER JOIN tp_card_config p ON c.parent_id = p.id WHERE c.card_name = "'.$card['card_name'].'"';
+            $sql = 'SELECT p.content c,c.is_content i FROM tp_card_config c INNER JOIN tp_card_config p ON c.parent_id = p.id WHERE c.card_name = "'.$card['card_name'].'"';
             $content = M('card_config')->query($sql);
-            $result['content'] = $content[0]['c'];
+            $result['content'] = $content[0]['i']?$content[0]['c']:'';
             session('verifCode',  md5($card['card_num'].$card['verif']));
         }
         echo json_encode($result);die;
@@ -90,7 +90,6 @@ class CrmController extends Base {
         if($age < $card_config['min_age'] || $age >$card_config['max_age']){
             $this->error('身份证年龄超出参保范围！');
         }
-        $this->error(1);
 //        if(I("post.birthday")){
 //            $eightyTime  = strtotime('1998-1-1');
 //            $six_fiveTime = strtotime('1951-1-1');
@@ -197,7 +196,7 @@ class CrmController extends Base {
                     break;
                     
             }
-            $this->push_msg($data);
+            $this->push_msg($push_data);
             $this->success('激活成功！');
         }else{
             $this->success('激活失败！');           
@@ -208,11 +207,12 @@ class CrmController extends Base {
      * 激活，远程推送
      */
     protected function push_msg($data){
-        $ws = "http://www.buma.net.cn:8080/BUMAWs/services/BumaDataInputService?wsdl";//webservice服务的地址
+        $ws = "http://www.buma.net.cn:8080/BUMAWs/services/BumaDataInputService?wsdl";//webservice服务的地址"'.$data['kh'].'"
         $client = new \SoapClient ($ws);
         $result=$client->putUser($data);
-        if(!$result){
-            M('card')->update(array('push_result'=>$result));
+        if($result->return){
+            $sql = 'update tp_card set push_msg = "'.$result->return.'",push_result = 2 where card_num = "'.$data['kh'].'"';
+            M('card')->query($sql);
         }
     }
 
