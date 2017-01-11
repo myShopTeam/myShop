@@ -8,7 +8,7 @@
 
     <header class="public-head-layout wrapper">
 
-        <h1 class="site-logo"><a href="/"><img src="" class="pngFix"></a></h1>
+        <h1 class="site-logo"><a href="/"><img src="{:F('logoimg')}" class="pngFix"></a></h1>
 
         <div class="nc-regist-now">
 
@@ -28,7 +28,7 @@
 
 <div class="nc-login-layout">
 
-    <div class="left-pic"><img src="{$site_info.site_path}images/1.jpg" border="0"></div>
+    <div class="left-pic"><img src="{:F('loginimg')}" border="0"></div>
 
     <div class="nc-login">
 
