@@ -130,6 +130,7 @@
 //鼠标悬停在列表食品缩略图上展示大图
 $(function(){
         $('#card_type').change(function(){
+            $('.search_form').attr('action',"{:U('cardList')}")
             var url   = "{:U('ajaxGetProduct')}";
             var data  = 'card_type='+$(this).val()
             $.post(url,data,function(re){
@@ -162,6 +163,7 @@ $(function(){
         }
         
         $('#status').change(function(){
+            $('.search_form').attr('action',"{:U('cardList')}")
             $('.search_form').submit()
         })
     
@@ -212,7 +214,9 @@ $(function(){
             $('.search_form').attr('action',"{:U('cardList')}").submit()
         })
         
-        function selectArea(area,section,stuff){
+        function selectArea(area,section,stuff){ 
+            
+            $('.search_form').attr('action',"{:U('cardList')}")
             var url  = "{:U('ajaxSelectRole')}";
             var selectHtml = '<option value="" >选择部门</option>'
             if(area){
@@ -223,6 +227,9 @@ $(function(){
                     async:false,
                     dataType:'json',
                     success:function(re){
+                        if(!re){
+                            return false;
+                        }
                         $.each(re,function(key,value){
                             if(section == value.id){
                                $('.selectStuff').css('display','')
@@ -253,9 +260,10 @@ $(function(){
      
 })
 
-        function selectAuto(){
-            $('.search_form').submit()
-        }
+function selectAuto(){
+    $('.search_form').attr('action',"{:U('cardList')}")
+    $('.search_form').submit()
+}
 
     
 </script>

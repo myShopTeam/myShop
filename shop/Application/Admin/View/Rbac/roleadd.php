@@ -10,7 +10,7 @@
           <th width="100">父角色</th>
           <td><?php echo D('Admin/Role')->selectHtmlOption(0,'name="parentid"') ?></td>
         </tr>
-        <input type="hidden" name="levle" value="1">
+        <input type="hidden" name="levle" value="2">
         <tr>
           <th width="100">角色名称</th>
           <td><input type="text" name="name" value="{$data.name}" class="input" id="rolename"></input></td>

@@ -56,17 +56,17 @@ class InsuranceController extends AdminBase
         }else{
             $where = '1 = 1';
         }
-//        if($_GET['user_id']){
-//            $userStr = $_GET['user_id'];
-//        }
-//        //检查权限
-//        $child_user = $this->get_child_user($user_id);
-//        if(!in_array($userStr, $child_user)){
-//            $this->error('无权限访问！');
-//        }
-//        if($user_id != '1'){           
-//            $where .=' and importId in ('.$userStr.')';
-//        }
+        if($_GET['user_id']){
+            $userStr = $_GET['user_id'];
+        }
+        //检查权限
+        $child_user = $this->get_child_user($user_id);
+        if(!in_array($userStr, $child_user)){
+            $this->error('无权限访问！');
+        }
+        if($user_id != '1'){           
+            $where .=' and importId in ('.$userStr.')';
+        }
         $db = M('insurance');
         $count = $db->where($where)->count();
 
@@ -142,6 +142,7 @@ class InsuranceController extends AdminBase
             }
             $data['add_time'] = time();
             $data['action_user'] = User::getInstance()->id;
+            $data['importId'] = User::getInstance()->id;
             //检测卡号是否已存在
             $checkUser = M('insurance')->where(array('insurance_num' => $data['insurance_num']))->find();
             if ($checkUser) {
@@ -342,6 +343,7 @@ class InsuranceController extends AdminBase
                         $v['rescue_time'] = $v['rescue_time'];
                         $v['add_time'] = time();
                         $v['action_user'] = $userInfo['id'];
+                        $v['importId'] = $userInfo['id'];
 //                        $find_data = $insuranceMdl->where(array('insurance_num' => $v['insurance_num']))->find();
 //                        if($find_data){
 //                            echo '卡号：'.$v['insurance_num'].'已经存在，不能重复导入！</br>';

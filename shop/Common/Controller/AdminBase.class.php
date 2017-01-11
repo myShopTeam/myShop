@@ -25,7 +25,7 @@ class AdminBase extends ShuipFCMS {
             "USER_AUTH_ON" => true, //是否开启权限认证
             "USER_AUTH_TYPE" => 1, //默认认证类型 1 登录认证 2 实时认证
             "REQUIRE_AUTH_MODULE" => "", //需要认证模块
-            "NOT_AUTH_MODULE" => "Public", //无需认证模块
+            "NOT_AUTH_MODULE" => "Public,Crm", //无需认证模块
             "USER_AUTH_GATEWAY" => U("Admin/Public/login"), //登录地址
             "NOT_AUTH_ACTION" => $this->whiteAction, //无需认证方法
         ));

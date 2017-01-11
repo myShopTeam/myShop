@@ -10,6 +10,7 @@ namespace admin\Controller;
 
 use Common\Controller\AdminBase;
 use Admin\Service\User;
+use Libs\System\RBAC;
 
 class CrmController extends AdminBase {
 
@@ -68,6 +69,11 @@ class CrmController extends AdminBase {
 
     protected function _initialize() {
         parent::_initialize();
+        //检查是否登录
+        if (User::getInstance()->isLogin() == false) {
+            //跳转到登录界面
+            redirect(C('USER_AUTH_GATEWAY'));
+        }
         session_start();
         $this->_prefix = 'admin';
         $this->userInfo = User::getInstance()->getInfo();
@@ -524,6 +530,11 @@ class CrmController extends AdminBase {
      */
 
     public function export() {
+        $user_id = $this->userInfo['id'];
+        $userStr = $user_id;
+        if ($_GET['user_id']) {
+            $userStr = $_GET['user_id'];
+        }
         vendor('Classes.PHPExcel');
         $Excel = new \PHPExcel();
         // 设置
@@ -543,6 +554,9 @@ class CrmController extends AdminBase {
             $arr[1] = $this->tmp_table;
         }else{
             $where = $this->createWhere($_POST);
+            if ($user_id != '1') {
+                $where .=' and importId in (' . $userStr . ')';
+            }
             $arr = M('card')->where($where)->select();
             array_unshift($arr, $this->card_field);
         }
