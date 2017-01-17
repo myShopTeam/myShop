@@ -37,7 +37,13 @@ class InsuranceController extends AdminBase
     protected function _initialize()
     {
         parent::_initialize();
+        //检查是否登录
+        if (User::getInstance()->isLogin() == false) {
+            //跳转到登录界面
+            redirect(C('USER_AUTH_GATEWAY'));
+        }
         session_start();
+        $this->_prefix = 'admin';
         $this->userInfo = User::getInstance()->getInfo();
         $this->assign('config',$this->config);
     }
@@ -339,8 +345,11 @@ class InsuranceController extends AdminBase
                     $insuranceMdl = M('insurance');
                     $userInfo = User::getInstance()->getInfo();
                     foreach ($data as $k => $v) {
-                        $v['start_time'] = $v['start_time'];
-                        $v['rescue_time'] = $v['rescue_time'];
+                        if(!$v['start_time']){
+                            continue;
+                        }
+                        $v['start_time'] = (string)$v['start_time'];
+                        $v['rescue_time'] = (string)$v['rescue_time'];
                         $v['add_time'] = time();
                         $v['action_user'] = $userInfo['id'];
                         $v['importId'] = $userInfo['id'];

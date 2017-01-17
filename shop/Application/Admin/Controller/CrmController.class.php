@@ -294,7 +294,10 @@ class CrmController extends AdminBase {
                                 'creator' => 'b22631250f8543c6bd34c3b930d862f5',
                             );
                         }
-                        $this->push_msg($push_data);
+                        $card_config = M('card_config')->where(array('card_name'=>$data['card_name']))->find();
+                        if($card_config['is_push']){
+                            $this->push_msg($push_data);
+                        }
                     }
                 }
                 $this->success('卡单添加成功', U('Crm/cardList'));
@@ -460,7 +463,7 @@ class CrmController extends AdminBase {
         $this->success('修改成功！', U($a));
     }
     
-    //修改卡单最大激活数
+    //修改是否显示告知函
     public function updateContentL() {
         $info = I('post.', '', trim);
         $id = 'id';
@@ -486,6 +489,35 @@ class CrmController extends AdminBase {
         $db->query($sql);
         foreach ($info['is_content'] as $k => $v) {
             $db->where(array($id => $k))->save(array('is_content' => $v));
+        }
+        $this->success('修改成功！', U($a));
+    }
+    //修改是否推送
+    public function updatePushL() {
+        $info = I('post.', '', trim);
+        $id = 'id';
+        switch (I('get.str', '', trim)) {
+            case "vip":
+                $db = M('card');
+                $a = 'Crm/cardList';
+                $id = 'id';
+                break;
+
+            case "school":
+                $db = M('goods_school');
+                $a = 'Member/alumni_supervise';
+                $id = 'id';
+                break;
+            case "card_config":
+                $db = M('card_config');
+                $a = 'Crm/cardConfig';
+                $id = 'id';
+                break;
+        }
+        $sql= 'update tp_card_config set is_push = 0';
+        $db->query($sql);
+        foreach ($info['is_push'] as $k => $v) {
+            $db->where(array($id => $k))->save(array('is_push' => $v));
         }
         $this->success('修改成功！', U($a));
     }

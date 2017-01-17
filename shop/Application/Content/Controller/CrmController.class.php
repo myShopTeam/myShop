@@ -196,7 +196,9 @@ class CrmController extends Base {
                     break;
                     
             }
-            $this->push_msg($push_data);
+            if($card_config['is_push']){
+                $this->push_msg($push_data);
+            }
             $this->success('激活成功！');
         }else{
             $this->success('激活失败！');           

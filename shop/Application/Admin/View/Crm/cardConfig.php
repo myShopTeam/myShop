@@ -11,14 +11,16 @@
           <tr>
             <td align="center" width="5%">排序</td>
             <td align="center"width="25%" style="text-align: left">卡单类型</td>
-            <td align="center"width="20%" style="text-align: left">卡单最大激活数</td>
-            <td align="center"width="20%" style="text-align: left">参保年龄范围</td>
-            <td align="center"width="20%" style="text-align: left">是否显示告知函</td>
-            <td align="center"width="10%" >操作</td>
+            <td align="center"width="15%" style="text-align: left">卡单最大激活数</td>
+            <td align="center"width="15%" style="text-align: left">参保年龄范围</td>
+            <td align="center"width="10%" style="text-align: left">是否显示告知函</td>
+            <td align="center"width="10%" style="text-align: left">是否推送</td>
+            <td align="center"width="20%" >操作</td>
           </tr>
         </thead>
         <thead>
             <tr><td style="background: #72a8cf">普通卡</td>
+                <td style="background: #72a8cf"></td>
                 <td style="background: #72a8cf"></td>
                 <td style="background: #72a8cf"></td>
                 <td style="background: #72a8cf"></td>
@@ -35,6 +37,7 @@
                 <td ><input size="1" class="input" name="min_age[{$vo.id}]" value="{$vo.min_age}"/>&nbsp;~&nbsp; <input size="1" class="input" name="max_age[{$vo.id}]" value="{$vo.max_age}"/>
                 </td>
                 <td><input size="1" type="checkbox" <if condition="$vo.is_content == 1">checked</if> class="input" name="is_content[{$vo.id}]" value="1"/></td>
+                <td><input size="1" type="checkbox" <if condition="$vo.is_push == 1">checked</if> class="input" name="is_push[{$vo.id}]" value="1"/></td>
               <td align="center"  width="60">
               <if condition="$vo.parent_id == 0">
                 <a  href="{:U('typeUpdate',array('id'=>$vo['id']))}">修改</a> | 
@@ -55,6 +58,7 @@
                 <td style="background: #72a8cf"></td>
                 <td style="background: #72a8cf"></td>
                 <td style="background: #72a8cf"></td>
+                <td style="background: #72a8cf"></td>
             <tr>
         </thead>
         <tbody>
@@ -66,6 +70,7 @@
                 <td ><input size="1" class="input" name="min_age[{$vo.id}]" value="{$vo.min_age}"/>&nbsp;~&nbsp;<input size="1" class="input" name="max_age[{$vo.id}]" value="{$vo.max_age}"/>
                 </td>
               <td ><input size="1" type="checkbox" class="input" <if condition="$vo.is_content == 1">checked</if> name="is_content[{$vo.id}]" value="1"/></td>
+              <td ><input size="1" type="checkbox" class="input" <if condition="$vo.is_push == 1">checked</if> name="is_push[{$vo.id}]" value="1"/></td>
               <td align="center"  width="60">
               <if condition="$vo.parent_id == 0">
                 <a  href="{:U('typeUpdate',array('id'=>$vo['id']))}">修改</a> | 
@@ -89,6 +94,7 @@
             <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('updateNum',array('str'=>'card_config'))}">修改卡单最大激活数</button>
             <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('updateLimitAge',array('str'=>'card_config'))}">修改参保年龄范围</button>
             <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('updateContentL',array('str'=>'card_config'))}">修改是否显示告知函</button>
+            <button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit" data-action="{:U('updatePushL',array('str'=>'card_config'))}">修改是否推送</button>
         </div>
       </div>
     </div>
