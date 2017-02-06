@@ -5,6 +5,7 @@
    <form class="J_ajaxForm" action="{:U('insuranceEdit')}" method="post" id="myform">
    <div class="h_a">基本属性</div>
    <div class="table_full">
+       <input type="hidden" name="id" value="{$id}" class="input" >
    <table width="100%" class="table_form contentWrap">
         <tbody>
           <tr>

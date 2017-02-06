@@ -178,7 +178,7 @@ class InsuranceController extends AdminBase
             if ($checkUser) {
                 $data['update_time'] = time();
                 $data['update_user'] = User::getInstance()->id;
-                $bool = M('insurance')->where(array('insurance_num' => $data['insurance_num']))->save($data);
+                $bool = M('insurance')->save($data);
             } else {
                 $this->error('此卡号不存在！');             
             }
@@ -318,6 +318,8 @@ class InsuranceController extends AdminBase
      */
     function upload() {
         if (!empty($_FILES ['file_stu'] ['name'])) {
+            vendor('Classes.PHPExcel.Shared.Date');
+            $shared = new \PHPExcel_Shared_Date();
             $tmp_file = $_FILES ['file_stu'] ['tmp_name'];
             $file_types = explode(".", $_FILES ['file_stu'] ['name']);
             $file_type = $file_types [count($file_types) - 1];
@@ -348,8 +350,13 @@ class InsuranceController extends AdminBase
                         if(!$v['start_time']){
                             continue;
                         }
+                        if(is_float($v['rescue_time'])){
+                            $v['rescue_time'] = date('Y年m月d日',$shared->ExcelToPHP($v['rescue_time']));
+                        }else{
+                            $v['rescue_time'] = (string)$v['rescue_time'];                            
+                        }
+                        $v['insurance_num'] = (string)$v['insurance_num'];
                         $v['start_time'] = (string)$v['start_time'];
-                        $v['rescue_time'] = (string)$v['rescue_time'];
                         $v['add_time'] = time();
                         $v['action_user'] = $userInfo['id'];
                         $v['importId'] = $userInfo['id'];

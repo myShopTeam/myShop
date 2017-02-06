@@ -234,10 +234,10 @@ class CrmController extends Base {
     public  function insuranceSearch(){
         $cred_num = I('post.cred_num','','trim');
         $insurance = M('insurance')->field('realname,cred_num,insurance_num,start_time,rescue_time')->where(array('cred_num'=>$cred_num))->select();
-        foreach ($insurance as $k=>$v){
-            $insurance[$k]['start_time'] = date('Y-m-d',$v['start_time']);
-            $insurance[$k]['rescue_time'] = date('Y-m-d',$v['rescue_time']);
-        }
+//        foreach ($insurance as $k=>$v){
+//            $insurance[$k]['start_time'] = date('Y-m-d',$v['start_time']);
+//            $insurance[$k]['rescue_time'] = date('Y-m-d',$v['rescue_time']);
+//        }
         echo json_encode($insurance);
         exit;
     }
