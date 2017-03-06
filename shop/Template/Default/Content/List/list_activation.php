@@ -77,8 +77,12 @@
                             <dd><input  type="text" name="mobile" id="mobile" class="txt datainp" /></dd>
                         </dl>
                         <dl>
+                            <dt>身份证号</dt>
+                            <dd><input type="text" name="cred_num" id="cred_num" class="txt" /></dd>
+                        </dl>
+                        <dl>
                             <dt>生日</dt>
-                            <dd><input type="text" id="datebut" name="birthday" onFocus="jeDate({dateCell:'#datebut',format:'YYYY-MM-DD'})" onClick="jeDate({dateCell:'#datebut',format:'YYYY-MM-DD'})"  class="txt" /></dd>
+                            <dd><input id="birthday" type="text" readonly id="datebut" name="birthday" onFocus="jeDate({dateCell:'#datebut',format:'YYYY-MM-DD'})" onClick="jeDate({dateCell:'#datebut',format:'YYYY-MM-DD'})"  class="txt" /></dd>
                         </dl>
 
                         <dl>
@@ -92,10 +96,6 @@
                         <dl>
                         <dt>联系地址</dt>
                         <dd><input  type="text" name="contract_addr"/></dd>
-                        </dl>
-                        <dl>
-                            <dt>身份证号</dt>
-                            <dd><input type="text" name="cred_num" id="cred_num" class="txt" /></dd>
                         </dl>
                         <dl>
                             <dt></dt>
@@ -307,6 +307,14 @@ $(document).ready(function () {
         }   
     })
     
+    $('#cred_num').focusout(function(){
+        var cred_num = $(this).val()
+        var birthday = GetBirthdatByIdNo(cred_num)
+        if($('#birthday')){
+            $('#birthday').val(birthday)
+        }
+    })
+    
     //身份信息提交
     $('.thirdStepSubmit').click(function(){
         var card_type = $('.selectCardType :selected').data('type')
@@ -422,6 +430,21 @@ $(document).ready(function () {
             $('.insuranceList').html(html);
         },'json')
     })
+    //检查身份证中的出生日期
+    function GetBirthdatByIdNo(iIdNo){
+      var tmpStr = "";
+      var birthday = $("#js_birthday");
+      iIdNo = $.trim(iIdNo);
+      if(iIdNo.length == 15){
+        tmpStr = iIdNo.substring(6, 12);
+        tmpStr = "19" + tmpStr;
+        tmpStr = tmpStr.substring(0, 4) + "-" + tmpStr.substring(4, 6) + "-" + tmpStr.substring(6);
+      }else{
+        tmpStr = iIdNo.substring(6, 14);
+        tmpStr = tmpStr.substring(0, 4) + "-" + tmpStr.substring(4, 6) + "-" + tmpStr.substring(6);
+      }
+      return tmpStr;
+    }
     
     function checkIdcard(idcard){
 

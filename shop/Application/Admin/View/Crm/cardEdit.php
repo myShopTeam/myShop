@@ -70,7 +70,7 @@
                             <input type="radio" name="sex" class="input" id="sex" value="男" <if condition="$sex eq '男'"> checked</if>>男
                             <input type="radio" name="sex" class="input" id="sex1" value="女" <if condition="$sex eq '女'"> checked</if>>女</td>
                             <th>状态</th>
-                            <td style="color:green"><if condition="$is_active == 2">已激活<else/><font color="red">未激活</font></if></td>
+                            <td style="color:green"><if condition="$is_active == 2">已激活<elseif condition="$is_active == 3"/><font color="red">激活失败</font><else/><font color="red">未激活</font></if></td>
                             </tr>
                             </tbody>
                         <else/>
@@ -138,7 +138,7 @@
                             </tr> 
                             <tr>
                             <th>状态</th>
-                            <td style="color:green"><if condition="$is_active == 2">已激活<else/><font color="red">未激活</font></if></td>
+                            <td style="color:green"><if condition="$is_active == 2">已激活<elseif condition="$is_active == 3"/><font color="red">激活失败</font><else/><font color="red">未激活</font></if></td>
                             </tr>
                         </tbody>    
                     </if>

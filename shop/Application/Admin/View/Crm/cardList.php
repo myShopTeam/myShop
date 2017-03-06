@@ -34,6 +34,7 @@
                             <option value="0">状态</option>
                             <option value='1' <if condition="$post.is_active eq 1">selected</if>>未激活</option>
                             <option value='2' <if condition="$post.is_active eq 2">selected</if>>已激活</option>
+                            <option value='3' <if condition="$post.is_active eq 3">selected</if>>激活失败</option>
                         </select> 
                         <button class="btn serach_btn" >搜索</button>
                         <input type="button" class="btn export" value="导出" style="background:#1D83DB;color:#fff"/>
@@ -93,7 +94,7 @@
               <td align="center">{$vo.verif}</td>
               <td align="center"><if condition="$vo['is_active'] == 1">--<else/>{$vo.active_time|date='Y-m-d H:i:s',###}</if></td>
               <td align="center">{$vo.create_time|date='Y-m-d H:i:s',###}</td>
-              <td align="center" <if condition="$vo['is_active'] == 1">style="color:red"</if>>{$config[is_active][$vo['is_active']]}</td>
+              <td align="center" <if condition="$vo['is_active'] == 1 or $vo['is_active'] == 3">style="color:red"</if>>{$config[is_active][$vo['is_active']]}</td>
               <td align="center" width="60">
               <a href="{:U('cardEdit',array('card_num'=>$vo[card_num]))}">修改</a>|
               <a class="J_ajax_del" href="{:U('cardDelete',array('id'=>$vo['id']))}">删除</a>
@@ -124,6 +125,9 @@
     </div>
   </form>
 </div>
+    <form method="post" action="{:U('upload')}" enctype="multipart/form-data" class="uploadFileForm">
+        
+    </form>
 <div class="show_img" style="position:fixed;top:20%;margin-left:30%;display:none;z-index:1000;"><img src="" style="max-width:250px;" /></div>
 <script src="{$config_siteurl}statics/js/common.js"></script>
 <script>
@@ -195,7 +199,9 @@ $(function(){
                 if(!confirm('请确认已将excel整体转换为宋体格式！')){
                     e.topPropagation();
                 }
-                $('<form method="post" action="{:U('upload')}" enctype="multipart/form-data"></form>').append($('.uploadFile')).submit()
+                $('.uploadFileForm').append($('.uploadFile'));
+                $('.uploadFileForm').submit();
+                //$('<form method="post" action="{:U('upload')}" enctype="multipart/form-data"></form>').append($('.uploadFile')).submit()
             }else{
                 $('.uploadFile').addClass('active')
                 $('.uploadFile').css('display','')

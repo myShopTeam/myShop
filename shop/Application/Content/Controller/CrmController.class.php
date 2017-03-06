@@ -175,6 +175,8 @@ class CrmController extends Base {
                                 'yxzjlx'=>'身份证',
                                 'jzh'=>I("post.cred_num", "", "trim"),
                                 'kh'=>$card_num,
+                                'fwkssj'=>date('Y-m-d',time()),
+                                'fwdqsj'=>date('Y-m-d',time() + 365*60*60*24),
                                 'csny'=>I("post.birthday"),
                                 'brlxfs'=>I("post.mobile", "", "trim"),
                                 'zt'=>'在保',
@@ -190,6 +192,8 @@ class CrmController extends Base {
                                 'kh'=>$card_num,
                                 'brlxfs'=>I("post.mobile", "", "trim"),
                                 'dljySph'=>I("post.num_plate", "", "trim"),
+                                'fwkssj'=>date('Y-m-d',time()),
+                                'fwdqsj'=>date('Y-m-d',time() + 365*60*60*24),
                                 'zt'=>'在保',
                                 'creator'=>'b22631250f8543c6bd34c3b930d862f5',
                         );
@@ -197,9 +201,14 @@ class CrmController extends Base {
                     
             }
             if($card_config['is_push']){
-                $this->push_msg($push_data);
+                $push_result = $this->push_msg($push_data);
+                if(is_bool($push_result)){
+                    $this->success('激活成功！');
+                }else{
+                    M('card')->where(array('card_num' => $card_num))->save(array('is_active'=>3));
+                    $this->error('激活失败！'.$push_result);
+                }
             }
-            $this->success('激活成功！');
         }else{
             $this->success('激活失败！');           
         }
@@ -215,7 +224,9 @@ class CrmController extends Base {
         if($result->return){
             $sql = 'update tp_card set push_msg = "'.$result->return.'",push_result = 2 where card_num = "'.$data['kh'].'"';
             M('card')->query($sql);
+            return $result->return;
         }
+        return true;
     }
 
 

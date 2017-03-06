@@ -15,11 +15,11 @@
                             <input type="radio" value="2" name="card_type_int" class="input car_card" id="card_type_int" placeholder="请输入卡号">
                             车卡                        
                         </td>
-                        <th width="90">是否激活</th>
+<!--                        <th width="90">是否激活</th>
                         <td>
                             <input type="radio" name="is_active" class="input" id="sex" value="2">是
                             <input type="radio" name="is_active" class="input" id="sex1" value="1" checked>否</td>  
-                        </td>
+                        </td>-->
                     </tr>
                     
                     <tbody class="nomal">
