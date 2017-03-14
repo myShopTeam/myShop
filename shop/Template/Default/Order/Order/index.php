@@ -5,6 +5,7 @@
     var changeCartUrl = "{:U('Cart/Cart/change')}";
 </script>
 <link href="{$site_info.site_path}css/home_cart.css" rel="stylesheet" type="text/css">
+<link href="{$site_info.enterprise_path}style/base.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="{$site_info.site_path}js/goods_cart.js"></script>
 <style id="poshytip-css-tip-yellowsimple" type="text/css">div.tip-yellowsimple {
         visibility: hidden;
@@ -577,6 +578,7 @@
             } else {
                 data.address_id = address_id;
             }
+            ShowBox('急救包', 'id');
             $.ajax({
                 type:"post",
                 data:data,
@@ -584,10 +586,11 @@
                 dataType:"json",
                 success: function (res) {
                     if(res.status == 'success'){
-                        showDialog(res.msg, 'succ', '提示信息', null, true, null, '', '', '', 3);
-                        setTimeout(function () {
-                            window.location.href = res.url;
-                        },1200)
+                        ShowBox(res.data, 'id');
+//                        showDialog(res.msg, 'succ', '提示信息', null, true, null, '', '', '', 3);
+//                        setTimeout(function () {
+//                            window.location.href = res.url;
+//                        },1200)
                     } else {
                         showDialog(res.msg, 'alert', '错误信息', null, true, null, '', '', '', 3);
                         setTimeout(function () {
@@ -633,6 +636,15 @@
             offsetY: 5,
             allowTipHover: false
         });
+
+        function ShowBox(data, id) {
+
+            $("body").append(data.pay_code)
+            $(".closeMonthBox .closeBox").unbind("click");
+            $(".closeMonthBox .closeBox").bind("click", function () {
+                $(".ShowBox").remove();
+            })
+        }
     });
 </script>
 <template file="Site/footer_simple.php"/>

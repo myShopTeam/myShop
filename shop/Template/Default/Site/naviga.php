@@ -77,9 +77,9 @@
         </div>
         <ul class="site-menu">
             <li><a href="/"><span>首页</span></a></li>
-            <li class="navitems-on"><a href="{:U('products', array('hot' => 1))}" <if condition="$hot eq 1">class="current"</if>><span>热卖</span></a></li>
-            <li><a href="{:U('products', array('new' => 1))}" <if condition="$new eq 1">class="current"</if>><span>新品</span></a></li>
-            <li><a href="{:U('products', array('best' => 1))}" <if condition="$best eq 1">class="current"</if>><span>精品</span></a></li>
+            <li class="navitems-on"><a href="{:U('Site/Goods/products', array('hot' => 1))}" <if condition="$hot eq 1">class="current"</if>><span>热卖</span></a></li>
+            <li><a href="{:U('Site/Goods/products', array('new' => 1))}" <if condition="$new eq 1">class="current"</if>><span>新品</span></a></li>
+            <li><a href="{:U('Site/Goods/products', array('best' => 1))}" <if condition="$best eq 1">class="current"</if>><span>精品</span></a></li>
            </ul>
     </div>
 </nav>

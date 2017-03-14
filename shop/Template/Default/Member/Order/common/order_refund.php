@@ -3,9 +3,8 @@
 <div class="wrap">
     <div class="tabmenu">
         <ul class="tab pngFix">
-            <li class="active"><a href="index.php?act=member_refund">退款申请</a></li>
-            <li class="normal"><a href="index.php?act=member_return">退货申请</a></li>
-            <li class="normal"><a href="index.php?act=member_vr_refund">虚拟兑码退款</a></li>
+            <li class="active"><a href="{:U('Member/Order/refund')}">退款申请</a></li>
+            <li class="normal"><a href="{:U('Member/Order/returnGoods')}">退货申请</a></li>
         </ul>
     </div>
     <form method="get" action="index.php">
@@ -15,17 +14,6 @@
             <tbody>
             <tr>
                 <td>&nbsp;</td>
-                <th>申请时间</th>
-                <td class="w240">
-                    <input name="add_time_from" id="add_time_from" type="text" class="text w70 hasDatepicker" value="" readonly="readonly">
-                    <label class="add-on">
-                        <i class="icon-calendar"></i>
-                    </label>&nbsp;–&nbsp;
-                    <input name="add_time_to" id="add_time_to" type="text" class="text w70 hasDatepicker" value="" readonly="readonly">
-                    <label class="add-on">
-                        <i class="icon-calendar"></i>
-                    </label>
-                </td>
                 <th>
                     <select name="type">
                         <option value="order_sn">订单编号</option>
@@ -63,10 +51,8 @@
         </tbody>
     </table>
 </div>
-<!--<script type="text/javascript" src="http://shopwwi.local.com/data/resource/js/jquery-ui/i18n/zh-CN.js" charset="utf-8"></script>-->
 <script type="text/javascript">
     $(function () {
-        $('#add_time_from').datepicker({dateFormat: 'yy-mm-dd'});
-        $('#add_time_to').datepicker({dateFormat: 'yy-mm-dd'});
+
     });
 </script>

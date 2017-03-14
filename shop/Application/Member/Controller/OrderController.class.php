@@ -191,6 +191,7 @@ class OrderController extends BaseController
             switch($state_type){
 
                 case 'order_cancel':
+                    //订单取消
                     $order_id = I('get.oid', 0, 'intval');
                     if($order_id){
                         $order = M('goods_orderinfo')->field('order_id,order_sn')->find($order_id);
@@ -200,6 +201,22 @@ class OrderController extends BaseController
                     } else {
                         msg('error','不存在此订单');
                     }
+                    break;
+                case 'change_address' :
+                    //新增 修改收货地址
+                    $addr_id = I('get.addr_id');
+                    if($addr_id){
+                        //修改操作
+                        $addr_info = M('member_address')->find($addr_id);
+                        $area_data = $this->getFormatArea();
+
+                        $this->assign($addr_info);
+                        $this->assign('area_data', $area_data);
+                    } else {
+                        //添加操作
+
+                    }
+                    $this->display('Member/Member/add_address');
                     break;
 
                 default:

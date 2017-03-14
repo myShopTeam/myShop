@@ -56,7 +56,7 @@ class OrderController extends BaseController
         //获取购物车数据
         $filter['uid'] = $this->uid;
         $info = D('Cart/GoodsCart')->getCartInfo($filter);
-        if(!$info){
+        if(!$info || !$info['carts']){
             redirect(U('Site/Goods/products'));
         }
         //判断商品是否下架 todo
@@ -122,7 +122,6 @@ class OrderController extends BaseController
         $cart_info = M('goods_cart')->where(array('cart_id' => array('IN', $carts)))->select();
         $goods_fee    = 0; //商品总额
         $goods_total  = 0; //商品总数
-        $goods_fee    = 0; //优惠折扣后的商品总额
         $goods_ids = array();
 
         foreach($cart_info as $k => $cart){
@@ -188,6 +187,9 @@ class OrderController extends BaseController
                     'goods_thumb'   => $cart['goods_thumb'],
                 );
                 $cart_ids[] = $cart['cart_id'];
+                //订单支付名称
+                $order_info['pay_body_array'][] = $cart['goods_name'];
+                $order_info['product_id'][] = $cart['goods_id'];
             }
             $order_result = M('goods_order')->addAll($order);
             if($order_result){
@@ -197,7 +199,14 @@ class OrderController extends BaseController
                 A('Cart/Cart')->clearCartCache();
                 if($clear_bool){
                     M()->commit();
-                    msg('success', '订单创建成功', array(), U('Member/Member/index'));
+                    $order_info['pay_body'] = implode('、', $order_info['pay_body_array']) . '等共' . count($order_info['pay_body_array']) . '件商品';
+                    make_log($order_info);
+                    $data = array(
+                        'data' => A('Wechat/Wxpay')->native($order_info),
+                    );
+                    $this->assign('pay_data', $data['data']);
+                    $pay_code = $this->fetch('Order/pay_code');
+                    msg('success', '订单创建成功', array('pay_code' => $pay_code), U('Member/Member/index'));
                 }
             } else {
                 M()->rollback();

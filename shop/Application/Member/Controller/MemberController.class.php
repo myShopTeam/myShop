@@ -233,9 +233,24 @@ class MemberController extends BaseController
      * 收货地址
      */
     public function address(){
+        $address = M('member_address')->where(array('uid' => $this->uid))->order('created ASC')->select();
 
         $this->assign('right', 'address_right');
+        $this->assign('address', $address);
         $this->display('index');
+    }
+
+    /**
+     * 添加、修改收货地址
+     */
+    public function modifyAddress(){
+        $addr_id = I('post.addr_id');
+        if($addr_id){
+            //修改
+        } else {
+            //添加
+        }
+
     }
 
     /**

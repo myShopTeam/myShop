@@ -115,7 +115,7 @@ class GoodsCartModel extends Model {
         if($info['carts']){
             foreach($info['carts'] as $k => $cart){
                 //判断商品是否有属性 使用price不需要前台判断
-                $info['carts'][$k]['price'] = $cart['sku'] ? $cart['attr_price'] : $cart['goods_price'];
+                $info['carts'][$k]['price'] = $cart['sku_id'] ? $cart['attr_price'] : $cart['goods_price'];
                 //商品小计
                 $info['carts'][$k]['goods_subtotal'] = $info['carts'][$k]['price'] * $cart['goods_num'];
                 //总价

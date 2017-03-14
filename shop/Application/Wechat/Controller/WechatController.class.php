@@ -21,6 +21,7 @@ class WechatController extends \Think\Controller
 
     public function auth()
     {
+        make_log($_GET);
         if($this->checkSignature()){
             echo $_GET['echostr'];
             exit;
@@ -32,6 +33,7 @@ class WechatController extends \Think\Controller
         $data = array($wxuser['token'],$_GET['timestamp'], $_GET['nonce']);
         $sign = $_GET['signature'];
         sort($data, SORT_STRING);
+        make_log($data);
         $signature = sha1(implode($data));
         if($signature == $sign){
             return true;

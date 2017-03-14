@@ -13,7 +13,7 @@
  * @param array $arr
  * @param boolean $bool
  */
-function p($arr,$bool=false){
+function p($arr,$bool=true){
     echo '<pre>';
     print_r($arr);
     echo '</pre>';
@@ -942,7 +942,7 @@ function format_bytes($size, $delimiter = '') {
 	return round($size, 2) . $delimiter . $units[$i];
 }
 
-function make_log($param, $filename, $path, $append=true){
+function make_log($param, $filename, $path, $txt, $append=true){
     if(!$path) {
         $path = SITE_PATH . 'data';
         if(!file_exists($path)){
@@ -960,9 +960,9 @@ function make_log($param, $filename, $path, $append=true){
         }
     }
     if($append){
-        file_put_contents($path . $filename, date('Y-m-d H:i:s',time()) . "  " . print_r($param,1).PHP_EOL.PHP_EOL,FILE_APPEND);
+        file_put_contents($path . $filename, date('Y-m-d H:i:s',time()) . "  {$txt}" . print_r($param,1).PHP_EOL.PHP_EOL,FILE_APPEND);
     } else {
-        file_put_contents($path . $filename, date('Y-m-d H:i:s',time()) . "  " . print_r($param,1));
+        file_put_contents($path . $filename, date('Y-m-d H:i:s',time()) . "  {$txt}" . print_r($param,1));
     }
 }
 
