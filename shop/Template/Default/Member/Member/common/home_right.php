@@ -51,7 +51,7 @@
                                         </span>
                                     </dd>
                                 </dl>
-                                <a href="{:U('Order/Order/pay')}" target="_blank" class="ncbtn ncbtn-bittersweet"><i class="icon-shield"></i>订单支付</a>
+                                <a data-href="{:U('Order/Order/submit', array('order_sn' => $vo['order_sn']))}" class="ncbtn ncbtn-bittersweet topay"><i class="icon-shield"></i>订单支付</a>
                             </li>
                         </volist>
                     </ul>

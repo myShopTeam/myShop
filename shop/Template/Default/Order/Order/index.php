@@ -7,52 +7,6 @@
 <link href="{$site_info.site_path}css/home_cart.css" rel="stylesheet" type="text/css">
 <link href="{$site_info.enterprise_path}style/base.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="{$site_info.site_path}js/goods_cart.js"></script>
-<style id="poshytip-css-tip-yellowsimple" type="text/css">div.tip-yellowsimple {
-        visibility: hidden;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-
-    div.tip-yellowsimple table, div.tip-yellowsimple td {
-        margin: 0;
-        font-family: inherit;
-        font-size: inherit;
-        font-weight: inherit;
-        font-style: inherit;
-        font-variant: inherit;
-    }
-
-    div.tip-yellowsimple td.tip-bg-image span {
-        display: block;
-        font: 1px/1px sans-serif;
-        height: 10px;
-        width: 10px;
-        overflow: hidden;
-    }
-
-    div.tip-yellowsimple td.tip-right {
-        background-position: 100% 0;
-    }
-
-    div.tip-yellowsimple td.tip-bottom {
-        background-position: 100% 100%;
-    }
-
-    div.tip-yellowsimple td.tip-left {
-        background-position: 0 100%;
-    }
-
-    div.tip-yellowsimple div.tip-inner {
-        background-position: -10px -10px;
-    }
-
-    div.tip-yellowsimple div.tip-arrow {
-        visibility: hidden;
-        position: absolute;
-        overflow: hidden;
-        font: 1px/1px sans-serif;
-    }</style>
 </head>
 <body>
 

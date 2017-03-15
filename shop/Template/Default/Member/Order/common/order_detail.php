@@ -62,7 +62,7 @@
                 </dl>
                 <ul>
                     <li>1. 您尚未对该订单进行支付，请
-                        <a href="{:U('Order/Order/pay')}" class="ncbtn-mini ncbtn-bittersweet"><i></i>支付订单</a>以确保商家及时发货。
+                        <a data-href="{:U('Order/Order/submit', array('order_sn' => $vo['order_sn']))}" class="ncbtn-mini ncbtn-bittersweet topay"><i></i>支付订单</a>以确保商家及时发货。
                     </li>
                     <li>2. 如果您不想购买此订单的商品，请选择<a href="#order-step" class="ncbtn-mini">取消订单</a>操作。</li>
 <!--                    <li>3. 如果您未对该笔订单进行支付操作，系统将于-->

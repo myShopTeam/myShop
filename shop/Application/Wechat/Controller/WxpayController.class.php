@@ -45,7 +45,8 @@ class WxpayController extends \Think\Controller
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
         $input->SetGoods_tag($order_info['pay_body']);
-        $input->SetNotify_url('http://www.gajysos.com/wechat.php');
+        $input->SetNotify_url('http://16161fg813.iok.la:39659/wechat.php');
+//        $input->SetNotify_url('http://www.gajysos.com/wechat.php');
         $input->SetTrade_type("NATIVE");
         $input->SetProduct_id(implode(',', $order_info['product_id']));
         make_log($notify_url);
@@ -64,7 +65,25 @@ class WxpayController extends \Think\Controller
             //禁止引用外部xml实体
             libxml_disable_entity_loader(true);
             $data = json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
-            make_log($data);
+
+            if(!session('isCheckOrder')){
+                if($data['result_code'] == 'SUCCESS'){
+                    //订单成功
+                    M()->startTrans();
+                    session('isCheckOrder', true);
+                    if(!M('wxpay_log')->where(array('transaction_id' => $data['transaction_id']))->find()){
+                        $orderRes = M('goods_orderinfo')->where(array('order_sn' => $data['out_trade_no']))->save(array('pay_status' => 1, 'order_status' => 2));
+                        $logRes = M('wxpay_log')->add($data);
+                        if($orderRes && $logRes){
+                            M()->commit();
+                        } else {
+                            M()->rollback();
+                        }
+                    }
+                } else {
+                    //订单失败
+                }
+            }
         }
     }
 

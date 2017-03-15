@@ -66,7 +66,7 @@
                 <span class="ml15">在线支付金额：
                     <em>￥{$vo.pay_fee|cur}</em>
                 </span>
-                        <a class="ncbtn ncbtn-bittersweet fr mr15" href="{:U('Order/Order/pay', array('order_sn' => $vo['order_sn']))}">
+                        <a class="ncbtn ncbtn-bittersweet fr mr15 topay" data-href="{:U('Order/Order/submit', array('order_sn' => $vo['order_sn']))}">
                             <i class="icon-shield"></i>订单支付
                         </a>
                     </td>
@@ -215,4 +215,5 @@
         $('#query_start_date').datepicker({dateFormat: 'yy-mm-dd'});
         $('#query_end_date').datepicker({dateFormat: 'yy-mm-dd'});
     });
+
 </script>

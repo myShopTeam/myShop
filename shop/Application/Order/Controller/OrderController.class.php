@@ -199,14 +199,7 @@ class OrderController extends BaseController
                 A('Cart/Cart')->clearCartCache();
                 if($clear_bool){
                     M()->commit();
-                    $order_info['pay_body'] = implode('、', $order_info['pay_body_array']) . '等共' . count($order_info['pay_body_array']) . '件商品';
-                    make_log($order_info);
-                    $data = array(
-                        'data' => A('Wechat/Wxpay')->native($order_info),
-                    );
-                    $this->assign('pay_data', $data['data']);
-                    $pay_code = $this->fetch('Order/pay_code');
-                    msg('success', '订单创建成功', array('pay_code' => $pay_code), U('Member/Member/index'));
+                    $this->pay($order_info);
                 }
             } else {
                 M()->rollback();
@@ -218,11 +211,37 @@ class OrderController extends BaseController
         }
     }
 
+    //提交付款页面
+    public function submit(){
+        $order_sn = I('get.order_sn');
+        if(!$order_sn){
+            redirect(U('Member/Order/index'));
+        }
+        $orderInfo = M('goods_orderinfo')->where(array('order_sn' => $order_sn))->find();
+        $orders = M('goods_order')->field('goods_id,goods_name')->where(array('order_id' => $orderInfo['order_id']))->select();
+        if($orders){
+            foreach($orders as $order){
+                //订单支付名称
+                $orderInfo['pay_body_array'][] = $order['goods_name'];
+                $orderInfo['product_id'][] = $order['goods_id'];
+            }
+        }
+        $this->pay($orderInfo);
+    }
+
     /**
      * 支付提交页面
      */
-    public function submit(){
-
+    public function pay($order_info){
+        $order_info['pay_body'] = implode('、', $order_info['pay_body_array']) . '等共' . count($order_info['pay_body_array']) . '件商品';
+        make_log($order_info);
+        $data = array(
+            'data' => A('Wechat/Wxpay')->native($order_info),
+        );
+        $this->assign('pay_data', $data['data']);
+        $this->assign($order_info);
+        $pay_code = $this->fetch('Order/pay_code');
+        msg('success', '订单创建成功', array('pay_code' => $pay_code), U('Member/Member/index'));
     }
 
     /**

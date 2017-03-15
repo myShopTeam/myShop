@@ -27,3 +27,4 @@
 <link href="/public/common/css/jquery.qtip.min.css" rel="stylesheet" type="text/css">
 <!-- 对比 -->
 <script src="/public/site/js/compare.js"></script>
+<script charset="utf-8" type="text/javascript" src="{$site_info.site_path}js/submit_order.js"></script>
