@@ -35,9 +35,9 @@
         <li <in name="selected" value="Member_Order_refund,Member_Order_returnGoods,Member_Order_refundApply">class="selected"</in>>
             <a href="{:U('Member/Order/refund')}">退款及退货</a>
         </li>
-        <li <in name="selected" value="Member_Order_complaint">class="selected"</in>>
-            <a href="{:U('Member/Order/complaint')}">交易投诉</a>
-        </li>
+<!--        <li <in name="selected" value="Member_Order_complaint">class="selected"</in>>-->
+<!--            <a href="{:U('Member/Order/complaint')}">交易投诉</a>-->
+<!--        </li>-->
 <!--        <li><a href="http://shop.local.com/shop/index.php?act=member_consult&op=my_consult">商品咨询</a></li>-->
 <!--        <li><a href="http://shop.local.com/shop/index.php?act=member_inform&op=index">违规举报</a></li>-->
 <!--        <li><a href="http://shop.local.com/shop/index.php?act=member_mallconsult&op=index">平台客服</a></li>-->
@@ -55,17 +55,17 @@
             <a href="{:U('Member/Member/address')}">收货地址</a>
         </li>
 
-        <li <in name="selected" value="Member_Member_modifyPwd">class="selected"</in>>
-            <a href="{:U('Member/Member/modifyPwd')}">修改登录密码</a>
-        </li>
+<!--        <li <in name="selected" value="Member_Member_modifyPwd">class="selected"</in>>-->
+<!--            <a href="{:U('Member/Member/modifyPwd')}">修改登录密码</a>-->
+<!--        </li>-->
 
-        <li <in name="selected" value="Member_Member_modifyAvatar">class="selected"</in>>
-            <a href="{:U('Member/Member/modifyAvatar')}">修改头像</a>
-        </li>
+<!--        <li <in name="selected" value="Member_Member_modifyAvatar">class="selected"</in>>-->
+<!--            <a href="{:U('Member/Member/modifyAvatar')}">修改头像</a>-->
+<!--        </li>-->
 
-        <li <in name="selected" value="Member_Member_modifyEmail">class="selected"</in>>
-            <a href="{:U('Member/Member/modifyEmail')}">邮件绑定</a>
-        </li>
+<!--        <li <in name="selected" value="Member_Member_modifyEmail">class="selected"</in>>-->
+<!--            <a href="{:U('Member/Member/modifyEmail')}">邮件绑定</a>-->
+<!--        </li>-->
     </ul>
 </li>
 <!--<li class="side-menu"><a href="javascript:void(0)" key="property">-->

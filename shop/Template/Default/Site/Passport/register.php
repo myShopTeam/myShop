@@ -44,7 +44,7 @@
 
                         <div id="default" class="tabs-content">
 
-                            <form id="register_form" method="post" class="nc-login-form" action="http://localhost:8009/member/index.php?act=login&op=usersave">
+                            <form id="register_form" method="post" class="nc-login-form" action="{:U('Passport/toregister')}">
 
                                 <dl>
 
@@ -52,7 +52,7 @@
 
                                     <dd>
 
-                                        <input type="text" id="user_name" name="user_name" class="text" tipMsg="请使用3-15个中、英文、数字及“-”符号"/>
+                                        <input type="text" id="user_name" name="username" class="text" placeholder="请使用3-15个中、英文、数字及“-”符号"/>
 
                                     </dd>
 
@@ -64,7 +64,7 @@
 
                                     <dd>
 
-                                        <input type="password" id="password" name="password" class="text" tipMsg="6-20个大小写英文字母、符号或数字"/>
+                                        <input type="password" id="password" name="password" class="text" placeholder="6-20个大小写英文字母、符号或数字"/>
 
                                     </dd>
 
@@ -76,7 +76,7 @@
 
                                     <dd>
 
-                                        <input type="password" id="password_confirm" name="password_confirm" class="text" tipMsg="请再次输入密码"/>
+                                        <input type="password" id="password_confirm" name="password_confirm" class="text" placeholder="请再次输入密码"/>
 
                                     </dd>
 
@@ -88,7 +88,7 @@
 
                                     <dd>
 
-                                        <input type="text" id="email" name="email" class="text" tipMsg="输入常用邮箱作为验证及找回密码使用"/>
+                                        <input type="text" id="email" name="email" class="text" placeholder="输入常用邮箱作为验证及找回密码使用"/>
 
                                     </dd>
 
@@ -102,13 +102,16 @@
 
                                         <dd>
 
-                                            <input type="text" id="captcha" name="captcha" class="text w80" size="10" tipMsg="输入验证码"/>
+                                            <input type="text" id="captcha" name="code" class="text w80" size="10" placeholder="输入验证码"/>
 
                                         </dd>
 
                                     </dl>
 
-                                    <span><img src="other/index.php?act=seccode&op=makecode&type=50,120&nchash=932bc2cf" name="codeimage" id="codeimage"/> <a class="makecode" href="javascript:void(0)" onclick="javascript:document.getElementById('codeimage').src='other/index.php?act=seccode&op=makecode&type=50,120&nchash=932bc2cf&t=' + Math.random();">看不清，换一张</a></span>
+                                    <span>
+                                <img src="{$code}" name="codeimage" id="codeimage">
+                                <a class="makecode" href="javascript:void(0)" onclick="javascript:document.getElementById('codeimage').src='{$code}&refresh=1&time=' + Math.random();">看不清，换一张</a>
+                            </span>
                                 </div>
 
                                 <dl class="clause-div">
@@ -117,13 +120,13 @@
 
                                         <input name="agree" type="checkbox" class="checkbox" id="clause" value="1" checked="checked"/>
 
-                                        阅读并同意<a href="http://localhost:8009/shop/index.php?act=document&op=index&code=agreement" target="_blank" class="agreement" title="阅读并同意">《服务协议》</a></dd>
+                                        阅读并同意<a href="#" target="_blank" class="agreement" title="阅读并同意">《服务协议》</a></dd>
 
                                 </dl>
 
                                 <div class="submit-div">
 
-                                    <input type="submit" id="Submit" value="立即注册" class="submit"/>
+                                    <input type="button" id="Submit" value="立即注册" class="submit"/>
 
                                 </div>
 
@@ -211,214 +214,79 @@
 
         });
 
-
-//注册表单验证
-
-        $("#register_form").validate({
-
-            errorPlacement: function (error, element) {
-
-                var error_td = element.parent('dd');
-
-                error_td.append(error);
-
-                element.parents('dl:first').addClass('error');
-
-            },
-
-            success: function (label) {
-
-                label.parents('dl:first').removeClass('error').find('label').remove();
-
-            },
-
-            submitHandler: function (form) {
-
-                ajaxpost('register_form', '', '', 'onerror');
-
-            },
-
-            onkeyup: false,
-
-            rules: {
-
-                user_name: {
-
-                    required: true,
-
-                    lettersmin: true,
-
-                    lettersmax: true,
-
-                    letters_name: true,
-
-                    remote: {
-
-                        url: 'index.php?act=login&op=check_member&column=ok',
-
-                        type: 'get',
-
-                        data: {
-
-                            user_name: function () {
-
-                                return $('#user_name').val();
-
-                            }
-
-                        }
-
-                    }
-
-                },
-
-                password: {
-
-                    required: true,
-
-                    minlength: 6,
-
-                    maxlength: 20
-
-                },
-
-                password_confirm: {
-
-                    required: true,
-
-                    equalTo: '#password'
-
-                },
-
-                email: {
-
-                    required: true,
-
-                    email: true,
-
-                    remote: {
-
-                        url: 'index.php?act=login&op=check_email',
-
-                        type: 'get',
-
-                        data: {
-
-                            email: function () {
-
-                                return $('#email').val();
-
-                            }
-
-                        }
-
-                    }
-
-                },
-
-                captcha: {
-
-                    required: true,
-
-                    remote: {
-
-                        url: 'index.php?act=seccode&op=check&nchash=932bc2cf',
-
-                        type: 'get',
-
-                        data: {
-
-                            captcha: function () {
-
-                                return $('#captcha').val();
-
-                            }
-
-                        },
-
-                        complete: function (data) {
-
-                            if (data.responseText == 'false') {
-
-                                document.getElementById('codeimage').src = 'other/index.php?act=seccode&op=makecode&type=50,120&nchash=932bc2cf&t=' + Math.random();
-
-                            }
-
-                        }
-
-                    }
-
-                },
-
-                agree: {
-
-                    required: true
-
-                }
-
-            },
-
-            messages: {
-
-                user_name: {
-
-                    required: '<i class="icon-exclamation-sign"></i>用户名不能为空',
-
-                    lettersmin: '<i class="icon-exclamation-sign"></i>用户名必须在3-15个字符之间',
-
-                    lettersmax: '<i class="icon-exclamation-sign"></i>用户名必须在3-15个字符之间',
-
-                    letters_name: '<i class="icon-exclamation-sign"></i>可包含“_”、“-”，不能是纯数字',
-
-                    remote: '<i class="icon-exclamation-sign"></i>该用户名已经存在'
-
-                },
-
-                password: {
-
-                    required: '<i class="icon-exclamation-sign"></i>密码不能为空',
-
-                    minlength: '<i class="icon-exclamation-sign"></i>密码长度应在6-20个字符之间',
-
-                    maxlength: '<i class="icon-exclamation-sign"></i>密码长度应在6-20个字符之间'
-
-                },
-
-                password_confirm: {
-
-                    required: '<i class="icon-exclamation-sign"></i>请再次输入密码',
-
-                    equalTo: '<i class="icon-exclamation-sign"></i>两次输入的密码不一致'
-
-                },
-
-                email: {
-
-                    required: '<i class="icon-exclamation-sign"></i>电子邮箱不能为空',
-
-                    email: '<i class="icon-exclamation-sign"></i>这不是一个有效的电子邮箱',
-
-                    remote: '<i class="icon-exclamation-sign"></i>该电子邮箱已经存在'
-
-                },
-
-                captcha: {
-
-                    required: '<i class="icon-remove-circle" title="请输入验证码"></i>',
-
-                    remote: '<i class="icon-remove-circle" title="验证码不正确"></i>'
-
-                },
-
-                agree: {
-
-                    required: '<i class="icon-exclamation-sign"></i>请勾选服务协议'
-
-                }
-
+        $('.submit').click(function () {
+            var data = {};
+            var username = $('input[name=username]').val();
+            var password = $('input[name=password]').val();
+            var password_confirm = $('input[name=password_confirm]').val();
+            var email    = $('input[name=email]').val();
+            var agree    = $('input[name=agree]:checked').val();
+            var code     = $('input[name=code]').val();
+
+            if($.trim(username) == ''){
+                showDialog('请输入用户名', 'alert', '错误信息', null, true, null, '', '', '', 3);
+                return;
+            } else {
+                data.username = username;
             }
+            if($.trim(password) == ''){
+                showDialog('请输入密码', 'alert', '错误信息', null, true, null, '', '', '', 3);
+                return;
+            } else {
+                if(password.length < 6){
+                    showDialog('请输入6位以上的密码', 'alert', '错误信息', null, true, null, '', '', '', 3);
+                    return;
+                }
+                data.password = password;
+            }
+            if($.trim(password) != $.trim(password_confirm)){
+                showDialog('2次密码输入不一样', 'alert', '错误信息', null, true, null, '', '', '', 3);
+                return;
+            } else {
+                data.password_confirm = password_confirm;
+            }
+            if($.trim(email) == ''){
+                showDialog('请输入邮箱', 'alert', '错误信息', null, true, null, '', '', '', 3);
+                return;
+            } else {
+                data.email = email;
+            }
+            if($.trim(agree) == ''){
+                showDialog('请勾选服务协议', 'alert', '错误信息', null, true, null, '', '', '', 3);
+                return;
+            } else {
+                data.agree = agree;
+            }
+            if($.trim(code) == ''){
+                showDialog('请输入验证码', 'alert', '错误信息', null, true, null, '', '', '', 3);
+                return;
+            }
+            if(($.trim(code)).length != 4){
+                showDialog('请输入正确的验证码', 'alert', '错误信息', null, true, null, '', '', '', 3);
+                return;
+            } else {
+                data.code = code;
+            }
+            data.back = "{$redirect_url}";
+            $.ajax({
+                type: "post",
+                data: data,
+                url: "{:U('Passport/toregister')}",
+                dataType: "json",
+                success: function (res) {
+                    if(res.status == 'success'){
+                        showDialog(res.msg, 'succ', '提示信息', null, true, null, '', '', '', 1);
+                        setTimeout(function () {
+                            window.location.href = res.data.back;
+                        },1200);
+                    } else {
 
-        });
+                        showDialog(res.msg, 'alert', '错误信息', null, true, null, '', '', '', 3);
+                        return;
+                    }
+                }
+            })
+        })
 
     });
 

@@ -44,7 +44,8 @@
         <div class="ncm-header-top">
             <div class="ncm-member-info">
                 <div class="avatar">
-                    <a href="{:U('Member/Member/modifyAvatar')}" title="修改头像">
+<!--                    <a href="{:U('Member/Member/modifyAvatar')}" title="修改头像">-->
+                    <a href="#" title="修改头像">
                         <if condition="$member_info['avatar'] eq ''">
                             <img src="{$site_info.default_avatar}">
                             <else/>

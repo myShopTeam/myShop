@@ -40,13 +40,13 @@ class WxpayController extends \Think\Controller
         $input->SetBody($order_info['pay_body']);
         $input->SetAttach($order_info['pay_body']);
         $input->SetOut_trade_no($order_info['order_sn']);
-//        $input->SetTotal_fee($order_info['pay_fee'] * 100);
-        $input->SetTotal_fee(1);
+        $input->SetTotal_fee($order_info['pay_fee'] * 100);
+//        $input->SetTotal_fee(1);
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
         $input->SetGoods_tag($order_info['pay_body']);
-        $input->SetNotify_url('http://16161fg813.iok.la:39659/wechat.php');
-//        $input->SetNotify_url('http://www.gajysos.com/wechat.php');
+//        $input->SetNotify_url('http://16161fg813.iok.la:39659/wechat.php');
+        $input->SetNotify_url(get_http_host() . '/wechat.php');
         $input->SetTrade_type("NATIVE");
         $input->SetProduct_id(implode(',', $order_info['product_id']));
         make_log($notify_url);

@@ -86,8 +86,10 @@
 
                             </dl>
 
-                            <span><img src="{$code}" name="codeimage" id="codeimage">
-                                <a class="makecode" href="javascript:void(0)" onclick="javascript:document.getElementById('codeimage').src='{$code}&refresh=1&time=' + Math.random();">看不清，换一张</a></span>
+                            <span>
+                                <img src="{$code}" name="codeimage" id="codeimage">
+                                <a class="makecode" href="javascript:void(0)" onclick="javascript:document.getElementById('codeimage').src='{$code}&refresh=1&time=' + Math.random();">看不清，换一张</a>
+                            </span>
                         </div>
 
                         <div class="handle-div">

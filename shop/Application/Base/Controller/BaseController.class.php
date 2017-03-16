@@ -96,10 +96,10 @@ class BaseController extends Base
     {
         if ($this->isLogin()) {
 
-            $this->member_info =  D('Member/Card')->getMemberInfo($this->uid);
+            $this->member_info =  D('Member/GoodsMember')->getMemberInfo($this->uid);
             $this->member_info['is_login'] = 1;
             //如果用户未设置昵称 为了统一字段 则将用户名设置为昵称
-            $this->member_info['nicknane'] = $this->member_info['nicknane'] ? $this->member_info['nicknane'] : $this->member_info['username'];
+            $this->member_info['nickname'] = $this->member_info['nickname'] ? : $this->member_info['username'];
 
         } else {
             return false;
@@ -193,7 +193,7 @@ class BaseController extends Base
             );
             if(cookie('s') === sha1(serialize($keep_data))){
                 //验证成功 用户自动登录
-                $member = M('card')->find(cookie('uid'));
+                $member = M('goods_member')->find(cookie('uid'));
                 if($member){
                     $this->_setSession($member);
                 }

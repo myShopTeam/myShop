@@ -54,7 +54,13 @@ class MemberController extends BaseController
         //购物车数据
         $data['carts'] = M('goods_cart')->where(array('uid' => $this->uid))->select();;
         //商品收藏
-        $data['collects'] = array();
+        $collects = M('goods_collect')->where(array('uid' => $this->uid))->order('addtime DESC')->select();
+
+        if($collects){
+            $collect_ids = array_keys(array_bind_key($collects, 'goods_id'));
+            $data['collects'] = M('goods')->where(array('goods_id' => array('IN',$collect_ids)))->select();
+
+        }
         //我的足迹
         $params = array(
             'filter'    => array('uid' => $this->uid),
@@ -144,10 +150,10 @@ class MemberController extends BaseController
         $collects = M('goods_collect')->where(array('uid' => $this->uid))->order('addtime DESC')->select();
 
         if($collects){
-            $collect_ids = array_keys(array_bind_key($collects, 'id'));
+            $collect_ids = array_keys(array_bind_key($collects, 'goods_id'));
             $goods = M('goods')->where(array('goods_id' => array('IN',$collect_ids)))->select();
 
-            $this->assign('items', $goods);
+            $this->assign('collects', $goods);
         }
 
         $this->assign('right', 'collect_right');
@@ -159,17 +165,17 @@ class MemberController extends BaseController
      */
     public function delFavoriteGoods(){
         if(IS_AJAX){
-            $collect_id = I('cid', '', 'intval');
+            $goods_id = I('get.id', 0, 'intval');
             //非法操作
-            if(!$collect_id){
+            if(!$goods_id){
                 msg('error', '非法操作');
             }
             //判断用户是否关注
-            $check = M('goods_collect')->where(array('id' => $collect_id, 'uid' => $this->uid))->find();
+            $check = M('goods_collect')->where(array('goods_id' => $goods_id, 'uid' => $this->uid))->find();
             if(!$check){
                 msg('error', '不存在该商品');
             } else {
-                M('goods_collect')->where(array('id' => $collect_id))->delete();
+                M('goods_collect')->where(array('goods_id' => $goods_id, 'uid' => $this->uid))->delete();
                 msg('success', '取消成功', array(), U('Member/Member/favoriteGoods'));
             }
         }

@@ -1499,11 +1499,20 @@ function hideWindow(k, all, clear) {
 }
 
 function ajax_get_confirm(msg, url){
-	if (msg != ''){
-		showDialog(msg, 'confirm', '', function(){ajaxget(url);});
-	}else{
-		ajaxget(url);
-	}
+    showDialog(msg, 'confirm', '', function(){ajaxCollect(url);});
+}
+
+function ajaxCollect(url){
+            $.post(url,{}, function (res) {
+                if(res.status == 'success'){
+                    showDialog(res.msg, 'succ', '提示信息', null, true, null, '', '', '', 1);
+                    setTimeout(function () {
+                        window.location.href = window.location.href;
+                    },1200);
+                } else {
+                    showDialog(res.msg, 'alert', '错误信息', null, true, null, '', '', '', 3);
+                }
+            },'json')
 }
 function get_confirm(msg, url){
     if(msg != ''){

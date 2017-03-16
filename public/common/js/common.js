@@ -279,6 +279,8 @@ function collect_goods(gid,type){
         if(res.status == 'success'){
             if(type == 'goods_collect'){
                 $('[nctype="'+type+'"]').html(parseInt($('[nctype="'+type+'"]').text())+1);
+            } else {
+                showDialog(res.msg, 'succ');
             }
         } else {
             showDialog(res.msg, 'notice');

@@ -95,7 +95,7 @@
                 </div>
                 <div class="ncc-candidate-items">
                     <ul>
-                        <li>在线支付</li>
+                        <li>微信扫码支付</li>
                     </ul>
                 </div>
                 <div id="payment_list" class="ncc-candidate-items" style="display:none">

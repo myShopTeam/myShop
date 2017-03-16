@@ -47,7 +47,7 @@
         font: 1px/1px sans-serif;
     }</style>
 <div class="ShowBox">
-    <div class="closeMonthBox"><h5 class="title">支付项目：{$pay_body}<span class="closeBox"></span></h5>
+    <div class="closeMonthBox"><h5 class="title" title="{$pay_body}">支付项目：{$pay_body|str_cut=17}<span class="closeBox"></span></h5>
 
         <div class="cont">
             <if condition="$pay_data neq ''">

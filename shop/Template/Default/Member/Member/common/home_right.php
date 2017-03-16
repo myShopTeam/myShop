@@ -113,7 +113,40 @@
                 <h3>商品收藏</h3>
             </div>
             <if condition="$collects">
+                    <div class="ncm-favorites-goods">
+                        <div class=" jcarousel-skin-tango">
+                            <div class="jcarousel-container jcarousel-container-horizontal"
+                                 style="position: relative; display: block;">
+                                <div class="jcarousel-clip jcarousel-clip-horizontal" style="position: relative;">
+                                    <ul id="favoritesGoodsList" class="jcarousel-list jcarousel-list-horizontal"
+                                        style="overflow: hidden; position: relative; top: 0px; margin: 0px; padding: 0px; left: 0px; width: 326px;">
+                                        <volist name="collects" id="vo">
+                                        <li class="jcarousel-item jcarousel-item-horizontal jcarousel-item-1 jcarousel-item-1-horizontal"
+                                            jcarouselindex="1" style="float: left; list-style: none; width: 163px;">
+                                            <div class="ncm-goods-thumb-120">
+                                                <a href="{:U('Site/Goods/product', array('gid' => $vo['goods_id']))}" target="_blank">
+                                                    <img alt="{$vo.goods_name}" src="{$vo.goods_thumb}">
+                                                </a>
 
+                                                <div class="ncm-goods-price"><em>￥<if condition="$vo['sku_id'] eq ''">{$vo.goods_price|cur}<else/>{$vo.attr_price|cur}</if></em></div>
+                                            </div>
+                                            <div class="ncm-goods-name">
+                                                <a href="{:U('Site/Goods/product', array('gid' => $vo['goods_id']))}" title="{$vo.goods_name}" target="_blank">{$vo.goods_name}</a></div>
+                                        </li>
+                                    </volist>
+                                    </ul>
+                                </div>
+                                <div
+                                    class="jcarousel-prev jcarousel-prev-horizontal jcarousel-prev-disabled jcarousel-prev-disabled-horizontal"
+                                    disabled="disabled" style="display: block;"></div>
+                                <div
+                                    class="jcarousel-next jcarousel-next-horizontal jcarousel-next-disabled jcarousel-next-disabled-horizontal"
+                                    disabled="disabled" style="display: block;"></div>
+                            </div>
+                        </div>
+                        <div class="more"><a href="{:U('Member/Member/favoriteGoods')}">查看收藏的所有商品</a>
+                        </div>
+                    </div>
             <else/>
                 <dl class="null-tip">
                     <dt></dt>

@@ -120,6 +120,7 @@
                 res.data.is_list = 'no';
                 var cart_id = res.data.cart_info.cart_id;
                 var cart_num = res.data.cart_info.goods_num;
+                var goods_total = res.data.cart_total.goods_total;
                 var cart_html = template('cart-list-html', res.data);
                 var submit_html = template('cart-list-submit', res.data.cart_total)
                 //顶部购物车
@@ -143,9 +144,9 @@
                     $('#rtoolbar_cartlist').append(submit_html);
                     $('#minicart_list .list_detail').append(top_submit);
                 }
-                $('#nofollow').find('.cart_num').text(cart_num);
+                $('#nofollow').find('.cart_num').text(goods_total);
                 $('#rtoobar_cart_count').show();
-                $('#rtoobar_cart_count').text(cart_num);
+                $('#rtoobar_cart_count').text(goods_total);
             }
 
         })
@@ -155,6 +156,7 @@
         $.getJSON("{:U('Cart/Cart/delCart')}", {cart_id:cart_id},function (res) {
             if(res.status == 'success'){
                 var cart_num = Number($('#nofollow').find('.cart_num').text()) - 1;
+                var goods_total = res.data.cart_total.goods_total;
                 $('li[ncTpye="cart_item_'+ cart_id+'"]').remove();
                 var cart_total = res.data.cart_total;
                 //删除结算按钮
@@ -168,8 +170,8 @@
                 } else {
                     $('#rtoolbar_cartlist').html('<ul class="cart-list"><li><dl><dd style="text-align: center; ">暂无商品</dd></dl></li></ul>');
                 }
-                $('#nofollow').find('.cart_num').text(cart_num);
-                $('#rtoobar_cart_count').text(cart_num);
+                $('#nofollow').find('.cart_num').text(goods_total);
+                $('#rtoobar_cart_count').text(goods_total);
                 if(cart_num == 0){
                     $('#rtoobar_cart_count').hide();
                     $('#minicart_list .list_detail').html('<div class="none_tips"> <i> </i> <p>购物车中没有商品，赶紧去选购！</p> </div>');
