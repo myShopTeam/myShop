@@ -123,7 +123,7 @@ class CrmController extends AdminBase {
         $db = M('card');
         $count = $db->where($where)->count();
         $page = $this->page($count, 20);
-        $vipList = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('listorder desc')->select();
+        $vipList = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('listorder desc, create_time desc')->select();
         //var_dump($vipList);die;
         $roleSql = 'SELECT * FROM tp_role WHERE parentid = 1';
         $roleResult = M('role')->query($roleSql);
@@ -660,7 +660,7 @@ class CrmController extends AdminBase {
                 $this->error('上传失败！');
             } else {
                 $data = $this->read($savePath . $file_name, 'utf-8', $file_type);
-                //数据处理并存入数据库
+                //数据处理并存入数据库               
                 if (count($data) > 0) {
                     $cardMdl = M('card');
                     $userInfo = User::getInstance()->getInfo();

@@ -46,7 +46,8 @@
     })
     
     function setLevle(){
-        levle  = $(".table_full select option:selected").attr('rel')
+        relVal  = $(".table_full select option:selected").attr('rel')
+        levle   = ++relVal
         $('input[name="levle"]').val(levle)
     }
 </script>

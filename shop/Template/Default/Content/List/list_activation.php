@@ -136,9 +136,9 @@
                                 <option value="营运2-5座客车">营运2-5座客车</option>
                                 <option value="营运6-9-座客车">营运6-9-座客车</option>
                                 <option value="非营运6-9座客车">非营运6-9座客车</option>
-                                <option value="1-3座专用车及10吨以上货车">1-3座专用车及10吨以上货车</option>
+<!--                                <option value="1-3座专用车及10吨以上货车">1-3座专用车及10吨以上货车</option>
                                 <option value="2-3座罐装车">2-3座罐装车</option>
-                                <option value="0-10吨货车">0-10吨货车</option> 
+                                <option value="0-10吨货车">0-10吨货车</option> -->
                             </select>
                         </dd>
                     </dl>
